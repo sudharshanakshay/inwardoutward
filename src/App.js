@@ -1,23 +1,45 @@
-import logo from './logo.svg';
+import React, { Component, useState } from 'react'
+import { BrowserRouter as Router, Routes, Route} from "react-router-dom";
 import './App.css';
+import Login from './components/auth/login';
+import Register from './components/auth/register';
+import { configureStore } from '@reduxjs/toolkit'
 
 function App() {
+
+  // authentication sate
+  const isAuthenticated = {value:false};
+
+  // action-object for the use of react-redux
+  const actionLogin = {
+    type:'auth/login',
+    payload: 'signin'
+  }
+
+  const actionLogout = {
+    type: 'auth/logout',
+    payload: 'signout'
+  }
+
+  // authReducer
+  // const authReducer = (state =; isAuthenticated, actionLogin) =>{
+    // if (authAction.type === 'auth/login'){
+    //   return {
+    //       ...state, value: !
+    //   }
+    // }
+  // }
+  
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div>
+      <Router>
+        <Routes>
+        <Route path='/' element={<Login/>}></Route>
+          <Route path='/login' element={<Login/>}></Route>
+          <Route path='/register' element={<Register/>}></Route>
+          <Route element={<Login/>}></Route>
+        </Routes>
+      </Router>
     </div>
   );
 }
