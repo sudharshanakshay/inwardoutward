@@ -34,7 +34,7 @@ const Register = () => {
                         <input type="password" placeholder="password"
                             name='password' value={password} onChange={change => onChange(change)} />
                         <button>create</button>
-                        <p className="message">Already registered? <Link to='/login'>Sign In</Link></p>
+                        <p className="message">Already registered ? <Link to='/login'>Sign In</Link></p>
                     </form>
                 </div>
             </div>

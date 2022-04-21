@@ -36,7 +36,7 @@ const Login = () => {
                         name='password' value={password} onChange={change=>onChange(change)}/>
                         <button type="submit">login</button>
                         
-                        <p className="message">Not registered? <Link to='/register'>Create an account</Link></p>
+                        <p className="message">Not registered ? <Link to='/register'>Create an account</Link></p>
                     </form>
                 </div>
             </div>

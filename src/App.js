@@ -18,8 +18,7 @@ function App() {
             <Route exact path='/' element={<Login />}></Route>
             <Route exact path='/login' element={<Login />}></Route>
             <Route exact path='/register' element={<Register />}></Route>
-            {/* <PrivateRoute path='/dashboard' element={<Dashboard/>}></PrivateRoute> */}
-            <Route exact element={<Login />}></Route>
+            <Route path='/dashboard' element={<PrivateRoute component={Dashboard}/>}></Route>
           </Routes>
         </Router>
       </Provider>
