@@ -1,9 +1,13 @@
 import React, { Component, useState } from 'react';
-import { Link } from 'react-router-dom';
-import { login } from '../../actions/auth/auth';
+import { Link, Navigate} from 'react-router-dom';
+import { LoginAction } from '../../actions/auth/auth';
+import { useSelector } from 'react-redux';
 
-const Login = ({ isAuthenticated }) => {
+const Login = () => {
 
+    const isLoggedIn = useSelector((state) => state.loggedInStatus.isLoggedIn );
+    console.log(isLoggedIn);
+    
     const [formData, setFormData] = useState({
         email: '',
         password: ''
@@ -16,16 +20,19 @@ const Login = ({ isAuthenticated }) => {
     }
     const onSubmit = (v) => {
         v.preventDefault();
-        login({ email, password });
+        console.log("sent " + email + " "+password);
+        LoginAction({ email, password });
     }
+
     return (
         <div>
+            { isLoggedIn && <Navigate replace to="/dashboard" />}
             <div className="login-page">
                 <div className="form">
                     <form className="login-form" onSubmit={s=>onSubmit(s)}>
                         <input type="text" placeholder="email / username" 
                         name='email' value={email} onChange={change=>onChange(change)}/>
-                        <input type="password" placeholder="password" 
+                        <input type="password" placeholder='password' 
                         name='password' value={password} onChange={change=>onChange(change)}/>
                         <button type="submit">login</button>
                         
