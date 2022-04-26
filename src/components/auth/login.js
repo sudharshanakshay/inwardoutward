@@ -1,13 +1,12 @@
-import React, { Component, useState } from 'react';
-import { Link, Navigate} from 'react-router-dom';
-import { LoginAction } from '../../actions/auth/auth';
+import React, { useState } from 'react';
+import { Link, Navigate } from 'react-router-dom';
+import { loginAction } from '../../actions/auth/auth';
 import { useSelector } from 'react-redux';
 
 const Login = () => {
-
-    const isLoggedIn = useSelector((state) => state.loggedInStatus.isLoggedIn );
+    const isLoggedIn = useSelector((state) => state.loggedInStatus.isLoggedIn);
     console.log(isLoggedIn);
-    
+
     const [formData, setFormData] = useState({
         email: '',
         password: ''
@@ -20,23 +19,24 @@ const Login = () => {
     }
     const onSubmit = (v) => {
         v.preventDefault();
-        console.log("sent " + email + " "+password);
-        LoginAction({ email, password });
+        // console.log("sent " + email + " " + password);
+        loginAction({ email, password});
     }
 
     return (
         <div>
-            { isLoggedIn && <Navigate replace to="/dashboard" />}
             <div className="login-page">
                 <div className="form">
-                    <form className="login-form" onSubmit={s=>onSubmit(s)}>
-                        <input type="text" placeholder="email / username" 
-                        name='email' value={email} onChange={change=>onChange(change)}/>
-                        <input type="password" placeholder='password' 
-                        name='password' value={password} onChange={change=>onChange(change)}/>
+                    <form className="login-form" onSubmit={s => onSubmit(s)}>
+                        <input type="text" placeholder="email / username"
+                            name='email' value={email} onChange={change => onChange(change)} />
+                        <input type="password" placeholder='password'
+                            name='password' value={password} onChange={change => onChange(change)} />
                         <button type="submit">login</button>
-                        
+
                         <p className="message">Not registered ? <Link to='/register'>Create an account</Link></p>
+
+                        <p className="message"><Link to='/login'>Forgot password ?</Link></p>
                     </form>
                 </div>
             </div>

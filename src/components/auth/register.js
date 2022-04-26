@@ -1,18 +1,19 @@
-import React, { useState } from "react";
-import { Link } from "react-router-dom";
-import register from '../auth/register'
+import React, { useState } from 'react';
+import { Link, Navigate } from 'react-router-dom';
+import { registerAction } from '../../actions/auth/auth';
+import { useSelector } from 'react-redux';
 
-const Register = () => {
+const Login = () => {
+    const isLoggedIn = useSelector((state) => state.loggedInStatus.isLoggedIn);
+    console.log(isLoggedIn);
 
-    const [formData, setFormData] = useState(
-        {
-            name: '',
-            email: '',
-            password: ''
-        }
-    );
+    const [formData, setFormData] = useState({
+        name:'',
+        email: '',
+        password: ''
+    });
 
-    const { name, email, password } = formData;
+    const {name, email, password } = formData;
 
     const onChange = (change) => {
         setFormData({ ...formData, [change.target.name]: change.target.value });
@@ -20,8 +21,10 @@ const Register = () => {
     }
     const onSubmit = (v) => {
         v.preventDefault();
-        register({ name, email, password });
+        // console.log("sent " +name+ " "+ email + " " + password);
+        registerAction({name,  email, password });
     }
+
     return (
         <div>
             <div className="login-page">
@@ -33,13 +36,16 @@ const Register = () => {
                             name='email' value={email} onChange={change => onChange(change)} />
                         <input type="password" placeholder="password"
                             name='password' value={password} onChange={change => onChange(change)} />
-                        <button>create</button>
+                        <button type="submit">create</button>
                         <p className="message">Already registered ? <Link to='/login'>Sign In</Link></p>
+                        
                     </form>
                 </div>
             </div>
         </div>
-    )       
+
+
+    )
 }
 
-export default Register
+export default Login;
