@@ -26,7 +26,7 @@ function App() {
             <Route path='/dashboard' element={<PrivateRoute component={Dashboard} />}></Route>
             <Route path='/inward' element={<PrivateRoute component={Inward} />}></Route>
             <Route path='/outward' element={<PrivateRoute component={Outward} />}></Route>
-            <Route path='/Report' element={<PrivateRoute component={Report} />}></Route>
+            <Route path='/Report' element={<PrivateRoute component={Report} />}></Route>  
           </Routes>
         </Router>
       </Provider>
