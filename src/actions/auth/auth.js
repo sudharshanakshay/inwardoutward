@@ -1,7 +1,7 @@
 import axios from 'axios';
 import { logIn, userConfig} from './authSlice';
 import store from '../../store';
-import { LOGIN_URL, REGISTER_URL, CONFIG } from '../../utility/Constants';
+import { LOGIN_URL, REGISTER_URL, CONFIG } from '../../utility/Values';
 import bcrypt from 'bcryptjs/dist/bcrypt';
 import bcryptjs from 'bcryptjs';
 

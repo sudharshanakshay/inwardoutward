@@ -1,9 +1,11 @@
 import { Navbar, Nav, NavDropdown, Container } from "react-bootstrap";
+import { THEME } from '../../utility/color';
+ 
 
 const TopNavBar = () => {
     return (
         <div>
-            <Navbar collapseOnSelect expand="lg" bg="dark" variant="dark">
+            <Navbar className="" collapseOnSelect  expand="lg" >
                 <Container>
                     <Navbar.Brand href="#home">Home</Navbar.Brand>
                     <Navbar.Toggle aria-controls="responsive-navbar-nav" />
