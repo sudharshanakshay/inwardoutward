@@ -1,25 +1,38 @@
-import { Navbar, Nav, NavDropdown, Container } from "react-bootstrap";
+import { Navbar, Nav, NavDropdown, Container, Button } from "react-bootstrap";
+import { useSelector } from "react-redux";
 import { THEME } from '../../utility/color';
+import { FiAlignJustify } from "react-icons/fi";
+import Inward from '../../pages/inward/inward';
+import Outward from '../../pages/outward/outward';
+import { Link } from "react-router-dom";
  
 
 const TopNavBar = () => {
+
+    const user = useSelector((state) => state.loggedIn.email);
+    const user1 = "hello";
+
     return (
         <div>
-            <Navbar className="" collapseOnSelect  expand="lg" >
+            <Navbar collapseOnSelect  expand="lg" >
                 <Container>
-                    <Navbar.Brand href="#home">Home</Navbar.Brand>
+                    <Navbar.Brand >
+                        <Link to='/dashboard'>Home</Link>
+                    </Navbar.Brand>
                     <Navbar.Toggle aria-controls="responsive-navbar-nav" />
                     <Navbar.Collapse id="responsive-navbar-nav">
                         <Nav className="me-auto">
-                            <Nav.Link href="#features">Inward Post</Nav.Link>
-                            <Nav.Link href="#pricing">Outward Post</Nav.Link>
-                            <Nav.Link href="#features">Report</Nav.Link>
+                            <Link to='/inward'>Inward Post</Link>
+                            <Link to='/outward'>Outward Post</Link>
+                            <Link to='/report'>Report</Link>
                         </Nav>
                         <Nav>
-                            <Nav.Link href="#deets">More deets</Nav.Link>
                             <Nav.Link eventKey={2} href="#memes">
-                                Dank memes
+                                Logined as {user}
                             </Nav.Link>
+                            <Nav>
+                                <FiAlignJustify/>
+                            </Nav>
                         </Nav>
                     </Navbar.Collapse>
                 </Container>

@@ -188,3 +188,7 @@ body {
 .theme {
   background-color: #5d7faf;
 }
+
+.center {
+  text-align: center;
+}
