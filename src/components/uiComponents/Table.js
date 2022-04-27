@@ -9,7 +9,7 @@ const TableFormat = ({ title, tableHeaders, tableRows }) => {
         <thead>
           <tr>
             {tableHeaders.map((value, index) => (
-              <td>{value}</td>
+              <td key={index}>{value}</td>
             ))}
           </tr>
         </thead>

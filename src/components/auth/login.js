@@ -4,7 +4,7 @@ import { loginAction } from '../../actions/auth/auth';
 import { useSelector } from 'react-redux';
 
 const Login = () => {
-    const isLoggedIn = useSelector((state) => state.loggedInStatus.isLoggedIn);
+    const isLoggedIn = useSelector((state) => state.loggedIn.isLoggedIn);
     console.log(isLoggedIn);
 
     const [formData, setFormData] = useState({

@@ -1,10 +1,8 @@
 import { Navbar, Nav, NavDropdown, Container, Button } from "react-bootstrap";
 import { useSelector } from "react-redux";
-import { THEME } from '../../utility/color';
-import { FiAlignJustify } from "react-icons/fi";
-import Inward from '../../pages/inward/inward';
-import Outward from '../../pages/outward/outward';
 import { Link } from "react-router-dom";
+import { logOut } from "../../actions/auth/authSlice";
+import store from "../../store";
  
 
 const TopNavBar = () => {
@@ -31,7 +29,7 @@ const TopNavBar = () => {
                                 Logined as {user}
                             </Nav.Link>
                             <Nav>
-                                <FiAlignJustify/>
+                                <button type="submit" onClick={()=>store.dispatch(logOut())}>logout</button>
                             </Nav>
                         </Nav>
                     </Navbar.Collapse>
