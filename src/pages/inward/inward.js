@@ -1,13 +1,18 @@
-import React from "react";
-import TopNavBar from "../../components/navBar/TopNavBar";
+import React from 'react';
+
+import TopNavBar from '../../components/navBar/TopNavBar';
+
 
 const Inward = () => {
     return (
         <>
             <TopNavBar />
-            <div>inward page</div>
+            <h1>INward</h1>
+          
+            
         </>
     )
 }
+
 
 export default Inward;
