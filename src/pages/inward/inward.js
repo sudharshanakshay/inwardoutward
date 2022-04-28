@@ -1,15 +1,17 @@
-import React from "react";
-import TopNavBar from "../../components/navBar/TopNavBar";
-import Status from "../../components/uiComponents/Status";
+import React from 'react';
+import TopNavBar from '../../components/navBar/TopNavBar';
 
 const Inward = () => {
     return (
         <>
             <TopNavBar />
-            <Status/>
-            <div>inward page</div>
+            
+            <div>
+                <h1> Inward post</h1>
+            </div>
         </>
     )
 }
+
 
 export default Inward;

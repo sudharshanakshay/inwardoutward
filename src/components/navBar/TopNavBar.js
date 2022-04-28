@@ -23,6 +23,7 @@ const TopNavBar = () => {
                             navbarScroll
                         >
                             {/* <Navigate to="/">Home</Navigate> */}
+                            <Nav.Link href="/dashboard">Dashboard</Nav.Link>
                             <Nav.Link href="/inward">Inward</Nav.Link>
                             <Nav.Link href="/outward">Outward</Nav.Link>
                             <Nav.Link href="/report">Report</Nav.Link>
