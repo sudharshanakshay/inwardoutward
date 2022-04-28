@@ -5,7 +5,7 @@ const TableFormat = ({ title, tableHeaders, tableRows }) => {
   return (
     <div>
       <h3 className="center">{title}</h3>
-      <Table responsive>
+      <Table responsive >
         <thead>
           <tr>
             {tableHeaders.map((value, index) => (
