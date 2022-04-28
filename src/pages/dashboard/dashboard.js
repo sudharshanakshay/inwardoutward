@@ -18,7 +18,7 @@ const Dashboard = () => {
             <Container className="align-item-center">
                 <Row><TopNavBar></TopNavBar></Row>
 
-                <Row>
+                <Row className='row-center'>
                     <Col xs={12} sm={12} md={12} lg={5} className="dataTable">
                         <Table title={INWARD_TABLE_TITLE} tableHeaders={TABLEHEADER_SMALL} tableRows={TEST_TABLEDATA_SMALL} />
                     </Col>

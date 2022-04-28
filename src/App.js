@@ -4,7 +4,6 @@ import './App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import Login from './components/auth/login';
 import Register from './components/auth/register';
-import Dashboard from './pages/dashboard/dashboard';
 import PrivateRoute from './components/routes/PrivateRoute';
 import { Provider } from 'react-redux';
 import store from './store';
