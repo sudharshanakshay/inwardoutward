@@ -12,7 +12,7 @@ const TopNavBar = () => {
 
     return (
         <div>
-            <Navbar bg="light" expand="lg">
+            <Navbar bg="light" expand="lg" className="top-nav-bar">
                 <Container fluid>
                     <Navbar.Brand href="#">INWARDOUTWARD</Navbar.Brand>
                     <Navbar.Toggle aria-controls="navbarScroll" />
@@ -39,7 +39,7 @@ const TopNavBar = () => {
                                 Link
                             </Nav.Link> */}
                         </Nav>
-                        <Form className="d-flex">
+                        {/* <Form className="d-flex">
                             <FormControl
                                 type="search"
                                 placeholder="Search"
@@ -47,7 +47,8 @@ const TopNavBar = () => {
                                 aria-label="Search"
                             />
                             <Button variant="outline-success">Search</Button>
-                        </Form>
+                        </Form> */}
+                        <Button variant="outline-success" onClick={()=>store.dispatch(logOut())}>logOut</Button>
                     </Navbar.Collapse>
                 </Container>
             </Navbar>

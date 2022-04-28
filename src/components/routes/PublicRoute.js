@@ -6,7 +6,7 @@ const PublicRoute = ({component: RouteComponent}) =>{
     if(!isLoggedIn){ 
         return <RouteComponent/>
     }
-    return <Navigate to="/dashboard" />
+    return <Navigate to="/" />
 }
 
 export default PublicRoute;
