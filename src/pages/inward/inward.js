@@ -1,15 +1,23 @@
 import React from "react";
 import TopNavBar from "../../components/navBar/TopNavBar";
-import Status from "../../components/uiComponents/Status";
+import DisplayTable from "../../components/uiComponents/displayTable";
+import { Container } from "react-bootstrap";
 
 const Inward = () => {
     return (
         <>
-            <TopNavBar />
-            <Status/>
-            <div>inward page</div>
+            <div >
+                <TopNavBar />
+                <br />
+                <br />
+                
+            </div>
+            <div >
+                <DisplayTable />
+            </div>
         </>
     )
 }
+
 
 export default Inward;
