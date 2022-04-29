@@ -221,6 +221,11 @@ body {
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19)
 }
 
+.status-bottom {
+    display: block;
+    border-style: solid;
+}
+
 .mainSpace {
     text-align: center;
 }
@@ -229,6 +234,8 @@ body {
 
 .top-nav-bar {
     margin-bottom: 3%;
+    text-decoration: none;
+    color: #535151;
 }
 
 .link {
@@ -260,13 +267,14 @@ body {
     align-items: center;
 }
 
+
 .align-item-center {
     align-items: center;
 }
-
 
 
 .grid {
     margin-left: 2%;
     margin-right: 2%;
 }
+

@@ -22,7 +22,7 @@ const IoDashboard = () => {
                         <Col md={12} sm={12} lg={5} className="dataTable">
                             <TableFormat title={OUTWARD_TABLE_TITLE} tableHeaders={TABLEHEADER_SMALL} tableRows={TEST_TABLEDATA_SMALL} />
                         </Col>
-                        <Col>
+                        <Col >
                             <Row><Status mainSpace="10" discription="Total Pending Post" color={VIOLET_SHADE}></Status></Row>
                             <Row><Status mainSpace="10" discription="Total Inward Post" color={YELLOWISH}></Status></Row>
                             <Row><Status mainSpace="10" discription="Total Outward Post" color={BRIGHT_GREEN_SHADE}></Status></Row>
