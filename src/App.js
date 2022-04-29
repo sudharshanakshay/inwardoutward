@@ -15,21 +15,18 @@ import IoDashboard from './pages/dashboard/ioDashboard';
 import useAuth from './actions/Hooks/useAuth';
 
 function App() {
-
-  const {auth, setAuth} = useAuth();
-
   return (
     <div>
       <Provider store={store}>
         <Router>
           <Routes>
             <Route path='/' element={<PrivateRoute component={IoDashboard} />}></Route>
-            <Route path='/login' element={<PublicRoute component={Login} setAuth={setAuth} />}></Route>
-            <Route path='/register' element={<PublicRoute component={Register} setAuth={setAuth}/>}></Route>
-            <Route path='/dashboard' element={<PrivateRoute component={IoDashboard} isLoggedIn={auth}/>}></Route>
-            <Route path='/inward' element={<PrivateRoute component={Inward} isLoggedIn={auth}/>}></Route>
-            <Route path='/outward' element={<PrivateRoute component={Outward} isLoggedIn={auth}/>}></Route>
-            <Route path='/Report' element={<PrivateRoute component={Report} isLoggedIn={auth}/>}></Route>  
+            <Route path='/login' element={<PublicRoute component={Login} />}></Route>
+            <Route path='/register' element={<PublicRoute component={Register} />}></Route>
+            <Route path='/dashboard' element={<PrivateRoute component={IoDashboard} />}></Route>
+            <Route path='/inward' element={<PrivateRoute component={Inward} />}></Route>
+            <Route path='/outward' element={<PrivateRoute component={Outward} />}></Route>
+            <Route path='/Report' element={<PrivateRoute component={Report} />}></Route>  
           </Routes>
         </Router>
       </Provider>
