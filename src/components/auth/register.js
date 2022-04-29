@@ -4,8 +4,8 @@ import { registerAction } from '../../actions/auth/auth';
 import { useSelector } from 'react-redux';
 
 const Register = () => {
-    const isLoggedIn = useSelector((state) => state.loggedInStatus.isLoggedIn);
-    console.log(isLoggedIn);
+    // const isLoggedIn = useSelector((state) => state.loggedInStatus.isLoggedIn);
+    // console.log(isLoggedIn);
 
     const [formData, setFormData] = useState({
         name:'',

@@ -35,13 +35,11 @@ const Login = () => {
 
                         <p className="message">Not registered ? <Link to='/register'>Create an account</Link></p>
 
-                        <p className="message"><Link to='/login'>Forgot password ?</Link></p>
+                        <p className="message"><Link to='/login/forgotpassword'>Forgot password ?</Link></p>
                     </form>
                 </div>
             </div>
         </div>
-
-
     )
 }
 
