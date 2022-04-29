@@ -5,8 +5,6 @@ import { useSelector } from 'react-redux';
 import PropTypes from 'prop-types';
 
 const Login = () => {
-    const isLoggedIn = useSelector((state) => state.loggedIn.isLoggedIn);
-    console.log(isLoggedIn);
 
     const [formData, setFormData] = useState({
         email: '',
