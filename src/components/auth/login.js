@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { Link, Navigate } from 'react-router-dom';
 import { loginAction } from '../../actions/auth/auth';
 import { useSelector } from 'react-redux';
+import PropTypes from 'prop-types';
 
 const Login = () => {
     const isLoggedIn = useSelector((state) => state.loggedIn.isLoggedIn);
@@ -47,3 +48,7 @@ const Login = () => {
 }
 
 export default Login;
+
+// Login.prototype = {
+//     setAuth: PropTypes.func.isRequired
+// }

@@ -278,3 +278,20 @@ body {
     margin-right: 2%;
 }
 
+
+
+.inline-block{
+    display: inline-block;
+}
+
+.display-block {
+    display: inline-block;
+}
+
+.data-table {
+    width: 100%;
+}
+
+.input {
+    width: 20%;
+}

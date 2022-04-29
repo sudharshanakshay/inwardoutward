@@ -3,7 +3,7 @@ import { Link, Navigate } from 'react-router-dom';
 import { registerAction } from '../../actions/auth/auth';
 import { useSelector } from 'react-redux';
 
-const Login = () => {
+const Register = () => {
     const isLoggedIn = useSelector((state) => state.loggedInStatus.isLoggedIn);
     console.log(isLoggedIn);
 
@@ -48,4 +48,4 @@ const Login = () => {
     )
 }
 
-export default Login;
+export default Register;
