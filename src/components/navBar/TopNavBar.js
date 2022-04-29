@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Navbar, Nav, NavDropdown, Container, Button, Tabs, Tab, Form, FormControl } from "react-bootstrap";
+import { Navbar, Nav, NavDropdown, Container, Button, Offcanvas, FormControl, Form } from "react-bootstrap";
 import { useSelector } from "react-redux";
 import { Link, Navigate } from "react-router-dom";
 import { logOut } from "../../actions/auth/authSlice";
@@ -12,11 +12,14 @@ const TopNavBar = () => {
     const user1 = "hello";
     const [key, setKey] = useState('Dashboard');
 
+    const expand = 'md';
+
     return (
         <div>
+
             <Navbar bg="light" expand="lg">
                 <Container fluid>
-                    <Navbar.Brand href="#">Navbar scroll</Navbar.Brand>
+                    <Navbar.Brand href="#"></Navbar.Brand>
                     <Navbar.Toggle aria-controls="navbarScroll" />
                     <Navbar.Collapse id="navbarScroll">
                         <Nav
@@ -24,34 +27,83 @@ const TopNavBar = () => {
                             style={{ maxHeight: '100px' }}
                             navbarScroll
                         >
-                            {/* <Nav.Item><Link t0="/dashboard">Dashboard</Link></Nav.Item> */}
-                            <Nav.Link href="#action2">Link</Nav.Link>
-                            <NavDropdown title="Link" id="navbarScrollingDropdown">
-                                <NavDropdown.Item href="#action3">Action</NavDropdown.Item>
-                                <NavDropdown.Item href="#action4">Another action</NavDropdown.Item>
-                                <NavDropdown.Divider />
-                                <NavDropdown.Item href="#action5">
-                                    Something else here
-                                </NavDropdown.Item>
-                            </NavDropdown>
-                            <Nav.Link href="#" disabled>
-                                Link
-                            </Nav.Link>
+                                <Nav.Link>
+                                    <Link to="/dashboard" >Dashboard</Link>
+                                </Nav.Link>
+
+                                <Nav.Link >
+                                    <Link to="/inward" >Inward Post</Link>
+                                </Nav.Link>
+
+                                <Nav.Link >
+                                    <Link to="/outward" >Outward Post</Link>
+                                </Nav.Link>
+
+                                <Nav.Link >
+                                    <Link to="/report" >Report</Link>
+                                </Nav.Link>
+
                         </Nav>
-                        <Form className="d-flex">
-                            <FormControl
-                                type="search"
-                                placeholder="Search"
-                                className="me-2"
-                                aria-label="Search"
-                            />
-                            <Button variant="outline-success">Search</Button>
-                        </Form>
+                        <Nav.Item><Button variant="outline-success" onClick={() => store.dispatch(logOut())} > Logout</Button></Nav.Item>
+                        
                     </Navbar.Collapse>
                 </Container>
             </Navbar>
-        </div>
+
+            {/* <Navbar key={expand} bg="light" expand={expand} className="mb-3">
+                <Container fluid>
+                    <Navbar.Brand >Inward Outward</Navbar.Brand>
+
+                    <Navbar.Toggle aria-controls={`offcanvasNavbar-expand-${expand}`} />
+                    <Navbar.Offcanvas
+                        id={`offcanvasNavbar-expand-${expand}`}
+                        aria-labelledby={`offcanvasNavbarLabel-expand-${expand}`}
+                        placement="end"
+                    >
+                        <Offcanvas.Header closeButton>
+
+                            <Offcanvas.Title id={`offcanvasNavbarLabel-expand-${expand}`}>
+                                Inward Outward
+                            </Offcanvas.Title>
+
+                        </Offcanvas.Header>
+
+                        <Offcanvas.Body>
+                            <Nav className="justify-content-end flex-grow-1 pe-2">
+                                <Nav.Link>
+                                    <Link to="/dashboard" >Dashboard</Link>
+                                </Nav.Link>
+
+                                <Nav.Link >
+                                    <Link to="/inward" >Inward Post</Link>
+                                </Nav.Link>
+
+                                <Nav.Link >
+                                    <Link to="/outward" >Outward Post</Link>
+                                </Nav.Link>
+
+                                <Nav.Link >
+                                    <Link to="/report" >Report</Link>
+                                </Nav.Link>
+
+                                <Nav.Item><Button variant="outline-success" onClick={() => store.dispatch(logOut())} > Logout</Button></Nav.Item>
+                            </Nav>
+
+                        </Offcanvas.Body>
+                    </Navbar.Offcanvas>
+                </Container>
+            </Navbar>
+
+            <Nav className="justify-content-end">
+
+            </Nav> */}
+
+
+
+
+        </div >
     )
 }
 
 export default TopNavBar;
+
