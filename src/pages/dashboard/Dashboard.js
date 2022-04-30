@@ -9,7 +9,7 @@ import { TABLEHEADER_SMALL, TEST_TABLEDATA_SMALL, INWARD_TABLE_TITLE, OUTWARD_TA
 import { Grid } from '@mui/material';
 
 
-const IoDashboard = () => {
+const Dashboard = () => {
     return (
         <div>
             <TopNavBar />
@@ -57,4 +57,4 @@ const IoDashboard = () => {
     )
 }
 
-export default IoDashboard;
+export default Dashboard;

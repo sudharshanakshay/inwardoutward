@@ -11,7 +11,7 @@ import PublicRoute from './components/routes/PublicRoute';
 import Inward from './pages/Inward/InwardPost';
 import Outward from './pages/Outward/outward';
 import Report from './pages/report/report';
-import IoDashboard from './pages/dashboard/ioDashboard';
+import Dashboard from './pages/dashboard/Dashboard';
 import ForgotPassword from './components/auth/ForgotPassword';
 
 function App() {
@@ -20,11 +20,11 @@ function App() {
       <Provider store={store}>
         <Router>
           <Routes>
-            <Route path='/' element={<PrivateRoute component={IoDashboard} />}></Route>
+            <Route path='/' element={<PrivateRoute component={Dashboard} />}></Route>
             <Route path='/login' element={<PublicRoute component={Login} />}></Route>
             <Route path='/register' element={<PublicRoute component={Register} />}></Route>
             <Route path='/login/forgotpassword' element={<PublicRoute component={ForgotPassword} />}></Route>  
-            <Route path='/dashboard' element={<PrivateRoute component={IoDashboard} />}></Route>
+            <Route path='/dashboard' element={<PrivateRoute component={Dashboard} />}></Route>
             <Route path='/inward' element={<PrivateRoute component={Inward} />}></Route>
             <Route path='/outward' element={<PrivateRoute component={Outward} />}></Route>
             <Route path='/Report' element={<PrivateRoute component={Report} />}></Route>  
