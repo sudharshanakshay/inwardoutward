@@ -1,6 +1,16 @@
-export const LOGIN_URL = "http://localhost:5000/cors/login";
+const BASE_URL = "http://localhost:5000"
 
-export const REGISTER_URL = "http://localhost:5000/cors/register";
+export const LOGIN_URL = BASE_URL+ "/cors/login";
+
+export const REGISTER_URL = BASE_URL+ "/cors/register";
+
+export const INSERT_URL = BASE_URL+ "/data";
+
+export const UPDATE_URL = BASE_URL+ "/data";
+
+export const DELETE_URL = BASE_URL+ "/data";
+
+export const DISPLAY_URL = BASE_URL + "/data" ;
 
 export const CONFIG = {
     headers: {
