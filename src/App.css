@@ -132,12 +132,27 @@ body {
 
 }
 
+@media (min-width: 1200px) {
+    .statusBox {
+        height: 100px;
+        padding: 10px;
+        margin: 10% 5px;
+        /* background-color: #eb1e2f; */
+    }
+
+    .mobile-view {
+        display: none;
+    }
+
+}
+
 
 @media (max-width: 1200px) {
     .statusBox {
         height: 80px;
         width: 250px;
         padding: 4px;
+        margin: 10% 2%;
         /* background-color: #12a031;  */
     }
 
@@ -146,19 +161,6 @@ body {
     }
 
     
-}
-
-@media (min-width: 1200px) {
-    .statusBox {
-        height: 100px;
-        padding: 10px;
-        /* background-color: #eb1e2f; */
-    }
-
-    .mobile-view {
-        display: none;
-    }
-
 }
 
 
@@ -209,7 +211,7 @@ body {
     display: block;
     justify-items: center;
     text-align: center;
-    margin: 5px;
+    
     /* padding: 2px; */
     /* height: 85px; */
     /* width: 250px; */
@@ -259,13 +261,13 @@ body {
 
 /* ---------------------- Table ---------------------- */
 
-/*.dataTable {
-    display: block;
-    margin: 10px;
+.dashboard {
+    /* display: block; */
+    margin: 5% 10px ;
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
     padding: 10px;
     align-items: center;
-}*/
+}
 
 
 .align-item-center {
@@ -288,10 +290,12 @@ body {
     display: inline-block;
 }
 
-.data-table {
-    width: 100%;
-}
 
 .input {
     width: 20%;
+}
+
+.display-empty-box {
+    display: block;
+    height: 5%;
 }

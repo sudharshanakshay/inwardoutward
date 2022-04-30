@@ -25,6 +25,10 @@ const TopNavBar = () => {
                         className="me-auto my-2 my-lg-0" style={{ maxHeight: '100px' }}
                     >
                         <Nav.Link >
+                            <Link to="/dashboard" >Dashboard</Link>
+                        </Nav.Link>
+
+                        <Nav.Link >
                             <Link to="/inward" >Inward Post</Link>
                         </Nav.Link>
 
@@ -37,7 +41,7 @@ const TopNavBar = () => {
                         </Nav.Link>
                     </Nav>
                     <Nav>
-                        <Button type="submit" onClick={()=> store.dispatch(logOut())} variant="outline-success" >logOut</Button>
+                        <Button type="submit" onClick={() => store.dispatch(logOut())} variant="outline-success" >logOut</Button>
                     </Nav>
                 </Container>
             </Navbar>

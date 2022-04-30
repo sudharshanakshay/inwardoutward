@@ -13,7 +13,7 @@ const IoDashboard = () => {
     return (
         <div>
             <TopNavBar />
-            <div className='desktop-view'>
+            <div className='desktop-view dashboard'>
                 <Grid className='grid'>
                     <Row >
                         <Col xs={12} sm={12} md={12} lg={5} className="dataTable">
@@ -23,6 +23,7 @@ const IoDashboard = () => {
                             <TableFormat title={OUTWARD_TABLE_TITLE} tableHeaders={TABLEHEADER_SMALL} tableRows={TEST_TABLEDATA_SMALL} />
                         </Col>
                         <Col >
+                            <Row className='display-empty-box'></Row>
                             <Row><Status mainSpace="10" discription="Total Pending Post" color={VIOLET_SHADE}></Status></Row>
                             <Row><Status mainSpace="10" discription="Total Inward Post" color={YELLOWISH}></Status></Row>
                             <Row><Status mainSpace="10" discription="Total Outward Post" color={BRIGHT_GREEN_SHADE}></Status></Row>
@@ -31,7 +32,7 @@ const IoDashboard = () => {
                 </Grid>
             </div>
 
-            <div className='mobile-view'>
+            <div className='mobile-view dashboard'>
                 <Grid className='grid'>
                     <Row>
                         <Col xs={4} sm={4}><Status mainSpace="10" discription="Total Pending Post" color={VIOLET_SHADE}></Status></Col>
