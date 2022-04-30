@@ -1,3 +1,4 @@
+import React from "react";
 import axios from "axios"
 import { INSERT_URL, CONFIG, DISPLAY_URL, DELETE_URL } from "../../utility/Values";
 
@@ -44,12 +45,11 @@ const insert_from = ({ inward = null, nature = null, recievedFrom = null, subjec
 }
 
 
-const display_from = ({ inward = null, outward = null }) => {
+export const display_from = ({ inward, outward }) => {
 
     const rows = [];
 
-    const from_post = null;
-    const post_id = null;
+    let from_post = null;
 
     if (inward) {
         from_post = "inward_post";
@@ -64,6 +64,7 @@ const display_from = ({ inward = null, outward = null }) => {
 
     try {
         const res = axios.get(DISPLAY_URL, body, CONFIG);
+        console.log(res);
         rows = res.data.rows;
     }
     catch (err) {
@@ -150,3 +151,5 @@ const delete_from = ({ inward_no = null, outward_no = null }) => {
             console.log(err);
         }
 }
+
+// export default {insert_from, display_from, update_on, delete_from};

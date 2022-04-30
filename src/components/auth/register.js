@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Link, Navigate } from 'react-router-dom';
-import { registerAction } from '../../actions/auth/auth';
+import { registerAction } from '../../actions/auth/authAction';
 import { useSelector } from 'react-redux';
 
 const Register = () => {
