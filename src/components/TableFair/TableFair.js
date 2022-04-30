@@ -1,11 +1,23 @@
 import React from "react";
 import { Table } from "react-bootstrap";
+import $ from 'jquery';
+import "datatables.net-dt/js/dataTables.dataTables";
+import "datatables.net-dt/css/jquery.dataTables.min.css";
 
-const TableFormat = ({ title, tableHeaders, tableRows }) => {
+
+const TableFair = ({ title, tableHeaders, tableRows, applyDataTable = false }) => {
+
+  if (applyDataTable) {
+    $(document).ready(function () {
+      $('#table').DataTable();
+    });
+  }
+
   return (
     <div>
       <h3 className="center">{title}</h3>
-      <Table responsive >
+
+      <Table responsive id="table">
         <thead>
           <tr>
             {tableHeaders.map((value, index) => (
@@ -15,10 +27,10 @@ const TableFormat = ({ title, tableHeaders, tableRows }) => {
         </thead>
         <tbody>
           {
-            tableRows.map((value,index)=>(
+            tableRows.map((value, index) => (
               <tr key={index}>
                 {
-                  value.map((data, index)=>(
+                  value.map((data, index) => (
                     <td key={index}>{data}</td>
                   ))
                 }
@@ -31,4 +43,4 @@ const TableFormat = ({ title, tableHeaders, tableRows }) => {
   );
 };
 
-export default TableFormat;
+export default TableFair;

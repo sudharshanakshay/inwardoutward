@@ -1,7 +1,7 @@
 import React from 'react';
 import TopNavBar from '../../components/navBar/TopNavBar';
-import Status from '../../components/uiComponents/Status';
-import TableFormat from '../../components/uiComponents/Table';
+import StatusBox from '../../components/StatusBox/StatusBox';
+import TableFormat from '../../components/TableFair/TableFair';
 
 import { BRIGHT_GREEN_SHADE, TEST_COLOR, ORANGE, MORE_TEAL, YELLOWISH, VIOLET, VIOLET_SHADE } from '../../utility/color';
 import { Col, Container, Row, Table } from 'react-bootstrap';
@@ -24,9 +24,9 @@ const IoDashboard = () => {
                         </Col>
                         <Col >
                             <Row className='display-empty-box'></Row>
-                            <Row><Status mainSpace="10" discription="Total Pending Post" color={VIOLET_SHADE}></Status></Row>
-                            <Row><Status mainSpace="10" discription="Total Inward Post" color={YELLOWISH}></Status></Row>
-                            <Row><Status mainSpace="10" discription="Total Outward Post" color={BRIGHT_GREEN_SHADE}></Status></Row>
+                            <Row><StatusBox mainSpace="10" discription="Total Pending Post" color={VIOLET_SHADE}></StatusBox></Row>
+                            <Row><StatusBox mainSpace="10" discription="Total Inward Post" color={YELLOWISH}></StatusBox></Row>
+                            <Row><StatusBox mainSpace="10" discription="Total Outward Post" color={BRIGHT_GREEN_SHADE}></StatusBox></Row>
                         </Col>
                     </Row>
                 </Grid>
@@ -35,9 +35,9 @@ const IoDashboard = () => {
             <div className='mobile-view dashboard'>
                 <Grid className='grid'>
                     <Row>
-                        <Col xs={4} sm={4}><Status mainSpace="10" discription="Total Pending Post" color={VIOLET_SHADE}></Status></Col>
-                        <Col xs={4} sm={4}><Status mainSpace="10" discription="Total Inward Post" color={YELLOWISH}></Status></Col>
-                        <Col xs={4} sm={4}><Status mainSpace="10" discription="Total Outward Post" color={BRIGHT_GREEN_SHADE}></Status></Col>
+                        <Col xs={4} sm={4}><StatusBox mainSpace="10" discription="Total Pending Post" color={VIOLET_SHADE}></StatusBox></Col>
+                        <Col xs={4} sm={4}><StatusBox mainSpace="10" discription="Total Inward Post" color={YELLOWISH}></StatusBox></Col>
+                        <Col xs={4} sm={4}><StatusBox mainSpace="10" discription="Total Outward Post" color={BRIGHT_GREEN_SHADE}></StatusBox></Col>
                     </Row>
                     <Row >
                         <Col xs={12} sm={12} md={12} lg={5} xl={5} className="dataTable">

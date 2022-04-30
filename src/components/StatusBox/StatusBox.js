@@ -1,7 +1,7 @@
 import React from "react";
 
 
-const Status = ({mainSpace, discription, color}) => {
+const StatusBox = ({mainSpace, discription, color}) => {
     return (
         <div className="statusBox" style={{borderBottomColor:color}}>
             <h2 className="mainSpace">{mainSpace}</h2>
@@ -10,4 +10,4 @@ const Status = ({mainSpace, discription, color}) => {
     )
 }
 
-export default Status;
+export default StatusBox;
