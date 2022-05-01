@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import axios from "axios"
 import { INSERT_URL, CONFIG, DISPLAY_URL, DELETE_URL } from "../../utility/Values";
 import store from "../../store";
@@ -67,21 +67,24 @@ export const display_from = async ({ inward, outward }) => {
     try {
         await axios.get(DISPLAY_URL, body, CONFIG)
         .then((res)=> {
-            console.log(res.data)
+            // console.log(res.data)
             res.data.rows.map((row, index)=>{
-                console.log("in womb "+row.nature)
                 rows.push(row);
             })
         })
-        // console.log(res);
-        // console.log(res.Promise);
+
+        
+        
     }
     catch (err) {
         console.log(err);
     }
 
-    store.dispatch(setPosts(rows));
+    // store.dispatch(setPosts(rows));
+    
+    
     console.log(rows);
+    
     // return list of lists
     // return rows;
 }

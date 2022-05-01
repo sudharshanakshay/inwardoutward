@@ -5,9 +5,9 @@ import "datatables.net-dt/js/dataTables.dataTables";
 import "datatables.net-dt/css/jquery.dataTables.min.css";
 
 
-const TableFair = ({ title, tableHeaders, tableRows, applyDataTable = false }) => {
+const TableFair = ({ title, tableHeaders, tableRows, applyDataTableApi = false }) => {
 
-  if (applyDataTable) {
+  if (applyDataTableApi) {
     $(document).ready(function () {
       $('#table').DataTable();
     });
