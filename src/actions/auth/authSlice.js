@@ -5,7 +5,7 @@ export const authSlice = createSlice({
     initialState: {
         user : null,
         email : "user",
-        isLoggedIn : JSON.parse(localStorage.getItem('auth')) == undefined ? 0 : JSON.parse(localStorage.getItem('auth')), 
+        isLoggedIn : JSON.parse(localStorage.getItem('auth')) == undefined ? 1 : JSON.parse(localStorage.getItem('auth')), 
     },
     reducers: {
         logIn : (state) => {
