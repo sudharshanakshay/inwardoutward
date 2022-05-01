@@ -27,15 +27,17 @@ const TableFair = ({ title, tableHeaders, tableRows, applyDataTable = false }) =
         </thead>
         <tbody>
           {
-            tableRows.map((value, index) => (
-              <tr key={index}>
-                {
-                  value.map((data, index) => (
-                    <td key={index}>{data}</td>
-                  ))
-                }
-              </tr>
-            ))
+            console.log(tableRows)
+            // tableRows.map((value, index) => (
+            //   <tr key={index}>
+            //     {
+            //       console.log("table data"+value)
+            //       // value.map((data, index) => (
+            //       //   <td key={index}>{data}</td>
+            //       // ))
+            //     }
+            //   </tr>
+            // ))
           }
         </tbody>
       </Table>

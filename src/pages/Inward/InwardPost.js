@@ -4,6 +4,8 @@ import { Container } from "react-bootstrap";
 import TableFair from "../../components/TableFair/TableFair";
 import { TABLEHEADER_LONG, TEST_TABLEDATA_LONG } from "../../utility/Values";
 import {display_from} from '../../actions/posts/postsAction';
+import { useSelector } from "react-redux";
+
 
 const Inward = () => {
 
@@ -14,7 +16,13 @@ const Inward = () => {
 
     const {inward, outward} = fromPost;
 
-    const table_data = display_from({inward, outward});
+    display_from({inward, outward});
+    const rows = useSelector((state)=> state.inwardPosts.posts);
+    console.log(rows);
+
+    // const rows = display_from({inward, outward});
+    // console.log("rows "+rows)
+    // console.log(rows)
     return (
         <>
             <div >
@@ -22,7 +30,7 @@ const Inward = () => {
             </div>
             <div >
                 <Container className="data-table">
-                    <TableFair id="table" title={"Inward Posts"} tableHeaders={TABLEHEADER_LONG} tableRows={table_data} applyDataTable={true} />
+                    <TableFair id="table" title={"Inward Posts"} tableHeaders={TABLEHEADER_LONG} tableRows={rows} applyDataTable={true} />
                 </Container>
             </div>
         </>

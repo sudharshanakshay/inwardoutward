@@ -1,6 +1,8 @@
 import React from "react";
 import axios from "axios"
 import { INSERT_URL, CONFIG, DISPLAY_URL, DELETE_URL } from "../../utility/Values";
+import store from "../../store";
+import { setPosts } from "./postsSlice";
 
 const insert_from = ({ inward = null, nature = null, recievedFrom = null, subject = null, deliverTo = null, outward = null, dept = null, addressee = null, desc = null, recipt_no = null }) => {
 
@@ -45,9 +47,9 @@ const insert_from = ({ inward = null, nature = null, recievedFrom = null, subjec
 }
 
 
-export const display_from = ({ inward, outward }) => {
+export const display_from = async ({ inward, outward }) => {
 
-    const rows = [];
+    let rows = [];
 
     let from_post = null;
 
@@ -63,16 +65,25 @@ export const display_from = ({ inward, outward }) => {
     });
 
     try {
-        const res = axios.get(DISPLAY_URL, body, CONFIG);
-        console.log(res);
-        rows = res.data.rows;
+        await axios.get(DISPLAY_URL, body, CONFIG)
+        .then((res)=> {
+            console.log(res.data)
+            res.data.rows.map((row, index)=>{
+                console.log("in womb "+row.nature)
+                rows.push(row);
+            })
+        })
+        // console.log(res);
+        // console.log(res.Promise);
     }
     catch (err) {
         console.log(err);
     }
 
+    store.dispatch(setPosts(rows));
+    console.log(rows);
     // return list of lists
-    return rows;
+    // return rows;
 }
 
 const update_on = ({ inward = null, nature = null, recievedFrom = null, subject = null, deliverTo = null, outward = null, dept = null, addressee = null, desc = null, recipt_no = null }) => {
