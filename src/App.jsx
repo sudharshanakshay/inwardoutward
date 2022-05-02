@@ -8,7 +8,7 @@ import PrivateRoute from './components/routes/PrivateRoute';
 import { Provider } from 'react-redux';
 import store from './store';
 import PublicRoute from './components/routes/PublicRoute';
-import Inward from './pages/Inward/InwardPost';
+import Inward from './pages/Inward/Inward';
 import Outward from './pages/Outward/outward';
 import Report from './pages/report/report';
 import Dashboard from './pages/dashboard/Dashboard';
