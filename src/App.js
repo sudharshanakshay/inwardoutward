@@ -13,6 +13,7 @@ import Outward from './pages/Outward/outward';
 import Report from './pages/report/report';
 import Dashboard from './pages/dashboard/Dashboard';
 import ForgotPassword from './components/auth/ForgotPassword';
+import Hello1 from './components/AlertModel/AlertModel';
 
 function App() {
   return (

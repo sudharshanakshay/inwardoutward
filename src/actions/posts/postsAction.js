@@ -1,6 +1,8 @@
-import React from "react";
+import React, { useEffect } from "react";
 import axios from "axios"
 import { INSERT_URL, CONFIG, DISPLAY_URL, DELETE_URL } from "../../utility/Values";
+import store from "../../store";
+import getInwardPosts from "./postsSlice";
 
 const insert_from = ({ inward = null, nature = null, recievedFrom = null, subject = null, deliverTo = null, outward = null, dept = null, addressee = null, desc = null, recipt_no = null }) => {
 
@@ -45,34 +47,31 @@ const insert_from = ({ inward = null, nature = null, recievedFrom = null, subjec
 }
 
 
-export const display_from = ({ inward, outward }) => {
+export const getDisplayData = async () => {
 
-    const rows = [];
+    if (sessionStorage.getItem('inwardTable') == undefined) {
+        let rows = [];
 
-    let from_post = null;
+        try {
+            await axios.get(DISPLAY_URL, CONFIG)
 
-    if (inward) {
-        from_post = "inward_post";
-    }
-    if (outward) {
-        from_post = "outward_post";
-    }
 
-    const body = JSON.stringify({
-        "from_post": from_post,
-    });
-
-    try {
-        const res = axios.get(DISPLAY_URL, body, CONFIG);
-        console.log(res);
-        rows = res.data.rows;
-    }
-    catch (err) {
-        console.log(err);
+                .then((res) => {
+                    console.log(res.data)
+                    res.data.rows.map((row, index) => {
+                        rows.push(row);
+                    })
+                    console.log("getDisplayData");
+                    const inwardTable = JSON.stringify(rows);
+                    sessionStorage.setItem('inwardTable', inwardTable);
+                })
+        }
+        catch (err) {
+            console.log(err);
+        }
     }
 
-    // return list of lists
-    return rows;
+    // console.log(rows);
 }
 
 const update_on = ({ inward = null, nature = null, recievedFrom = null, subject = null, deliverTo = null, outward = null, dept = null, addressee = null, desc = null, recipt_no = null }) => {

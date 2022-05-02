@@ -5,13 +5,16 @@ import "datatables.net-dt/js/dataTables.dataTables";
 import "datatables.net-dt/css/jquery.dataTables.min.css";
 
 
-const TableFair = ({ title, tableHeaders, tableRows, applyDataTable = false }) => {
+const TableFair = ({ title, tableHeaders, tableRows, applyDataTableApi = false }) => {
 
-  if (applyDataTable) {
+  if (applyDataTableApi) {
     $(document).ready(function () {
       $('#table').DataTable();
     });
   }
+
+  // console.log("table fair");
+  // console.log(tableRows);
 
   return (
     <div>
@@ -27,12 +30,30 @@ const TableFair = ({ title, tableHeaders, tableRows, applyDataTable = false }) =
         </thead>
         <tbody>
           {
-            tableRows.map((value, index) => (
+            tableRows?.map((value, index) => (
               <tr key={index}>
+                {applyDataTableApi &&
+                  <>
+                    <td>{value.inwardID}</td>
+                    <td>{value.dt}</td>
+                    <td>{value.inwardID}</td>
+                    <td>{value.nature}</td>
+                    <td>{value.recievedFrom}</td>
+                    <td>{value.subject}</td>
+                    <td>{value.deliverTo}</td>
+                    <td>{value.remark}</td>
+                  </>
+                } 
+
                 {
-                  value.map((data, index) => (
-                    <td key={index}>{data}</td>
-                  ))
+                  !applyDataTableApi &&
+                  <>
+                    <td>{value.dt}</td>
+                    <td>{value.inwardID}</td>
+                    <td>{value.recievedFrom}</td>
+                    <td>{value.subject}</td>
+                    <td>{value.deliverTo}</td>
+                  </>
                 }
               </tr>
             ))
