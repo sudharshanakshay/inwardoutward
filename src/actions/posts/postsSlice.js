@@ -7,25 +7,27 @@ import { CONFIG, DISPLAY_URL } from "../../utility/Values";
 export const inwardSlice = createSlice({
     name: 'inwardPosts',
     initialState: {
-        posts : [],
+        posts: [],
     },
-    reducers : {
-        setPosts : (state, rows) => {
+    reducers: {
+        setPosts: (state, rows) => {
             state.posts = rows;
         },
 
-        getPosts : async (state) => {
-            let rows = []
+        getPosts: async (state) => {
+            let rows = [];
+
             try {
                 await axios.get(DISPLAY_URL, CONFIG)
-                .then((res)=> {
-                    // console.log(res.data)
-                    res.data.rows.map((row)=>{
-                        rows.push(row);
+                    .then((res) => {
+                        console.log(res.data)
+                        res.data.rows.map((row, index) => {
+                            rows.push(row);
+                        })
+                        console.log("getDisplayData");
+                        const inwardTable = JSON.stringify(rows);
+                        sessionStorage.setItem('inwardTable', inwardTable);
                     })
-                })
-                state.posts = rows;
-                
             }
             catch (err) {
                 console.log(err);
@@ -35,5 +37,5 @@ export const inwardSlice = createSlice({
 });
 
 
-export const {setPosts, getPosts} = inwardSlice.actions;
+export const { setPosts, getInwardPosts } = inwardSlice.actions;
 export default inwardSlice.reducer;

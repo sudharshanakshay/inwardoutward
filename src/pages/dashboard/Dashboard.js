@@ -5,16 +5,19 @@ import TableFair from '../../components/TableFair/TableFair';
 
 import { BRIGHT_GREEN_SHADE, TEST_COLOR, ORANGE, MORE_TEAL, YELLOWISH, VIOLET, VIOLET_SHADE } from '../../utility/color';
 import { Col, Container, Row, Table } from 'react-bootstrap';
-import { TABLEHEADER_SMALL, TEST_TABLEDATA_SMALL, INWARD_TABLE_TITLE, OUTWARD_TABLE_TITLE } from '../../utility/Values';
+import { TABLEHEADER_SMALL, INWARD_TABLE_TITLE, OUTWARD_TABLE_TITLE } from '../../utility/Values';
 import { Grid } from '@mui/material';
 import Footer from '../../components/Footer/Footer';
+import { getDisplayData } from '../../actions/posts/postsAction';
 
 
 const Dashboard = () => {
 
-    let tableData = sessionStorage.getItem('inwardTable');
-    tableData = JSON.parse(tableData);
-    console.log("dashboard"+tableData);
+    getDisplayData();
+    let TABLE_DATA = sessionStorage.getItem('inwardTable');
+    TABLE_DATA = JSON.parse(TABLE_DATA);
+    console.log("dashboard"+TABLE_DATA);
+
     return (
         <div>
             <TopNavBar />
@@ -23,10 +26,10 @@ const Dashboard = () => {
                 <Grid className='grid'>
                     <Row >
                         <Col xs={12} sm={12} md={12} lg={5} className="dataTable">
-                            <TableFair title={INWARD_TABLE_TITLE} tableHeaders={TABLEHEADER_SMALL} tableRows={tableData} />
+                            <TableFair title={INWARD_TABLE_TITLE} tableHeaders={TABLEHEADER_SMALL} tableRows={TABLE_DATA} />
                         </Col>
                         <Col md={12} sm={12} lg={5} className="dataTable">
-                            <TableFair title={OUTWARD_TABLE_TITLE} tableHeaders={TABLEHEADER_SMALL} tableRows={tableData} />
+                            <TableFair title={OUTWARD_TABLE_TITLE} tableHeaders={TABLEHEADER_SMALL} tableRows={TABLE_DATA} />
                         </Col>
                         <Col >
                             <Row className='display-empty-box'></Row>
@@ -47,10 +50,10 @@ const Dashboard = () => {
                     </Row>
                     <Row >
                         <Col xs={12} sm={12} md={12} lg={5} xl={5} className="dataTable">
-                            <TableFair title={INWARD_TABLE_TITLE} tableHeaders={TABLEHEADER_SMALL} tableRows={TEST_TABLEDATA_SMALL} />
+                            <TableFair title={INWARD_TABLE_TITLE} tableHeaders={TABLEHEADER_SMALL} tableRows={TABLE_DATA} />
                         </Col>
                         <Col xs={12} sm={12} md={12} lg={5} xl={5} className="dataTable">
-                            <TableFair title={OUTWARD_TABLE_TITLE} tableHeaders={TABLEHEADER_SMALL} tableRows={TEST_TABLEDATA_SMALL} />
+                            <TableFair title={OUTWARD_TABLE_TITLE} tableHeaders={TABLEHEADER_SMALL} tableRows={TABLE_DATA} />
                         </Col>
                         <Col>
 

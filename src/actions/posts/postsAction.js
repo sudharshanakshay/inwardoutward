@@ -2,7 +2,7 @@ import React, { useEffect } from "react";
 import axios from "axios"
 import { INSERT_URL, CONFIG, DISPLAY_URL, DELETE_URL } from "../../utility/Values";
 import store from "../../store";
-import { setPosts } from "./postsSlice";
+import getInwardPosts from "./postsSlice";
 
 const insert_from = ({ inward = null, nature = null, recievedFrom = null, subject = null, deliverTo = null, outward = null, dept = null, addressee = null, desc = null, recipt_no = null }) => {
 
@@ -49,27 +49,29 @@ const insert_from = ({ inward = null, nature = null, recievedFrom = null, subjec
 
 export const getDisplayData = async () => {
 
-    let rows = [];
+    if (sessionStorage.getItem('inwardTable') == undefined) {
+        let rows = [];
 
-    try {
-        await axios.get(DISPLAY_URL,  CONFIG)
+        try {
+            await axios.get(DISPLAY_URL, CONFIG)
 
-        
-        .then((res)=> {
-            console.log(res.data)
-            res.data.rows.map((row, index)=>{
-                rows.push(row);
-            })
-            console.log("getDisplayData");
-            const inwardTable = JSON.stringify(rows);
-            sessionStorage.setItem('inwardTable', inwardTable);
-        })
+
+                .then((res) => {
+                    console.log(res.data)
+                    res.data.rows.map((row, index) => {
+                        rows.push(row);
+                    })
+                    console.log("getDisplayData");
+                    const inwardTable = JSON.stringify(rows);
+                    sessionStorage.setItem('inwardTable', inwardTable);
+                })
+        }
+        catch (err) {
+            console.log(err);
+        }
     }
-    catch (err) {
-        console.log(err);
-    }
-    
-    console.log(rows);
+
+    // console.log(rows);
 }
 
 const update_on = ({ inward = null, nature = null, recievedFrom = null, subject = null, deliverTo = null, outward = null, dept = null, addressee = null, desc = null, recipt_no = null }) => {

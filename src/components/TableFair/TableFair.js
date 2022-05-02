@@ -13,8 +13,8 @@ const TableFair = ({ title, tableHeaders, tableRows, applyDataTableApi = false }
     });
   }
 
-  console.log("table fair");
-  console.log(tableRows);
+  // console.log("table fair");
+  // console.log(tableRows);
 
   return (
     <div>
@@ -30,7 +30,7 @@ const TableFair = ({ title, tableHeaders, tableRows, applyDataTableApi = false }
         </thead>
         <tbody>
           {
-            tableRows.map((value, index) => (
+            tableRows?.map((value, index) => (
               <tr key={index}>
                 {applyDataTableApi &&
                   <>
@@ -43,8 +43,8 @@ const TableFair = ({ title, tableHeaders, tableRows, applyDataTableApi = false }
                     <td>{value.deliverTo}</td>
                     <td>{value.remark}</td>
                   </>
-                }
-                
+                } 
+
                 {
                   !applyDataTableApi &&
                   <>
