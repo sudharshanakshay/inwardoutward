@@ -14,6 +14,7 @@ import { getDisplayData } from '../../actions/posts/postsAction';
 const Dashboard = () => {
 
     getDisplayData();
+    
     let TABLE_DATA = sessionStorage.getItem('inwardTable');
     TABLE_DATA = JSON.parse(TABLE_DATA);
     console.log("dashboard"+TABLE_DATA);
