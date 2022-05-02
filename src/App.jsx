@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React from 'react'
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import './App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
@@ -15,7 +15,6 @@ import Dashboard from './pages/dashboard/Dashboard';
 import ForgotPassword from './components/auth/ForgotPassword';
 import Forms from './components/Forms/Forms';
 import OUTForm from './components/Forms/OUTForm';
-import { Calendar } from '@progress/kendo-react-dateinputs';
 
 
 function App() {
@@ -33,7 +32,7 @@ function App() {
               <Route path='/outward' element={<PrivateRoute component={Outward} />}></Route>
               <Route path='/Report' element={<PrivateRoute component={Report} />}></Route>  
               <Route path='/forms' element={<PrivateRoute component={Forms}/>}></Route>
-              <Route path='/OUTform' element={<PrivateRoute component={OUTForm}/>}></Route>
+              <Route path='/outform' element={<PrivateRoute component={OUTForm}/>}></Route>
               
             </Routes>
           </Router>
