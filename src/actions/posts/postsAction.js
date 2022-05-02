@@ -47,34 +47,35 @@ const insert_from = ({ inward = null, nature = null, recievedFrom = null, subjec
 }
 
 
-export const display_from = async ({ inward, outward }) => {
+export const getDisplayData = async () => {
 
+    // { inward, outward }
     let rows = [];
 
-    let from_post = null;
+    // let from_post = null;
 
-    if (inward) {
-        from_post = "inward_post";
-    }
-    if (outward) {
-        from_post = "outward_post";
-    }
+    // if (inward) {
+    //     from_post = "inward_post";
+    // }
+    // if (outward) {
+    //     from_post = "outward_post";
+    // }
 
-    const body = JSON.stringify({
-        "from_post": from_post,
-    });
+    // const body = JSON.stringify({
+    //     "from_post": from_post,
+    // });
 
     try {
-        await axios.get(DISPLAY_URL, body, CONFIG)
+        await axios.get(DISPLAY_URL,  CONFIG)
         .then((res)=> {
-            // console.log(res.data)
+            console.log(res.data)
             res.data.rows.map((row, index)=>{
                 rows.push(row);
             })
+            console.log("getDisplayData");
+            const inwardTable = JSON.stringify(rows);
+            sessionStorage.setItem('inwardTable', inwardTable);
         })
-
-        
-        
     }
     catch (err) {
         console.log(err);

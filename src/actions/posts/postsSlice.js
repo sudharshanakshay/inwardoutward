@@ -25,7 +25,6 @@ export const inwardSlice = createSlice({
                     })
                 })
                 state.posts = rows;
-
                 
             }
             catch (err) {

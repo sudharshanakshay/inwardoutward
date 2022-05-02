@@ -13,6 +13,9 @@ const TableFair = ({ title, tableHeaders, tableRows, applyDataTableApi = false }
     });
   }
 
+  console.log("table fair");
+  console.log(tableRows);
+
   return (
     <div>
       <h3 className="center">{title}</h3>
@@ -27,17 +30,32 @@ const TableFair = ({ title, tableHeaders, tableRows, applyDataTableApi = false }
         </thead>
         <tbody>
           {
-            console.log(tableRows)
-            // tableRows.map((value, index) => (
-            //   <tr key={index}>
-            //     {
-            //       console.log("table data"+value)
-            //       // value.map((data, index) => (
-            //       //   <td key={index}>{data}</td>
-            //       // ))
-            //     }
-            //   </tr>
-            // ))
+            tableRows.map((value, index) => (
+              <tr key={index}>
+                {applyDataTableApi &&
+                  <>
+                    <td>{value.inwardID}</td>
+                    <td>{value.dt}</td>
+                    <td>{value.inwardID}</td>
+                    <td>{value.nature}</td>
+                    <td>{value.recievedFrom}</td>
+                    <td>{value.subject}</td>
+                    <td>{value.deliverTo}</td>
+                    <td>{value.remark}</td>
+                  </>
+                }
+                {
+                  !applyDataTableApi &&
+                  <>
+                    <td>{value.dt}</td>
+                    <td>{value.inwardID}</td>
+                    <td>{value.recievedFrom}</td>
+                    <td>{value.subject}</td>
+                    <td>{value.deliverTo}</td>
+                  </>
+                }
+              </tr>
+            ))
           }
         </tbody>
       </Table>

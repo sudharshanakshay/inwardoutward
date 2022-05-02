@@ -11,17 +11,22 @@ import Footer from '../../components/Footer/Footer';
 
 
 const Dashboard = () => {
+
+    let tableData = sessionStorage.getItem('inwardTable');
+    tableData = JSON.parse(tableData);
+    console.log("dashboard"+tableData);
     return (
         <div>
             <TopNavBar />
+
             <div className='desktop-view dashboard'>
                 <Grid className='grid'>
                     <Row >
                         <Col xs={12} sm={12} md={12} lg={5} className="dataTable">
-                            <TableFair title={INWARD_TABLE_TITLE} tableHeaders={TABLEHEADER_SMALL} tableRows={TEST_TABLEDATA_SMALL} />
+                            <TableFair title={INWARD_TABLE_TITLE} tableHeaders={TABLEHEADER_SMALL} tableRows={tableData} />
                         </Col>
                         <Col md={12} sm={12} lg={5} className="dataTable">
-                            <TableFair title={OUTWARD_TABLE_TITLE} tableHeaders={TABLEHEADER_SMALL} tableRows={TEST_TABLEDATA_SMALL} />
+                            <TableFair title={OUTWARD_TABLE_TITLE} tableHeaders={TABLEHEADER_SMALL} tableRows={tableData} />
                         </Col>
                         <Col >
                             <Row className='display-empty-box'></Row>

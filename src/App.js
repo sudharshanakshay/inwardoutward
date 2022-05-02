@@ -13,6 +13,7 @@ import Outward from './pages/Outward/outward';
 import Report from './pages/report/report';
 import Dashboard from './pages/dashboard/Dashboard';
 import ForgotPassword from './components/auth/ForgotPassword';
+import Hello1 from './components/AlertModel/AlertModel';
 
 function App() {
   return (
@@ -28,6 +29,8 @@ function App() {
             <Route path='/inward' element={<PrivateRoute component={Inward} />}></Route>
             <Route path='/outward' element={<PrivateRoute component={Outward} />}></Route>
             <Route path='/Report' element={<PrivateRoute component={Report} />}></Route>  
+
+            <Route path="/alert" element={<Hello1/>}></Route>
 
           </Routes>
         </Router>
