@@ -11,5 +11,4 @@ const Outward = () => {
         </>
     )
 }
-
 export default Outward;
