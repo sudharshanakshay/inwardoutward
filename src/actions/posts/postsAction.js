@@ -49,24 +49,12 @@ const insert_from = ({ inward = null, nature = null, recievedFrom = null, subjec
 
 export const getDisplayData = async () => {
 
-    // { inward, outward }
     let rows = [];
-
-    // let from_post = null;
-
-    // if (inward) {
-    //     from_post = "inward_post";
-    // }
-    // if (outward) {
-    //     from_post = "outward_post";
-    // }
-
-    // const body = JSON.stringify({
-    //     "from_post": from_post,
-    // });
 
     try {
         await axios.get(DISPLAY_URL,  CONFIG)
+
+        
         .then((res)=> {
             console.log(res.data)
             res.data.rows.map((row, index)=>{
@@ -80,14 +68,8 @@ export const getDisplayData = async () => {
     catch (err) {
         console.log(err);
     }
-
-    // store.dispatch(setPosts(rows));
-    
     
     console.log(rows);
-    
-    // return list of lists
-    // return rows;
 }
 
 const update_on = ({ inward = null, nature = null, recievedFrom = null, subject = null, deliverTo = null, outward = null, dept = null, addressee = null, desc = null, recipt_no = null }) => {

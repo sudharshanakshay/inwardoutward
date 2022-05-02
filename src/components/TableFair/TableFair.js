@@ -44,6 +44,7 @@ const TableFair = ({ title, tableHeaders, tableRows, applyDataTableApi = false }
                     <td>{value.remark}</td>
                   </>
                 }
+                
                 {
                   !applyDataTableApi &&
                   <>

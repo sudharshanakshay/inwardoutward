@@ -22,7 +22,6 @@ const Inward = () => {
     // console.log("Inward 111");
     // console.log(tableData);
 
-
     return (
         <>
             <div >

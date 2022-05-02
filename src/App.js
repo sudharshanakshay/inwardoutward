@@ -30,8 +30,6 @@ function App() {
             <Route path='/outward' element={<PrivateRoute component={Outward} />}></Route>
             <Route path='/Report' element={<PrivateRoute component={Report} />}></Route>  
 
-            <Route path="/alert" element={<Hello1/>}></Route>
-
           </Routes>
         </Router>
       </Provider>
