@@ -10,7 +10,9 @@ export const UPDATE_URL = BASE_URL+ "/data";
 
 export const DELETE_URL = BASE_URL+ "/data";
 
-export const DISPLAY_URL = BASE_URL + "/data" ;
+export const INWARD_URL = BASE_URL + "/inward/posts" ;
+
+export const OUTWARD_URL = BASE_URL + "/outward/posts" ;
 
 export const CONFIG = {
     headers: {

@@ -26,6 +26,9 @@ export const loginAction = async ({ email, password, setAuth }) => {
             store.dispatch(logIn());
             store.dispatch(userConfig({ 'email': email }));
         }
+        else {
+            // alert should trigger here
+        }
     } catch (err) {
         console.log("error client side " + err);
     }

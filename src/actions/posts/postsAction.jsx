@@ -1,13 +1,28 @@
 import React, { useEffect } from "react";
 import axios from "axios"
-import { INSERT_URL, CONFIG, DISPLAY_URL, DELETE_URL } from "../../utility/Values";
+import { INSERT_URL, CONFIG, DELETE_URL, INWARD_URL, OUTWARD_URL } from "../../utility/Values";
 import store from "../../store";
 import getInwardPosts from "./postsSlice";
 
-const insert_from = ({ inward = null, nature = null, recievedFrom = null, subject = null, deliverTo = null, outward = null, dept = null, addressee = null, desc = null, recipt_no = null }) => {
+export const insertFrom = async ({ 
+    inward = null, 
+    outward = null,
 
-    const from_post = null;
-    const body = null;
+    nature = null, 
+    recievedFrom = null, 
+    subject = null, 
+    deliverTo = null, 
+    remark = null,
+     
+    dept = null, 
+    addressee = null, 
+    desc = null, 
+    recipt_no = null }) => {
+
+        console.log("post Action")
+
+    let from_post = null;
+    let body = null;
 
     if (inward) {
         from_post = "inward_post";
@@ -17,7 +32,8 @@ const insert_from = ({ inward = null, nature = null, recievedFrom = null, subjec
             'nature': nature,
             'recievedFrom': recievedFrom,
             'subject': subject,
-            'deliverTo': deliverTo
+            'deliverTo': deliverTo,
+            'remark' : remark
         });
     }
 
@@ -36,42 +52,57 @@ const insert_from = ({ inward = null, nature = null, recievedFrom = null, subjec
 
     if (body)
         try {
-            const res = axios.post(INSERT_URL, body, CONFIG);
-            if (res.data.insert == "successful") {
-                console.log("insert successful")
-                // Todo : alert model . 
-            }
+            await axios.post(INSERT_URL, body, CONFIG)
+            .then((res)=>{
+                if (res.data.insert == "successful") {
+                    console.log("insert successful")
+                    // Todo : alert model . 
+                }
+            })
         } catch (err) {
             console.log(err);
         }
 }
 
 
-export const getDisplayData = async () => {
+export const getDisplayData = async ({ inward = false, outward = false, setRen }) => {
 
     if (sessionStorage.getItem('inwardTable') == undefined) {
-        let rows = [];
+        const body = JSON.stringify({
+            'inward': inward,
+            'outward': outward
+        });
 
-        try {
-            await axios.get(DISPLAY_URL, CONFIG)
+        if (inward) {
+            try {
+                console.log(body);
+                await axios.post(INWARD_URL , body, CONFIG)
+                    .then((res) => {
 
-
-                .then((res) => {
-                    console.log(res.data)
-                    res.data.rows.map((row, index) => {
-                        rows.push(row);
+                        sessionStorage.setItem('inwardTable', JSON.stringify(res.data.inward));
+                        setRen(true);
                     })
-                    console.log("getDisplayData");
-                    const inwardTable = JSON.stringify(rows);
-                    sessionStorage.setItem('inwardTable', inwardTable);
-                })
+            }
+            catch (err) {
+                console.log(err);
+            }
         }
-        catch (err) {
-            console.log(err);
+
+        if (outward) {
+            try {
+                console.log(body);
+                await axios.post(OUTWARD_URL, body, CONFIG)
+                    .then((res) => {
+                        sessionStorage.setItem('outwardTable', JSON.stringify(res.data.outward));
+                        setRen(true);
+                    })
+            }
+            catch (err) {
+                console.log(err);
+            }
         }
     }
 
-    // console.log(rows);
 }
 
 const update_on = ({ inward = null, nature = null, recievedFrom = null, subject = null, deliverTo = null, outward = null, dept = null, addressee = null, desc = null, recipt_no = null }) => {

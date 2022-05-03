@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import TopNavBar from '../../components/navBar/TopNavBar';
 import StatusBox from '../../components/StatusBox/StatusBox';
 import TableFair from '../../components/TableFair/TableFair';
@@ -9,11 +9,20 @@ import { TABLEHEADER_SMALL, INWARD_TABLE_TITLE, OUTWARD_TABLE_TITLE } from '../.
 import { Grid } from '@mui/material';
 import Footer from '../../components/Footer/Footer';
 import { getDisplayData } from '../../actions/posts/postsAction';
+import Inward from '../Inward/Inward';
 
 
 const Dashboard = () => {
 
-    getDisplayData();
+    const [ren, setRen] = useState(false);
+
+    getDisplayData({
+        inward:true,
+        outward:true,
+        setRen
+    });
+
+    
     
     let TABLE_DATA = sessionStorage.getItem('inwardTable');
     TABLE_DATA = JSON.parse(TABLE_DATA);

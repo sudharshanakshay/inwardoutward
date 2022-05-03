@@ -1,63 +1,82 @@
 import { Button } from 'bootstrap';
-import React from 'react';
+import React, { useState } from 'react';
 import { Form } from 'react-bootstrap';
+import {insertFrom} from '../../actions/posts/postsAction'
+import TopNavBar from '../navBar/TopNavBar';
 
 const Forms = () => {
+
+    const [formData, setFormData] = useState({
+        nature : '',
+        recievedFrom : '',
+        subject : '',
+        deliverTo : '',
+        remark : ''
+    });
+
+    const inward = true;
+
+    const {nature, recievedFrom, subject, deliverTo, remark } = formData;
+
+    const handleChange = (change) => {
+        setFormData({...formData, [change.target.name]:change.target.value });
+        console.log(formData);
+    }
+
+    const onSubmit = (e) => {
+        e.preventDefault();
+        insertFrom({inward, nature, recievedFrom, subject, deliverTo, remark});
+    }
+
     return (
         <div>
-            <Form>
-                <Form.Label htmlFor="inputPassword5">Inward Number</Form.Label>
-                <Form.Control
-                    type="Number"
-                    id="Number"
-                    aria-describedby="passwordHelpBlock"
-                />
-                 
-            </Form>
-            <Form>
-                <Form.Label htmlFor="inputPassword5">Nature Of Mail</Form.Label>
+            <TopNavBar/>
+            <Form onSubmit={(s)=>onSubmit(s)}>
+                <Form.Label >Nature Of Mail</Form.Label>
                 <Form.Control
                     type="text"
                     id="text"
+                    name='nature'
                     aria-describedby="passwordHelpBlock"
+                    onChange={(value)=> handleChange(value)}
                 />
-                 
-            </Form>
-            <Form>
-                <Form.Label htmlFor="inputPassword5">Received From</Form.Label>
+
+                <Form.Label >Received From</Form.Label>
                 <Form.Control
                     type="text"
                     id="text"
+                    name='recievedFrom'
                     aria-describedby="passwordHelpBlock"
+                    onChange={(value)=> handleChange(value)}
                 />
-                 
-            </Form>
-            <Form>
-                <Form.Label htmlFor="inputPassword5">Subject</Form.Label>
+
+                <Form.Label >Subject</Form.Label>
                 <Form.Control
                     type="text"
                     id="text"
+                    name='subject'
                     aria-describedby="passwordHelpBlock"
                 />
-                 
-            </Form>
-            <Form>
-                <Form.Label htmlFor="inputPassword5">Delivered To</Form.Label>
+
+                <Form.Label >Deliver To</Form.Label>
                 <Form.Control
                     type="text"
                     id="text"
+                    name='deliverTo'
                     aria-describedby="passwordHelpBlock"
+                    onChange={(value)=> handleChange(value)}
                 />
-                 
-            </Form>
-            <Form>
-                <Form.Label htmlFor="inputPassword5">Remarks</Form.Label>
+
+                <Form.Label >Remarks</Form.Label>
                 <Form.Control
                     type="text"
                     id="text"
+                    name='remark'
                     aria-describedby="passwordHelpBlock"
+                    onChange={(value)=> handleChange(value)}
                 />
-                 <button type="button" class="btn btn-primary">Submit</button>
+                
+                <button type="submit" class="btn btn-primary" >Submit</button>
             </Form>
         </div>
     )
