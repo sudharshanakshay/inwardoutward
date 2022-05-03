@@ -1,79 +1,96 @@
 import { Button } from 'bootstrap';
-import React from 'react';
+import React, { useState } from 'react';
 import { Form } from 'react-bootstrap';
-
+import { insertFrom } from '../../actions/posts/postsAction'
+import TopNavBar from '../navBar/TopNavBar';
 
 const OUTForm = () => {
 
+    const [formData, setFormData] = useState({
+        serialNo: '',
+        receiptNo: '',
+        addresseeName: '',
+        nature: '',
+        description: '',
+        remark: ''
+    });
+
+    const outward = true;
+
+    const { serialNo, receiptNo, addresseeName, nature, description, remark } = formData;
+
+    const handleChange = (change) => {
+        setFormData({ ...formData, [change.target.name]: change.target.value });
+        console.log(formData);
+    }
+
+    const onSubmit = (e) => {
+        e.preventDefault();
+        insertFrom({outward,  serialNo, receiptNo, addresseeName, nature, description, remark });
+    }
+
     return (
         <div>
-            
-            <Form>
-                <Form.Label htmlFor="inputPassword5">Serial Number </Form.Label>
-                <Form.Control
-                    type="Number"
-                    id="Number"
-                    aria-describedby="passwordHelpBlock"
-                />
-                 
-            </Form>
-            <Form>
-                <Form.Label htmlFor="inputPassword5">From Department</Form.Label>
+            <TopNavBar />
+            <Form onSubmit={(s) => onSubmit(s)}>
+                <Form.Label >Serial No</Form.Label>
                 <Form.Control
                     type="text"
                     id="text"
+                    name='serialNo'
                     aria-describedby="passwordHelpBlock"
+                    onChange={(value) => handleChange(value)}
                 />
-                 
-            </Form>
-            <Form>
-                <Form.Label htmlFor="inputPassword5">Addressee Name</Form.Label>
+
+                <Form.Label >Receipt No</Form.Label>
                 <Form.Control
                     type="text"
                     id="text"
+                    name='receiptNo'
                     aria-describedby="passwordHelpBlock"
+                    onChange={(value) => handleChange(value)}
                 />
-                 
-            </Form>
-            <Form>
-                <Form.Label htmlFor="inputPassword5">Description</Form.Label>
+
+                <Form.Label >Addressee Name</Form.Label>
                 <Form.Control
                     type="text"
                     id="text"
+                    name='addresseeName'
                     aria-describedby="passwordHelpBlock"
+                    onChange={(value) => handleChange(value)}
                 />
-                 
-            </Form>
-            <Form>
-                <Form.Label htmlFor="inputPassword5">Nature Of Mail</Form.Label>
+
+                <Form.Label >Nature</Form.Label>
                 <Form.Control
                     type="text"
                     id="text"
+                    name='nature'
                     aria-describedby="passwordHelpBlock"
+                    onChange={(value) => handleChange(value)}
                 />
-                 
-            </Form>
-            <Form>
-                <Form.Label htmlFor="inputPassword5">Receipt Number</Form.Label>
+
+                <Form.Label >Description</Form.Label>
                 <Form.Control
                     type="text"
                     id="text"
+                    name='description'
                     aria-describedby="passwordHelpBlock"
+                    onChange={(value) => handleChange(value)}
                 />
-                 
-            </Form>
-            <Form>
-                <Form.Label htmlFor="inputPassword5"> Remarks</Form.Label>
+
+                <Form.Label >Remarks</Form.Label>
                 <Form.Control
                     type="text"
                     id="text"
+                    name='remark'
                     aria-describedby="passwordHelpBlock"
+                    onChange={(value) => handleChange(value)}
                 />
-                 <button type="button" class="btn btn-primary">Submit</button>
+
+                <button type="submit" className="btn btn-primary" >Submit</button>
             </Form>
         </div>
     )
-    
 }
 
 export default OUTForm;

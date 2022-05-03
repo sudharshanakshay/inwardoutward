@@ -56,6 +56,7 @@ const Forms = () => {
                     id="text"
                     name='subject'
                     aria-describedby="passwordHelpBlock"
+                    onChange={(value) => handleChange(value)}
                 />
 
                 <Form.Label >Deliver To</Form.Label>

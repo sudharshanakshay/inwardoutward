@@ -1,27 +1,37 @@
-import React from "react";
+import React, {useState} from "react";
 import TopNavBar from "../../components/navBar/TopNavBar";
 import { Container } from "react-bootstrap";
 import TableFair from "../../components/TableFair/TableFair";
-import { TABLEHEADER_LONG } from "../../utility/Values";
+import { TABLEHEADER_LONG, OUTWARD_TABLE_HEADER } from "../../utility/Values";
 import {getDisplayData} from '../../actions/posts/postsAction';
+import { Link } from "react-router-dom";
 
 const Outward = () => {
 
-    getDisplayData()
+    const [ren, setRen] = useState(false);
+
+    getDisplayData({
+        inward:true,
+        outward:true,
+        setRen
+    });
 
     const OUTWARD_TABLE_TITLE = "Outward Table";
 
-    const tableDataString = sessionStorage.getItem('inwardTable');
-    const TABLE_DATA =  JSON.parse(tableDataString);
+    let OUTWARD_TABLE_DATA = sessionStorage.getItem('outwardTable');
+    OUTWARD_TABLE_DATA =  JSON.parse(OUTWARD_TABLE_DATA);
 
     return (
         <>
             <div >
                 <TopNavBar />
             </div>
+
+            <div style={{textAlign:"center"}}><Link to="/outform"><button type="button">Enter New Outward Data</button></Link></div>
+
             <div >
                 <Container className="data-table">
-                    <TableFair id="table" title={OUTWARD_TABLE_TITLE} tableHeaders={TABLEHEADER_LONG} tableRows={TABLE_DATA} applyDataTableApi={true} />
+                    <TableFair id="table" title={OUTWARD_TABLE_TITLE} tableHeaders={OUTWARD_TABLE_HEADER} tableRows={OUTWARD_TABLE_DATA} applyDataTableApi={true} />
                 </Container>
             </div>
         </>
