@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import axios from "axios"
-import { INSERT_INWARD_URL, INSERT_OUTWARD_URL, CONFIG, SELECT_INWARD_URL, DELETE_URL, SELECT_OUTWARD_URL, SELECT_DASHBOARD_INWARD_URL } from "../../utility/Values";
+import { INSERT_INWARD_URL, INSERT_OUTWARD_URL, CONFIG, SELECT_INWARD_URL, DELETE_URL, SELECT_OUTWARD_URL, SELECT_DASHBOARD_INWARD_URL, SELECT_DASHBOARD_OUTWARD_URL } from "../../utility/Constants";
 
 export const insertFrom = async ({
     inward = null,
@@ -91,12 +91,18 @@ export const getDisplayData = async ({ setRen, updated = false }) => {
 
         try {
             console.log("dashboard/inward");
-            await axios.get('SELECT_DASHBOARD_INWARD_URL', CONFIG)
+            await axios.post(SELECT_DASHBOARD_INWARD_URL, CONFIG)
             .then((res) => {
                 console.log(res.data);
                 sessionStorage.setItem('dashboardInward', JSON.stringify(res.data.dashboardInward));
-                setRen(true)
             })
+
+            await axios.post(SELECT_DASHBOARD_OUTWARD_URL, CONFIG)
+            .then((res) => {
+                sessionStorage.setItem('dashboardOutward', JSON.stringify(res.data.dashboardOutward))
+            })
+
+            setRen(true)
         }
         catch (err) {
             console.log(err);
@@ -104,10 +110,10 @@ export const getDisplayData = async ({ setRen, updated = false }) => {
 
 
         try {
-            await axios.get(SELECT_INWARD_URL, CONFIG)
+            await axios.post(SELECT_INWARD_URL, CONFIG)
                 .then((res) => {
                     sessionStorage.setItem('inwardTable', JSON.stringify(res.data.inward));
-                    setRen(true);
+                    // setRen(true);
                 })
         }
         catch (err) {
@@ -115,10 +121,10 @@ export const getDisplayData = async ({ setRen, updated = false }) => {
         }
         
         try {
-            await axios.get(SELECT_OUTWARD_URL, CONFIG)
+            await axios.post(SELECT_OUTWARD_URL, CONFIG)
                 .then((res) => {
                     sessionStorage.setItem('outwardTable', JSON.stringify(res.data.outward));
-                    setRen(true);
+                    setRen(true);   
                     console.log(res.data);
                 })
         }

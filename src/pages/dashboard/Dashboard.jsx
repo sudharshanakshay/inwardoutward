@@ -5,7 +5,7 @@ import TableFair from '../../components/TableFair/TableFair';
 
 import { BRIGHT_GREEN_SHADE, TEST_COLOR, ORANGE, MORE_TEAL, YELLOWISH, VIOLET, VIOLET_SHADE } from '../../utility/color';
 import { Col, Container, Row, Table } from 'react-bootstrap';
-import { INWARD_TABLE_HEADER_SHORT, INWARD_TABLE_TITLE, OUTWARD_TABLE_TITLE, OUTWARD_TABLE_HEADER_SHORT } from '../../utility/Values';
+import { INWARD_TABLE_HEADER_SHORT, INWARD_TABLE_TITLE, OUTWARD_TABLE_TITLE, OUTWARD_TABLE_HEADER_SHORT } from '../../utility/Constants';
 import { Grid } from '@mui/material';
 import Footer from '../../components/Footer/Footer';
 import { getDisplayData } from '../../actions/posts/postsAction';

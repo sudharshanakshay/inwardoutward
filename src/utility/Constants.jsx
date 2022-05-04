@@ -2,9 +2,9 @@
 
 const BASE_URL = "http://localhost:5000"
 
-export const LOGIN_URL = BASE_URL+ "/cors/login";
+export const LOGIN_URL = BASE_URL+ "/login";
 
-export const REGISTER_URL = BASE_URL+ "/cors/register";
+export const REGISTER_URL = BASE_URL+ "/register";
 
 export const INSERT_INWARD_URL = BASE_URL+ "/inward/insert";
 
@@ -18,7 +18,7 @@ export const SELECT_INWARD_URL = BASE_URL + "/inward/select" ;
 
 export const SELECT_OUTWARD_URL = BASE_URL + "/outward/select" ;
 
-export const SELECT_DASHBOARD_INWARD_URL = BASE_URL+"/dashboad/inward";
+export const SELECT_DASHBOARD_INWARD_URL = BASE_URL+"/dashboard/inward";
 
 export const SELECT_DASHBOARD_OUTWARD_URL = BASE_URL+"/dashboard/outward";
 

@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import TopNavBar from "../../components/navBar/TopNavBar";
 import { Container } from "react-bootstrap";
 import TableFair from "../../components/TableFair/TableFair";
-import { TABLEHEADER_LONG, OUTWARD_TABLE_HEADER } from "../../utility/Values";
+import { TABLEHEADER_LONG, OUTWARD_TABLE_HEADER } from "../../utility/Constants";
 import { getDisplayData } from '../../actions/posts/postsAction';
 import { Link } from "react-router-dom";
 
