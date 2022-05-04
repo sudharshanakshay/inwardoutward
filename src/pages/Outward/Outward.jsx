@@ -5,6 +5,7 @@ import TableFair from "../../components/TableFair/TableFair";
 import { TABLEHEADER_LONG, OUTWARD_TABLE_HEADER } from "../../utility/Constants";
 import { getDisplayData } from '../../actions/posts/postsAction';
 import { Link } from "react-router-dom";
+import ButtonSpinner from "../../components/Loading/ButtonSpinner";
 
 const Outward = () => {
 
@@ -16,6 +17,15 @@ const Outward = () => {
 
     let OUTWARD_TABLE_DATA = sessionStorage.getItem('outwardTable');
     OUTWARD_TABLE_DATA = JSON.parse(OUTWARD_TABLE_DATA);
+
+    if (OUTWARD_TABLE_DATA == undefined) {
+        return (
+            <>
+                <TopNavBar />
+                <ButtonSpinner/>
+            </>
+        )
+    }
 
     return (
         <>

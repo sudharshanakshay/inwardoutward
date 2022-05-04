@@ -299,3 +299,11 @@ body {
     display: block;
     height: 5%;
 }
+
+.nav-item {
+    display: block;
+    padding: 4px;
+    margin: 6px;
+    text-decoration: none;
+    color: #000000;
+}

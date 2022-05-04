@@ -4,27 +4,38 @@ import StatusBox from '../../components/StatusBox/StatusBox';
 import TableFair from '../../components/TableFair/TableFair';
 
 import { BRIGHT_GREEN_SHADE, TEST_COLOR, ORANGE, MORE_TEAL, YELLOWISH, VIOLET, VIOLET_SHADE } from '../../utility/color';
-import { Col, Container, Row, Table } from 'react-bootstrap';
+import { Button, Col, Container, Row, Spinner, Table } from 'react-bootstrap';
 import { INWARD_TABLE_HEADER_SHORT, INWARD_TABLE_TITLE, OUTWARD_TABLE_TITLE, OUTWARD_TABLE_HEADER_SHORT } from '../../utility/Constants';
 import { Grid } from '@mui/material';
 import Footer from '../../components/Footer/Footer';
 import { getDisplayData } from '../../actions/posts/postsAction';
+import ButtonSpinner from '../../components/Loading/ButtonSpinner';
 
 
 const Dashboard = () => {
 
-    const [ren, setRen] = useState(false);
+    const [rerender, setReRender] = useState(false);
 
-    getDisplayData({ setRen });
+    getDisplayData({ setReRender });
 
 
     let INWARD_TABLE_DATA = sessionStorage.getItem('dashboardInward');
     INWARD_TABLE_DATA = JSON.parse(INWARD_TABLE_DATA);
 
-    let OUTWARD_TABLE_DATA = sessionStorage.getItem('outwardTable');
+    let OUTWARD_TABLE_DATA = sessionStorage.getItem('dashboardOutward');
     OUTWARD_TABLE_DATA = JSON.parse(OUTWARD_TABLE_DATA);
 
-    console.log(INWARD_TABLE_DATA);
+    // console.log(INWARD_TABLE_DATA.length);
+
+
+    if (INWARD_TABLE_DATA == undefined) {
+        return (
+            <>
+            <TopNavBar />
+            <ButtonSpinner/>
+            </>
+        )
+    }
 
     return (
         <div>
@@ -72,7 +83,7 @@ const Dashboard = () => {
                     <Row >
                         {/* --------------------------- Inward Table --------------------------- */}
                         <Col xs={12} sm={12} md={12} lg={5} xl={5} className="dataTable">
-                        <TableFair
+                            <TableFair
                                 inward={true}
                                 title={INWARD_TABLE_TITLE}
                                 tableHeaders={INWARD_TABLE_HEADER_SHORT}
@@ -82,7 +93,7 @@ const Dashboard = () => {
 
                         {/* --------------------------- Outward Table --------------------------- */}
                         <Col xs={12} sm={12} md={12} lg={5} xl={5} className="dataTable">
-                        <TableFair
+                            <TableFair
                                 outward={true}
                                 title={OUTWARD_TABLE_TITLE}
                                 tableHeaders={OUTWARD_TABLE_HEADER_SHORT}

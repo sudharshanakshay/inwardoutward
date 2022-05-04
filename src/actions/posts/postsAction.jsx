@@ -83,50 +83,36 @@ export const insertFrom = async ({
 }
 
 
-export const getDisplayData = async ({ setRen, updated = false }) => {
+export const getDisplayData = async ({ setReRender, updated = false }) => {
 
     if (sessionStorage.getItem('inwardTable') == undefined || updated) {
 
-        console.log("sessionStorage undefined");
+        // console.log("sessionStorage undefined");
 
         try {
             console.log("dashboard/inward");
             await axios.post(SELECT_DASHBOARD_INWARD_URL, CONFIG)
-            .then((res) => {
-                console.log(res.data);
-                sessionStorage.setItem('dashboardInward', JSON.stringify(res.data.dashboardInward));
-            })
+                .then((res) => {
+                    console.log(res.data);
+                    sessionStorage.setItem('dashboardInward', JSON.stringify(res.data.dashboardInward));
+                })
 
             await axios.post(SELECT_DASHBOARD_OUTWARD_URL, CONFIG)
-            .then((res) => {
-                sessionStorage.setItem('dashboardOutward', JSON.stringify(res.data.dashboardOutward))
-            })
+                .then((res) => {
+                    sessionStorage.setItem('dashboardOutward', JSON.stringify(res.data.dashboardOutward));
+                })
 
-            setRen(true)
-        }
-        catch (err) {
-            console.log(err);
-        }
-
-
-        try {
             await axios.post(SELECT_INWARD_URL, CONFIG)
                 .then((res) => {
                     sessionStorage.setItem('inwardTable', JSON.stringify(res.data.inward));
-                    // setRen(true);
                 })
-        }
-        catch (err) {
-            console.log(err);
-        }
-        
-        try {
             await axios.post(SELECT_OUTWARD_URL, CONFIG)
                 .then((res) => {
                     sessionStorage.setItem('outwardTable', JSON.stringify(res.data.outward));
-                    setRen(true);   
-                    console.log(res.data);
+                    // console.log(res.data);
+                    setReRender(true);
                 })
+
         }
         catch (err) {
             console.log(err);
