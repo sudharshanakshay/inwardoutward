@@ -5,7 +5,7 @@ import "datatables.net-dt/js/dataTables.dataTables";
 import "datatables.net-dt/css/jquery.dataTables.min.css";
 
 
-const TableFair = ({ title, tableHeaders, tableRows, applyDataTableApi = false }) => {
+const TableFair = ({ title, tableHeaders, tableRows, inward=false, outward=false, applyDataTableApi = false }) => {
 
   if (applyDataTableApi) {
     $(document).ready(function () {
@@ -32,7 +32,10 @@ const TableFair = ({ title, tableHeaders, tableRows, applyDataTableApi = false }
           {
             tableRows?.map((value, index) => (
               <tr key={index}>
-                {applyDataTableApi &&
+
+                {/* ------------ Inward Table ------------ */}
+
+                {applyDataTableApi && inward &&
                   <>
                     <td>{value.inwardID}</td>
                     <td>{value.dt}</td>
@@ -43,16 +46,44 @@ const TableFair = ({ title, tableHeaders, tableRows, applyDataTableApi = false }
                     <td>{value.deliverTo}</td>
                     <td>{value.remark}</td>
                   </>
-                } 
+                }
+
+                {/* ------------ Inward Table for Dashboad------------ */}
 
                 {
-                  !applyDataTableApi &&
+                  !applyDataTableApi && inward &&
                   <>
                     <td>{value.dt}</td>
-                    <td>{value.inwardID}</td>
                     <td>{value.recievedFrom}</td>
-                    <td>{value.subject}</td>
                     <td>{value.deliverTo}</td>
+                    {/* <td>{value.subject}</td> */}
+                  </>
+                }
+
+                {/* ------------ Outward Table ------------ */}
+
+                {applyDataTableApi && outward &&
+                  <>
+                    <td>{value.outwardID}</td>
+                    <td>{value.dt}</td>
+                    <td>{value.serialNo}</td>
+                    <td>{value.department}</td>
+                    <td>{value.receiptNo}</td>
+                    <td>{value.addresseeName}</td>
+                    <td>{value.nature}</td>
+                    <td>{value.description}</td>
+                    <td>{value.remark}</td>
+                  </>
+                }
+
+                {/* ------------ Outward Table for Dashboad------------ */}
+
+                {
+                  !applyDataTableApi && outward &&
+                  <>
+                    <td>{value.dt}</td>
+                    <td>{value.department}</td>
+                    <td>{value.addresseeName}</td>
                   </>
                 }
               </tr>

@@ -18,6 +18,9 @@ export const SELECT_INWARD_URL = BASE_URL + "/inward/select" ;
 
 export const SELECT_OUTWARD_URL = BASE_URL + "/outward/select" ;
 
+export const SELECT_DASHBOARD_INWARD_URL = BASE_URL+"/dashboad/inward";
+
+export const SELECT_DASHBOARD_OUTWARD_URL = BASE_URL+"/dashboard/outward";
 
 // ------------------------------ Configuration data ------------------------------
 
@@ -29,6 +32,10 @@ export const CONFIG = {
       }
 }
 
+// ----------------------------------- SQL queries ----------------------------------
+
+
+
 
 // ------------------------------ constants & test data ------------------------------
 
@@ -36,11 +43,13 @@ export const INWARD_TABLE_TITLE = "Inward Table";
 
 export const OUTWARD_TABLE_TITLE = "Outward Table";
 
-export const OUTWARD_TABLE_HEADER = ["sl.no", "Serial No.", "Receipt No.", "Addressee Name", "Nature", "Description", "Remark"];
+export const OUTWARD_TABLE_HEADER = ["sl.no","Date",  "Serial No.","Department", "Addressee Name", "Nature", "Description", "Receipt No.", "Remark"];
 
-export const TABLEHEADER_LONG = ["sl. no", "Date", "Inward No", "Nature of Mail", "Recieved From", "Subject", "Deliver To", "Remark"];
+export const OUTWARD_TABLE_HEADER_SHORT = [ "Date",  "Department", "Addressee"];
 
-export const TABLEHEADER_SMALL = ["Date", "Inward No", /*"Nature of Mail"*/, "Recieved From", "Subject", "Deliver To"];
+export const INWARD_TABLE_HEADER = ["sl. no", "Date", "Inward No", "Nature of Mail", "Recieved From", "Subject", "Deliver To", "Remark"];
+
+export const INWARD_TABLE_HEADER_SHORT = [ "Date", "Recieved From", "Deliver To" /*,"Subject"*/];
 
 export const TEST_TABLEDATA_LONG = [[1, "21/04/2022", "in005", "Invitation", "NITK", "Meeting", "Principal", "NA"],["2", "20/04/2022","in006", "Updates", "Higher Authority", "Examination", "Students", "NA"]];
 

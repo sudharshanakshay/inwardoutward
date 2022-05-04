@@ -5,7 +5,7 @@ import TableFair from '../../components/TableFair/TableFair';
 
 import { BRIGHT_GREEN_SHADE, TEST_COLOR, ORANGE, MORE_TEAL, YELLOWISH, VIOLET, VIOLET_SHADE } from '../../utility/color';
 import { Col, Container, Row, Table } from 'react-bootstrap';
-import { TABLEHEADER_SMALL, INWARD_TABLE_TITLE, OUTWARD_TABLE_TITLE, OUTWARD_TABLE_HEADER } from '../../utility/Values';
+import { INWARD_TABLE_HEADER_SHORT, INWARD_TABLE_TITLE, OUTWARD_TABLE_TITLE, OUTWARD_TABLE_HEADER_SHORT } from '../../utility/Values';
 import { Grid } from '@mui/material';
 import Footer from '../../components/Footer/Footer';
 import { getDisplayData } from '../../actions/posts/postsAction';
@@ -15,20 +15,16 @@ const Dashboard = () => {
 
     const [ren, setRen] = useState(false);
 
-    getDisplayData({
-        inward:true,
-        outward:true,
-        setRen
-    });
+    getDisplayData({ setRen });
 
-    
-    let INWARD_TABLE_DATA = sessionStorage.getItem('inwardTable');
+
+    let INWARD_TABLE_DATA = sessionStorage.getItem('dashboardInward');
     INWARD_TABLE_DATA = JSON.parse(INWARD_TABLE_DATA);
 
     let OUTWARD_TABLE_DATA = sessionStorage.getItem('outwardTable');
     OUTWARD_TABLE_DATA = JSON.parse(OUTWARD_TABLE_DATA);
 
-    console.log(OUTWARD_TABLE_DATA);
+    console.log(INWARD_TABLE_DATA);
 
     return (
         <div>
@@ -37,11 +33,24 @@ const Dashboard = () => {
             <div className='desktop-view dashboard'>
                 <Grid className='grid'>
                     <Row >
+                        {/* --------------------------- Inward Table --------------------------- */}
                         <Col xs={12} sm={12} md={12} lg={5} className="dataTable">
-                            <TableFair title={INWARD_TABLE_TITLE} tableHeaders={TABLEHEADER_SMALL} tableRows={INWARD_TABLE_DATA} />
+                            <TableFair
+                                inward={true}
+                                title={INWARD_TABLE_TITLE}
+                                tableHeaders={INWARD_TABLE_HEADER_SHORT}
+                                tableRows={INWARD_TABLE_DATA}
+                            />
+
                         </Col>
+
+                        {/* --------------------------- Outward Table --------------------------- */}
                         <Col md={12} sm={12} lg={5} className="dataTable">
-                            <TableFair title={OUTWARD_TABLE_TITLE} tableHeaders={OUTWARD_TABLE_HEADER} tableRows={OUTWARD_TABLE_DATA} />
+                            <TableFair
+                                outward={true}
+                                title={OUTWARD_TABLE_TITLE}
+                                tableHeaders={OUTWARD_TABLE_HEADER_SHORT}
+                                tableRows={OUTWARD_TABLE_DATA} />
                         </Col>
                         <Col >
                             <Row className='display-empty-box'></Row>
@@ -61,11 +70,23 @@ const Dashboard = () => {
                         <Col xs={4} sm={4}><StatusBox mainSpace="10" discription="Total Outward Post" color={BRIGHT_GREEN_SHADE}></StatusBox></Col>
                     </Row>
                     <Row >
+                        {/* --------------------------- Inward Table --------------------------- */}
                         <Col xs={12} sm={12} md={12} lg={5} xl={5} className="dataTable">
-                            <TableFair title={INWARD_TABLE_TITLE} tableHeaders={TABLEHEADER_SMALL} tableRows={INWARD_TABLE_DATA} />
+                        <TableFair
+                                inward={true}
+                                title={INWARD_TABLE_TITLE}
+                                tableHeaders={INWARD_TABLE_HEADER_SHORT}
+                                tableRows={INWARD_TABLE_DATA}
+                            />
                         </Col>
+
+                        {/* --------------------------- Outward Table --------------------------- */}
                         <Col xs={12} sm={12} md={12} lg={5} xl={5} className="dataTable">
-                            <TableFair title={OUTWARD_TABLE_TITLE} tableHeaders={TABLEHEADER_SMALL} tableRows={OUTWARD_TABLE_DATA} />
+                        <TableFair
+                                outward={true}
+                                title={OUTWARD_TABLE_TITLE}
+                                tableHeaders={OUTWARD_TABLE_HEADER_SHORT}
+                                tableRows={OUTWARD_TABLE_DATA} />
                         </Col>
                         <Col>
 
@@ -74,7 +95,7 @@ const Dashboard = () => {
                 </Grid>
             </div>
 
-            <Footer/>
+            <Footer />
 
         </div>
     )

@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Navbar, Nav, NavDropdown, Container, Button, Offcanvas, FormControl, Form } from "react-bootstrap";
+import { Navbar, Nav, NavDropdown, Container, Button, Offcanvas, FormControl, Form, Dropdown } from "react-bootstrap";
 import { useSelector } from "react-redux";
 import { Link, Navigate } from "react-router-dom";
 import { logOut } from "../../actions/auth/authSlice";
@@ -36,9 +36,22 @@ const TopNavBar = () => {
                             <Link to="/outward" >Outward Post</Link>
                         </Nav.Link>
 
-                        <Nav.Link >
-                            <Link to="/report" >Report</Link>
-                        </Nav.Link>
+                        <Dropdown>
+                            <Dropdown.Toggle style={{backgroundColor:'#ffffff', color:'#000000', border:'none'}} id="dropdown-basic">
+                                Report
+                            </Dropdown.Toggle>
+
+                            <Dropdown.Menu>
+                                <Nav.Link >
+                                    <Link to="/#" >Inward Report</Link>
+                                </Nav.Link>
+                                <Nav.Link >
+                                    <Link to="/#" >Outward Report</Link>
+                                </Nav.Link>
+                            </Dropdown.Menu>
+                        </Dropdown>
+
+
                     </Nav>
                     <Nav>
                         <Button type="submit" onClick={() => store.dispatch(logOut())} variant="outline-success" >logOut</Button>

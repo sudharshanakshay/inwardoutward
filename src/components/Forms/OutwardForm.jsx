@@ -8,6 +8,7 @@ const OUTForm = () => {
 
     const [formData, setFormData] = useState({
         serialNo: '',
+        department:'',
         receiptNo: '',
         addresseeName: '',
         nature: '',
@@ -17,7 +18,7 @@ const OUTForm = () => {
 
     const outward = true;
 
-    const { serialNo, receiptNo, addresseeName, nature, description, remark } = formData;
+    const { serialNo,department, receiptNo, addresseeName, nature, description, remark } = formData;
 
     const handleChange = (change) => {
         setFormData({ ...formData, [change.target.name]: change.target.value });
@@ -26,13 +27,14 @@ const OUTForm = () => {
 
     const onSubmit = (e) => {
         e.preventDefault();
-        insertFrom({outward,  serialNo, receiptNo, addresseeName, nature, description, remark });
+        insertFrom({ outward, serialNo,department, receiptNo, addresseeName, nature, description, remark });
     }
 
     return (
         <div>
             <TopNavBar />
             <Form onSubmit={(s) => onSubmit(s)}>
+                
                 <Form.Label >Serial No</Form.Label>
                 <Form.Control
                     type="text"
@@ -42,16 +44,16 @@ const OUTForm = () => {
                     onChange={(value) => handleChange(value)}
                 />
 
-                <Form.Label >Receipt No</Form.Label>
+                <Form.Label >Department</Form.Label>
                 <Form.Control
                     type="text"
                     id="text"
-                    name='receiptNo'
+                    name='department'
                     aria-describedby="passwordHelpBlock"
                     onChange={(value) => handleChange(value)}
                 />
 
-                <Form.Label >Addressee Name</Form.Label>
+                <Form.Label >Addressee </Form.Label>
                 <Form.Control
                     type="text"
                     id="text"
@@ -74,6 +76,15 @@ const OUTForm = () => {
                     type="text"
                     id="text"
                     name='description'
+                    aria-describedby="passwordHelpBlock"
+                    onChange={(value) => handleChange(value)}
+                />
+
+                <Form.Label >Receipt No</Form.Label>
+                <Form.Control
+                    type="text"
+                    id="text"
+                    name='receiptNo'
                     aria-describedby="passwordHelpBlock"
                     onChange={(value) => handleChange(value)}
                 />

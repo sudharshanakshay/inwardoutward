@@ -9,15 +9,19 @@ import { Provider } from 'react-redux';
 import store from './store';
 import PublicRoute from './components/routes/PublicRoute';
 import Inward from './pages/Inward/Inward';
-import Outward from './pages/Outward/outward';
+import Outward from './pages/Outward/Outward';
 import Report from './pages/report/report';
 import Dashboard from './pages/dashboard/Dashboard';
 import ForgotPassword from './components/auth/ForgotPassword';
-import Forms from './components/Forms/Forms';
-import OUTForm from './components/Forms/OUTForm';
+import Forms from './components/Forms/InwardForms';
+import OUTForm from './components/Forms/OutwardForm';
 
 
 function App() {
+
+  window.onbeforeunload = (e) => {
+    sessionStorage.clear()
+  }
     return (
       <div>
         <Provider store={store}>

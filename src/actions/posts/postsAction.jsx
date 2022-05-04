@@ -1,8 +1,6 @@
 import React, { useEffect } from "react";
 import axios from "axios"
-import { INSERT_INWARD_URL, INSERT_OUTWARD_URL, CONFIG, SELECT_INWARD_URL, DELETE_URL } from "../../utility/Values";
-import store from "../../store";
-import getInwardPosts from "./postsSlice";
+import { INSERT_INWARD_URL, INSERT_OUTWARD_URL, CONFIG, SELECT_INWARD_URL, DELETE_URL, SELECT_OUTWARD_URL, SELECT_DASHBOARD_INWARD_URL } from "../../utility/Values";
 
 export const insertFrom = async ({
     inward = null,
@@ -17,7 +15,8 @@ export const insertFrom = async ({
     serialNo = null,
     receiptNo = null,
     addresseeName = null,
-    description = null }) => {
+    description = null,
+    department = null }) => {
 
     console.log("post Action")
 
@@ -43,7 +42,7 @@ export const insertFrom = async ({
                 .then((res) => {
                     if (res.data.insert == "successful") {
                         console.log("insert successful")
-                        getDisplayData({updated:true, inward:true})
+                        getDisplayData({ updated: true, inward: true })
                         // Todo : alert model . 
                     }
                 })
@@ -60,6 +59,7 @@ export const insertFrom = async ({
         body = JSON.stringify({
             'from_post': from_post,
             'serialNo': serialNo,
+            'department': department,
             'receiptNo': receiptNo,
             'addresseeName': addresseeName,
             'nature': nature,
@@ -72,7 +72,7 @@ export const insertFrom = async ({
                 .then((res) => {
                     if (res.data.insert == "successful") {
                         console.log("insert successful")
-                        getDisplayData({updated:true, outward:true})
+                        getDisplayData({ updated: true, outward: true })
                         // Todo : alert model . 
                     }
                 })
@@ -83,45 +83,49 @@ export const insertFrom = async ({
 }
 
 
-export const getDisplayData = async ({ setRen, inward = false, outward = false, updated =false }) => {
+export const getDisplayData = async ({ setRen, updated = false }) => {
 
-    // if (sessionStorage.getItem('inwardTable') == undefined || updated) {
-        const body = JSON.stringify({
-            'inward': inward,
-            'outward': outward
-        });
+    if (sessionStorage.getItem('inwardTable') == undefined || updated) {
 
-        if (inward) {
-            try {
-                console.log("inward "+body);
-                await axios.post(SELECT_INWARD_URL, body, CONFIG)
-                    .then((res) => {
+        console.log("sessionStorage undefined");
 
-                        sessionStorage.setItem('inwardTable', JSON.stringify(res.data.inward));
-                        setRen(true);
-                    })
-            }
-            catch (err) {
-                console.log(err);
-            }
+        try {
+            console.log("dashboard/inward");
+            await axios.get('SELECT_DASHBOARD_INWARD_URL', CONFIG)
+            .then((res) => {
+                console.log(res.data);
+                sessionStorage.setItem('dashboardInward', JSON.stringify(res.data.dashboardInward));
+                setRen(true)
+            })
+        }
+        catch (err) {
+            console.log(err);
         }
 
-        if (outward) {
-            try {
-                console.log("outward "+body);
-                await axios.post(INSERT_OUTWARD_URL, body, CONFIG)
-                    .then((res) => {
-                        sessionStorage.setItem('outwardTable', JSON.stringify(res.data.outward));
-                        setRen(true);
-                        console.log(res.data);
-                    })
-            }
-            catch (err) {
-                console.log(err);
-            }
-        }
-    // }
 
+        try {
+            await axios.get(SELECT_INWARD_URL, CONFIG)
+                .then((res) => {
+                    sessionStorage.setItem('inwardTable', JSON.stringify(res.data.inward));
+                    setRen(true);
+                })
+        }
+        catch (err) {
+            console.log(err);
+        }
+        
+        try {
+            await axios.get(SELECT_OUTWARD_URL, CONFIG)
+                .then((res) => {
+                    sessionStorage.setItem('outwardTable', JSON.stringify(res.data.outward));
+                    setRen(true);
+                    console.log(res.data);
+                })
+        }
+        catch (err) {
+            console.log(err);
+        }
+    }
 }
 
 const update_on = ({ inward = null, nature = null, recievedFrom = null, subject = null, deliverTo = null, outward = null, dept = null, addressee = null, desc = null, recipt_no = null }) => {
