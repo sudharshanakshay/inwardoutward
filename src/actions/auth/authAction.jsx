@@ -27,6 +27,7 @@ export const loginAction = async ({ email, password, setAuth }) => {
         }
         else {
             // alert should trigger here
+            
         }
     } catch (err) {
         console.log("error client side " + err);
