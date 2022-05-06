@@ -6,6 +6,7 @@ import { TABLEHEADER_LONG, OUTWARD_TABLE_HEADER } from "../../utility/Constants"
 import { getDisplayData } from '../../actions/posts/postsAction';
 import { Link } from "react-router-dom";
 import ButtonSpinner from "../../components/Loading/ButtonSpinner";
+import Footer from "../../components/Footer/Footer";
 
 const Outward = () => {
 
@@ -44,6 +45,7 @@ const Outward = () => {
                     />
                 </Container>
             </div>
+            <Footer/>
         </>
     )
 }
