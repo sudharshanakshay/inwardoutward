@@ -21,7 +21,7 @@ const Inward = () => {
         return (
             <>
                 <TopNavBar />
-                <ButtonSpinner/>
+                <ButtonSpinner />
             </>
         )
     }
@@ -30,18 +30,16 @@ const Inward = () => {
         <>
             <TopNavBar />
 
-            <div style={{ textAlign: "center" }}><Link to="/forms"><button type="button">Enter New Inward Data</button></Link></div>
+            {/* <div style={{ textAlign: "center" }}><Link to="/inwardform"><button type="button">Enter New Inward Data</button></Link></div> */}
 
-            <div style={{ textAlign: "center", marginTop: "4%" }}>
-                <Container className="data-table">
-                    <TableFair
-                        inward={true}
-                        applyDataTableApi={true}
-                        title={"Inward Posts"}
-                        tableHeaders={INWARD_TABLE_HEADER}
-                        tableRows={INWARD_TABLE_DATA}
-                    />
-                </Container>
+            <div>
+                <TableFair
+                    inward={true}
+                    applyDataTableApi={true}
+                    title={"Inward Posts"}
+                    tableHeaders={INWARD_TABLE_HEADER}
+                    tableRows={INWARD_TABLE_DATA}
+                />
             </div>
         </>
     )

@@ -37,8 +37,8 @@ function App() {
               <Route path='/inward' element={<PrivateRoute component={Inward} />}></Route>
               <Route path='/outward' element={<PrivateRoute component={Outward} />}></Route>
               <Route path='/Report' element={<PrivateRoute component={Report} />}></Route>  
-              <Route path='/forms' element={<PrivateRoute component={Forms}/>}></Route>
-              <Route path='/outform' element={<PrivateRoute component={OUTForm}/>}></Route>
+              <Route path='/inwardform' element={<PrivateRoute component={Forms}/>}></Route>
+              <Route path='/outwardform' element={<PrivateRoute component={OUTForm}/>}></Route>
               
             </Routes>
           </Router>

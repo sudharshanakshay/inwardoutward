@@ -33,10 +33,8 @@ const Outward = () => {
                 <TopNavBar />
             </div>
 
-            <div style={{ textAlign: "center" }}><Link to="/outform"><button type="button">Enter New Outward Data</button></Link></div>
-
             <div >
-                <Container className="data-table">
+                <Container >
                     <TableFair
                         outward={true}
                         applyDataTableApi={true}

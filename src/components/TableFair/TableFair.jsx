@@ -1,5 +1,6 @@
 import React from "react";
-import { Table } from "react-bootstrap";
+import { Table} from "react-bootstrap";
+import {Link} from 'react-router-dom';
 import $ from 'jquery';
 import "datatables.net-dt/js/dataTables.dataTables";
 import "datatables.net-dt/css/jquery.dataTables.min.css";
@@ -17,7 +18,7 @@ const TableFair = ({ title, tableHeaders, tableRows, inward=false, outward=false
   // console.log(tableRows);
 
   return (
-    <div>
+    <div className="elevated-box">
       <h3 className="center">{title}</h3>
 
       <Table responsive id="table">
@@ -26,6 +27,7 @@ const TableFair = ({ title, tableHeaders, tableRows, inward=false, outward=false
             {tableHeaders.map((value, index) => (
               <td key={index}>{value}</td>
             ))}
+            { applyDataTableApi && <td>Actions</td>}
           </tr>
         </thead>
         <tbody>
@@ -45,6 +47,7 @@ const TableFair = ({ title, tableHeaders, tableRows, inward=false, outward=false
                     <td>{value.subject}</td>
                     <td>{value.deliverTo}</td>
                     <td>{value.remark}</td>
+                    <td><Link to="/inwardform">View, Edit, delete</Link></td>
                   </>
                 }
 
@@ -73,6 +76,7 @@ const TableFair = ({ title, tableHeaders, tableRows, inward=false, outward=false
                     <td>{value.nature}</td>
                     <td>{value.description}</td>
                     <td>{value.remark}</td>
+                    <td><Link to="/outwardform">View, Edit, delete</Link></td>
                   </>
                 }
 

@@ -6,7 +6,7 @@ import TableFair from '../../components/TableFair/TableFair';
 import { BRIGHT_GREEN_SHADE, TEST_COLOR, ORANGE, MORE_TEAL, YELLOWISH, VIOLET, VIOLET_SHADE } from '../../utility/color';
 import { Button, Col, Container, Row, Spinner, Table } from 'react-bootstrap';
 import { INWARD_TABLE_HEADER_SHORT, INWARD_TABLE_TITLE, OUTWARD_TABLE_TITLE, OUTWARD_TABLE_HEADER_SHORT } from '../../utility/Constants';
-import { Grid } from '@mui/material';
+// import {  } from '@mui/material';
 import Footer from '../../components/Footer/Footer';
 import { getDisplayData } from '../../actions/posts/postsAction';
 import ButtonSpinner from '../../components/Loading/ButtonSpinner';
@@ -33,24 +33,24 @@ const Dashboard = () => {
     // console.log(INWARD_TABLE_DATA.length);
 
 
-    // if (outwardTableData == undefined) {
-    //     return (
-    //         <>
-    //         <TopNavBar />
-    //         <ButtonSpinner/>
-    //         </>
-    //     )
-    // }
+    if (outwardTableData == undefined) {
+        return (
+            <>
+            <TopNavBar />
+            <ButtonSpinner/>
+            </>
+        )
+    }
 
     return (
         <div>
             <TopNavBar />
 
             <div className='desktop-view dashboard'>
-                <Grid className='grid'>
+                <Container fluid>
                     <Row >
                         {/* --------------------------- Inward Table --------------------------- */}
-                        <Col xs={12} sm={12} md={12} lg={5} className="dataTable">
+                        <Col xs={12} sm={12} md={12} lg={5} >
                             <TableFair
                                 inward={true}
                                 title={INWARD_TABLE_TITLE}
@@ -61,7 +61,7 @@ const Dashboard = () => {
                         </Col>
 
                         {/* --------------------------- Outward Table --------------------------- */}
-                        <Col md={12} sm={12} lg={5} className="dataTable">
+                        <Col md={12} sm={12} lg={5} >
                             <TableFair
                                 outward={true}
                                 title={OUTWARD_TABLE_TITLE}
@@ -81,11 +81,11 @@ const Dashboard = () => {
                             <Row><StatusBox mainSpace={outwardCount} discription="Total Outward Post" color={BRIGHT_GREEN_SHADE}></StatusBox></Row>
                         </Col>
                     </Row>
-                </Grid>
+                </Container>
             </div>
 
             <div className='mobile-view dashboard'>
-                <Grid className='grid'>
+                <Container fluid>
 
                     {/* --------------------------- Status Box --------------------------- */}  
                     
@@ -99,7 +99,7 @@ const Dashboard = () => {
                     </Row>
                     <Row >
                         {/* --------------------------- Inward Table --------------------------- */}
-                        <Col xs={12} sm={12} md={12} lg={5} xl={5} className="dataTable">
+                        <Col xs={12} sm={12} md={12} lg={5} xl={5}>
                             <TableFair
                                 inward={true}
                                 title={INWARD_TABLE_TITLE}
@@ -109,7 +109,7 @@ const Dashboard = () => {
                         </Col>
 
                         {/* --------------------------- Outward Table --------------------------- */}
-                        <Col xs={12} sm={12} md={12} lg={5} xl={5} className="dataTable">
+                        <Col xs={12} sm={12} md={12} lg={5} xl={5}>
                             <TableFair
                                 outward={true}
                                 title={OUTWARD_TABLE_TITLE}
@@ -120,7 +120,7 @@ const Dashboard = () => {
 
                         </Col>
                     </Row>
-                </Grid>
+                </Container>
             </div>
 
             <Footer />

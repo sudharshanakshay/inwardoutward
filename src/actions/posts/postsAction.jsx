@@ -82,15 +82,6 @@ export const insertFrom = async ({
     }
 }
 
-const computeStatusData = async () => {
-    try {
-
-    }
-    catch (err) {
-        console.log(err);
-    }
-}
-
 
 export const getDisplayData = async ({ setReRender, updated = false }) => {
 
@@ -121,6 +112,8 @@ export const getDisplayData = async ({ setReRender, updated = false }) => {
                     // console.log(res.data);
 
                 })
+
+                // request inward & outward count  
             await axios.post('http://localhost:5000/status', CONFIG)
                 .then((res) => {
                     // console.log(typeof(res.data.inward[0].inward_count));

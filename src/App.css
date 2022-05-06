@@ -125,7 +125,7 @@ body {
 /* ----- Status Box ----- */
 @media (max-width: 1400px) {
     .statusBox {
-        height: 100px;
+        height: 120px;
         padding: 10px;
         /* background-color: #eb1e2f; */
     }
@@ -134,9 +134,10 @@ body {
 
 @media (min-width: 1200px) {
     .statusBox {
-        height: 100px;
+        height: 120px;
         padding: 10px;
-        margin: 10% 5px;
+        /* top | horizontal | bottom */  /* top | right | bottom | left*/
+        margin: 15% 10px;
         /* background-color: #eb1e2f; */
     }
 
@@ -203,22 +204,12 @@ body {
     } */
 }
 
-
-
-
-
 .statusBox {
     display: block;
     justify-items: center;
     text-align: center;
-    
-    /* padding: 2px; */
-    /* height: 85px; */
-    /* width: 250px; */
     z-index: 0.5;
     border-style: solid;
-    /* border-bottom-color: #c4aeec; */
-    /* border-color: #FFFFFF #FFFFFF #FFFFFF #c4aeec; */
     border-color: #FFFFFF;
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19)
 }
@@ -235,9 +226,22 @@ body {
 /* ---------------------- Navbar ---------------------- */
 
 .top-nav-bar {
-    margin-bottom: 3%;
+    padding: 1%;
+    display: block;
     text-decoration: none;
+    /* border-style: solid; */
+    z-index: 1;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
     color: #535151;
+}
+
+.nav-item {
+    display: block;
+    padding: 4px;
+    margin: 6px;
+    text-decoration: none;
+    font-size: larger;
+    color: #000000;
 }
 
 .link {
@@ -261,9 +265,9 @@ body {
 
 /* ---------------------- Table ---------------------- */
 
-.dashboard {
+.elevated-box {
     /* display: block; */
-    margin: 5% 10px ;
+    margin: 4% 10px ;
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
     padding: 10px;
     align-items: center;
@@ -273,14 +277,6 @@ body {
 .align-item-center {
     align-items: center;
 }
-
-
-.grid {
-    margin-left: 2%;
-    margin-right: 2%;
-}
-
-
 
 .inline-block{
     display: inline-block;
@@ -300,10 +296,7 @@ body {
     height: 5%;
 }
 
-.nav-item {
+.dashboardContainer {
     display: block;
-    padding: 4px;
-    margin: 6px;
-    text-decoration: none;
-    color: #000000;
+
 }

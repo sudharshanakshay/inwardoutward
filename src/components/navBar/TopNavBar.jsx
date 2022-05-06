@@ -19,8 +19,8 @@ const TopNavBar = () => {
 
             <Navbar key={expand} expand="sm" variant="light" bg="light" >
                 
-                <Container fluid>
-                    <Navbar.Brand>Inward-Outward</Navbar.Brand>
+                <Container fluid className="top-nav-bar">
+                    <Navbar.Brand className="nav-item">Inward-Outward</Navbar.Brand>
                     <Navbar.Toggle aria-controls={`offcanvasNavbar-expand-${expand}}`} />
                     <Navbar.Collapse id="navbarScroll">
 
@@ -35,7 +35,7 @@ const TopNavBar = () => {
                             <Link to="/outward" className="nav-item" >Outward Post</Link>
 
                             <Dropdown>
-                                <Dropdown.Toggle style={{ backgroundColor: '#ffffff', color: '#000000', border: 'none' }} id="dropdown-basic">
+                                <Dropdown.Toggle className="nav-item" style={{ backgroundColor: '#ffffff', color: '#000000', border: 'none', fontSize:'larger' }} id="dropdown-basic">
                                     Report
                                 </Dropdown.Toggle>
 
@@ -56,52 +56,6 @@ const TopNavBar = () => {
                         </Nav>
 
                     </Navbar.Collapse>
-
-
-                    {/* <Navbar.Offcanvas
-                        id={`offcanvasNavbar-expand-${expand}`}
-                        // aria-labelledby={`offcanvasNavbarLabel-expand-${expand}`}
-                        placement="end">
-
-
-                        <Offcanvas.Header closeButton>
-                            <Offcanvas.Title id={`offcanvasNavbarLabel-expand-${expand}`}>
-                                Inward-Outward
-                            </Offcanvas.Title>
-                        </Offcanvas.Header>
-                        <Offcanvas.Body>
-
-                            <Nav defaultActiveKey="/home" as="ul"
-                                className="justify-content-end flex-grow-1 pe-3" style={{ maxHeight: '100px' }}
-                            >
-                                <Link to="/dashboard" className="nav-item" >Dashboard</Link>
-
-                                <Link to="/inward" className="nav-item">Inward Post</Link>
-
-                                <Link to="/outward" className="nav-item" >Outward Post</Link>
-
-                                <Dropdown>
-                                    <Dropdown.Toggle style={{ backgroundColor: '#ffffff', color: '#000000', border: 'none' }} id="dropdown-basic">
-                                        Report
-                                    </Dropdown.Toggle>
-
-                                    <Dropdown.Menu>
-                                        <Nav.Link >
-                                            <Link to="/#" >Inward Report</Link>
-                                        </Nav.Link>
-                                        <Nav.Link >
-                                            <Link to="/#" >Outward Report</Link>
-                                        </Nav.Link>
-                                    </Dropdown.Menu>
-                                </Dropdown>
-                            </Nav>
-                            <Nav>
-                                <Button type="submit" onClick={() => store.dispatch(logOut())} variant="outline-success" >logOut</Button>
-                            </Nav>
-                        </Offcanvas.Body>
-                    </Navbar.Offcanvas> */}
-
-
                 </Container>
             </Navbar>
         </div >
