@@ -47,7 +47,7 @@ const TableFair = ({ title, tableHeaders, tableRows, inward=false, outward=false
                     <td>{value.subject}</td>
                     <td>{value.deliverTo}</td>
                     <td>{value.remark}</td>
-                    <td><Link to="/inwardform">View, Edit, delete</Link></td>
+                    <td><Link to="/inwardform">Add</Link></td>
                   </>
                 }
 
@@ -76,7 +76,7 @@ const TableFair = ({ title, tableHeaders, tableRows, inward=false, outward=false
                     <td>{value.nature}</td>
                     <td>{value.description}</td>
                     <td>{value.remark}</td>
-                    <td><Link to="/outwardform">View, Edit, delete</Link></td>
+                    <td><Link to="/outwardform">Add</Link></td>
                   </>
                 }
 
