@@ -1,9 +1,11 @@
 import React from "react";
-import { Table} from "react-bootstrap";
+import { Button, Table} from "react-bootstrap";
 import {Link} from 'react-router-dom';
 import $ from 'jquery';
 import "datatables.net-dt/js/dataTables.dataTables";
 import "datatables.net-dt/css/jquery.dataTables.min.css";
+
+import { MdDelete } from 'react-icons/md';
 
 
 const TableFair = ({ title, tableHeaders, tableRows, inward=false, outward=false, applyDataTableApi = false }) => {
@@ -12,6 +14,10 @@ const TableFair = ({ title, tableHeaders, tableRows, inward=false, outward=false
     $(document).ready(function () {
       $('#table').DataTable();
     });
+  }
+
+  const handleInwardDelete =({value}) =>{
+    console.log(value);
   }
 
   // console.log("table fair");
@@ -47,7 +53,7 @@ const TableFair = ({ title, tableHeaders, tableRows, inward=false, outward=false
                     <td>{value.subject}</td>
                     <td>{value.deliverTo}</td>
                     <td>{value.remark}</td>
-                    <td><Link to="/inwardform">Add</Link></td>
+                    <td><Button variant="outline-danger" value={value.inwardID} onClick={(value)=> handleInwardDelete(value)}><MdDelete></MdDelete></Button></td>
                   </>
                 }
 
