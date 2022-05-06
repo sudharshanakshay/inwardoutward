@@ -2,6 +2,7 @@ import { Navigate } from "react-router-dom";
 import React from "react";
 import { useSelector } from "react-redux";
 import { useState } from "react";
+import { getDisplayData } from "../../actions/posts/postsAction";
 
 const PrivateRoute = ({ component: RouteComponent }) => {
     

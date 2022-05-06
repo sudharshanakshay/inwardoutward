@@ -7,3 +7,4 @@ export const BRIGHT_GREEN = "#00c292";
 export const BRIGHT_GREEN_SHADE = "#66dabd";
 export const ORANGE = "#fb9678";
 export const TEST_COLOR = "#ab8ce4";
+export const GOLDEN = "#f7b740";

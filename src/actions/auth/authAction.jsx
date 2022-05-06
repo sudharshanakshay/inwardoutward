@@ -1,8 +1,7 @@
 import axios from 'axios';
 import { logIn, userConfig } from './authSlice';
 import store from '../../store';
-import { LOGIN_URL, REGISTER_URL, CONFIG } from '../../utility/Values';
-import bcrypt from 'bcryptjs/dist/bcrypt';
+import { LOGIN_URL, REGISTER_URL, CONFIG } from '../../utility/Constants';
 import bcryptjs from 'bcryptjs';
 
 
@@ -25,6 +24,10 @@ export const loginAction = async ({ email, password, setAuth }) => {
         if (await bcryptjs.compareSync(password, res.data.password)) {
             store.dispatch(logIn());
             store.dispatch(userConfig({ 'email': email }));
+        }
+        else {
+            // alert should trigger here
+            
         }
     } catch (err) {
         console.log("error client side " + err);

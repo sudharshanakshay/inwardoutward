@@ -1,15 +1,31 @@
 import React, { useEffect } from "react";
 import axios from "axios"
-import { INSERT_URL, CONFIG, DISPLAY_URL, DELETE_URL } from "../../utility/Values";
-import store from "../../store";
-import getInwardPosts from "./postsSlice";
+import { INSERT_INWARD_URL, INSERT_OUTWARD_URL, CONFIG, SELECT_INWARD_URL, DELETE_URL, SELECT_OUTWARD_URL, SELECT_DASHBOARD_INWARD_URL, SELECT_DASHBOARD_OUTWARD_URL } from "../../utility/Constants";
 
-const insert_from = ({ inward = null, nature = null, recievedFrom = null, subject = null, deliverTo = null, outward = null, dept = null, addressee = null, desc = null, recipt_no = null }) => {
+export const insertFrom = async ({
+    inward = null,
+    outward = null,
 
-    const from_post = null;
-    const body = null;
+    nature = null,
+    recievedFrom = null,
+    subject = null,
+    deliverTo = null,
+    remark = null,
+
+    serialNo = null,
+    receiptNo = null,
+    addresseeName = null,
+    description = null,
+    department = null }) => {
+
+    console.log("post Action")
+
+    let from_post = null;
+    let body = null;
 
     if (inward) {
+        console.log("insert inward");
+
         from_post = "inward_post";
 
         body = JSON.stringify({
@@ -17,61 +33,103 @@ const insert_from = ({ inward = null, nature = null, recievedFrom = null, subjec
             'nature': nature,
             'recievedFrom': recievedFrom,
             'subject': subject,
-            'deliverTo': deliverTo
+            'deliverTo': deliverTo,
+            'remark': remark
         });
+
+        try {
+            await axios.post(INSERT_INWARD_URL, body, CONFIG)
+                .then((res) => {
+                    if (res.data.insert == "successful") {
+                        console.log("insert successful")
+                        getDisplayData({ updated: true, inward: true })
+                        // Todo : alert model . 
+                    }
+                })
+        } catch (err) {
+            console.log(err);
+        }
     }
 
     if (outward) {
+        console.log("insert outward");
+
         from_post = "outward_post";
 
         body = JSON.stringify({
             'from_post': from_post,
-            'dept': dept,
-            'addressee': addressee,
-            'desc': desc,
+            'serialNo': serialNo,
+            'department': department,
+            'receiptNo': receiptNo,
+            'addresseeName': addresseeName,
             'nature': nature,
-            'recipt_no': recipt_no
+            'description': description,
+            'remark': remark
         });
-    }
 
-    if (body)
         try {
-            const res = axios.post(INSERT_URL, body, CONFIG);
-            if (res.data.insert == "successful") {
-                console.log("insert successful")
-                // Todo : alert model . 
-            }
+            await axios.post(INSERT_OUTWARD_URL, body, CONFIG)
+                .then((res) => {
+                    if (res.data.insert == "successful") {
+                        console.log("insert successful")
+                        getDisplayData({ updated: true, outward: true })
+                        // Todo : alert model . 
+                    }
+                })
         } catch (err) {
             console.log(err);
         }
+    }
 }
 
 
-export const getDisplayData = async () => {
+export const getDisplayData = async ({ setReRender, updated = false }) => {
 
-    if (sessionStorage.getItem('inwardTable') == undefined) {
-        let rows = [];
+    if (sessionStorage.getItem('inwardTable') == undefined || updated) {
+
+        console.log("sessionStorage undefined");
 
         try {
-            await axios.get(DISPLAY_URL, CONFIG)
-
-
+            console.log("dashboard/inward");
+            await axios.post(SELECT_DASHBOARD_INWARD_URL, CONFIG)
                 .then((res) => {
-                    console.log(res.data)
-                    res.data.rows.map((row, index) => {
-                        rows.push(row);
-                    })
-                    console.log("getDisplayData");
-                    const inwardTable = JSON.stringify(rows);
-                    sessionStorage.setItem('inwardTable', inwardTable);
+                    console.log(res.data);
+                    sessionStorage.setItem('dashboardInward', JSON.stringify(res.data.dashboardInward));
                 })
+
+            await axios.post(SELECT_DASHBOARD_OUTWARD_URL, CONFIG)
+                .then((res) => {
+                    sessionStorage.setItem('dashboardOutward', JSON.stringify(res.data.dashboardOutward));
+                })
+
+            await axios.post(SELECT_INWARD_URL, CONFIG)
+                .then((res) => {
+                    sessionStorage.setItem('inwardTable', JSON.stringify(res.data.inward));
+                })
+            await axios.post(SELECT_OUTWARD_URL, CONFIG)
+                .then((res) => {
+                    sessionStorage.setItem('outwardTable', JSON.stringify(res.data.outward));
+                    // console.log(res.data);
+
+                })
+
+                // request inward & outward count  
+            await axios.post('http://localhost:5000/status', CONFIG)
+                .then((res) => {
+                    // console.log(typeof(res.data.inward[0].inward_count));
+                    let totalInward = res.data.inward[0].inward_count;
+                    let totalOutward = res.data.outward[0].outward_count;
+                    sessionStorage.setItem('inwardCount', totalInward);
+                    sessionStorage.setItem('outwardCount', totalOutward);
+                    // sessionStorage.setItem('pendingCount', totalInward-totalOutward);
+                    setReRender(true);
+                })
+
         }
         catch (err) {
             console.log(err);
         }
     }
-
-    // console.log(rows);
 }
 
 const update_on = ({ inward = null, nature = null, recievedFrom = null, subject = null, deliverTo = null, outward = null, dept = null, addressee = null, desc = null, recipt_no = null }) => {
@@ -105,7 +163,7 @@ const update_on = ({ inward = null, nature = null, recievedFrom = null, subject 
 
     if (body)
         try {
-            const res = axios.put(INSERT_URL, body, CONFIG);
+            const res = axios.put(body, CONFIG);
             if (res.data.insert == "successful") {
                 console.log("insert successful")
                 // Todo : alert model . 

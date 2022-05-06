@@ -1,19 +1,24 @@
-import { Button, Alert } from "bootstrap";
-import React, { useState } from "react";
-
-const Hello1 = () => {
-  return (
-    <div>hello 1</div>
-  )
-
-}
+import React from "react";
+import { Alert } from "react-bootstrap";
 
 
-const Hello2 = () => {
+const AlertModel =({message,variant,show, setShow})=>{
+
+  setTimeout(()=>{
+    setShow(null);
+  },4000);
   return(
-    <div>hello shining</div>
+    <>
+     <Alert
+            show={show}
+            variant={variant}
+            onClose={() => setShow(false)}
+            dismissible
+          >
+            <p style={{height:"10px"}}>{message}</p>
+          </Alert>
+    </>
   )
+
 }
-
-export default Hello1;
-
+export default AlertModel;
