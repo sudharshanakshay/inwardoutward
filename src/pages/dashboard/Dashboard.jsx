@@ -18,24 +18,29 @@ const Dashboard = () => {
 
     getDisplayData({ setReRender });
 
+    // To refer sessionStorage 'key' navigate to 'postAction.jsx'
 
-    let INWARD_TABLE_DATA = sessionStorage.getItem('dashboardInward');
-    INWARD_TABLE_DATA = JSON.parse(INWARD_TABLE_DATA);
+    let inwardTableData = sessionStorage.getItem('dashboardInward');
+    inwardTableData = JSON.parse(inwardTableData);
 
-    let OUTWARD_TABLE_DATA = sessionStorage.getItem('dashboardOutward');
-    OUTWARD_TABLE_DATA = JSON.parse(OUTWARD_TABLE_DATA);
+    let outwardTableData = sessionStorage.getItem('dashboardOutward');
+    outwardTableData = JSON.parse(outwardTableData);
+
+    let inwardCount = sessionStorage.getItem('inwardCount');     
+    let outwardCount = sessionStorage.getItem('outwardCount');     
+    let pending = inwardCount - outwardCount;
 
     // console.log(INWARD_TABLE_DATA.length);
 
 
-    if (INWARD_TABLE_DATA == undefined) {
-        return (
-            <>
-            <TopNavBar />
-            <ButtonSpinner/>
-            </>
-        )
-    }
+    // if (outwardTableData == undefined) {
+    //     return (
+    //         <>
+    //         <TopNavBar />
+    //         <ButtonSpinner/>
+    //         </>
+    //     )
+    // }
 
     return (
         <div>
@@ -50,7 +55,7 @@ const Dashboard = () => {
                                 inward={true}
                                 title={INWARD_TABLE_TITLE}
                                 tableHeaders={INWARD_TABLE_HEADER_SHORT}
-                                tableRows={INWARD_TABLE_DATA}
+                                tableRows={inwardTableData}
                             />
 
                         </Col>
@@ -61,13 +66,19 @@ const Dashboard = () => {
                                 outward={true}
                                 title={OUTWARD_TABLE_TITLE}
                                 tableHeaders={OUTWARD_TABLE_HEADER_SHORT}
-                                tableRows={OUTWARD_TABLE_DATA} />
+                                tableRows={outwardTableData} />
                         </Col>
+
+                        {/* --------------------------- Status Box --------------------------- */}
+
                         <Col >
                             <Row className='display-empty-box'></Row>
-                            <Row><StatusBox mainSpace="10" discription="Total Pending Post" color={VIOLET_SHADE}></StatusBox></Row>
-                            <Row><StatusBox mainSpace="10" discription="Total Inward Post" color={YELLOWISH}></StatusBox></Row>
-                            <Row><StatusBox mainSpace="10" discription="Total Outward Post" color={BRIGHT_GREEN_SHADE}></StatusBox></Row>
+                            {/* ---------- total pending posts ---------- */}
+                            <Row><StatusBox mainSpace={pending} discription="Total Pending Post" color={VIOLET_SHADE}></StatusBox></Row>
+                            {/* ---------- total inward posts ---------- */}
+                            <Row><StatusBox mainSpace={inwardCount} discription="Total Inward Post" color={YELLOWISH}></StatusBox></Row>
+                            {/* ---------- total outward posts ---------- */}
+                            <Row><StatusBox mainSpace={outwardCount} discription="Total Outward Post" color={BRIGHT_GREEN_SHADE}></StatusBox></Row>
                         </Col>
                     </Row>
                 </Grid>
@@ -75,10 +86,16 @@ const Dashboard = () => {
 
             <div className='mobile-view dashboard'>
                 <Grid className='grid'>
+
+                    {/* --------------------------- Status Box --------------------------- */}  
+                    
                     <Row>
-                        <Col xs={4} sm={4}><StatusBox mainSpace="10" discription="Total Pending Post" color={VIOLET_SHADE}></StatusBox></Col>
-                        <Col xs={4} sm={4}><StatusBox mainSpace="10" discription="Total Inward Post" color={YELLOWISH}></StatusBox></Col>
-                        <Col xs={4} sm={4}><StatusBox mainSpace="10" discription="Total Outward Post" color={BRIGHT_GREEN_SHADE}></StatusBox></Col>
+                        {/* ---------- total pending posts ---------- */}
+                        <Col xs={4} sm={4}><StatusBox mainSpace={pending} discription="Total Pending Post" color={VIOLET_SHADE}></StatusBox></Col>
+                        {/* ---------- total inward posts ---------- */}
+                        <Col xs={4} sm={4}><StatusBox mainSpace={inwardCount} discription="Total Inward Post" color={YELLOWISH}></StatusBox></Col>
+                        {/* ---------- total outward posts ---------- */}
+                        <Col xs={4} sm={4}><StatusBox mainSpace={outwardCount} discription="Total Outward Post" color={BRIGHT_GREEN_SHADE}></StatusBox></Col>
                     </Row>
                     <Row >
                         {/* --------------------------- Inward Table --------------------------- */}
@@ -87,7 +104,7 @@ const Dashboard = () => {
                                 inward={true}
                                 title={INWARD_TABLE_TITLE}
                                 tableHeaders={INWARD_TABLE_HEADER_SHORT}
-                                tableRows={INWARD_TABLE_DATA}
+                                tableRows={inwardTableData}
                             />
                         </Col>
 
@@ -97,7 +114,7 @@ const Dashboard = () => {
                                 outward={true}
                                 title={OUTWARD_TABLE_TITLE}
                                 tableHeaders={OUTWARD_TABLE_HEADER_SHORT}
-                                tableRows={OUTWARD_TABLE_DATA} />
+                                tableRows={outwardTableData} />
                         </Col>
                         <Col>
 

@@ -82,12 +82,21 @@ export const insertFrom = async ({
     }
 }
 
+const computeStatusData = async () => {
+    try {
+
+    }
+    catch (err) {
+        console.log(err);
+    }
+}
+
 
 export const getDisplayData = async ({ setReRender, updated = false }) => {
 
     if (sessionStorage.getItem('inwardTable') == undefined || updated) {
 
-        // console.log("sessionStorage undefined");
+        console.log("sessionStorage undefined");
 
         try {
             console.log("dashboard/inward");
@@ -110,6 +119,16 @@ export const getDisplayData = async ({ setReRender, updated = false }) => {
                 .then((res) => {
                     sessionStorage.setItem('outwardTable', JSON.stringify(res.data.outward));
                     // console.log(res.data);
+
+                })
+            await axios.post('http://localhost:5000/status', CONFIG)
+                .then((res) => {
+                    // console.log(typeof(res.data.inward[0].inward_count));
+                    let totalInward = res.data.inward[0].inward_count;
+                    let totalOutward = res.data.outward[0].outward_count;
+                    sessionStorage.setItem('inwardCount', totalInward);
+                    sessionStorage.setItem('outwardCount', totalOutward);
+                    // sessionStorage.setItem('pendingCount', totalInward-totalOutward);
                     setReRender(true);
                 })
 
