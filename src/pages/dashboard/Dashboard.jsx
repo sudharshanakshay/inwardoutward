@@ -3,7 +3,7 @@ import TopNavBar from '../../components/navBar/TopNavBar';
 import StatusBox from '../../components/StatusBox/StatusBox';
 import TableFair from '../../components/TableFair/TableFair';
 
-import { BRIGHT_GREEN_SHADE, TEST_COLOR, ORANGE, MORE_TEAL, YELLOWISH, VIOLET, VIOLET_SHADE } from '../../utility/color';
+import { BRIGHT_GREEN_SHADE, TEST_COLOR, ORANGE, MORE_TEAL, YELLOWISH, VIOLET, VIOLET_SHADE, GOLDEN } from '../../utility/color';
 import { Button, Col, Container, Row, Spinner, Table } from 'react-bootstrap';
 import { INWARD_TABLE_HEADER_SHORT, INWARD_TABLE_TITLE, OUTWARD_TABLE_TITLE, OUTWARD_TABLE_HEADER_SHORT } from '../../utility/Constants';
 // import {  } from '@mui/material';
@@ -46,7 +46,7 @@ const Dashboard = () => {
         <div>
             <TopNavBar />
 
-            <div className='desktop-view dashboard'>
+            <div className='desktop-view'>
                 <Container fluid>
                     <Row >
                         {/* --------------------------- Inward Table --------------------------- */}
@@ -72,11 +72,11 @@ const Dashboard = () => {
                         {/* --------------------------- Status Box --------------------------- */}
 
                         <Col >
-                            <Row className='display-empty-box'></Row>
+                            {/* <Row className='display-empty-box'></Row> */}
                             {/* ---------- total pending posts ---------- */}
                             <Row><StatusBox mainSpace={pending} discription="Total Pending Post" color={VIOLET_SHADE}></StatusBox></Row>
                             {/* ---------- total inward posts ---------- */}
-                            <Row><StatusBox mainSpace={inwardCount} discription="Total Inward Post" color={YELLOWISH}></StatusBox></Row>
+                            <Row><StatusBox mainSpace={inwardCount} discription="Total Inward Post" color={GOLDEN}></StatusBox></Row>
                             {/* ---------- total outward posts ---------- */}
                             <Row><StatusBox mainSpace={outwardCount} discription="Total Outward Post" color={BRIGHT_GREEN_SHADE}></StatusBox></Row>
                         </Col>
@@ -91,11 +91,11 @@ const Dashboard = () => {
                     
                     <Row>
                         {/* ---------- total pending posts ---------- */}
-                        <Col xs={4} sm={4}><StatusBox mainSpace={pending} discription="Total Pending Post" color={VIOLET_SHADE}></StatusBox></Col>
+                        <Col /*xs={4} sm={4}*/><StatusBox mainSpace={pending} discription="Total Pending Post" color={VIOLET_SHADE}></StatusBox></Col>
                         {/* ---------- total inward posts ---------- */}
-                        <Col xs={4} sm={4}><StatusBox mainSpace={inwardCount} discription="Total Inward Post" color={YELLOWISH}></StatusBox></Col>
+                        <Col /*xs={4} sm={4} */ ><StatusBox mainSpace={inwardCount} discription="Total Inward Post" color={GOLDEN}></StatusBox></Col>
                         {/* ---------- total outward posts ---------- */}
-                        <Col xs={4} sm={4}><StatusBox mainSpace={outwardCount} discription="Total Outward Post" color={BRIGHT_GREEN_SHADE}></StatusBox></Col>
+                        <Col /*xs={4} sm={4}*/ ><StatusBox mainSpace={outwardCount} discription="Total Outward Post" color={BRIGHT_GREEN_SHADE}></StatusBox></Col>
                     </Row>
                     <Row >
                         {/* --------------------------- Inward Table --------------------------- */}

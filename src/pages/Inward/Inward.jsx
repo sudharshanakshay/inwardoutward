@@ -33,6 +33,7 @@ const Inward = () => {
             {/* <div style={{ textAlign: "center" }}><Link to="/inwardform"><button type="button">Enter New Inward Data</button></Link></div> */}
 
             <div>
+                <Container fluid>
                 <TableFair
                     inward={true}
                     applyDataTableApi={true}
@@ -40,6 +41,7 @@ const Inward = () => {
                     tableHeaders={INWARD_TABLE_HEADER}
                     tableRows={INWARD_TABLE_DATA}
                 />
+                </Container>
             </div>
         </>
     )

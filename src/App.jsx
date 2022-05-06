@@ -15,7 +15,6 @@ import Dashboard from './pages/dashboard/Dashboard';
 import ForgotPassword from './components/auth/ForgotPassword';
 import Forms from './components/Forms/InwardForms';
 import OUTForm from './components/Forms/OutwardForm';
-import TryNavbars from './components/navBar/TryNavbars';
 
 
 function App() {
@@ -28,7 +27,7 @@ function App() {
         <Provider store={store}>
           <Router>
             <Routes>
-              <Route path='/test' element={<TryNavbars/>}></Route>
+              {/* <Route path='/test' element={<TryLogo/>}></Route> */}
               <Route path='/' element={<PrivateRoute component={Dashboard} />}></Route>
               <Route path='/login' element={<PublicRoute component={Login} />}></Route>
               <Route path='/register' element={<PublicRoute component={Register} />}></Route>

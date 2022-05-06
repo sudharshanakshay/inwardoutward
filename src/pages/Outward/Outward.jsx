@@ -34,7 +34,7 @@ const Outward = () => {
             </div>
 
             <div >
-                <Container >
+                <Container fluid>
                     <TableFair
                         outward={true}
                         applyDataTableApi={true}

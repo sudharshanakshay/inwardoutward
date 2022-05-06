@@ -8,6 +8,11 @@
       "type": "image/x-icon"
     }
   ],
+  "logo": [
+    {
+      "src": "."
+    }
+  ],
   "start_url": ".",
   "display": "standalone",
   "theme_color": "#000000",

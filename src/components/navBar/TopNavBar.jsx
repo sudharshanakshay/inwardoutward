@@ -12,15 +12,24 @@ const TopNavBar = () => {
     const user1 = "hello";
     const [key, setKey] = useState('Dashboard');
 
-    const expand = 'sm';
+    const expand = 'md';
 
     return (
         <div>
 
-            <Navbar key={expand} expand="sm" variant="light" bg="light" >
-                
+            <Navbar key={expand} expand={expand} variant="light" bg="light" >
+
                 <Container fluid className="top-nav-bar">
-                    <Navbar.Brand className="nav-item">Inward-Outward</Navbar.Brand>
+                    <Navbar.Brand className="nav-item">
+                        <img
+                            src="https://sahyadri.edu.in/img/sahyadri-logo.png"
+                            width="300"
+                            height="60"
+                            // className="d-inline-block align-top"
+                            alt="logo"
+                            style={{margin:"0px", padding:"0px"}}
+                        />
+                    </Navbar.Brand>
                     <Navbar.Toggle aria-controls={`offcanvasNavbar-expand-${expand}}`} />
                     <Navbar.Collapse id="navbarScroll">
 
@@ -35,7 +44,7 @@ const TopNavBar = () => {
                             <Link to="/outward" className="nav-item" >Outward Post</Link>
 
                             <Dropdown>
-                                <Dropdown.Toggle className="nav-item" style={{ backgroundColor: '#ffffff', color: '#000000', border: 'none', fontSize:'larger' }} id="dropdown-basic">
+                                <Dropdown.Toggle className="nav-item" style={{ backgroundColor: '#ffffff', color: '#000000', border: 'none', fontSize: 'larger' }} id="dropdown-basic">
                                     Report
                                 </Dropdown.Toggle>
 
