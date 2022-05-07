@@ -13,9 +13,9 @@ import Outward from './pages/Outward/Outward';
 import Report from './pages/report/report';
 import Dashboard from './pages/dashboard/Dashboard';
 import ForgotPassword from './components/auth/ForgotPassword';
-import Forms from './components/Forms/InwardForms';
-import OUTForm from './components/Forms/OutwardForm';
-
+import InwardForms from './components/Forms/InwardForms';
+import OutwardForm from './components/Forms/OutwardForm';
+import FormAction from './components/Forms/FormAction';
 
 function App() {
 
@@ -27,7 +27,7 @@ function App() {
         <Provider store={store}>
           <Router>
             <Routes>
-              {/* <Route path='/test' element={<TryLogo/>}></Route> */}
+              <Route path='/test' element={<FormAction/>}></Route>
               <Route path='/' element={<PrivateRoute component={Dashboard} />}></Route>
               <Route path='/login' element={<PublicRoute component={Login} />}></Route>
               <Route path='/register' element={<PublicRoute component={Register} />}></Route>
@@ -36,8 +36,8 @@ function App() {
               <Route path='/inward' element={<PrivateRoute component={Inward} />}></Route>
               <Route path='/outward' element={<PrivateRoute component={Outward} />}></Route>
               <Route path='/Report' element={<PrivateRoute component={Report} />}></Route>  
-              <Route path='/inwardform' element={<PrivateRoute component={Forms}/>}></Route>
-              <Route path='/outwardform' element={<PrivateRoute component={OUTForm}/>}></Route>
+              <Route path='/inwardform' element={<PrivateRoute component={InwardForms}/>}></Route>
+              <Route path='/outwardform' element={<PrivateRoute component={OutwardForm}/>}></Route>
               
             </Routes>
           </Router>
