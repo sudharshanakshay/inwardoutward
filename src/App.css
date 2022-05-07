@@ -298,3 +298,10 @@ body {
 .desktop-view {
     margin: 2% 2%;
 }
+
+
+.inward-page, .outward-page {
+    margin: 1% 15% 1% 2% ;
+    /* top | right | bottom | left */
+    /* padding-right: 4%; */
+}

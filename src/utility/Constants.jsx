@@ -43,13 +43,13 @@ export const INWARD_TABLE_TITLE = "Inward Table";
 
 export const OUTWARD_TABLE_TITLE = "Outward Table";
 
-export const OUTWARD_TABLE_HEADER = ["sl.no","Date",  "Serial No.","Department", "Addressee Name", "Nature", "Description", "Receipt No.", "Remark"];
+export const INWARD_TABLE_HEADER = [["sl. no", "4%"], ["Date", "10%"], ["Inward No", "10%"], ["Nature", "10%"], ["Recieved From", "12%"], ["Subject", "10%"], ["Deliver To", "10%"], ["Remark", "10%"]];
 
-export const OUTWARD_TABLE_HEADER_SHORT = [ "Date",  "Department", "Addressee"];
+export const INWARD_TABLE_HEADER_SHORT = [ ["Date", "33.33%"], ["Recieved From", "33.33%"], ["Deliver To", "33.33%"] /*,"Subject"*/];
 
-export const INWARD_TABLE_HEADER = ["sl. no", "Date", "Inward No", "Nature of Mail", "Recieved From", "Subject", "Deliver To", "Remark"];
+export const OUTWARD_TABLE_HEADER = [["sl.no", "4%"], ["Date","10%"],  ["Serial No.", "10%"],["Department", "10%"], ["Addressee", "10%"], ["Nature", "10%"], ["Description", "10%"], ["Receipt No.", "12%"], ["Remark", "10%"]];
 
-export const INWARD_TABLE_HEADER_SHORT = [ "Date", "Recieved From", "Deliver To" /*,"Subject"*/];
+export const OUTWARD_TABLE_HEADER_SHORT = [ ["Date", "33.33%"],  ["Department", "33.33%"], ["Addressee", "33.33%"]];
 
 export const TEST_TABLEDATA_LONG = [[1, "21/04/2022", "in005", "Invitation", "NITK", "Meeting", "Principal", "NA"],["2", "20/04/2022","in006", "Updates", "Higher Authority", "Examination", "Students", "NA"]];
 

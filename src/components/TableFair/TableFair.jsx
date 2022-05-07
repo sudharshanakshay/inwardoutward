@@ -29,9 +29,9 @@ const TableFair = ({ title, tableHeaders, tableRows, inward=false, outward=false
 
       <Table responsive id="table">
         <thead>
-          <tr>
+          <tr className="center">
             {tableHeaders.map((value, index) => (
-              <td key={index}>{value}</td>
+              <td key={index} style={{width:value[1]}}>{value[0]}</td>
             ))}
             { applyDataTableApi && <td>Actions</td>}
           </tr>
@@ -39,7 +39,7 @@ const TableFair = ({ title, tableHeaders, tableRows, inward=false, outward=false
         <tbody>
           {
             tableRows?.map((value, index) => (
-              <tr key={index}>
+              <tr key={index} className="center" >
 
                 {/* ------------ Inward Table ------------ */}
 
@@ -53,7 +53,7 @@ const TableFair = ({ title, tableHeaders, tableRows, inward=false, outward=false
                     <td>{value.subject}</td>
                     <td>{value.deliverTo}</td>
                     <td>{value.remark}</td>
-                    <td><Button variant="outline-danger" value={value.inwardID} onClick={(value)=> handleInwardDelete(value)}><MdDelete></MdDelete></Button></td>
+                    <td></td>
                   </>
                 }
 
@@ -77,10 +77,10 @@ const TableFair = ({ title, tableHeaders, tableRows, inward=false, outward=false
                     <td>{value.dt}</td>
                     <td>{value.serialNo}</td>
                     <td>{value.department}</td>
-                    <td>{value.receiptNo}</td>
                     <td>{value.addresseeName}</td>
                     <td>{value.nature}</td>
                     <td>{value.description}</td>
+                    <td>{value.receiptNo}</td>
                     <td>{value.remark}</td>
                     <td><Link to="/outwardform">Add</Link></td>
                   </>

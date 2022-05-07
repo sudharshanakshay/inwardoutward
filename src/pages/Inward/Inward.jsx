@@ -33,7 +33,7 @@ const Inward = () => {
 
             {/* <div style={{ textAlign: "center" }}><Link to="/inwardform"><button type="button">Enter New Inward Data</button></Link></div> */}
 
-            <div>
+            <div className="inward-page">
                 <Container fluid>
                 <TableFair
                     inward={true}
