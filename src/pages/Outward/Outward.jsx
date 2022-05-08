@@ -7,26 +7,42 @@ import { getDisplayData } from '../../actions/posts/postsAction';
 import { Link } from "react-router-dom";
 import ButtonSpinner from "../../components/Loading/ButtonSpinner";
 import Footer from "../../components/Footer/Footer";
+import { useSelector } from "react-redux";
 
 const Outward = () => {
 
-    const [ren, setRen] = useState(false);
+    // const [ren, setRen] = useState(false);
 
-    getDisplayData({ setRen });
+    // getDisplayData({ setRen });
 
     const OUTWARD_TABLE_TITLE = "Outward Table";
 
-    let OUTWARD_TABLE_DATA = sessionStorage.getItem('outwardTable');
-    OUTWARD_TABLE_DATA = JSON.parse(OUTWARD_TABLE_DATA);
+    // let outwardTableData = sessionStorage.getItem('outwardTable');
+    // outwardTableData = JSON.parse(outwardTableData);
 
-    if (OUTWARD_TABLE_DATA == undefined) {
+
+    const outwardTableData = useSelector((state)=> {
+        console.log(state.posts.outwardTable);
+        try {
+            return state.posts.outwardTable.payload.outward;
+        }
+        catch {
+            return 0;
+        }
+    });
+
+    
+
+    if (!outwardTableData) {
         return (
             <>
-                <TopNavBar />
-                <ButtonSpinner/>
+            <TopNavBar />
+            <ButtonSpinner/>
             </>
         )
     }
+
+    
 
     return (
         <>
@@ -41,7 +57,7 @@ const Outward = () => {
                         applyDataTableApi={true}
                         title={OUTWARD_TABLE_TITLE}
                         tableHeaders={OUTWARD_TABLE_HEADER}
-                        tableRows={OUTWARD_TABLE_DATA}
+                        tableRows={outwardTableData}
                     />
                 </Container>
             </div>

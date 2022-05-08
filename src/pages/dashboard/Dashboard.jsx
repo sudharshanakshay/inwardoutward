@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import TopNavBar from '../../components/navBar/TopNavBar';
 import StatusBox from '../../components/StatusBox/StatusBox';
 import TableFair from '../../components/TableFair/TableFair';
@@ -6,38 +6,73 @@ import TableFair from '../../components/TableFair/TableFair';
 import { BRIGHT_GREEN_SHADE, TEST_COLOR, ORANGE, MORE_TEAL, YELLOWISH, VIOLET, VIOLET_SHADE, GOLDEN } from '../../utility/color';
 import { Button, Col, Container, Row, Spinner, Table } from 'react-bootstrap';
 import { INWARD_TABLE_HEADER_SHORT, INWARD_TABLE_TITLE, OUTWARD_TABLE_TITLE, OUTWARD_TABLE_HEADER_SHORT } from '../../utility/Constants';
-// import {  } from '@mui/material';
 import Footer from '../../components/Footer/Footer';
-import { getDisplayData } from '../../actions/posts/postsAction';
 import ButtonSpinner from '../../components/Loading/ButtonSpinner';
+import { useSelector } from 'react-redux';
 
 
 const Dashboard = () => {
 
-    const [rerender, setReRender] = useState(false);
+    // const [rerender, setReRender] = useState(false);
 
-    getDisplayData({ setReRender });
+    // getDisplayData({ setReRender });
 
     // To refer sessionStorage 'key' navigate to 'postAction.jsx'
 
-    let inwardTableData = sessionStorage.getItem('dashboardInward');
-    inwardTableData = JSON.parse(inwardTableData);
+    // let inwardTableData = sessionStorage.getItem('dashboardInward');
+    // inwardTableData = JSON.parse(inwardTableData);
 
-    let outwardTableData = sessionStorage.getItem('dashboardOutward');
-    outwardTableData = JSON.parse(outwardTableData);
+    // let outwardTableData = sessionStorage.getItem('dashboardOutward');
+    // outwardTableData = JSON.parse(outwardTableData);
 
-    let inwardCount = sessionStorage.getItem('inwardCount');     
-    let outwardCount = sessionStorage.getItem('outwardCount');     
+    // let inwardCount = sessionStorage.getItem('inwardCount');     
+    // let outwardCount = sessionStorage.getItem('outwardCount');
+    
+    const inwardTableData = useSelector((state)=> {
+        try {
+            return state.posts.dashboardInward.payload.dashboardInward;
+        }
+        catch {
+            return 0;
+        }
+    });
+
+    const outwardTableData = useSelector((state)=> {
+        try {
+            return state.posts.dashboardOutward.payload.dashboardOutward;
+        }
+        catch {
+            return 0;
+        }
+    });
+
+    const inwardCount = useSelector((state)=> {
+        try {
+            return state.posts.inwardCount;
+        }
+        catch {
+            return 0;
+        }
+    });
+
+    const outwardCount = useSelector((state)=> {
+        try {
+            return state.posts.outwardCount;
+        }
+        catch {
+            return 0;
+        }
+    });
+
+    console.log(inwardTableData, outwardTableData, inwardCount, outwardCount);
+
     let pending = inwardCount - outwardCount;
 
-    // console.log(INWARD_TABLE_DATA.length);
-
-
-    if (outwardTableData == undefined) {
+    if (! outwardTableData) {
         return (
             <>
-            <TopNavBar />
-            <ButtonSpinner/>
+                <TopNavBar />
+                <ButtonSpinner />
             </>
         )
     }
@@ -87,8 +122,8 @@ const Dashboard = () => {
             <div className='mobile-view dashboard'>
                 <Container fluid>
 
-                    {/* --------------------------- Status Box --------------------------- */}  
-                    
+                    {/* --------------------------- Status Box --------------------------- */}
+
                     <Row>
                         {/* ---------- total pending posts ---------- */}
                         <Col /*xs={4} sm={4}*/><StatusBox mainSpace={pending} discription="Total Pending Post" color={VIOLET_SHADE}></StatusBox></Col>

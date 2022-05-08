@@ -7,18 +7,33 @@ import { getDisplayData } from '../../actions/posts/postsAction';
 import { Link } from "react-router-dom";
 import ButtonSpinner from "../../components/Loading/ButtonSpinner";
 import Footer from "../../components/Footer/Footer";
+import { useSelector } from "react-redux";
+
+
 
 const Inward = () => {
 
-    const [ren, setRen] = useState(false);
+    // const [ren, setRen] = useState(false);
 
-    getDisplayData({ setRen });
+    // getDisplayData({ setRen });
 
-    const tableDataString = sessionStorage.getItem('inwardTable');
+    // const tableDataString = sessionStorage.getItem('inwardTable');
 
-    const INWARD_TABLE_DATA = JSON.parse(tableDataString);
+    // const INWARD_TABLE_DATA = JSON.parse(tableDataString);
 
-    if (INWARD_TABLE_DATA == undefined) {
+    const inwardTableData = useSelector((state)=> {
+        console.log(state.posts.inwardTable)
+        try {
+            return state.posts.inwardTable.payload.inward;
+        }
+        catch {
+            return 0;
+        }
+    });
+
+    // console.log(inwardTableData);
+
+    if (!inwardTableData) {
         return (
             <>
                 <TopNavBar />
@@ -30,9 +45,6 @@ const Inward = () => {
     return (
         <>
             <TopNavBar />
-
-            {/* <div style={{ textAlign: "center" }}><Link to="/inwardform"><button type="button">Enter New Inward Data</button></Link></div> */}
-
             <div className="inward-page">
                 <Container fluid>
                 <TableFair
@@ -40,7 +52,7 @@ const Inward = () => {
                     applyDataTableApi={true}
                     title={"Inward Posts"}
                     tableHeaders={INWARD_TABLE_HEADER}
-                    tableRows={INWARD_TABLE_DATA}
+                    tableRows={inwardTableData}
                 />
                 </Container>
             </div>

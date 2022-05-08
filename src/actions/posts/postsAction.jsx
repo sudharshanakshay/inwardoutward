@@ -1,6 +1,9 @@
 import React, { useEffect } from "react";
 import axios from "axios"
 import { INSERT_INWARD_URL, INSERT_OUTWARD_URL, CONFIG, SELECT_INWARD_URL, DELETE_URL, SELECT_OUTWARD_URL, SELECT_DASHBOARD_INWARD_URL, SELECT_DASHBOARD_OUTWARD_URL } from "../../utility/Constants";
+import store from "../../store";
+import { connected, connectionError, setDashboardInward, setDashboardOutward, setInwardCount, setInwardTable, setOutwardTable } from "./postsSlice";
+
 
 export const insertFrom = async ({
     inward = null,
@@ -42,7 +45,7 @@ export const insertFrom = async ({
                 .then((res) => {
                     if (res.data.insert == "successful") {
                         console.log("insert successful")
-                        getDisplayData({ updated: true, inward: true })
+                        getDisplayData({ updated: true })
                         // Todo : alert model . 
                     }
                 })
@@ -72,7 +75,7 @@ export const insertFrom = async ({
                 .then((res) => {
                     if (res.data.insert == "successful") {
                         console.log("insert successful")
-                        getDisplayData({ updated: true, outward: true })
+                        getDisplayData({ updated: true })
                         // Todo : alert model . 
                     }
                 })
@@ -83,34 +86,43 @@ export const insertFrom = async ({
 }
 
 
-export const getDisplayData = async ({ setReRender, updated = false }) => {
+export const getDisplayData = async ({ updated = false }) => {
 
     if (sessionStorage.getItem('inwardTable') == undefined || updated) {
 
         console.log("sessionStorage undefined");
 
         try {
-            console.log("dashboard/inward");
+                // ------------ Dashboard Inward ------------
             await axios.post(SELECT_DASHBOARD_INWARD_URL, CONFIG)
                 .then((res) => {
                     console.log(res.data);
                     sessionStorage.setItem('dashboardInward', JSON.stringify(res.data.dashboardInward));
+                    store.dispatch(setDashboardInward(res.data));
                 })
 
+                // ------------ Dashboard Outward ------------
             await axios.post(SELECT_DASHBOARD_OUTWARD_URL, CONFIG)
                 .then((res) => {
                     sessionStorage.setItem('dashboardOutward', JSON.stringify(res.data.dashboardOutward));
+                    console.log(res.data);
+                    store.dispatch(setDashboardOutward(res.data));
                 })
 
+                // ------------  Inward ------------
             await axios.post(SELECT_INWARD_URL, CONFIG)
                 .then((res) => {
                     sessionStorage.setItem('inwardTable', JSON.stringify(res.data.inward));
+                    console.log(res.data);
+                    store.dispatch(setInwardTable(res.data));
                 })
+
+                // ------------ Outward ------------
             await axios.post(SELECT_OUTWARD_URL, CONFIG)
                 .then((res) => {
                     sessionStorage.setItem('outwardTable', JSON.stringify(res.data.outward));
+                    store.dispatch(setOutwardTable(res.data));
                     // console.log(res.data);
-
                 })
 
                 // request inward & outward count  
@@ -120,14 +132,23 @@ export const getDisplayData = async ({ setReRender, updated = false }) => {
                     let totalInward = res.data.inward[0].inward_count;
                     let totalOutward = res.data.outward[0].outward_count;
                     sessionStorage.setItem('inwardCount', totalInward);
+                    store.dispatch(setInwardCount(totalInward));
                     sessionStorage.setItem('outwardCount', totalOutward);
+                    store.dispatch(setOutwardTable(totalOutward));
                     // sessionStorage.setItem('pendingCount', totalInward-totalOutward);
-                    setReRender(true);
+                    // setReRender(true);
                 })
+
+                store.dispatch(connected());
 
         }
         catch (err) {
             console.log(err);
+            store.dispatch(connectionError());
+            setTimeout(() => {
+                getDisplayData({});
+                console.log("hello");
+            }, 6000);
         }
     }
 }
