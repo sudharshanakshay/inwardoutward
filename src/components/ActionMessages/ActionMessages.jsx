@@ -1,41 +1,80 @@
-import { Modal, Button } from "react-bootstrap"
+import { Modal, Button } from "react-bootstrap";
+import {Link, Navigate} from 'react-router-dom';
 import { useState } from "react";
-import TopNavBar from "../navBar/TopNavBar";
-const ActionMessage = ({ confirmDelete = false }) => {
+import ViewRecord from "../View/View";
+const ActionMessage = ({confirmDelete = false , confirmEdit = false}) => {
     const [show, setShow] = useState(false);
     const handleClose = () => setShow(false);
     const handleShow = () => setShow(true);
-    return (
-        <>
+    
+   
+    if(confirmDelete)
+    {
+        return (
+            <>
+    
+                <div>
+                    <Button onClick={handleShow}>
+                        Delete
+                    </Button>
+                    <Modal show={show} onHide={handleClose}>
+                        
+                        <Modal.Header closeButton>
+                            <Modal.Title>Delete Record</Modal.Title>
+                        </Modal.Header>
+    
+                        <Modal.Body>Are you sure you want delete this record ???</Modal.Body>
+                        <Modal.Footer>
+                            <Button variant="secondary" onClick={handleClose}>
+                                Close
+                            </Button>
+                            <Button variant="primary" onClick={handleClose}>
+                                Delete
+                            </Button>
+                        </Modal.Footer>
+                    </Modal>
+                </div>{' '}
+    
+            </>
+    
+    
+        );
+    
+    }
 
-            <div>
-                <TopNavBar/>
-                <Button variant="primary" onClick={handleShow}>
-                    trying modal
-                </Button>
-                <Modal show={show} onHide={handleClose}>
+    else if(confirmEdit)
+    {
+        return (
+            <>
+    
+                <div>
+                    <Button  onClick={handleShow}>
+                        Edit
+                    </Button>
+                    <Modal show={show} onHide={handleClose}>
+                        
+                        <Modal.Header closeButton>
+                            <Modal.Title>Update</Modal.Title>
+                        </Modal.Header>
+    
+                        <Modal.Body>Do you want to save changes???</Modal.Body>
+                        <Modal.Footer>
+                            <Button variant="secondary" onClick={handleClose}>
+                                Close
+                            </Button>
+                            <Button variant="primary" onClick={handleClose}>
+                                Update
+                            </Button>
+                        </Modal.Footer>
+                    </Modal>
+                </div>{' '}
+    
+            </>
+    
+    
+        );
 
-                    <Modal.Header closeButton>
-                        <Modal.Title>Modal heading</Modal.Title>
-                    </Modal.Header>
-
-                    <Modal.Body>Are you sure ???</Modal.Body>
-                    <Modal.Footer>
-                        <Button variant="secondary" onClick={handleClose}>
-                            Close
-                        </Button>
-                        <Button variant="primary" onClick={handleClose}>
-                            Save Changes
-                        </Button>
-                    </Modal.Footer>
-                </Modal>
-            </div>
-
-        </>
-
-
-    );
-
+        
+    }
 }
-
 export default ActionMessage;

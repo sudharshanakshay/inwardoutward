@@ -4,23 +4,16 @@ import { Container } from "react-bootstrap";
 import TableFair from "../../components/TableFair/TableFair";
 import { INWARD_TABLE_HEADER } from "../../utility/Constants";
 import { getDisplayData } from '../../actions/posts/postsAction';
-import { Link } from "react-router-dom";
+
 import ButtonSpinner from "../../components/Loading/ButtonSpinner";
-import ActionMessage from "../../components/ActionMessages/ActionMessages";
+
 
 
 const ReportInward = () => {
-    return(
-        <>
-        <div>
-        <ActionMessage/>
-        </div>
-        
-        </>
-    );
+    
 
 
-   /*const [ren, setRen] = useState(false);
+  const [ren, setRen] = useState(false);
 
     getDisplayData({ setRen });
 
@@ -38,12 +31,7 @@ const ReportInward = () => {
     }
 
     return (
-        <>
-
-
-
-        
-          <div>
+        <><div>
             <TopNavBar />
             <Container fluid>
                 <TableFair
@@ -55,9 +43,8 @@ const ReportInward = () => {
                     tableRows={INWARD_TABLE_DATA}
                 />
             </Container>
-            </div>
-        </>
-    )*/
+        </div></>
+    )
 }
 
 

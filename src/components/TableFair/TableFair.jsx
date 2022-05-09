@@ -13,6 +13,8 @@ import 'datatables.net-dt';
 import jsZip from 'jszip';
 import pdfMake from 'pdfmake/build/pdfmake'
 import pdfFonts from 'pdfmake/build/vfs_fonts'
+import ActionMessage from "../ActionMessages/ActionMessages";
+import ViewRecord from "../View/View";
 pdfMake.vfs = pdfFonts.pdfMake.vfs;
 window.pdfMake = pdfMake;
 window.JSZip = jsZip;
@@ -47,13 +49,10 @@ const TableFair = ({ title, tableHeaders, tableRows, inward = false, outward = f
   }
 
   const handleInwardDelete =(value) =>{
-    console.log(value);
-    
-    console.log(outward);
+   
   }
 
-  // console.log("table fair");
-  // console.log(tableRows);
+
 
   return (
     <div>
@@ -85,9 +84,9 @@ const TableFair = ({ title, tableHeaders, tableRows, inward = false, outward = f
                     <td>{rowValue.deliverTo}</td>
                     <td>{rowValue.remark}</td>
                     <td>
-                    <Link to="/">View</Link>{' '}
-                    <Link to="/inward">Edit</Link>{' '}
-                    <Button onClick={()=>handleInwardDelete(rowValue.inwardID)}>Delete</Button>
+                    <ViewRecord inward = {rowValue.inwardID}/>
+                    <ActionMessage confirmDelete = { true }/>
+                    <ActionMessage confirmEdit = { true }/>
                     </td>
                   </>
                 }
@@ -117,7 +116,7 @@ const TableFair = ({ title, tableHeaders, tableRows, inward = false, outward = f
                     <td>{rowValue.description}</td>
                     <td>{rowValue.receiptNo}</td>
                     <td>{rowValue.remark}</td>
-                    <td><Link to="/outwardform">View</Link>{' '}<Link to="/inward">Edit</Link>{' '}<Link to="/outwardform">Delete</Link></td>
+                    {/*<td><Link to="/outwardform">View</Link>{' '}<Link to="/inward">Edit</Link>{' '}<Link to="/outwardform">Delete</Link></td>*/}
                   </>
                 }
 

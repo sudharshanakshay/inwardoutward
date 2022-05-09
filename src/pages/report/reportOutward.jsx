@@ -6,7 +6,7 @@ import { OUTWARD_TABLE_HEADER } from "../../utility/Constants";
 import { getDisplayData } from '../../actions/posts/postsAction';
 import ButtonSpinner from "../../components/Loading/ButtonSpinner";
 
-const Outward = () => {
+const ReportOutward = () => {
 
 
     const [ren, setRen] = useState(false);
@@ -46,4 +46,4 @@ const Outward = () => {
 }
 
 
-export default Outward;
+export default ReportOutward ;

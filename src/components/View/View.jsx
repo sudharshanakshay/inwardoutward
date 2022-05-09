@@ -1,13 +1,20 @@
-import React from "react";
+import React, { useState } from 'react';
 
-const ViewData = ({lable})=> {
-    return (
+import { Button, Col, Container, Form, FormControl, InputGroup, Row } from "react-bootstrap";
+import ActionMessage from '../ActionMessages/ActionMessages';
+ 
+const ViewRecord = (inwardID) => {
+    
+    
+    return(
         <>
-        {lable.map((eachLable, index)=>{
-            
-        })}
+        <div>
+            <Button> View </Button>
+        </div>
         </>
-    )
+    );
+    
 }
 
-export default ViewData;
+export default ViewRecord;
+
