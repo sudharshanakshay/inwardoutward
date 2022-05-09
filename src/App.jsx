@@ -48,7 +48,7 @@ function App() {
               <Route path='/inwardform' element={<PrivateRoute component={InwardForms}/>}></Route>
               <Route path='/outwardform' element={<PrivateRoute component={OutwardForm}/>}></Route>
               <Route path='/view' element={<PrivateRoute component={ViewRecord}/>}></Route>
-              
+              <Route path='/settings' element={<PrivateRoute component={Settings}/>}></Route>
             </Routes>
           </Router>
         </Provider>
