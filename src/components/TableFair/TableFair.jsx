@@ -50,15 +50,11 @@ const TableFair = ({ title, tableHeaders, tableRows, inward = false, outward = f
     });
   }
 
-<<<<<<< HEAD
   const handleInwardDelete =(value) =>{
     console.log(value);
     
     console.log(outward);
   }
-=======
-
->>>>>>> main
 
   // console.log("table fair");
   // console.log(tableRows);
