@@ -1,12 +1,43 @@
 import React from "react";
-import { Table} from "react-bootstrap";
-import {Link} from 'react-router-dom';
+import { Table } from "react-bootstrap";
 import $ from 'jquery';
 import "datatables.net-dt/js/dataTables.dataTables";
 import "datatables.net-dt/css/jquery.dataTables.min.css";
+import 'datatables.net-buttons-dt';
+import 'datatables.net-buttons/js/dataTables.buttons.min';
+import 'datatables.net-buttons/js/buttons.flash.min';
+import 'datatables.net-buttons/js/buttons.html5.min';
+import 'datatables.net-buttons/js/buttons.print';
+import 'datatables.net-dt';
+import jsZip from 'jszip';
+import pdfMake from 'pdfmake/build/pdfmake'
+import pdfFonts from 'pdfmake/build/vfs_fonts'
+pdfMake.vfs = pdfFonts.pdfMake.vfs;
+window.pdfMake = pdfMake;
+window.JSZip = jsZip;
 
+const TableFair = ({ title, tableHeaders, tableRows, inward = false, outward = false, applyDataTableApi = false, createReport = false }) => {
 
-const TableFair = ({ title, tableHeaders, tableRows, inward=false, outward=false, applyDataTableApi = false }) => {
+  // creating print option for report.....
+  if (createReport) {
+
+    $(document).ready(function () {
+
+      $('#table').DataTable({
+        destroy: true,
+        paging: false,
+        searching: false,
+        dom: 'Blfrtip',
+        buttons: [
+          { extend: 'copy', className: 'btn btn-success glyphicon glyphicon-duplicate' },
+          { extend: 'csv', className: 'btn btn-success glyphicon glyphicon-save-file' },
+          { extend: 'excel', className: 'btn btn-success glyphicon glyphicon-list-alt' },
+          { extend: 'pdf', className: 'btn btn-success glyphicon glyphicon-file' },
+          { extend: 'print', className: 'btn btn-success glyphicon glyphicon-print' }
+        ],
+      });
+    });
+  }
 
   if (applyDataTableApi) {
     $(document).ready(function () {
@@ -14,11 +45,13 @@ const TableFair = ({ title, tableHeaders, tableRows, inward=false, outward=false
     });
   }
 
+
+
   // console.log("table fair");
   // console.log(tableRows);
 
   return (
-    <div className="elevated-box">
+    <div>
       <h3 className="center">{title}</h3>
 
       <Table responsive id="table">
@@ -27,7 +60,6 @@ const TableFair = ({ title, tableHeaders, tableRows, inward=false, outward=false
             {tableHeaders.map((value, index) => (
               <td key={index}>{value}</td>
             ))}
-            { applyDataTableApi && <td>Actions</td>}
           </tr>
         </thead>
         <tbody>
@@ -47,7 +79,8 @@ const TableFair = ({ title, tableHeaders, tableRows, inward=false, outward=false
                     <td>{value.subject}</td>
                     <td>{value.deliverTo}</td>
                     <td>{value.remark}</td>
-                    <td><Link to="/inwardform">View, Edit, delete</Link></td>
+                    
+                    
                   </>
                 }
 
@@ -76,7 +109,6 @@ const TableFair = ({ title, tableHeaders, tableRows, inward=false, outward=false
                     <td>{value.nature}</td>
                     <td>{value.description}</td>
                     <td>{value.remark}</td>
-                    <td><Link to="/outwardform">View, Edit, delete</Link></td>
                   </>
                 }
 
