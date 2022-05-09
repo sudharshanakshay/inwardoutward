@@ -50,10 +50,10 @@ const TopNavBar = () => {
 
                                 <Dropdown.Menu>
                                     <Nav.Link >
-                                        <Link to="/#" >Inward Report</Link>
+                                        <Link to="/ReportInward" >Inward Report</Link>
                                     </Nav.Link>
                                     <Nav.Link >
-                                        <Link to="/#" >Outward Report</Link>
+                                        <Link to="/ReportOutward" >Outward Report</Link>
                                     </Nav.Link>
                                 </Dropdown.Menu>
                             </Dropdown>

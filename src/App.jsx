@@ -10,7 +10,7 @@ import store from './store';
 import PublicRoute from './components/routes/PublicRoute';
 import Inward from './pages/Inward/Inward';
 import Outward from './pages/Outward/Outward';
-import Report from './pages/report/report';
+import Report from './pages/report/reportInward';
 import Dashboard from './pages/dashboard/Dashboard';
 import ForgotPassword from './components/auth/ForgotPassword';
 import InwardForms from './components/Forms/InwardForms';
