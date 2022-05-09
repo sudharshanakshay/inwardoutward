@@ -13,13 +13,12 @@ import { useSelector } from 'react-redux';
 
 const Dashboard = () => {
 
-
     const inwardTableData = useSelector((state)=> {
         try {
             return state.posts.dashboardInward;
         }
         catch {
-            return 0
+            return 0;
         }
     });
 
@@ -53,7 +52,7 @@ const Dashboard = () => {
 
     let pending = inwardCount - outwardCount;
 
-    if (! outwardTableData) {
+    if (!outwardTableData) {
         return (
             <>
                 <TopNavBar />

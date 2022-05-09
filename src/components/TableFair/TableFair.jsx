@@ -4,43 +4,10 @@ import {Link} from 'react-router-dom';
 import $ from 'jquery';
 import "datatables.net-dt/js/dataTables.dataTables";
 import "datatables.net-dt/css/jquery.dataTables.min.css";
-import 'datatables.net-buttons-dt';
-import 'datatables.net-buttons/js/dataTables.buttons.min';
-import 'datatables.net-buttons/js/buttons.flash.min';
-import 'datatables.net-buttons/js/buttons.html5.min';
-import 'datatables.net-buttons/js/buttons.print';
-import 'datatables.net-dt';
-import jsZip from 'jszip';
-import pdfMake from 'pdfmake/build/pdfmake'
-import pdfFonts from 'pdfmake/build/vfs_fonts'
-import ActionMessage from "../ActionMessages/ActionMessages";
-import ViewRecord from "../View/View";
-pdfMake.vfs = pdfFonts.pdfMake.vfs;
-window.pdfMake = pdfMake;
-window.JSZip = jsZip;
+import { delete_from } from "../../actions/posts/postsAction";
 
-const TableFair = ({ title, tableHeaders, tableRows, inward = false, outward = false, applyDataTableApi = false, createReport = false }) => {
 
-  // creating print option for report.....
-  if (createReport) {
-
-    $(document).ready(function () {
-
-      $('#table').DataTable({
-        destroy: true,
-        paging: false,
-        searching: false,
-        dom: 'Blfrtip',
-        buttons: [
-          { extend: 'copy', className: 'btn btn-success glyphicon glyphicon-duplicate' },
-          { extend: 'csv', className: 'btn btn-success glyphicon glyphicon-save-file' },
-          { extend: 'excel', className: 'btn btn-success glyphicon glyphicon-list-alt' },
-          { extend: 'pdf', className: 'btn btn-success glyphicon glyphicon-file' },
-          { extend: 'print', className: 'btn btn-success glyphicon glyphicon-print' }
-        ],
-      });
-    });
-  }
+const TableFair = ({ title, tableHeaders, tableRows, inward=false, outward=false, applyDataTableApi = false }) => {
 
   if (applyDataTableApi) {
     $(document).ready(function () {
@@ -48,14 +15,17 @@ const TableFair = ({ title, tableHeaders, tableRows, inward = false, outward = f
     });
   }
 
-  const handleInwardDelete =(value) =>{
-   
+  const handleInwardDelete = (id) =>{
+    delete_from({inward:inward, rowID:id});
+  }
+
+  const handleOutwardDelete =(id) =>{
+    delete_from({outward:outward, rowID:id});
   }
 
 
-
   return (
-    <div>
+    <div className="elevated-box">
       <h3 className="center">{title}</h3>
 
       <Table responsive id="table">
@@ -64,6 +34,7 @@ const TableFair = ({ title, tableHeaders, tableRows, inward = false, outward = f
             {tableHeaders.map((headerValue, index) => (
               <td key={index} style={{width:headerValue[1]}}>{headerValue[0]}</td>
             ))}
+            { applyDataTableApi && <td>Actions</td>}
           </tr>
         </thead>
         <tbody>
@@ -84,9 +55,9 @@ const TableFair = ({ title, tableHeaders, tableRows, inward = false, outward = f
                     <td>{rowValue.deliverTo}</td>
                     <td>{rowValue.remark}</td>
                     <td>
-                    <ViewRecord inward = {rowValue.inwardID}/>
-                    <ActionMessage confirmDelete = { true }/>
-                    <ActionMessage confirmEdit = { true }/>
+                    <Link to="/">View</Link>{' '}
+                    <Link to="/inward">Edit</Link>{' '}
+                    <Button onClick={()=>handleInwardDelete(rowValue.inwardID)}>Delete</Button>
                     </td>
                   </>
                 }
@@ -116,7 +87,11 @@ const TableFair = ({ title, tableHeaders, tableRows, inward = false, outward = f
                     <td>{rowValue.description}</td>
                     <td>{rowValue.receiptNo}</td>
                     <td>{rowValue.remark}</td>
-                    {/*<td><Link to="/outwardform">View</Link>{' '}<Link to="/inward">Edit</Link>{' '}<Link to="/outwardform">Delete</Link></td>*/}
+                    <td>
+                    <Link to="/">View</Link>{' '}
+                    <Link to="/inward">Edit</Link>{' '}
+                    <Button onClick={()=>handleOutwardDelete(rowValue.outwardID)}>Delete</Button>
+                    </td>
                   </>
                 }
 

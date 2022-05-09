@@ -11,7 +11,6 @@ import { useSelector } from "react-redux";
 const Outward = () => {
 
     const OUTWARD_TABLE_TITLE = "Outward Table";
-
     const outwardTableData = useSelector((state)=> {
         console.log(state.posts);
         try {
@@ -22,8 +21,6 @@ const Outward = () => {
         }
     });
 
-    
-
     if (!outwardTableData) {
         return (
             <>
@@ -32,9 +29,7 @@ const Outward = () => {
             </>
         )
     }
-
     
-
     return (
         <>
             <div >

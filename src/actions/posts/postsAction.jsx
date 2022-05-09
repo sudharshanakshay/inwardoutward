@@ -147,6 +147,16 @@ export const getDisplayData = async ({ updated = false }) => {
     }
 }
 
+export const getRow = ({id, inward=false, outward=false}) => {
+    if (inward && outward) {
+        return null;
+    }
+
+    if(inward) {
+        
+    }
+}
+
 const update_on = ({ inward = null, nature = null, recievedFrom = null, subject = null, deliverTo = null, outward = null, dept = null, addressee = null, desc = null, recipt_no = null }) => {
     const from_post = null;
     const body = null;
@@ -187,6 +197,8 @@ const update_on = ({ inward = null, nature = null, recievedFrom = null, subject 
             console.log(err);
         }
 }
+
+
 
 export const delete_from = ({ inward = false, outward = false, rowID }) => {
 

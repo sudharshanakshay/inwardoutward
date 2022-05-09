@@ -3,25 +3,23 @@ import TopNavBar from "../../components/navBar/TopNavBar";
 import { Container } from "react-bootstrap";
 import TableFair from "../../components/TableFair/TableFair";
 import { INWARD_TABLE_HEADER } from "../../utility/Constants";
-import { getDisplayData } from '../../actions/posts/postsAction';
-
 import ButtonSpinner from "../../components/Loading/ButtonSpinner";
-
+import { useSelector } from "react-redux";
 
 
 const ReportInward = () => {
-    
 
+    const inwardTableData = useSelector((state) => {
+        console.log(state.posts.inwardTable)
+        try {
+            return state.posts.inwardTable;
+        }
+        catch {
+            return 0;
+        }
+    });
 
-  const [ren, setRen] = useState(false);
-
-    getDisplayData({ setRen });
-
-    const tableDataString = sessionStorage.getItem('inwardTable');
-
-    const INWARD_TABLE_DATA = JSON.parse(tableDataString);
-
-    if (INWARD_TABLE_DATA == undefined) {
+    if (!inwardTableData) {
         return (
             <>
                 <TopNavBar />
@@ -40,7 +38,7 @@ const ReportInward = () => {
                     createReport={true}
                     title={"Inward Posts"}
                     tableHeaders={INWARD_TABLE_HEADER}
-                    tableRows={INWARD_TABLE_DATA}
+                    tableRows={inwardTableData}
                 />
             </Container>
         </div></>

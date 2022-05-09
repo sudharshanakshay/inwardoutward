@@ -23,7 +23,6 @@ const Inward = () => {
     });
 
     if (!inwardTableData) {
-        // store.dispatch(initStore());
         return (
             <>
                 <TopNavBar />
