@@ -19,52 +19,52 @@ const Dashboard = () => {
 
     // To refer sessionStorage 'key' navigate to 'postAction.jsx'
 
-    // let inwardTableData = sessionStorage.getItem('dashboardInward');
-    // inwardTableData = JSON.parse(inwardTableData);
+    let inwardTableData = sessionStorage.getItem('dashboardInward');
+    inwardTableData = JSON.parse(inwardTableData);
 
-    // let outwardTableData = sessionStorage.getItem('dashboardOutward');
-    // outwardTableData = JSON.parse(outwardTableData);
+    let outwardTableData = sessionStorage.getItem('dashboardOutward');
+    outwardTableData = JSON.parse(outwardTableData);
 
-    // let inwardCount = sessionStorage.getItem('inwardCount');     
-    // let outwardCount = sessionStorage.getItem('outwardCount');
+    let inwardCount = sessionStorage.getItem('inwardCount');     
+    let outwardCount = sessionStorage.getItem('outwardCount');
     
-    const inwardTableData = useSelector((state)=> {
-        try {
-            return state.posts.dashboardInward.payload.dashboardInward;
-        }
-        catch {
-            return 0;
-        }
-    });
+    // const inwardTableData = useSelector((state)=> {
+    //     try {
+    //         return state.posts.dashboardInward.payload.dashboardInward;
+    //     }
+    //     catch {
+    //         return 0;
+    //     }
+    // });
 
-    const outwardTableData = useSelector((state)=> {
-        try {
-            return state.posts.dashboardOutward.payload.dashboardOutward;
-        }
-        catch {
-            return 0;
-        }
-    });
+    // const outwardTableData = useSelector((state)=> {
+    //     try {
+    //         return state.posts.dashboardOutward.payload.dashboardOutward;
+    //     }
+    //     catch {
+    //         return 0;
+    //     }
+    // });
 
-    const inwardCount = useSelector((state)=> {
-        try {
-            return state.posts.inwardCount;
-        }
-        catch {
-            return 0;
-        }
-    });
+    // const inwardCount = useSelector((state)=> {
+    //     try {
+    //         return state.posts.inwardCount;
+    //     }
+    //     catch {
+    //         return 0;
+    //     }
+    // });
 
-    const outwardCount = useSelector((state)=> {
-        try {
-            return state.posts.outwardCount;
-        }
-        catch {
-            return 0;
-        }
-    });
+    // const outwardCount = useSelector((state)=> {
+    //     try {
+    //         return state.posts.outwardCount;
+    //     }
+    //     catch {
+    //         return 0;
+    //     }
+    // });
 
-    console.log(inwardTableData, outwardTableData, inwardCount, outwardCount);
+    // console.log(inwardTableData, outwardTableData, inwardCount, outwardCount);
 
     let pending = inwardCount - outwardCount;
 

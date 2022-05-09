@@ -17,19 +17,20 @@ const Outward = () => {
 
     const OUTWARD_TABLE_TITLE = "Outward Table";
 
-    // let outwardTableData = sessionStorage.getItem('outwardTable');
-    // outwardTableData = JSON.parse(outwardTableData);
+    let outwardTableData = sessionStorage.getItem('outwardTable');
+    outwardTableData = JSON.parse(outwardTableData);
 
 
-    const outwardTableData = useSelector((state)=> {
-        console.log(state.posts.outwardTable);
-        try {
-            return state.posts.outwardTable.payload.outward;
-        }
-        catch {
-            return 0;
-        }
-    });
+    // const outwardTableData = useSelector((state)=> {
+    //     console.log(state.posts.outwardTable);
+    //     try {
+    //         return state.posts.inwardTable.payload.outward;
+    //     }
+    //     catch {
+    //         setTimeout('outwardTableData', 2000);
+    //         return 0;
+    //     }
+    // });
 
     
 
