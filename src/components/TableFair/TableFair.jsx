@@ -76,7 +76,6 @@ const TableFair = ({ title, tableHeaders, tableRows, inward = false, outward = f
 
                 {applyDataTableApi && inward &&
                   <>
-<<<<<<< HEAD
                     <td>{rowValue.inwardID}</td>
                     <td>{rowValue.dt}</td>
                     <td>{rowValue.inwardID}</td>
@@ -90,18 +89,6 @@ const TableFair = ({ title, tableHeaders, tableRows, inward = false, outward = f
                     <Link to="/inward">Edit</Link>{' '}
                     <Button onClick={()=>handleInwardDelete(rowValue.inwardID)}>Delete</Button>
                     </td>
-=======
-                    <td>{value.inwardID}</td>
-                    <td>{value.dt}</td>
-                    <td>{value.inwardID}</td>
-                    <td>{value.nature}</td>
-                    <td>{value.recievedFrom}</td>
-                    <td>{value.subject}</td>
-                    <td>{value.deliverTo}</td>
-                    <td>{value.remark}</td>
-                    
-                    
->>>>>>> main
                   </>
                 }
 
@@ -121,7 +108,6 @@ const TableFair = ({ title, tableHeaders, tableRows, inward = false, outward = f
 
                 {applyDataTableApi && outward &&
                   <>
-<<<<<<< HEAD
                     <td>{rowValue.outwardID}</td>
                     <td>{rowValue.dt}</td>
                     <td>{rowValue.serialNo}</td>
@@ -132,17 +118,6 @@ const TableFair = ({ title, tableHeaders, tableRows, inward = false, outward = f
                     <td>{rowValue.receiptNo}</td>
                     <td>{rowValue.remark}</td>
                     <td><Link to="/outwardform">View</Link>{' '}<Link to="/inward">Edit</Link>{' '}<Link to="/outwardform">Delete</Link></td>
-=======
-                    <td>{value.outwardID}</td>
-                    <td>{value.dt}</td>
-                    <td>{value.serialNo}</td>
-                    <td>{value.department}</td>
-                    <td>{value.receiptNo}</td>
-                    <td>{value.addresseeName}</td>
-                    <td>{value.nature}</td>
-                    <td>{value.description}</td>
-                    <td>{value.remark}</td>
->>>>>>> main
                   </>
                 }
 
