@@ -4,6 +4,8 @@ import { useSelector } from "react-redux";
 import { Link, Navigate } from "react-router-dom";
 import { logOut } from "../../actions/auth/authSlice";
 import store from "../../store";
+import { BsFillGridFill } from 'react-icons/bs';
+
 
 
 const TopNavBar = () => {
@@ -11,6 +13,13 @@ const TopNavBar = () => {
     const user = useSelector((state) => state.loggedIn.email);
     const user1 = "hello";
     const [key, setKey] = useState('Dashboard');
+
+    const [show, setShow] = useState(false);
+
+    const handleClose = () => setShow(false);
+    const handleShow = () => setShow(true);
+
+    const placement = 'end';
 
     const expand = 'md';
 
@@ -27,7 +36,7 @@ const TopNavBar = () => {
                             height="60"
                             // className="d-inline-block align-top"
                             alt="logo"
-                            style={{margin:"0px", padding:"0px"}}
+                            style={{ margin: "0px", padding: "0px" }}
                         />
                     </Navbar.Brand>
                     <Navbar.Toggle aria-controls={`offcanvasNavbar-expand-${expand}}`} />
@@ -38,16 +47,12 @@ const TopNavBar = () => {
                             style={{ maxHeight: '100px' }}
                         >
                             <Link to="/dashboard" className="nav-item" >Dashboard</Link>
-
                             <Link to="/inward" className="nav-item">Inward Post</Link>
-
                             <Link to="/outward" className="nav-item" >Outward Post</Link>
-
                             <Dropdown>
                                 <Dropdown.Toggle className="nav-item" style={{ backgroundColor: '#ffffff', color: '#000000', border: 'none', fontSize: 'larger' }} id="dropdown-basic">
                                     Report
                                 </Dropdown.Toggle>
-
                                 <Dropdown.Menu>
                                     <Nav.Link >
                                         <Link to="/#" >Inward Report</Link>
@@ -58,13 +63,30 @@ const TopNavBar = () => {
                                 </Dropdown.Menu>
                             </Dropdown>
                         </Nav>
-                        <Nav defaultActiveKey="/home" as="ul"
-                            className=" my-3 my-lg-0"
-                            style={{ maxHeight: '100px' }}>
-                            <Button type="submit" onClick={() => store.dispatch(logOut())} variant="outline-success" >logOut</Button>
-                        </Nav>
+
 
                     </Navbar.Collapse>
+
+                    <BsFillGridFill size="30px" onClick={handleShow} className="me-2" />
+
+                    <Offcanvas show={show} onHide={handleClose} placement={placement} name={placement} >
+                        <Container>
+                            <Offcanvas.Header closeButton>
+                                <Offcanvas.Title  >Settings</Offcanvas.Title>
+                            </Offcanvas.Header>
+                            <hr />
+                            <Offcanvas.Body>
+
+                                <Link to="/settings" className="nav-item" > Settings </Link>
+
+                                <Nav defaultActiveKey="/home" as="ul"
+                                    className=" my-3 my-lg-0"
+                                    style={{ maxHeight: '100px' }}>
+                                    <Button type="submit" onClick={() => store.dispatch(logOut())} variant="outline-success" >logOut</Button>
+                                </Nav>
+                            </Offcanvas.Body>
+                        </Container>
+                    </Offcanvas>
                 </Container>
             </Navbar>
         </div >

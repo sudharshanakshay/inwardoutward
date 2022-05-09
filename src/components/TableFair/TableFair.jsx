@@ -4,8 +4,7 @@ import {Link} from 'react-router-dom';
 import $ from 'jquery';
 import "datatables.net-dt/js/dataTables.dataTables";
 import "datatables.net-dt/css/jquery.dataTables.min.css";
-
-import { MdDelete } from 'react-icons/md';
+import { delete_from } from "../../actions/posts/postsAction";
 
 
 const TableFair = ({ title, tableHeaders, tableRows, inward=false, outward=false, applyDataTableApi = false }) => {
@@ -16,14 +15,14 @@ const TableFair = ({ title, tableHeaders, tableRows, inward=false, outward=false
     });
   }
 
-  const handleInwardDelete =(value) =>{
-    console.log(value);
-    
-    console.log(outward);
+  const handleInwardDelete = (id) =>{
+    delete_from({inward:inward, rowID:id});
   }
 
-  // console.log("table fair");
-  // console.log(tableRows);
+  const handleOutwardDelete =(id) =>{
+    delete_from({outward:outward, rowID:id});
+  }
+
 
   return (
     <div className="elevated-box">
@@ -88,7 +87,11 @@ const TableFair = ({ title, tableHeaders, tableRows, inward=false, outward=false
                     <td>{rowValue.description}</td>
                     <td>{rowValue.receiptNo}</td>
                     <td>{rowValue.remark}</td>
-                    <td><Link to="/outwardform">View</Link>{' '}<Link to="/inward">Edit</Link>{' '}<Link to="/outwardform">Delete</Link></td>
+                    <td>
+                    <Link to="/">View</Link>{' '}
+                    <Link to="/inward">Edit</Link>{' '}
+                    <Button onClick={()=>handleOutwardDelete(rowValue.outwardID)}>Delete</Button>
+                    </td>
                   </>
                 }
 

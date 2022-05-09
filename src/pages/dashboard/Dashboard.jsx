@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import TopNavBar from '../../components/navBar/TopNavBar';
 import StatusBox from '../../components/StatusBox/StatusBox';
 import TableFair from '../../components/TableFair/TableFair';
@@ -13,58 +13,43 @@ import { useSelector } from 'react-redux';
 
 const Dashboard = () => {
 
-    // const [rerender, setReRender] = useState(false);
 
-    // getDisplayData({ setReRender });
+    const inwardTableData = useSelector((state)=> {
+        try {
+            return state.posts.dashboardInward;
+        }
+        catch {
+            return 0
+        }
+    });
 
-    // To refer sessionStorage 'key' navigate to 'postAction.jsx'
+    const outwardTableData = useSelector((state)=> {
+        try {
+            return state.posts.dashboardOutward;
+        }
+        catch {
+            return 0;
+        }
+    });
 
-    let inwardTableData = sessionStorage.getItem('dashboardInward');
-    inwardTableData = JSON.parse(inwardTableData);
+    const inwardCount = useSelector((state)=> {
+        try {
+            return state.posts.inwardCount;
+        }
+        catch {
+            return 0;
+        }
+    });
 
-    let outwardTableData = sessionStorage.getItem('dashboardOutward');
-    outwardTableData = JSON.parse(outwardTableData);
+    const outwardCount = useSelector((state)=> {
+        try {
+            return state.posts.outwardCount;
+        }
+        catch {
+            return 0;
+        }
+    });
 
-    let inwardCount = sessionStorage.getItem('inwardCount');     
-    let outwardCount = sessionStorage.getItem('outwardCount');
-    
-    // const inwardTableData = useSelector((state)=> {
-    //     try {
-    //         return state.posts.dashboardInward.payload.dashboardInward;
-    //     }
-    //     catch {
-    //         return 0;
-    //     }
-    // });
-
-    // const outwardTableData = useSelector((state)=> {
-    //     try {
-    //         return state.posts.dashboardOutward.payload.dashboardOutward;
-    //     }
-    //     catch {
-    //         return 0;
-    //     }
-    // });
-
-    // const inwardCount = useSelector((state)=> {
-    //     try {
-    //         return state.posts.inwardCount;
-    //     }
-    //     catch {
-    //         return 0;
-    //     }
-    // });
-
-    // const outwardCount = useSelector((state)=> {
-    //     try {
-    //         return state.posts.outwardCount;
-    //     }
-    //     catch {
-    //         return 0;
-    //     }
-    // });
-
-    // console.log(inwardTableData, outwardTableData, inwardCount, outwardCount);
 
     let pending = inwardCount - outwardCount;
 

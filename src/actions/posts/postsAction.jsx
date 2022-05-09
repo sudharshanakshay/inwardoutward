@@ -1,8 +1,7 @@
-import React, { useEffect } from "react";
 import axios from "axios"
 import { INSERT_INWARD_URL, INSERT_OUTWARD_URL, CONFIG, SELECT_INWARD_URL, DELETE_URL, SELECT_OUTWARD_URL, SELECT_DASHBOARD_INWARD_URL, SELECT_DASHBOARD_OUTWARD_URL } from "../../utility/Constants";
 import store from "../../store";
-import { connected, connectionError, setDashboardInward, setDashboardOutward, setInwardCount, setInwardTable, setOutwardTable } from "./postsSlice";
+import { connected, connectionError, initStore, setDashboardInward, setDashboardOutward, setInwardCount, setInwardTable, setOutwardCount, setOutwardTable } from "./postsSlice";
 
 
 export const insertFrom = async ({
@@ -98,32 +97,30 @@ export const getDisplayData = async ({ updated = false }) => {
                 .then((res) => {
                     console.log(res.data);
                     sessionStorage.setItem('dashboardInward', JSON.stringify(res.data.dashboardInward));
-                    store.dispatch(setDashboardInward(res.data));
                 })
+                .then(()=>store.dispatch(setDashboardInward()))
 
                 // ------------ Dashboard Outward ------------
             await axios.post(SELECT_DASHBOARD_OUTWARD_URL, CONFIG)
                 .then((res) => {
                     sessionStorage.setItem('dashboardOutward', JSON.stringify(res.data.dashboardOutward));
                     console.log(res.data);
-                    store.dispatch(setDashboardOutward(res.data));
                 })
+                .then(()=>store.dispatch(setDashboardOutward()))
 
                 // ------------  Inward ------------
             await axios.post(SELECT_INWARD_URL, CONFIG)
                 .then((res) => {
                     sessionStorage.setItem('inwardTable', JSON.stringify(res.data.inward));
-                    console.log(res.data);
-                    store.dispatch(setInwardTable(res.data));
                 })
+                .then(()=>store.dispatch(setInwardTable()))
 
                 // ------------ Outward ------------
             await axios.post(SELECT_OUTWARD_URL, CONFIG)
                 .then((res) => {
                     sessionStorage.setItem('outwardTable', JSON.stringify(res.data.outward));
-                    store.dispatch(setOutwardTable(res.data));
-                    // console.log(res.data);
                 })
+                .then(()=> store.dispatch(setOutwardTable()))
 
                 // request inward & outward count  
             await axios.post('http://localhost:5000/status', CONFIG)
@@ -132,12 +129,9 @@ export const getDisplayData = async ({ updated = false }) => {
                     let totalInward = res.data.inward[0].inward_count;
                     let totalOutward = res.data.outward[0].outward_count;
                     sessionStorage.setItem('inwardCount', totalInward);
-                    store.dispatch(setInwardCount(totalInward));
                     sessionStorage.setItem('outwardCount', totalOutward);
-                    store.dispatch(setOutwardTable(totalOutward));
-                    // sessionStorage.setItem('pendingCount', totalInward-totalOutward);
-                    // setReRender(true);
                 })
+                .then(()=>store.dispatch(setInwardCount(), setOutwardCount()))
 
                 store.dispatch(connected());
 
@@ -194,7 +188,7 @@ const update_on = ({ inward = null, nature = null, recievedFrom = null, subject 
         }
 }
 
-const delete_from = ({ inward = false, outward = false, rowID }) => {
+export const delete_from = ({ inward = false, outward = false, rowID }) => {
 
     // only one of two options must be specified.
 
@@ -204,6 +198,7 @@ const delete_from = ({ inward = false, outward = false, rowID }) => {
     }
 
     if(inward) {
+        console.log(rowID)
 
         const body = JSON.stringify({
             from : 'inward',
@@ -211,7 +206,13 @@ const delete_from = ({ inward = false, outward = false, rowID }) => {
         });
 
         try {
-            const res = axios.delete(DELETE_URL, body, CONFIG);
+            console.log(body);
+            axios.post('http://localhost:5000/delete', body, CONFIG)
+            .then((res)=>{
+                console.log(res.data);
+            })
+            getDisplayData({updated:true});
+            
             // delete successful alert msg.
         }
         catch (err) {
@@ -227,7 +228,13 @@ const delete_from = ({ inward = false, outward = false, rowID }) => {
         });
 
         try {
-            const res = axios.delete(DELETE_URL, body, CONFIG);
+            console.log(body);
+            axios.post('http://localhost:5000/delete', body, CONFIG)
+            .then((res)=>{
+                console.log(res.data);
+            })
+
+            getDisplayData({updated:true});
             // delete successful alert msg.
         }
         catch (err) {

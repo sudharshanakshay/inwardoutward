@@ -16,12 +16,16 @@ import ForgotPassword from './components/auth/ForgotPassword';
 import InwardForms from './components/Forms/InwardForms';
 import OutwardForm from './components/Forms/OutwardForm';
 import FormAction from './components/Forms/FormAction';
+import { getDisplayData } from './actions/posts/postsAction';
+import Settings from './pages/Settings/Settings';
 
 function App() {
 
   window.onbeforeunload = (e) => {
-    sessionStorage.clear()
+    sessionStorage.clear();
   }
+
+  
     return (
       <div>
         <Provider store={store}>
@@ -36,9 +40,9 @@ function App() {
               <Route path='/inward' element={<PrivateRoute component={Inward} />}></Route>
               <Route path='/outward' element={<PrivateRoute component={Outward} />}></Route>
               <Route path='/Report' element={<PrivateRoute component={Report} />}></Route>  
-              <Route path='/inwardform' element={<PrivateRoute component={InwardForms}/>}></Route>
-              <Route path='/outwardform' element={<PrivateRoute component={OutwardForm}/>}></Route>
-              
+              <Route path='/inwardform' element={<PrivateRoute component={InwardForms}/>} />
+              <Route path='/outwardform' element={<PrivateRoute component={OutwardForm}/>} />
+              <Route path='/settings' element={<PrivateRoute component={Settings}/> } />
             </Routes>
           </Router>
         </Provider>

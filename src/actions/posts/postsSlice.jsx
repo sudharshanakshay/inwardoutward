@@ -14,35 +14,43 @@ export const postsSlice = createSlice({
     reducers: {
         connectionError : (state) => {
             state.connectionError = true;
-            // setTimeout(()=>{state.connectionError = false},6)
         },
 
         connected : (state) => {
             state.connectionError = false;
         },
 
-        setInwardTable: (state, rows) => {
-            state.inwardTable = rows;
+        // initStore : (state) => {
+        //     state.inwardTable = JSON.parse(sessionStorage.getItem('inwardTable'));
+        //     state.outwardTable = JSON.parse(sessionStorage.getItem('outwardTable'));
+        //     state.dashboardInward = JSON.parse(sessionStorage.getItem('dashboardInward'));
+        //     state.dashboardOutward = JSON.parse(sessionStorage.getItem('dashboardOutward'));
+        //     state.inwardCount = JSON.parse(sessionStorage.getItem('inwardCount'));
+        //     state.outwardCount = JSON.parse(sessionStorage.getItem('outwardCount'));
+        // },
+
+        setInwardTable: (state) => {
+            state.inwardTable = JSON.parse(sessionStorage.getItem('inwardTable'));
         },
 
-        setOutwardTable: (state, rows) =>{
-            state.outwardTable = rows;
+        setOutwardTable: (state) =>{
+            state.outwardTable = JSON.parse(sessionStorage.getItem('outwardTable'));
         },
 
-        setDashboardInward: (state, rows) => {
-            state.dashboardInward = rows
+        setDashboardInward: (state) => {
+            state.dashboardInward = JSON.parse(sessionStorage.getItem('dashboardInward'));
         },
 
-        setDashboardOutward: (state, rows) => {
-            state.dashboardOutward = rows
+        setDashboardOutward: (state) => {
+            state.dashboardOutward = JSON.parse(sessionStorage.getItem('dashboardOutward'));
         },
 
-        setInwardCount : (state, count) => {
-            state.inwardCount = count
+        setInwardCount : (state) => {
+            state.inwardCount = JSON.parse(sessionStorage.getItem('inwardCount'));
         },
 
-        setOutwardCount : (state, count) => {
-            state.outwardCount = count
+        setOutwardCount : (state) => {
+            state.outwardCount = JSON.parse(sessionStorage.getItem('outwardCount'));
         }
     }
 });
