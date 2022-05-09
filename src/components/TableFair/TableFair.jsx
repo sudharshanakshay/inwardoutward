@@ -1,10 +1,6 @@
 import React from "react";
-<<<<<<< HEAD
 import { Button, Table} from "react-bootstrap";
 import {Link} from 'react-router-dom';
-=======
-import { Table } from "react-bootstrap";
->>>>>>> main
 import $ from 'jquery';
 import "datatables.net-dt/js/dataTables.dataTables";
 import "datatables.net-dt/css/jquery.dataTables.min.css";
