@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 
 import { Button, Col, Container, Form, FormControl, InputGroup, Row } from "react-bootstrap";
-import ActionMessage from '../ActionMessages/ActionMessages';
+import ActionMessage from '../AlertModel/PopModal';
  
 const ViewRecord = (inwardID) => {
     
