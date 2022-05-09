@@ -194,33 +194,22 @@ const update_on = ({ inward = null, nature = null, recievedFrom = null, subject 
         }
 }
 
-const delete_from = ({ inward_no = null, outward_no = null }) => {
+const delete_from = ({ inward = false, outward = false, rowID }) => {
 
     // only one of two options must be specified.
 
-    if (inward_no && outward_no) {
+    if (inward && outward) {
         // alert function usage error
         return;
     }
 
-    const from_post = null;
-    const post_id = null;
+    if(inward) {
 
-    if (inward_no) {
-        from_post = "inward_post";
-        post_id = inward_no;
-    }
-    if (outward_no) {
-        from_post = "outward_post";
-        post_id = outward_no;
-    }
+        const body = JSON.stringify({
+            from : 'inward',
+            id: rowID
+        });
 
-    const body = JSON.stringify({
-        "from_post": from_post,
-        "post_id": post_id
-    });
-
-    if (body)
         try {
             const res = axios.delete(DELETE_URL, body, CONFIG);
             // delete successful alert msg.
@@ -228,6 +217,24 @@ const delete_from = ({ inward_no = null, outward_no = null }) => {
         catch (err) {
             console.log(err);
         }
+    }
+
+    if(outward) {
+
+        const body = JSON.stringify({
+            from : 'outward',
+            id : rowID
+        });
+
+        try {
+            const res = axios.delete(DELETE_URL, body, CONFIG);
+            // delete successful alert msg.
+        }
+        catch (err) {
+            console.log(err);
+        }
+    }
+    
+       
 }
 
-// export default {insert_from, display_from, update_on, delete_from};

@@ -32,7 +32,7 @@ const FormAction = () => {
             <Form onSubmit={(s)=>onSubmit(s)}>
                 <Container >
                     <Row className='pt-5'>
-                        <Col sm={12} md={4} lg={4}>
+                        <Col >
                             <InputGroup className="mb-3 mt-4" >
                                 <InputGroup.Text >Inward No : </InputGroup.Text>
                                 <FormControl
@@ -43,7 +43,7 @@ const FormAction = () => {
                                 />
                             </InputGroup>
                         </Col>
-                        <Col sm={12} md={4} lg={4}>
+                        <Col >
                             <InputGroup className="mb-3 mt-4" >
                                 <InputGroup.Text>Date : </InputGroup.Text>
                                 <FormControl
@@ -60,7 +60,7 @@ const FormAction = () => {
 
 
                     <Row>
-                        <Col sm={12} md={4} lg={4} >
+                        <Col xs={12} sm={12} md={12} lg={4}>
                             <InputGroup className="mb-3 mt-4" >
                                 <InputGroup.Text >Nature : </InputGroup.Text>
                                 <FormControl
@@ -72,7 +72,7 @@ const FormAction = () => {
                                 />
                             </InputGroup>
                         </Col>
-                        <Col sm={12} md={4} lg={4}>
+                        <Col xs={12} sm={12} md={6} lg={4}>
                             <InputGroup className="mb-3 mt-4" >
                                 <InputGroup.Text>Subject : </InputGroup.Text>
                                 <FormControl
@@ -84,35 +84,8 @@ const FormAction = () => {
                                 />
                             </InputGroup>
                         </Col>
-                    </Row>
 
-
-                    <Row>
-                        <Col sm={12} md={4} lg={4}>
-                            <InputGroup className="mb-3 mt-4" >
-                                <InputGroup.Text >Recieved From : </InputGroup.Text>
-                                <FormControl
-                                    placeholder="Recieved"
-                                    aria-label="Recieved"
-                                    aria-describedby="basic-addon1"
-                                    name='recievedFrom'
-                                    onChange={(value)=> handleChange(value)}
-                                />
-                            </InputGroup>
-                        </Col>
-                        <Col sm={12} md={4} lg={4}>
-                            <InputGroup className="mb-3 mt-4" >
-                                <InputGroup.Text>Deliver To : </InputGroup.Text>
-                                <FormControl
-                                    placeholder="Deliver"
-                                    aria-label="Deliver"
-                                    aria-describedby="basic-addon1"
-                                    name='deliverTo'
-                                    onChange={(value)=> handleChange(value)}
-                                />
-                            </InputGroup>
-                        </Col>
-                        <Col sm={12} md={4} lg={4}>
+                        <Col xs={12} sm={12} md={6}  lg={4}>
                             <InputGroup className="mb-3 mt-4" >
                                 <InputGroup.Text>Remark : </InputGroup.Text>
                                 <FormControl
@@ -124,6 +97,35 @@ const FormAction = () => {
                                 />
                             </InputGroup>
                         </Col>
+                    </Row>
+
+
+                    <Row>
+                        <Col xs={12} sm={12} md={6} >
+                            <InputGroup className="mb-3 mt-4" >
+                                <InputGroup.Text >Recieved From : </InputGroup.Text>
+                                <FormControl
+                                    placeholder="Recieved"
+                                    aria-label="Recieved"
+                                    aria-describedby="basic-addon1"
+                                    name='recievedFrom'
+                                    onChange={(value)=> handleChange(value)}
+                                />
+                            </InputGroup>
+                        </Col>
+                        <Col xs={12} sm={12} md={6} >
+                            <InputGroup className="mb-3 mt-4" >
+                                <InputGroup.Text>Deliver To : </InputGroup.Text>
+                                <FormControl
+                                    placeholder="Deliver"
+                                    aria-label="Deliver"
+                                    aria-describedby="basic-addon1"
+                                    name='deliverTo'
+                                    onChange={(value)=> handleChange(value)}
+                                />
+                            </InputGroup>
+                        </Col>
+                       
                     </Row>
                     <Row >
                         <Col  lg={{ span: 2, offset: 5 }}  md={{ span:2, offset:2 }} sm={{ span:2, offset:2 }} >

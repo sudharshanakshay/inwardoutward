@@ -12,7 +12,7 @@ export const INSERT_OUTWARD_URL = BASE_URL+ "/outward/insert";
 
 export const UPDATE_URL = BASE_URL+ "/data";
 
-export const DELETE_URL = BASE_URL+ "/data";
+export const DELETE_URL = BASE_URL+ "/delete";
 
 export const SELECT_INWARD_URL = BASE_URL + "/inward/select" ;
 

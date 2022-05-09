@@ -16,8 +16,10 @@ const TableFair = ({ title, tableHeaders, tableRows, inward=false, outward=false
     });
   }
 
-  const handleInwardDelete =({value}) =>{
+  const handleInwardDelete =(value) =>{
     console.log(value);
+    
+    console.log(outward);
   }
 
   // console.log("table fair");
@@ -30,30 +32,34 @@ const TableFair = ({ title, tableHeaders, tableRows, inward=false, outward=false
       <Table responsive id="table">
         <thead>
           <tr className="center">
-            {tableHeaders.map((value, index) => (
-              <td key={index} style={{width:value[1]}}>{value[0]}</td>
+            {tableHeaders.map((headerValue, index) => (
+              <td key={index} style={{width:headerValue[1]}}>{headerValue[0]}</td>
             ))}
             { applyDataTableApi && <td>Actions</td>}
           </tr>
         </thead>
         <tbody>
           {
-            tableRows?.map((value, index) => (
+            tableRows?.map((rowValue, index) => (
               <tr key={index} className="center" >
 
                 {/* ------------ Inward Table ------------ */}
 
                 {applyDataTableApi && inward &&
                   <>
-                    <td>{value.inwardID}</td>
-                    <td>{value.dt}</td>
-                    <td>{value.inwardID}</td>
-                    <td>{value.nature}</td>
-                    <td>{value.recievedFrom}</td>
-                    <td>{value.subject}</td>
-                    <td>{value.deliverTo}</td>
-                    <td>{value.remark}</td>
-                    <td></td>
+                    <td>{rowValue.inwardID}</td>
+                    <td>{rowValue.dt}</td>
+                    <td>{rowValue.inwardID}</td>
+                    <td>{rowValue.nature}</td>
+                    <td>{rowValue.recievedFrom}</td>
+                    <td>{rowValue.subject}</td>
+                    <td>{rowValue.deliverTo}</td>
+                    <td>{rowValue.remark}</td>
+                    <td>
+                    <Link to="/">View</Link>{' '}
+                    <Link to="/inward">Edit</Link>{' '}
+                    <Button onClick={()=>handleInwardDelete(rowValue.inwardID)}>Delete</Button>
+                    </td>
                   </>
                 }
 
@@ -62,10 +68,10 @@ const TableFair = ({ title, tableHeaders, tableRows, inward=false, outward=false
                 {
                   !applyDataTableApi && inward &&
                   <>
-                    <td>{value.dt}</td>
-                    <td>{value.recievedFrom}</td>
-                    <td>{value.deliverTo}</td>
-                    {/* <td>{value.subject}</td> */}
+                    <td>{rowValue.dt}</td>
+                    <td>{rowValue.recievedFrom}</td>
+                    <td>{rowValue.deliverTo}</td>
+                    {/* <td>{rowValue.subject}</td> */}
                   </>
                 }
 
@@ -73,16 +79,16 @@ const TableFair = ({ title, tableHeaders, tableRows, inward=false, outward=false
 
                 {applyDataTableApi && outward &&
                   <>
-                    <td>{value.outwardID}</td>
-                    <td>{value.dt}</td>
-                    <td>{value.serialNo}</td>
-                    <td>{value.department}</td>
-                    <td>{value.addresseeName}</td>
-                    <td>{value.nature}</td>
-                    <td>{value.description}</td>
-                    <td>{value.receiptNo}</td>
-                    <td>{value.remark}</td>
-                    <td><Link to="/outwardform">Add</Link></td>
+                    <td>{rowValue.outwardID}</td>
+                    <td>{rowValue.dt}</td>
+                    <td>{rowValue.serialNo}</td>
+                    <td>{rowValue.department}</td>
+                    <td>{rowValue.addresseeName}</td>
+                    <td>{rowValue.nature}</td>
+                    <td>{rowValue.description}</td>
+                    <td>{rowValue.receiptNo}</td>
+                    <td>{rowValue.remark}</td>
+                    <td><Link to="/outwardform">View</Link>{' '}<Link to="/inward">Edit</Link>{' '}<Link to="/outwardform">Delete</Link></td>
                   </>
                 }
 
@@ -91,9 +97,9 @@ const TableFair = ({ title, tableHeaders, tableRows, inward=false, outward=false
                 {
                   !applyDataTableApi && outward &&
                   <>
-                    <td>{value.dt}</td>
-                    <td>{value.department}</td>
-                    <td>{value.addresseeName}</td>
+                    <td>{rowValue.dt}</td>
+                    <td>{rowValue.department}</td>
+                    <td>{rowValue.addresseeName}</td>
                   </>
                 }
               </tr>
