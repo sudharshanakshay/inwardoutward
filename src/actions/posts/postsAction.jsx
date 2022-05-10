@@ -1,7 +1,7 @@
 import axios from "axios"
 import { INSERT_INWARD_URL, INSERT_OUTWARD_URL, CONFIG, SELECT_INWARD_URL, DELETE_URL, SELECT_OUTWARD_URL, SELECT_DASHBOARD_INWARD_URL, SELECT_DASHBOARD_OUTWARD_URL } from "../../utility/Constants";
 import store from "../../store";
-import { connected, connectionError, initStore, setDashboardInward, setDashboardOutward, setInwardCount, setInwardTable, setOutwardCount, setOutwardTable } from "./postsSlice";
+import { connected, connectionError, initStore, setDashboardInward, setDashboardOutward, setInwardCount, setInwardTable, setOutwardCount, setOutwardTable, setViewRow } from "./postsSlice";
 
 
 export const insertFrom = async ({
@@ -10,7 +10,7 @@ export const insertFrom = async ({
 
     date = null,
 
-    inwardNo =null,
+    inwardNo = null,
     nature = null,
     recievedFrom = null,
     subject = null,
@@ -34,14 +34,14 @@ export const insertFrom = async ({
         from_post = "inward_post";
 
         body = JSON.stringify({
-            inwardNo : inwardNo,
-            date : date,
-            from_post : from_post,
-            nature : nature,
-            recievedFrom : recievedFrom,
-            subject : subject,
-            deliverTo : deliverTo,
-            remark : remark
+            inwardNo: inwardNo,
+            date: date,
+            from_post: from_post,
+            nature: nature,
+            recievedFrom: recievedFrom,
+            subject: subject,
+            deliverTo: deliverTo,
+            remark: remark
         });
 
         try {
@@ -65,15 +65,15 @@ export const insertFrom = async ({
         from_post = "outward_post";
 
         body = JSON.stringify({
-            from_post : from_post,
-            date : date,
-            serialNo : serialNo,
-            department : department,
-            receiptNo : receiptNo,
-            addressee : addressee,
-            nature : nature,
-            description : description,
-            remark : remark
+            from_post: from_post,
+            date: date,
+            serialNo: serialNo,
+            department: department,
+            receiptNo: receiptNo,
+            addressee: addressee,
+            nature: nature,
+            description: description,
+            remark: remark
         });
 
         try {
@@ -101,37 +101,37 @@ export const getDisplayData = async ({ updated = false }) => {
         console.log("sessionStorage undefined");
 
         try {
-                // ------------ Dashboard Inward ------------
+            // ------------ Dashboard Inward ------------
             await axios.post(SELECT_DASHBOARD_INWARD_URL, CONFIG)
                 .then((res) => {
                     console.log(res.data);
                     sessionStorage.setItem('dashboardInward', JSON.stringify(res.data.dashboardInward));
                 })
-                .then(()=>store.dispatch(setDashboardInward()))
+                .then(() => store.dispatch(setDashboardInward()))
 
-                // ------------ Dashboard Outward ------------
+            // ------------ Dashboard Outward ------------
             await axios.post(SELECT_DASHBOARD_OUTWARD_URL, CONFIG)
                 .then((res) => {
                     sessionStorage.setItem('dashboardOutward', JSON.stringify(res.data.dashboardOutward));
                     console.log(res.data);
                 })
-                .then(()=>store.dispatch(setDashboardOutward()))
+                .then(() => store.dispatch(setDashboardOutward()))
 
-                // ------------  Inward ------------
+            // ------------  Inward ------------
             await axios.post(SELECT_INWARD_URL, CONFIG)
                 .then((res) => {
                     sessionStorage.setItem('inwardTable', JSON.stringify(res.data.inward));
                 })
-                .then(()=>store.dispatch(setInwardTable()))
+                .then(() => store.dispatch(setInwardTable()))
 
-                // ------------ Outward ------------
+            // ------------ Outward ------------
             await axios.post(SELECT_OUTWARD_URL, CONFIG)
                 .then((res) => {
                     sessionStorage.setItem('outwardTable', JSON.stringify(res.data.outward));
                 })
-                .then(()=> store.dispatch(setOutwardTable()))
+                .then(() => store.dispatch(setOutwardTable()))
 
-                // request inward & outward count  
+            // request inward & outward count  
             await axios.post('http://localhost:5000/status', CONFIG)
                 .then((res) => {
                     // console.log(typeof(res.data.inward[0].inward_count));
@@ -140,9 +140,9 @@ export const getDisplayData = async ({ updated = false }) => {
                     sessionStorage.setItem('inwardCount', totalInward);
                     sessionStorage.setItem('outwardCount', totalOutward);
                 })
-                .then(()=>store.dispatch( setOutwardCount()))
+                .then(() => store.dispatch(setOutwardCount()))
 
-                store.dispatch(connected());
+            store.dispatch(connected());
 
         }
         catch (err) {
@@ -156,55 +156,91 @@ export const getDisplayData = async ({ updated = false }) => {
     }
 }
 
-export const getRow = ({id, inward=false, outward=false}) => {
-    if (inward && outward) {
-        return null;
-    }
+export const selectRow = async ({ id, inward = false, outward = false }) => {
 
-    if(inward) {
-        
-    }
-}
-
-const update_on = ({ inward = null, nature = null, recievedFrom = null, subject = null, deliverTo = null, outward = null, dept = null, addressee = null, desc = null, recipt_no = null }) => {
-    const from_post = null;
-    const body = null;
+    console.log('here at getRow');
+    // console.log(inward);
 
     if (inward) {
-        from_post = "inward_post";
+        const body = JSON.stringify({
+            from_post: 'inward',
+            id: id
+        })
 
-        body = JSON.stringify({
-            'from_post': from_post,
-            'nature': nature,
-            'recievedFrom': recievedFrom,
-            'subject': subject,
-            'deliverTo': deliverTo
+        try {
+            await axios.post('http://localhost:5000/select/row', body, CONFIG)
+                .then((res) => {
+                    console.log(res.data.selectRow);
+                    sessionStorage.setItem('viewRow', JSON.stringify(res.data.selectRow));
+                })
+                .then(()=>{
+                    store.dispatch(setViewRow());
+                })
+        }
+
+        catch (err) {
+            console.log(err);
+        }
+    }
+
+}
+
+
+export const update_on = ({
+
+    inward = null,
+    outward = null,
+
+    date = null,
+
+    inwardNo = null,
+    nature = null,
+    recievedFrom = null,
+    subject = null,
+    deliverTo = null,
+    remark = null,
+
+    serialNo = null,
+    receiptNo = null,
+    addressee = null,
+    description = null,
+    department = null
+
+
+}) => {
+
+    if (inward) {
+        const from_post = "inward_post";
+
+        const body = JSON.stringify({
+            inwardNo: inwardNo,
+            date: date,
+            from_post: from_post,
+            nature: nature,
+            recievedFrom: recievedFrom,
+            subject: subject,
+            deliverTo: deliverTo,
+            remark: remark
         });
+
+        axios.post()
     }
 
     if (outward) {
-        from_post = "outward_post";
+        const from_post = "outward_post";
 
-        body = JSON.stringify({
-            'from_post': from_post,
-            'dept': dept,
-            'addressee': addressee,
-            'desc': desc,
-            'nature': nature,
-            'recipt_no': recipt_no
+        const body = JSON.stringify({
+            from_post: from_post,
+            date: date,
+            serialNo: serialNo,
+            department: department,
+            receiptNo: receiptNo,
+            addressee: addressee,
+            nature: nature,
+            description: description,
+            remark: remark
         });
     }
-
-    if (body)
-        try {
-            const res = axios.put(body, CONFIG);
-            if (res.data.insert == "successful") {
-                console.log("insert successful")
-                // Todo : alert model . 
-            }
-        } catch (err) {
-            console.log(err);
-        }
 }
 
 
@@ -218,22 +254,22 @@ export const delete_from = ({ inward = false, outward = false, rowID }) => {
         return;
     }
 
-    if(inward) {
+    if (inward) {
         console.log(rowID)
 
         const body = JSON.stringify({
-            from : 'inward',
+            from: 'inward',
             id: rowID
         });
 
         try {
             console.log(body);
             axios.post('http://localhost:5000/delete', body, CONFIG)
-            .then((res)=>{
-                console.log(res.data);
-            })
-            getDisplayData({updated:true});
-            
+                .then((res) => {
+                    console.log(res.data);
+                })
+            getDisplayData({ updated: true });
+
             // delete successful alert msg.
         }
         catch (err) {
@@ -241,28 +277,28 @@ export const delete_from = ({ inward = false, outward = false, rowID }) => {
         }
     }
 
-    if(outward) {
+    if (outward) {
 
         const body = JSON.stringify({
-            from : 'outward',
-            id : rowID
+            from: 'outward',
+            id: rowID
         });
 
         try {
             console.log(body);
             axios.post('http://localhost:5000/delete', body, CONFIG)
-            .then((res)=>{
-                console.log(res.data);
-            })
+                .then((res) => {
+                    console.log(res.data);
+                })
 
-            getDisplayData({updated:true});
+            getDisplayData({ updated: true });
             // delete successful alert msg.
         }
         catch (err) {
             console.log(err);
         }
     }
-    
-       
+
+
 }
 

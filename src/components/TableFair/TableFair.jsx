@@ -15,7 +15,7 @@ import pdfMake from 'pdfmake/build/pdfmake'
 import pdfFonts from 'pdfmake/build/vfs_fonts'
 import PopModal from "../AlertModel/PopModal";
 import ViewRecord from "../View/View";
-import { delete_from } from "../../actions/posts/postsAction";
+import { delete_from, selectRow, update_on } from "../../actions/posts/postsAction";
 pdfMake.vfs = pdfFonts.pdfMake.vfs;
 window.pdfMake = pdfMake;
 window.JSZip = jsZip;
@@ -57,6 +57,16 @@ const TableFair = ({ title, tableHeaders, tableRows, inward = false, outward = f
     delete_from({ outward: outward, rowID: id });
   }
 
+  const handleView = () => {
+    selectRow({inward:true});
+  }
+
+  const handleEdit = (id) => {
+    console.log('id : ' + id);
+    selectRow({inward:true, id:id});
+    // update_on({inward:true, id:id})
+  }
+
 
   return (
     <div className="elevated-box">
@@ -91,8 +101,8 @@ const TableFair = ({ title, tableHeaders, tableRows, inward = false, outward = f
                     <td>{rowValue.remark}</td>
                     <td>
                       {/* <ViewRecord inward={rowValue.inwardID} /> */}
-                      <Link to="#">View</Link>{' '}
-                      <Link to="#">Edit</Link>{' '}
+                      <Button onClick={()=>handleEdit(rowValue.inwardID)}>Edit</Button>
+                      <Button onClick={handleView} > view </Button>
                       <PopModal
                         inward={inward}
                         mode={'delete'}
