@@ -7,8 +7,8 @@ export const postsSlice = createSlice({
         outwardTable:[],
         dashboardInward:[],
         dashboardOutward:[],
-        inwardCount: '',
-        outwardCount: '',
+        inwardCount: 0,
+        outwardCount: 0,
         connectionError: false
     },
     reducers: {

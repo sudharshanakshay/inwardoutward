@@ -3,19 +3,22 @@ import {insertFrom} from '../../actions/posts/postsAction';
 import { Button, Col, Container, Form, FormControl, InputGroup, Row } from "react-bootstrap";
 import TopNavBar from '../navBar/TopNavBar';
 
-const InwardForms = () => {
+const OutwardForm = () => {
 
     const [formData, setFormData] = useState({
+        serialNo: '',
+        date : '',
+        department : '',
+        addressee : '',
         nature : '',
-        recievedFrom : '',
-        subject : '',
-        deliverTo : '',
+        description : '',
+        receiptNo : '',
         remark : '',
     });
 
-    const inward = true;
+    const outward = true;
 
-    const {nature, recievedFrom, subject, deliverTo, remark } = formData;
+    const {serialNo, date,  nature, department, addressee, description, receiptNo, deliverTo, remark } = formData;
 
     const handleChange = (change) => {
         setFormData({...formData, [change.target.name]:change.target.value });
@@ -24,9 +27,8 @@ const InwardForms = () => {
 
     const onSubmit = (e) => {
         e.preventDefault();
-        insertFrom({inward, nature, recievedFrom, subject, deliverTo, remark});
+        insertFrom({outward, serialNo, date,  nature, department, addressee, description, receiptNo, deliverTo, remark});
     }
-
 
     return (
         <>
@@ -41,7 +43,8 @@ const InwardForms = () => {
                                     placeholder="Serial No : "
                                     aria-label="SerialNo"
                                     aria-describedby="basic-addon1"
-                                    // onChange={(value)=> handleChange(value)}
+                                    name='serialNo'
+                                    onChange={(value)=> handleChange(value)}
                                 />
                             </InputGroup>
                         </Col>
@@ -53,8 +56,8 @@ const InwardForms = () => {
                                     placeholder="Date"
                                     aria-label="Date"
                                     aria-describedby="basic-addon1"
-                                    name=''
-                                    // onChange={(value)=> handleChange(value)}
+                                    name='date'
+                                    onChange={(value)=> handleChange(value)}
                                 />
                             </InputGroup>
                         </Col>
@@ -102,6 +105,7 @@ const InwardForms = () => {
                             <InputGroup className="mb-3 mt-4" >
                                 <InputGroup.Text>Description : </InputGroup.Text>
                                 <FormControl
+                                    type='textarea'
                                     placeholder="Description"
                                     aria-label="Description"
                                     aria-describedby="basic-addon1"
@@ -118,7 +122,7 @@ const InwardForms = () => {
                                     placeholder="Recipt No"
                                     aria-label="Recipt No"
                                     aria-describedby="basic-addon1"
-                                    name='recipt'
+                                    name='receiptNo'
                                     onChange={(value)=> handleChange(value)}
                                 />
                             </InputGroup>
@@ -141,7 +145,7 @@ const InwardForms = () => {
 
                     <Row >
                         <Col  lg={{ span: 2, offset: 5 }}  md={{ span:2, offset:2 }} sm={{ span:2, offset:2 }} >
-                        <Button type='submit' variant="success" >Save Inward Post</Button>
+                        <Button type='submit' variant="success" >Save Outward Post</Button>
                         </Col>
                     </Row>
                 </Container>
@@ -150,5 +154,5 @@ const InwardForms = () => {
     )
 }
 
-export default InwardForms;
+export default OutwardForm;
 

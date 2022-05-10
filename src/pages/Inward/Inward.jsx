@@ -10,9 +10,7 @@ import { useSelector } from "react-redux";
 
 
 const Inward = () => {
-
     const inwardTableData = useSelector((state) => {
-
         console.log(state.posts.inwardTable)
         try {
             return state.posts.inwardTable;

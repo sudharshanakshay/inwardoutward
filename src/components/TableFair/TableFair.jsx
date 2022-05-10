@@ -90,7 +90,9 @@ const TableFair = ({ title, tableHeaders, tableRows, inward = false, outward = f
                     <td>{rowValue.deliverTo}</td>
                     <td>{rowValue.remark}</td>
                     <td>
-                      <ViewRecord inward={rowValue.inwardID} />
+                      {/* <ViewRecord inward={rowValue.inwardID} /> */}
+                      <Link to="#">View</Link>{' '}
+                      <Link to="#">Edit</Link>{' '}
                       <PopModal
                         inward={inward}
                         mode={'delete'}
@@ -98,15 +100,6 @@ const TableFair = ({ title, tableHeaders, tableRows, inward = false, outward = f
                         modelTitle={"Delete"}
                         message={`Inward Row with ID "${rowValue.inwardID}" will be permanently deleted, wish to proceed ? `}
                         variant={'outline-danger'}
-                        id={rowValue.inwardID}
-                      />
-                      <PopModal
-                        inward={inward}
-                        mode={'update'}
-                        btnText={'edit'}
-                        modelTitle={"Update"}
-                        message={`Inward Row with ID "${rowValue.inwardID}" will be updated, wish to proceed ? `}
-                        variant={'outline-success'}
                         id={rowValue.inwardID}
                       />
                     </td>
@@ -130,17 +123,17 @@ const TableFair = ({ title, tableHeaders, tableRows, inward = false, outward = f
                 {applyDataTableApi && outward &&
                   <>
                     <td>{rowValue.outwardID}</td>
-                    <td>{rowValue.dt}</td>
+                    <td>{rowValue.date}</td>
                     <td>{rowValue.serialNo}</td>
                     <td>{rowValue.department}</td>
-                    <td>{rowValue.addresseeName}</td>
+                    <td>{rowValue.addressee}</td>
                     <td>{rowValue.nature}</td>
                     <td>{rowValue.description}</td>
                     <td>{rowValue.receiptNo}</td>
                     <td>{rowValue.remark}</td>
                     <td>
-                      <Link to="/">View</Link>{' '}
-                      <Link to="/inward">Edit</Link>{' '}
+                      <Link to="#">View</Link>{' '}
+                      <Link to="#">Edit</Link>{' '}
                       <PopModal
                         outward={outward}
                         mode={'delete'}
@@ -159,9 +152,9 @@ const TableFair = ({ title, tableHeaders, tableRows, inward = false, outward = f
                 {
                   !applyDataTableApi && outward &&
                   <>
-                    <td>{rowValue.dt}</td>
+                    <td>{rowValue.date}</td>
                     <td>{rowValue.department}</td>
-                    <td>{rowValue.addresseeName}</td>
+                    <td>{rowValue.addressee}</td>
                   </>
                 }
               </tr>

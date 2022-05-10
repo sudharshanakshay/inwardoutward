@@ -40,7 +40,7 @@ const PopModal = ({ inward, outward, mode, btnText, modelTitle, message, variant
 
                         <Modal.Body>{message}</Modal.Body>
                         <Modal.Footer>
-                            <Button variant={variant} props onClick={handleClick}>
+                            <Button variant={variant} onClick={handleClick}>
                                 {btnText || mode.trim().replace(/^\w/, (c) => c.toUpperCase())}
                             </Button>
                         </Modal.Footer>

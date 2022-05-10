@@ -4,9 +4,11 @@ import { Button, Col, Container, Form, FormControl, InputGroup, Row } from "reac
 import TopNavBar from '../navBar/TopNavBar';
 
 
-const InwardForms = () => {
+const InwardForm = () => {
 
     const [formData, setFormData] = useState({
+        inwardNo : '',
+        date : '',
         nature : '',
         recievedFrom : '',
         subject : '',
@@ -16,7 +18,7 @@ const InwardForms = () => {
 
     const inward = true;
 
-    const {nature, recievedFrom, subject, deliverTo, remark } = formData;
+    const {inwardNo, date, nature, recievedFrom, subject, deliverTo, remark } = formData;
 
     const handleChange = (change) => {
         setFormData({...formData, [change.target.name]:change.target.value });
@@ -25,9 +27,8 @@ const InwardForms = () => {
 
     const onSubmit = (e) => {
         e.preventDefault();
-        insertFrom({inward, nature, recievedFrom, subject, deliverTo, remark});
+        insertFrom({inward, inwardNo, date, nature, recievedFrom, subject, deliverTo, remark});
     }
-
 
     return (
         <>
@@ -42,7 +43,8 @@ const InwardForms = () => {
                                     placeholder="Inward No:"
                                     aria-label="Inward No:"
                                     aria-describedby="basic-addon1"
-                                    // onChange={(value)=> handleChange(value)}
+                                    name='inwardNo'
+                                    onChange={(value)=> handleChange(value)}
                                 />
                             </InputGroup>
                         </Col>
@@ -54,8 +56,8 @@ const InwardForms = () => {
                                     placeholder="Date"
                                     aria-label="Date"
                                     aria-describedby="basic-addon1"
-                                    name=''
-                                    // onChange={(value)=> handleChange(value)}
+                                    name='date'
+                                    onChange={(value)=> handleChange(value)}
                                 />
                             </InputGroup>
                         </Col>
@@ -141,5 +143,5 @@ const InwardForms = () => {
     )
 }
 
-export default InwardForms;
+export default InwardForm;
 

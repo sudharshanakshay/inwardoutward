@@ -50,7 +50,8 @@ const Dashboard = () => {
     });
 
 
-    let pending = inwardCount - outwardCount;
+    let pending = inwardCount - outwardCount ;
+    pending = pending < 0 ? 0 : pending ; 
 
     if (!outwardTableData) {
         return (

@@ -8,6 +8,9 @@ export const insertFrom = async ({
     inward = null,
     outward = null,
 
+    date = null,
+
+    inwardNo =null,
     nature = null,
     recievedFrom = null,
     subject = null,
@@ -16,7 +19,7 @@ export const insertFrom = async ({
 
     serialNo = null,
     receiptNo = null,
-    addresseeName = null,
+    addressee = null,
     description = null,
     department = null }) => {
 
@@ -31,17 +34,20 @@ export const insertFrom = async ({
         from_post = "inward_post";
 
         body = JSON.stringify({
-            'from_post': from_post,
-            'nature': nature,
-            'recievedFrom': recievedFrom,
-            'subject': subject,
-            'deliverTo': deliverTo,
-            'remark': remark
+            inwardNo : inwardNo,
+            date : date,
+            from_post : from_post,
+            nature : nature,
+            recievedFrom : recievedFrom,
+            subject : subject,
+            deliverTo : deliverTo,
+            remark : remark
         });
 
         try {
             await axios.post(INSERT_INWARD_URL, body, CONFIG)
                 .then((res) => {
+                    console.log(res.data)
                     if (res.data.insert == "successful") {
                         console.log("insert successful")
                         getDisplayData({ updated: true })
@@ -59,19 +65,21 @@ export const insertFrom = async ({
         from_post = "outward_post";
 
         body = JSON.stringify({
-            'from_post': from_post,
-            'serialNo': serialNo,
-            'department': department,
-            'receiptNo': receiptNo,
-            'addresseeName': addresseeName,
-            'nature': nature,
-            'description': description,
-            'remark': remark
+            from_post : from_post,
+            date : date,
+            serialNo : serialNo,
+            department : department,
+            receiptNo : receiptNo,
+            addressee : addressee,
+            nature : nature,
+            description : description,
+            remark : remark
         });
 
         try {
             await axios.post(INSERT_OUTWARD_URL, body, CONFIG)
                 .then((res) => {
+                    console.log(res);
                     if (res.data.insert == "successful") {
                         console.log("insert successful")
                         getDisplayData({ updated: true })
@@ -79,6 +87,7 @@ export const insertFrom = async ({
                     }
                 })
         } catch (err) {
+            console.log("err outward insert ");
             console.log(err);
         }
     }
@@ -131,7 +140,7 @@ export const getDisplayData = async ({ updated = false }) => {
                     sessionStorage.setItem('inwardCount', totalInward);
                     sessionStorage.setItem('outwardCount', totalOutward);
                 })
-                .then(()=>store.dispatch(setInwardCount(), setOutwardCount()))
+                .then(()=>store.dispatch( setOutwardCount()))
 
                 store.dispatch(connected());
 
