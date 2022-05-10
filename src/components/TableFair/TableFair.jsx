@@ -82,8 +82,8 @@ const TableFair = ({ title, tableHeaders, tableRows, inward = false, outward = f
                 {applyDataTableApi && inward &&
                   <>
                     <td>{rowValue.inwardID}</td>
-                    <td>{rowValue.dt}</td>
-                    <td>{rowValue.inwardID}</td>
+                    <td>{rowValue.date}</td>
+                    <td>{rowValue.inwardNo}</td>
                     <td>{rowValue.nature}</td>
                     <td>{rowValue.recievedFrom}</td>
                     <td>{rowValue.subject}</td>
@@ -111,7 +111,7 @@ const TableFair = ({ title, tableHeaders, tableRows, inward = false, outward = f
                 {
                   !applyDataTableApi && inward &&
                   <>
-                    <td>{rowValue.dt}</td>
+                    <td>{rowValue.date}</td>
                     <td>{rowValue.recievedFrom}</td>
                     <td>{rowValue.deliverTo}</td>
                     {/* <td>{rowValue.subject}</td> */}
