@@ -22,9 +22,9 @@ import ViewRecord from './components/View/View';
 
 function App() {
 
-  window.onbeforeunload = (e) => {
-    sessionStorage.clear();
-  }
+  // window.onbeforeunload = (e) => {
+  //   sessionStorage.clear();
+  // }
 
   
     return (

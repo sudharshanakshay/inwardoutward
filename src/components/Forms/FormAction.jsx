@@ -1,35 +1,69 @@
-import React, { useState } from 'react';
-import {insertFrom} from '../../actions/posts/postsAction';
+import React, { useEffect, useState } from 'react';
+import { insertFrom } from '../../actions/posts/postsAction';
 import { Button, Col, Container, Form, FormControl, InputGroup, Row } from "react-bootstrap";
+import { useSelector } from 'react-redux';
+import TopNavBar from '../navBar/TopNavBar';
+import { delete_from, selectRow, update_on } from "../../actions/posts/postsAction";
 
-const FormAction = () => {
+
+const FormAction = (viewMode = false) => {
 
     const [formData, setFormData] = useState({
-        nature : '',
-        recievedFrom : '',
-        subject : '',
-        deliverTo : '',
-        remark : '',
+        inwardNo: '',
+        date: '',
+        nature: '',
+        recievedFrom: '',
+        subject: '',
+        deliverTo: '',
+        remark: ''
     });
+
+    // const id = 5;
+
+
+    const viewRow = useSelector((state) => {
+
+        console.log(state.posts.viewRow);
+        try {
+            return state.posts.viewRow;
+        }
+        catch {
+            return 0;
+        }
+    });
+
+    setFormData(viewRow[0]);
+
+
+
+    // if (!viewRow) {
+    //     return (
+    //         <>
+    //             <TopNavBar />
+    //             <ButtonSpinner />
+    //         </>
+    //     )
+    // }
 
     const inward = true;
 
-    const {nature, recievedFrom, subject, deliverTo, remark } = formData;
+    const { date, inwardNo, nature, recievedFrom, subject, deliverTo, remark } = formData;
 
     const handleChange = (change) => {
-        setFormData({...formData, [change.target.name]:change.target.value });
+        setFormData({ ...formData, [change.target.name]: change.target.value });
         console.log(formData);
     }
 
     const onSubmit = (e) => {
         e.preventDefault();
-        insertFrom({inward, nature, recievedFrom, subject, deliverTo, remark});
+        insertFrom({ inward, nature, recievedFrom, subject, deliverTo, remark });
     }
 
 
     return (
         <>
-            <Form onSubmit={(s)=>onSubmit(s)}>
+            <TopNavBar />
+            <Form onSubmit={(s) => onSubmit(s)}>
                 <Container >
                     <Row className='pt-5'>
                         <Col >
@@ -39,7 +73,8 @@ const FormAction = () => {
                                     placeholder="Inward No:"
                                     aria-label="Inward No:"
                                     aria-describedby="basic-addon1"
-                                    // onChange={(value)=> handleChange(value)}
+                                    name='inwardNo'
+                                    onChange={(value) => handleChange(value)}
                                 />
                             </InputGroup>
                         </Col>
@@ -51,8 +86,8 @@ const FormAction = () => {
                                     placeholder="Date"
                                     aria-label="Date"
                                     aria-describedby="basic-addon1"
-                                    name=''
-                                    // onChange={(value)=> handleChange(value)}
+                                    name='date'
+                                    onChange={(value) => handleChange(value)}
                                 />
                             </InputGroup>
                         </Col>
@@ -68,7 +103,7 @@ const FormAction = () => {
                                     aria-label="Nature"
                                     aria-describedby="basic-addon1"
                                     name='nature'
-                                    onChange={(value)=> handleChange(value)}
+                                    onChange={(value) => handleChange(value)}
                                 />
                             </InputGroup>
                         </Col>
@@ -80,12 +115,12 @@ const FormAction = () => {
                                     aria-label="Subject"
                                     aria-describedby="basic-addon1"
                                     name='subject'
-                                    onChange={(value)=> handleChange(value)}
+                                    onChange={(value) => handleChange(value)}
                                 />
                             </InputGroup>
                         </Col>
 
-                        <Col xs={12} sm={12} md={6}  lg={4}>
+                        <Col xs={12} sm={12} md={6} lg={4}>
                             <InputGroup className="mb-3 mt-4" >
                                 <InputGroup.Text>Remark : </InputGroup.Text>
                                 <FormControl
@@ -93,7 +128,7 @@ const FormAction = () => {
                                     aria-label="Remark"
                                     aria-describedby="basic-addon1"
                                     name='remark'
-                                    onChange={(value)=> handleChange(value)}
+                                    onChange={(value) => handleChange(value)}
                                 />
                             </InputGroup>
                         </Col>
@@ -109,7 +144,7 @@ const FormAction = () => {
                                     aria-label="Recieved"
                                     aria-describedby="basic-addon1"
                                     name='recievedFrom'
-                                    onChange={(value)=> handleChange(value)}
+                                    onChange={(value) => handleChange(value)}
                                 />
                             </InputGroup>
                         </Col>
@@ -121,15 +156,15 @@ const FormAction = () => {
                                     aria-label="Deliver"
                                     aria-describedby="basic-addon1"
                                     name='deliverTo'
-                                    onChange={(value)=> handleChange(value)}
+                                    onChange={(value) => handleChange(value)}
                                 />
                             </InputGroup>
                         </Col>
-                       
+
                     </Row>
                     <Row >
-                        <Col  lg={{ span: 2, offset: 5 }}  md={{ span:2, offset:2 }} sm={{ span:2, offset:2 }} >
-                        <Button type='submit' variant="success" >Save Inward Post</Button>
+                        <Col lg={{ span: 2, offset: 5 }} md={{ span: 2, offset: 2 }} sm={{ span: 2, offset: 2 }} >
+                            <Button type='submit' variant="success" >Save Inward Post</Button>
                         </Col>
                     </Row>
                 </Container>

@@ -4,7 +4,7 @@ import { Button, Col, Container, Form, FormControl, InputGroup, Row } from "reac
 import TopNavBar from '../navBar/TopNavBar';
 
 
-const InwardForm = () => {
+const InwardForm = (viewMode = false) => {
 
     const [formData, setFormData] = useState({
         inwardNo : '',
@@ -15,6 +15,10 @@ const InwardForm = () => {
         deliverTo : '',
         remark : '',
     });
+
+    
+
+    
 
     const inward = true;
 

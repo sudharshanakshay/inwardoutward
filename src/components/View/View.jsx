@@ -1,17 +1,35 @@
 import React, { useState } from 'react';
 
-import { Button, Col, Container, Form, FormControl, InputGroup, Row } from "react-bootstrap";
+import { Button, Col, Container, Form, FormControl, InputGroup, Row, Table } from "react-bootstrap";
 import ActionMessage from '../AlertModel/PopModal';
  
-const ViewRecord = (inwardID) => {
+const ViewRecord = () => {
     
+    // const viewRow = useSelector((state) => {
+    //     // console.log(state.posts.viewRow)
+    //     try {
+    //         return state.posts.viewRow;
+    //     }
+    //     catch {
+    //         return 0;
+    //     }
+    // });
+
+    // if (!viewRow) {
+    //     return (
+    //         <>
+    //             <TopNavBar />
+    //             <ButtonSpinner />
+    //         </>
+    //     )
+    // }
     
     return(
-        <>
-        <div>
-            <Button> View </Button>
-        </div>
-        </>
+       <Container>
+           <Table>
+
+           </Table>
+       </Container>
     );
     
 }

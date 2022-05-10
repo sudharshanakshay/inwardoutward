@@ -31,7 +31,7 @@ const Outward = () => {
     }
     
     return (
-        <>
+        <div>
             <div >
                 <TopNavBar />
             </div>
@@ -55,7 +55,7 @@ const Outward = () => {
                 </Container>
             </div>
             <Footer/>
-        </>
+        </div>
     )
 }
 

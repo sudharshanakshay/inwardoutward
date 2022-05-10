@@ -161,28 +161,32 @@ export const selectRow = async ({ id, inward = false, outward = false }) => {
     console.log('here at getRow');
     // console.log(inward);
 
-    if (inward) {
-        const body = JSON.stringify({
-            from_post: 'inward',
-            id: id
-        })
+    console.log(sessionStorage.getItem('viewRow'));
+    if (sessionStorage.getItem('viewRow') == undefined) {
+        console.log("sessionStorage undefined @ selectRow");
 
-        try {
-            await axios.post('http://localhost:5000/select/row', body, CONFIG)
-                .then((res) => {
-                    console.log(res.data.selectRow);
-                    sessionStorage.setItem('viewRow', JSON.stringify(res.data.selectRow));
-                })
-                .then(()=>{
-                    store.dispatch(setViewRow());
-                })
-        }
+        if (inward) {
+            const body = JSON.stringify({
+                from_post: 'inward',
+                id: id
+            })
 
-        catch (err) {
-            console.log(err);
+            try {
+                await axios.post('http://localhost:5000/select/row', body, CONFIG)
+                    .then((res) => {
+                        console.log(res.data.selectRow);
+                        sessionStorage.setItem('viewRow', JSON.stringify(res.data.selectRow));
+                    })
+                    .then(() => {
+                        store.dispatch(setViewRow());
+                    })
+            }
+
+            catch (err) {
+                console.log(err);
+            }
         }
     }
-
 }
 
 

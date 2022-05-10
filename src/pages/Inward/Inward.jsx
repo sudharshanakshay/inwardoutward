@@ -30,9 +30,9 @@ const Inward = () => {
     }
 
     return (
-        <>
+        <div>
             <TopNavBar />
-            {/* <Container fluid> */}
+            <Container fluid>
                 <Row>
                     <Col md={10}>
                         <div className="inward-page">
@@ -53,11 +53,11 @@ const Inward = () => {
                         </Link>
                     </Col>
                 </Row>
-            {/* </Container> */}
+            </Container>
 
 
             <Footer />
-        </>
+        </div>
     )
 }
 

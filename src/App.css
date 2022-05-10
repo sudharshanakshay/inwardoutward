@@ -305,3 +305,16 @@ body {
     /* top | right | bottom | left */
     /* padding-right: 4%; */
 }
+
+
+/* ---------------------- Footer ---------------------- */
+
+.footer {
+    position:static;
+    
+    padding: 10px;
+    height: 1%;
+    display: block;
+    text-align: center;
+    background-color: #41454748;
+}

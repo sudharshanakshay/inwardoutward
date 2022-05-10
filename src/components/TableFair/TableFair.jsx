@@ -16,9 +16,12 @@ import pdfFonts from 'pdfmake/build/vfs_fonts'
 import PopModal from "../AlertModel/PopModal";
 import ViewRecord from "../View/View";
 import { delete_from, selectRow, update_on } from "../../actions/posts/postsAction";
+import FormAction from "../Forms/FormAction";
 pdfMake.vfs = pdfFonts.pdfMake.vfs;
 window.pdfMake = pdfMake;
 window.JSZip = jsZip;
+
+
 
 const TableFair = ({ title, tableHeaders, tableRows, inward = false, outward = false, applyDataTableApi = false, createReport = false }) => {
 
@@ -101,6 +104,7 @@ const TableFair = ({ title, tableHeaders, tableRows, inward = false, outward = f
                     <td>{rowValue.remark}</td>
                     <td>
                       {/* <ViewRecord inward={rowValue.inwardID} /> */}
+                      {/* <Link >Edit</Link> */}
                       <Button onClick={()=>handleEdit(rowValue.inwardID)}>Edit</Button>
                       <Button onClick={handleView} > view </Button>
                       <PopModal
