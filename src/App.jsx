@@ -18,7 +18,8 @@ import ReportInward from './pages/report/reportInward';
 import ReportOutward from './pages/report/reportOutward';
 import FormAction from './components/Forms/FormAction';
 import Settings from './pages/Settings/Settings';
-import ViewRecord from './components/View/View';
+import ViewInward from './components/ViewRow/ViewInward';
+import ViewOutward from './components/ViewRow/ViewOutward';
 
 function App() {
 
@@ -39,16 +40,15 @@ function App() {
               <Route path='/login/forgotpassword' element={<PublicRoute component={ForgotPassword} />}></Route>  
               <Route path='/dashboard' element={<PrivateRoute component={Dashboard} />}></Route>
               <Route path='/inward' element={<PrivateRoute component={Inward} />}></Route>
-              <Route path='/inward/view/:id' element={<PrivateRoute component={InwardForms} />}></Route>
+              <Route path='/inward/view/:id' element={<PrivateRoute component={ViewInward} />}></Route>
               <Route path='/inward/update/:id' element={<PrivateRoute component={InwardForms} />}></Route>
               <Route path='/outward' element={<PrivateRoute component={Outward} />}></Route>
-              <Route path='/outward/view/:id' element={<PrivateRoute component={OutwardForm} />}></Route>
+              <Route path='/outward/view/:id' element={<PrivateRoute component={ViewOutward} />}></Route>
               <Route path='/outward/update/:id' element={<PrivateRoute component={OutwardForm} />}></Route>
               <Route path='/reportInward' element={<PrivateRoute component={ReportInward} />}></Route> 
               <Route path='/reportOutward' element={<PrivateRoute component={ReportOutward} />}></Route>   
               <Route path='/inwardform' element={<PrivateRoute component={InwardForms}/>}></Route>
               <Route path='/outwardform' element={<PrivateRoute component={OutwardForm}/>}></Route>
-              <Route path='/view' element={<PrivateRoute component={ViewRecord}/>}></Route>
               <Route path='/settings' element={<PrivateRoute component={Settings}/>}></Route>
             </Routes>
           </Router>
