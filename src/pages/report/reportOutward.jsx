@@ -34,7 +34,7 @@ const ReportOutward = () => {
                 <TableFair
                     outward={true}
                     applyDataTableApi={true} 
-                    createReport={true}
+                    applyReportOptions={true}
                     title={"Outward Posts"}
                     tableHeaders={OUTWARD_TABLE_HEADER}
                     tableRows={OUTWARD_TABLE_DATA}

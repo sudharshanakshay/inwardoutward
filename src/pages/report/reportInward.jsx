@@ -35,7 +35,7 @@ const ReportInward = () => {
                 <TableFair
                     inward={true}
                     applyDataTableApi={true} 
-                    createReport={true}
+                    applyReportOptions={true}
                     title={"Inward Posts"}
                     tableHeaders={INWARD_TABLE_HEADER}
                     tableRows={inwardTableData}

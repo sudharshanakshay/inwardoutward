@@ -10,7 +10,7 @@ export const INSERT_INWARD_URL = BASE_URL+ "/inward/insert";
 
 export const INSERT_OUTWARD_URL = BASE_URL+ "/outward/insert";
 
-export const UPDATE_URL = BASE_URL+ "/data";
+export const UPDATE_INWARD_URL = BASE_URL+ "/inward/update";
 
 export const DELETE_URL = BASE_URL+ "/delete";
 
@@ -45,7 +45,7 @@ export const OUTWARD_TABLE_TITLE = "Outward Table";
 
 export const INWARD_TABLE_HEADER = [["sl. no", "4%"], ["Date", "10%"], ["Inward No", "10%"], ["Nature", "10%"], ["Recieved From", "12%"], ["Subject", "10%"], ["Deliver To", "10%"], ["Remark", "10%"]];
 
-export const INWARD_TABLE_HEADER_SHORT = [ ["Date", "33.33%"], ["Recieved From", "33.33%"], ["Deliver To", "33.33%"] /*,"Subject"*/];
+export const INWARD_TABLE_HEADER_SHORT = [ ["Date", "33.33%"], ["From", "33.33%"], ["Deliver To", "33.33%"] /*,"Subject"*/];
 
 export const OUTWARD_TABLE_HEADER = [["sl.no", "4%"], ["Date","10%"],  ["Serial No.", "10%"],["Department", "10%"], ["Addressee", "10%"], ["Nature", "10%"], ["Description", "10%"], ["Receipt No.", "12%"], ["Remark", "10%"]];
 

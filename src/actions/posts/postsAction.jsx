@@ -1,8 +1,9 @@
 import axios from "axios"
-import { INSERT_INWARD_URL, INSERT_OUTWARD_URL, CONFIG, SELECT_INWARD_URL, DELETE_URL, SELECT_OUTWARD_URL, SELECT_DASHBOARD_INWARD_URL, SELECT_DASHBOARD_OUTWARD_URL } from "../../utility/Constants";
+import { INSERT_INWARD_URL, INSERT_OUTWARD_URL, CONFIG, SELECT_INWARD_URL, DELETE_URL, SELECT_OUTWARD_URL, SELECT_DASHBOARD_INWARD_URL, SELECT_DASHBOARD_OUTWARD_URL, UPDATE_INWARD_URL } from "../../utility/Constants";
 import store from "../../store";
 import { connected, connectionError, initStore, setDashboardInward, setDashboardOutward, setInwardCount, setInwardTable, setOutwardCount, setOutwardTable, setViewRow } from "./postsSlice";
 
+var tempViewRow = '';
 
 export const insertFrom = async ({
     inward = null,
@@ -135,12 +136,11 @@ export const getDisplayData = async ({ updated = false }) => {
             await axios.post('http://localhost:5000/status', CONFIG)
                 .then((res) => {
                     // console.log(typeof(res.data.inward[0].inward_count));
-                    let totalInward = res.data.inward[0].inward_count;
-                    let totalOutward = res.data.outward[0].outward_count;
-                    sessionStorage.setItem('inwardCount', totalInward);
-                    sessionStorage.setItem('outwardCount', totalOutward);
+                    sessionStorage.setItem('inwardCount', res.data.inward[0].inward_count);
+                    sessionStorage.setItem('outwardCount', res.data.outward[0].outward_count);
                 })
                 .then(() => store.dispatch(setOutwardCount()))
+                .then(() => store.dispatch(setInwardCount()));
 
             store.dispatch(connected());
 
@@ -156,44 +156,57 @@ export const getDisplayData = async ({ updated = false }) => {
     }
 }
 
-export const selectRow = async ({ id, inward = false, outward = false }) => {
+export const getRow = ({ id, inward = false, outward = false }) => {
 
-    console.log('here at getRow');
-    // console.log(inward);
+    if (inward) {
+        const body = JSON.stringify({
+            from_post: 'inward',
+            id: id
+        })
+        try {
+            const row = axios.post('http://localhost:5000/select/row', body, CONFIG)
+                .then((res) => {
+                    console.log(res.data.selectRow);
+                    console.log('retrive successful')
+                    return res.data.selectRow;
+                })
+            return row;
+        }
+        catch (err) {
+            console.log(err);
+            return 'error';
+        }
+    }
 
-    console.log(sessionStorage.getItem('viewRow'));
-    if (sessionStorage.getItem('viewRow') == undefined) {
-        console.log("sessionStorage undefined @ selectRow");
+    if (outward) {
+        const body = JSON.stringify({
+            from_post: 'outward',
+            id: id
+        })
 
-        if (inward) {
-            const body = JSON.stringify({
-                from_post: 'inward',
-                id: id
-            })
-
-            try {
-                await axios.post('http://localhost:5000/select/row', body, CONFIG)
-                    .then((res) => {
-                        console.log(res.data.selectRow);
-                        sessionStorage.setItem('viewRow', JSON.stringify(res.data.selectRow));
-                    })
-                    .then(() => {
-                        store.dispatch(setViewRow());
-                    })
-            }
-
-            catch (err) {
-                console.log(err);
-            }
+        try {
+            const row = axios.post('http://localhost:5000/select/row', body, CONFIG)
+                .then((res) => {
+                    console.log(res.data.selectRow);
+                    console.log('retrive successful')
+                    return res.data.selectRow;
+                })
+            return row;
+        }
+        catch (err) {
+            console.log(err);
+            return 'error'
         }
     }
 }
 
 
-export const update_on = ({
+export const updateTo = ({
 
     inward = null,
     outward = null,
+
+    id = null,
 
     date = null,
 
@@ -208,15 +221,14 @@ export const update_on = ({
     receiptNo = null,
     addressee = null,
     description = null,
-    department = null
-
-
-}) => {
+    department = null }) => {
 
     if (inward) {
         const from_post = "inward_post";
+        console.log(id)
 
         const body = JSON.stringify({
+            inwardID: id,
             inwardNo: inwardNo,
             date: date,
             from_post: from_post,
@@ -227,13 +239,26 @@ export const update_on = ({
             remark: remark
         });
 
-        axios.post()
+        try {
+            axios.post('http://localhost:5000/inward/update', body, CONFIG)
+            .then((res) => {
+                console.log(res.data.inwardUpdate);
+                if (res.data.inwardUpdate) getDisplayData({ updated: true });
+            })
+        }
+        catch (err){
+            console.log(err);
+        }
     }
 
     if (outward) {
+        console.log('outward update')
+        console.log(id)
+        
         const from_post = "outward_post";
 
         const body = JSON.stringify({
+            outwardID : id,
             from_post: from_post,
             date: date,
             serialNo: serialNo,
@@ -244,6 +269,19 @@ export const update_on = ({
             description: description,
             remark: remark
         });
+
+        try {
+            axios.post('http://localhost:5000/outward/update', body, CONFIG)
+            .then((res) => {
+                console.log(res.data.outwardUpdate);
+                console.log('outward update success');
+                if (res.data.outwardUpdate) getDisplayData({ updated: true });
+            })
+        }
+        catch (err) {
+            console.log('outward update error')
+            console.log(err);
+        }
     }
 }
 
@@ -305,4 +343,3 @@ export const delete_from = ({ inward = false, outward = false, rowID }) => {
 
 
 }
-

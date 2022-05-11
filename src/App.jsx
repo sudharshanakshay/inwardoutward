@@ -22,9 +22,9 @@ import ViewRecord from './components/View/View';
 
 function App() {
 
-  // window.onbeforeunload = (e) => {
-  //   sessionStorage.clear();
-  // }
+  window.onbeforeunload = (e) => {
+    sessionStorage.clear();
+  }
 
   
     return (
@@ -32,14 +32,18 @@ function App() {
         <Provider store={store}>
           <Router>
             <Routes>
-              <Route path='/test' element={<FormAction/>}></Route>
+              {/* <Route path='/test' element={<FormAction/>}></Route> */}
               <Route path='/' element={<PrivateRoute component={Dashboard} />}></Route>
               <Route path='/login' element={<PublicRoute component={Login} />}></Route>
               <Route path='/register' element={<PublicRoute component={Register} />}></Route>
               <Route path='/login/forgotpassword' element={<PublicRoute component={ForgotPassword} />}></Route>  
               <Route path='/dashboard' element={<PrivateRoute component={Dashboard} />}></Route>
               <Route path='/inward' element={<PrivateRoute component={Inward} />}></Route>
+              <Route path='/inward/view/:id' element={<PrivateRoute component={InwardForms} />}></Route>
+              <Route path='/inward/update/:id' element={<PrivateRoute component={InwardForms} />}></Route>
               <Route path='/outward' element={<PrivateRoute component={Outward} />}></Route>
+              <Route path='/outward/view/:id' element={<PrivateRoute component={OutwardForm} />}></Route>
+              <Route path='/outward/update/:id' element={<PrivateRoute component={OutwardForm} />}></Route>
               <Route path='/reportInward' element={<PrivateRoute component={ReportInward} />}></Route> 
               <Route path='/reportOutward' element={<PrivateRoute component={ReportOutward} />}></Route>   
               <Route path='/inwardform' element={<PrivateRoute component={InwardForms}/>}></Route>

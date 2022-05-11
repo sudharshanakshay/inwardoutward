@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 import { Button, Table } from "react-bootstrap";
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
+
+// ---- imports for converting into PDF, Excel, CSV, & to print ----   
 import $ from 'jquery';
 import "datatables.net-dt/js/dataTables.dataTables";
 import "datatables.net-dt/css/jquery.dataTables.min.css";
@@ -14,60 +16,52 @@ import jsZip from 'jszip';
 import pdfMake from 'pdfmake/build/pdfmake'
 import pdfFonts from 'pdfmake/build/vfs_fonts'
 import PopModal from "../AlertModel/PopModal";
-import ViewRecord from "../View/View";
-import { delete_from, selectRow, update_on } from "../../actions/posts/postsAction";
-import FormAction from "../Forms/FormAction";
 pdfMake.vfs = pdfFonts.pdfMake.vfs;
 window.pdfMake = pdfMake;
 window.JSZip = jsZip;
+// ---- import ends here ----
 
 
+const TableFair = ({ title, tableHeaders, tableRows, inward = false, outward = false, applyDataTableApi = false, applyReportOptions = false }) => {
 
-const TableFair = ({ title, tableHeaders, tableRows, inward = false, outward = false, applyDataTableApi = false, createReport = false }) => {
-
-  // creating print option for report.....
-  if (createReport) {
-
+  // ---- Option to Apply convert & download table data by Data-Table Api, set 'applyReportOptions' to 'true'----
+  if (applyReportOptions) {
     $(document).ready(function () {
-
       $('#table').DataTable({
         destroy: true,
         paging: false,
         searching: false,
         dom: 'Blfrtip',
         buttons: [
-          { extend: 'copy', className: 'btn btn-success glyphicon glyphicon-duplicate' },
-          { extend: 'csv', className: 'btn btn-success glyphicon glyphicon-save-file' },
-          { extend: 'excel', className: 'btn btn-success glyphicon glyphicon-list-alt' },
-          { extend: 'pdf', className: 'btn btn-success glyphicon glyphicon-file' },
-          { extend: 'print', className: 'btn btn-success glyphicon glyphicon-print' }
+          { extend: 'copy', className: 'btn btn-outline-primary glyphicon glyphicon-duplicate' },
+          { extend: 'csv', className: 'btn btn-outline-primary glyphicon glyphicon-save-file' },
+          { extend: 'excel', className: 'btn btn-outline-primary glyphicon glyphicon-list-alt' },
+          { extend: 'pdf', className: 'btn btn-outline-primary glyphicon glyphicon-file' },
+          { extend: 'print', className: 'btn btn-outline-primary glyphicon glyphicon-print' }
         ],
       });
     });
   }
 
+  // ---- Option to Apply Data-Table API for table, by setting 'applyDataTableApi' params to 'true' ----
   if (applyDataTableApi) {
     $(document).ready(function () {
       $('#table').DataTable();
     });
   }
 
-  const handleInwardDelete = (id) => {
-    delete_from({ inward: inward, rowID: id });
-  }
+  let navigate = useNavigate();
 
-  const handleOutwardDelete = (id) => {
-    delete_from({ outward: outward, rowID: id });
-  }
-
-  const handleView = () => {
-    selectRow({inward:true});
+  const handleView = (id) => {
+    console.log(id);
+    if(inward) navigate(`view/${id}`);
+    if(outward) navigate(`view/${id}`);
   }
 
   const handleEdit = (id) => {
-    console.log('id : ' + id);
-    selectRow({inward:true, id:id});
-    // update_on({inward:true, id:id})
+    console.log(id);
+    if(inward) navigate(`update/${id}`);
+    if(outward) navigate(`update/${id}`);
   }
 
 
@@ -82,7 +76,7 @@ const TableFair = ({ title, tableHeaders, tableRows, inward = false, outward = f
             {tableHeaders.map((headerValue, index) => (
               <td key={index} style={{ width: headerValue[1] }}>{headerValue[0]}</td>
             ))}
-            {applyDataTableApi && <td>Actions</td>}
+            {applyDataTableApi && !applyReportOptions && <td>Actions</td>}
           </tr>
         </thead>
         <tbody>
@@ -102,21 +96,21 @@ const TableFair = ({ title, tableHeaders, tableRows, inward = false, outward = f
                     <td>{rowValue.subject}</td>
                     <td>{rowValue.deliverTo}</td>
                     <td>{rowValue.remark}</td>
-                    <td>
-                      {/* <ViewRecord inward={rowValue.inwardID} /> */}
-                      {/* <Link >Edit</Link> */}
-                      <Button onClick={()=>handleEdit(rowValue.inwardID)}>Edit</Button>
-                      <Button onClick={handleView} > view </Button>
+                    { applyDataTableApi && !applyReportOptions && 
+                      <td>
+                      <Button variant="link" className="me-1 p-0" onClick={() => handleEdit(rowValue.inwardID)}>Edit</Button>
+                      <Button variant="link" className="me-1 p-0" onClick={() => handleView(rowValue.inwardID)} > view </Button>
                       <PopModal
                         inward={inward}
                         mode={'delete'}
                         btnText={'Yes, Delete'}
                         modelTitle={"Delete"}
-                        message={`Inward Row with ID "${rowValue.inwardID}" will be permanently deleted, wish to proceed ? `}
+                        message={`Row will be permanently deleted, wish to proceed ? `}
                         variant={'outline-danger'}
                         id={rowValue.inwardID}
                       />
                     </td>
+                    }
                   </>
                 }
 
@@ -145,19 +139,21 @@ const TableFair = ({ title, tableHeaders, tableRows, inward = false, outward = f
                     <td>{rowValue.description}</td>
                     <td>{rowValue.receiptNo}</td>
                     <td>{rowValue.remark}</td>
-                    <td>
-                      <Link to="#">View</Link>{' '}
-                      <Link to="#">Edit</Link>{' '}
-                      <PopModal
-                        outward={outward}
-                        mode={'delete'}
-                        btnText={'Yes, Delete'}
-                        modelTitle={"Delete"}
-                        message={`Outward Row with ID "${rowValue.outwardID}" will be permanently deleted, wish to proceed ? `}
-                        variant={'outline-danger'}
-                        id={rowValue.outwardID}
-                      />
-                    </td>
+                    { applyDataTableApi && !applyReportOptions && 
+                      <td>
+                      <Button variant="link" className="me-1 p-0" onClick={() => handleEdit(rowValue.outwardID)}>Edit</Button>
+                        <Button variant="link" className="me-1 p-0" onClick={() => handleView(rowValue.outwardID)} > view </Button>
+                        <PopModal
+                          outward={outward}
+                          mode={'delete'}
+                          btnText={'Yes, Delete'}
+                          modelTitle={"Delete"}
+                          message={`Outward Row with ID "${rowValue.outwardID}" will be permanently deleted, wish to proceed ? `}
+                          variant={'outline-danger'}
+                          id={rowValue.outwardID}
+                        />
+                      </td>
+                    }
                   </>
                 }
 
@@ -181,3 +177,4 @@ const TableFair = ({ title, tableHeaders, tableRows, inward = false, outward = f
 };
 
 export default TableFair;
+

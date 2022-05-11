@@ -310,11 +310,11 @@ body {
 /* ---------------------- Footer ---------------------- */
 
 .footer {
-    position:static;
-
+    /* display: block; */
+    position: relative;
+    bottom: 0px;
     padding: 10px;
-    height: 1%;
-    display: block;
+    width: 100%;
     text-align: center;
-    background-color: #41454748;
+    background-color: #4b51528f;
 }

@@ -40,6 +40,8 @@ const Dashboard = () => {
         }
     });
 
+    console.log(inwardCount);
+
     const outwardCount = useSelector((state)=> {
         try {
             return state.posts.outwardCount;

@@ -9,7 +9,7 @@ export const postsSlice = createSlice({
         dashboardOutward:[],
         inwardCount: 0,
         outwardCount: 0,
-        viewRow:[],
+        inwardViewRow:{},
         connectionError: false
     },
     reducers: {
@@ -56,10 +56,19 @@ export const postsSlice = createSlice({
 
         setViewRow : (state) =>{
             state.viewRow = JSON.parse(sessionStorage.getItem('viewRow'));
+        },
+
+        setInwardViewRow : (state, id) => {
+            state.inwardTable.forEach(element => {
+                if(element.inwardID === id){
+                    console.log(element)
+                    state.inwardViewRow = element;
+                }
+            });
         }
     }
 });
 
 
-export const { setViewRow, connected, connectionError, setInwardTable, setOutwardTable, setDashboardInward, setDashboardOutward, setInwardCount, setOutwardCount } = postsSlice.actions;
+export const { setViewRow, setInwardViewRow, connected, connectionError, setInwardTable, setOutwardTable, setDashboardInward, setDashboardOutward, setInwardCount, setOutwardCount } = postsSlice.actions;
 export default postsSlice.reducer;

@@ -22,10 +22,10 @@ const Inward = () => {
 
     if (!inwardTableData) {
         return (
-            <>
+            <div>
                 <TopNavBar />
                 <ButtonSpinner />
-            </>
+            </div>
         )
     }
 
@@ -34,8 +34,8 @@ const Inward = () => {
             <TopNavBar />
             <Container fluid>
                 <Row>
-                    <Col md={10}>
-                        <div className="inward-page">
+                    <Col sm={12} md={12} lg={10}>
+                        <div >
                             <Container fluid>
                                 <TableFair
                                     inward={true}
@@ -54,8 +54,6 @@ const Inward = () => {
                     </Col>
                 </Row>
             </Container>
-
-
             <Footer />
         </div>
     )
