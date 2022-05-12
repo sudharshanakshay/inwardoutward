@@ -32,28 +32,41 @@ const Outward = () => {
 
     return (
         <div>
-            <div >
-                <TopNavBar />
-            </div>
+            <TopNavBar />
 
-            <div >
-                <Container fluid>
-                    <Row>
-                        <Col sm={12} md={12} lg={10} >
-                            <TableFair
-                                outward={true}
-                                applyDataTableApi={true}
-                                title={OUTWARD_TABLE_TITLE}
-                                tableHeaders={OUTWARD_TABLE_HEADER}
-                                tableRows={outwardTableData}
-                            />
-                        </Col>
-                        <Col>
+            <Container fluid className="desktop-view">
+                <Row>
+                    <Col sm={12} md={12} lg={10} >
+                        <TableFair
+                            outward={true}
+                            applyDataTableApi={true}
+                            title={OUTWARD_TABLE_TITLE}
+                            tableHeaders={OUTWARD_TABLE_HEADER}
+                            tableRows={outwardTableData}
+                        />
+                    </Col>
+                    <Col>
+                        <Link to="/outwardform" className="btn btn-success">Add outward</Link>
+                    </Col>
+                </Row>
+            </Container>
+
+            <Container fluid className="mobile-view">
+                    <Row >
+                        <Col md={{ span: 4, offset: 10 }}>
                             <Link to="/outwardform" className="btn btn-success">Add outward</Link>
                         </Col>
                     </Row>
-                </Container>
-            </div>
+                    <Row sm={12} md={12} lg={10} >
+                        <TableFair
+                            outward={true}
+                            applyDataTableApi={true}
+                            title={OUTWARD_TABLE_TITLE}
+                            tableHeaders={OUTWARD_TABLE_HEADER}
+                            tableRows={outwardTableData}
+                        />
+                    </Row>
+            </Container>
             <Footer />
         </div>
     )

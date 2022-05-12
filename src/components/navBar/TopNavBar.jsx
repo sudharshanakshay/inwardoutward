@@ -10,10 +10,6 @@ import { BsFillGridFill } from 'react-icons/bs';
 
 const TopNavBar = () => {
 
-    const user = useSelector((state) => state.loggedIn.email);
-    const user1 = "hello";
-    const [key, setKey] = useState('Dashboard');
-
     const [show, setShow] = useState(false);
 
     const handleClose = () => setShow(false);

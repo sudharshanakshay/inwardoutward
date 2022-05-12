@@ -31,7 +31,7 @@ const ReportInward = () => {
     return (
         <><div>
             <TopNavBar />
-            <Container fluid>
+            <Container className="desktop-view" fluid>
                 <TableFair
                     inward={true}
                     applyDataTableApi={true} 

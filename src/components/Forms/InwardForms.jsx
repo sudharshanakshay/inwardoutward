@@ -22,14 +22,16 @@ const InwardForm = () => {
 
     // ---- 'getRow' func defined in PostsAction, fetches specific row from database ----
     // ---- useEffect to render only once , empty '[]' makes it happn. ----
-    useEffect(()=>{
-        var res = getRow({ inward: true, id: id });
-        console.log(res);
-        res.then((value) => {
-              console.log(value[0]);
-              setFormData(value[0]);
+    useEffect(() => {
+        if (id) {
+            var res = getRow({ inward: true, id: id });
+            console.log(res);
+            res.then((value) => {
+                console.log(value[0]);
+                setFormData(value[0]);
             })
-    },[]);
+        }
+    }, []);
 
     const handleChange = (change) => {
         setFormData({ ...formData, [change.target.name]: change.target.value });
@@ -170,7 +172,7 @@ const InwardForm = () => {
                     <Row >
                         <Col lg={{ span: 3, offset: 5 }} md={{ span: 4, offset: 4 }} sm={{ span: 5, offset: 3 }} xs={{ span: 3, offset: 2 }} >
                             {!id && <Button className='m-4' type='submit' variant="success" >Save Inward Post</Button>}
-                            { id && <Button className='m-4' type='submit' variant="success" >Update Inward Post</Button>}
+                            {id && <Button className='m-4' type='submit' variant="success" >Update Inward Post</Button>}
                         </Col>
                     </Row>
                 </Container>

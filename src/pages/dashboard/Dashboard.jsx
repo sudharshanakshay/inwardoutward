@@ -13,6 +13,7 @@ import { useSelector } from 'react-redux';
 
 const Dashboard = () => {
 
+    // ---- get dashboard inward table data ----
     const inwardTableData = useSelector((state)=> {
         try {
             return state.posts.dashboardInward;
@@ -22,6 +23,7 @@ const Dashboard = () => {
         }
     });
 
+    // ---- get dashboard outward table data ----
     const outwardTableData = useSelector((state)=> {
         try {
             return state.posts.dashboardOutward;
@@ -31,6 +33,7 @@ const Dashboard = () => {
         }
     });
 
+    // ---- get inward count ----
     const inwardCount = useSelector((state)=> {
         try {
             return state.posts.inwardCount;
@@ -40,8 +43,8 @@ const Dashboard = () => {
         }
     });
 
-    console.log(inwardCount);
 
+    // ---- get outward count ----
     const outwardCount = useSelector((state)=> {
         try {
             return state.posts.outwardCount;
@@ -52,9 +55,11 @@ const Dashboard = () => {
     });
 
 
+    // ---- calculate pending count ----
     let pending = inwardCount - outwardCount ;
     pending = pending < 0 ? 0 : pending ; 
 
+    // ---- load spinner while loading ----
     if (!outwardTableData) {
         return (
             <>
@@ -64,9 +69,12 @@ const Dashboard = () => {
         )
     }
 
+    // ---- actual dashboard UI ----
     return (
         <div>
             <TopNavBar />
+
+            {/* ----------------------- Desktop View -----------------------  */}
 
             <div className='desktop-view'>
                 <Container fluid>
@@ -106,7 +114,10 @@ const Dashboard = () => {
                 </Container>
             </div>
 
-            <div className='mobile-view dashboard'>
+
+            {/* ----------------------- Mobile View -----------------------  */}
+
+            <div className='mobile-view'>
                 <Container fluid>
 
                     {/* --------------------------- Status Box --------------------------- */}

@@ -23,11 +23,13 @@ const OutwardForm = () => {
     // ---- 'getRow' func defined in PostsAction, fetches specific row from database ----
     // ---- useEffect to render only once , empty '[]' makes it happn. ----
     useEffect(() => {
-        var res = getRow({ outward: true, id: id });
-        res.then((value) => {
-            console.log(value[0]);
-            setFormData(value[0]);
-        })
+        if (id) {
+            var res = getRow({ outward: true, id: id });
+            res.then((value) => {
+                console.log(value[0]);
+                setFormData(value[0]);
+            })
+        }
     }, []);
 
 
@@ -40,8 +42,8 @@ const OutwardForm = () => {
         e.preventDefault();
         const outward = true;
         const { serialNo, date, nature, department, addressee, description, receiptNo, deliverTo, remark } = formData;
-        if(!id) insertFrom({ outward, serialNo, date, nature, department, addressee, description, receiptNo, deliverTo, remark });
-        if(id) updateTo({ id, outward, serialNo, date, nature, department, addressee, description, receiptNo, deliverTo, remark });
+        if (!id) insertFrom({ outward, serialNo, date, nature, department, addressee, description, receiptNo, deliverTo, remark });
+        if (id) updateTo({ id, outward, serialNo, date, nature, department, addressee, description, receiptNo, deliverTo, remark });
     }
 
     return (
@@ -69,7 +71,7 @@ const OutwardForm = () => {
                                 <InputGroup.Text>Date : </InputGroup.Text>
 
                                 {/* ---- set date field type to 'text' when updating ---- */}
-                                { id && <FormControl
+                                {id && <FormControl
                                     type="text"
                                     placeholder="Date"
                                     aria-label="Date"
@@ -78,7 +80,7 @@ const OutwardForm = () => {
                                     value={formData.date}
                                     onChange={(value) => handleChange(value)}
                                 />}
-                                { !id && <FormControl
+                                {!id && <FormControl
                                     type="Date"
                                     placeholder="Date"
                                     aria-label="Date"
@@ -180,8 +182,8 @@ const OutwardForm = () => {
 
                     <Row >
                         <Col lg={{ span: 2, offset: 5 }} md={{ span: 2, offset: 2 }} sm={{ span: 2, offset: 2 }} >
-                            { !id && <Button type='submit' variant="success" >Save Outward Post</Button>}
-                            { id && <Button type='submit' variant="success" >Update Outward Post</Button>}
+                            {!id && <Button type='submit' variant="success" >Save Outward Post</Button>}
+                            {id && <Button type='submit' variant="success" >Update Outward Post</Button>}
                         </Col>
                     </Row>
                 </Container>
