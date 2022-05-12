@@ -4,8 +4,6 @@ import { Button, Col, Container, Form, FormControl, InputGroup, Row, Table } fro
 import { useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
 import { getRow } from '../../actions/posts/postsAction';
-import store from '../../store';
-import ActionMessage from '../AlertModel/PopModal';
  
 const ViewInward = () => {
 

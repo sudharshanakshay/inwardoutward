@@ -4,7 +4,7 @@ import { useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
 import { getRow } from '../../actions/posts/postsAction';
 import store from '../../store';
-import ActionMessage from '../AlertModel/PopModal';
+import ActionMessage from '../Modals/PopModal';
  
 const ViewOutward = () => {
 

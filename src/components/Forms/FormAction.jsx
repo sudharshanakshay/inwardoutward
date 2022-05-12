@@ -1,8 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import { getRow, insertFrom } from '../../actions/posts/postsAction';
-import { Button, Col, Container, Form, FormControl, InputGroup, Row } from "react-bootstrap";
+import { Button, Col, Container, Dropdown, Form, FormControl, InputGroup, Row } from "react-bootstrap";
 import TopNavBar from '../navBar/TopNavBar';
 import { useParams } from 'react-router-dom';
+import { getAllDepartment } from '../../actions/settings/settingsAction';
 
 const OutwardForm = () => {
 
@@ -20,16 +21,33 @@ const OutwardForm = () => {
         remark: '',
     });
 
+    const [departmentList, setDepartmentList] = useState();
+
     // ---- 'getRow' func defined in PostsAction, fetches specific row from database ----
     // ---- useEffect to render only once , empty '[]' makes it happn. ----
     useEffect(() => {
-        var res = getRow({ outward: true, id: id });
-        res.then((value) => {
-            console.log(value[0]);
-            setFormData(value[0]);
+        var dept = getAllDepartment();
+        dept.then((val)=>{
+            setDepartmentList(val);
         })
+        if (id) {
+            var res = getRow({ outward: true, id: id });
+            res.then((value) => {
+                console.log(value);
+                setFormData(value);
+            })
+        }
     }, []);
 
+    
+    console.log(departmentList);
+
+    const [dropdownValue, setDropdownValue] = useState();
+
+
+    const handleDropDownChange = (event) =>{
+        setDropdownValue(event.target.value)
+    }
 
     const handleChange = (change) => {
         setFormData({ ...formData, [change.target.name]: change.target.value });
@@ -94,14 +112,23 @@ const OutwardForm = () => {
                         <Col xs={12} sm={12} md={12} lg={4}>
                             <InputGroup className="mb-3 mt-4" >
                                 <InputGroup.Text >Department : </InputGroup.Text>
-                                <FormControl
+                                {/* { id && <FormControl
                                     placeholder="Department"
                                     aria-label="Department"
                                     aria-describedby="basic-addon1"
                                     name='department'
                                     value={formData.department}
                                     onChange={(value) => handleChange(value)}
-                                />
+                                />} */}
+                                {  
+                                    <select value={dropdownValue} onChange={handleDropDownChange}> 
+
+                                        {departmentList?.map((obj)=>{
+
+                                          <option value={obj.name} >{obj.name}</option>
+                                      })}
+                                    </select>
+                                }
                             </InputGroup>
                         </Col>
                         <Col xs={12} sm={12} md={6} lg={4}>

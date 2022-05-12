@@ -2,8 +2,8 @@ import React from 'react'
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import './App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import Login from './components/auth/login';
-import Register from './components/auth/register';
+import Login from './pages/auth/login'
+import Register from './pages/auth/register';
 import PrivateRoute from './components/routes/PrivateRoute';
 import { Provider } from 'react-redux';
 import store from './store';
@@ -11,7 +11,7 @@ import PublicRoute from './components/routes/PublicRoute';
 import Inward from './pages/Inward/Inward';
 import Outward from './pages/Outward/Outward';
 import Dashboard from './pages/dashboard/Dashboard';
-import ForgotPassword from './components/auth/ForgotPassword';
+import ForgotPassword from './pages/auth/ForgotPassword';
 import InwardForms from './components/Forms/InwardForms';
 import OutwardForm from './components/Forms/OutwardForm';
 import ReportInward from './pages/report/reportInward';
@@ -44,11 +44,11 @@ function App() {
               <Route path='/inward/update/:id' element={<PrivateRoute component={InwardForms} />}></Route>
               <Route path='/outward' element={<PrivateRoute component={Outward} />}></Route>
               <Route path='/outward/view/:id' element={<PrivateRoute component={ViewOutward} />}></Route>
-              <Route path='/outward/update/:id' element={<PrivateRoute component={OutwardForm} />}></Route>
+              <Route path='/outward/update/:id' element={<PrivateRoute component={FormAction} />}></Route>
               <Route path='/reportInward' element={<PrivateRoute component={ReportInward} />}></Route> 
               <Route path='/reportOutward' element={<PrivateRoute component={ReportOutward} />}></Route>   
               <Route path='/inwardform' element={<PrivateRoute component={InwardForms}/>}></Route>
-              <Route path='/outwardform' element={<PrivateRoute component={OutwardForm}/>}></Route>
+              <Route path='/outwardform' element={<PrivateRoute component={FormAction}/>}></Route>
               <Route path='/settings' element={<PrivateRoute component={Settings}/>}></Route>
             </Routes>
           </Router>

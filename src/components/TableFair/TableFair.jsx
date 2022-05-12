@@ -15,7 +15,7 @@ import 'datatables.net-dt';
 import jsZip from 'jszip';
 import pdfMake from 'pdfmake/build/pdfmake'
 import pdfFonts from 'pdfmake/build/vfs_fonts'
-import PopModal from "../AlertModel/PopModal";
+import PopModal from "../Modals/PopModal";
 pdfMake.vfs = pdfFonts.pdfMake.vfs;
 window.pdfMake = pdfMake;
 window.JSZip = jsZip;
@@ -101,8 +101,7 @@ const TableFair = ({ title, tableHeaders, tableRows, inward = false, outward = f
                       <Button variant="link" className="me-1 p-0" onClick={() => handleEdit(rowValue.inwardID)}>Edit</Button>
                       <Button variant="link" className="me-1 p-0" onClick={() => handleView(rowValue.inwardID)} > view </Button>
                       <PopModal
-                        inward={inward}
-                        mode={'delete'}
+                        mode={'inward_delete'}
                         btnText={'Yes, Delete'}
                         modelTitle={"Delete"}
                         message={`Row will be permanently deleted, wish to proceed ? `}
@@ -144,11 +143,10 @@ const TableFair = ({ title, tableHeaders, tableRows, inward = false, outward = f
                       <Button variant="link" className="me-1 p-0" onClick={() => handleEdit(rowValue.outwardID)}>Edit</Button>
                         <Button variant="link" className="me-1 p-0" onClick={() => handleView(rowValue.outwardID)} > view </Button>
                         <PopModal
-                          outward={outward}
-                          mode={'delete'}
+                          mode={'outward_delete'}
                           btnText={'Yes, Delete'}
                           modelTitle={"Delete"}
-                          message={`Outward Row with ID "${rowValue.outwardID}" will be permanently deleted, wish to proceed ? `}
+                          message={`Outward Row will be permanently deleted, wish to proceed ? `}
                           variant={'outline-danger'}
                           id={rowValue.outwardID}
                         />

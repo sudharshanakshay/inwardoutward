@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import TopNavBar from "../../components/navBar/TopNavBar";
 import { Tab, Nav, Button, Col, Container, Form, FormControl, InputGroup, Row } from "react-bootstrap";
 import { addDepartment, getAllDepartment } from "../../actions/settings/settingsAction";
@@ -25,13 +25,12 @@ const Settings = () => {
 
     const [deptData, setDeptData] = useState();
 
-    const getDepartment = (s) => {
-        s.preventDefault();
+    useEffect(() => {
         const dept = getAllDepartment();
         dept.then((val) => {
             setDeptData(val);
         })
-    }
+    }, []);
 
     console.log(deptData);
 
@@ -79,16 +78,12 @@ const Settings = () => {
                     </Col>
 
                     <Col>
-                        <Form onSubmit={(s) => getDepartment(s)}>
-                            <Button variant='success' type='submit'>Get all dept</Button>
-                            <ui>
-                                
+                        <ui>
                             {deptData?.map((value) => {
-                                    <li>{value.name}</li>
+                                <li>{value.name}</li>
                             })}
-                            </ui>
-                            
-                        </Form>
+                        </ui>
+
                     </Col>
                 </Row>
             </Tab.Container>
