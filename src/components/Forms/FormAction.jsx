@@ -21,15 +21,17 @@ const OutwardForm = () => {
         remark: '',
     });
 
-    const [departmentList, setDepartmentList] = useState();
+    const [departmentList, setDepartmentList] = useState([]);
 
     // ---- 'getRow' func defined in PostsAction, fetches specific row from database ----
     // ---- useEffect to render only once , empty '[]' makes it happn. ----
     useEffect(() => {
         var dept = getAllDepartment();
-        dept.then((val)=>{
+        dept.then((val) => {
             setDepartmentList(val);
+            console.log(val)
         })
+
         if (id) {
             var res = getRow({ outward: true, id: id });
             res.then((value) => {
@@ -39,18 +41,8 @@ const OutwardForm = () => {
         }
     }, []);
 
-    
-    console.log(departmentList);
-
-    const [dropdownValue, setDropdownValue] = useState();
-
-
-    const handleDropDownChange = (event) =>{
-        setDropdownValue(event.target.value)
-    }
-
-    const handleChange = (change) => {
-        setFormData({ ...formData, [change.target.name]: change.target.value });
+    const handleChange = (event) => {
+        setFormData({ ...formData, [event.target.name]: event.target.value });
         console.log(formData);
     }
 
@@ -61,8 +53,10 @@ const OutwardForm = () => {
         insertFrom({ outward, serialNo, date, nature, department, addressee, description, receiptNo, deliverTo, remark });
     }
 
+
     return (
         <>
+
             <TopNavBar />
             <Form onSubmit={(s) => onSubmit(s)}>
                 <Container >
@@ -85,7 +79,7 @@ const OutwardForm = () => {
                                 <InputGroup.Text>Date : </InputGroup.Text>
 
                                 {/* ---- set date field type to 'text' when updating ---- */}
-                                { id && <FormControl
+                                {id && <FormControl
                                     type="text"
                                     placeholder="Date"
                                     aria-label="Date"
@@ -94,7 +88,7 @@ const OutwardForm = () => {
                                     value={formData.date}
                                     onChange={(value) => handleChange(value)}
                                 />}
-                                { !id && <FormControl
+                                {!id && <FormControl
                                     type="Date"
                                     placeholder="Date"
                                     aria-label="Date"
@@ -112,21 +106,16 @@ const OutwardForm = () => {
                         <Col xs={12} sm={12} md={12} lg={4}>
                             <InputGroup className="mb-3 mt-4" >
                                 <InputGroup.Text >Department : </InputGroup.Text>
-                                {/* { id && <FormControl
-                                    placeholder="Department"
-                                    aria-label="Department"
-                                    aria-describedby="basic-addon1"
-                                    name='department'
-                                    value={formData.department}
-                                    onChange={(value) => handleChange(value)}
-                                />} */}
-                                {  
-                                    <select value={dropdownValue} onChange={handleDropDownChange}> 
 
-                                        {departmentList?.map((obj)=>{
-
-                                          <option value={obj.name} >{obj.name}</option>
-                                      })}
+                                {
+                                    <select name='department' id='dropdown' onChange={(val) => { handleChange(val) }}>
+                                        <option value="" selected="selected">Select Department</option>
+                                        {departmentList.map((obj, index) => {
+                                            return (
+                                                <option >{obj.name}</option>
+                                            )
+                                        })
+                                        }
                                     </select>
                                 }
                             </InputGroup>
@@ -204,8 +193,8 @@ const OutwardForm = () => {
 
                     <Row >
                         <Col lg={{ span: 2, offset: 5 }} md={{ span: 2, offset: 2 }} sm={{ span: 2, offset: 2 }} >
-                            { !id && <Button type='submit' variant="success" >Save Outward Post</Button>}
-                            { id && <Button type='submit' variant="success" >Update Outward Post</Button>}
+                            {!id && <Button type='submit' variant="success" >Save Outward Post</Button>}
+                            {id && <Button type='submit' variant="success" >Update Outward Post</Button>}
                         </Col>
                     </Row>
                 </Container>

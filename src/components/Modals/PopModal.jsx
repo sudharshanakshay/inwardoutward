@@ -13,6 +13,7 @@ const PopModal = ({id, mode, btnText, modelTitle, message, variant, ctlBtnVarian
     const handleClick = () => {
         if (mode === 'inward_delete') delete_from({ inward: true, rowID: id });
         if (mode === 'outward_delete') delete_from({ outward: true, rowID: id });
+        if (mode === 'department_delete') delete_from({ department: true, rowID:id });
         if (mode === 'logout') store.dispatch(logOut());
     };
     return (
@@ -31,9 +32,9 @@ const PopModal = ({id, mode, btnText, modelTitle, message, variant, ctlBtnVarian
                     { id && <Modal.Body className="center">{message}</Modal.Body>}
 
                     <Modal.Footer>
-                        { <Modal.Body className="center">{message}</Modal.Body>}
+                        { !id && <Modal.Body className="center">{message}</Modal.Body>}
                         <Button variant={variant} onClick={handleClick}>
-                            {btnText || mode.trim().replace(/^\w/, (c) => c.toUpperCase())}
+                            {btnText || modelTitle.trim().replace(/^\w/, (c) => c.toUpperCase())}
                         </Button>
                     </Modal.Footer>
                 </Modal>

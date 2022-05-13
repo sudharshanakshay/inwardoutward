@@ -9,7 +9,6 @@ export const postsSlice = createSlice({
         dashboardOutward:[],
         inwardCount: 0,
         outwardCount: 0,
-        inwardViewRow:{},
         connectionError: false
     },
     reducers: {
@@ -20,15 +19,6 @@ export const postsSlice = createSlice({
         connected : (state) => {
             state.connectionError = false;
         },
-
-        // initStore : (state) => {
-        //     state.inwardTable = JSON.parse(sessionStorage.getItem('inwardTable'));
-        //     state.outwardTable = JSON.parse(sessionStorage.getItem('outwardTable'));
-        //     state.dashboardInward = JSON.parse(sessionStorage.getItem('dashboardInward'));
-        //     state.dashboardOutward = JSON.parse(sessionStorage.getItem('dashboardOutward'));
-        //     state.inwardCount = JSON.parse(sessionStorage.getItem('inwardCount'));
-        //     state.outwardCount = JSON.parse(sessionStorage.getItem('outwardCount'));
-        // },
 
         setInwardTable: (state) => {
             state.inwardTable = JSON.parse(sessionStorage.getItem('inwardTable'));
@@ -56,15 +46,6 @@ export const postsSlice = createSlice({
 
         setViewRow : (state) =>{
             state.viewRow = JSON.parse(sessionStorage.getItem('viewRow'));
-        },
-
-        setInwardViewRow : (state, id) => {
-            state.inwardTable.forEach(element => {
-                if(element.inwardID === id){
-                    console.log(element)
-                    state.inwardViewRow = element;
-                }
-            });
         }
     }
 });
