@@ -2,22 +2,24 @@ import React from 'react'
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import './App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import Login from './components/auth/login';
-import Register from './components/auth/register';
+import Login from './pages/auth/login'
+import Register from './pages/auth/register';
 import PrivateRoute from './components/routes/PrivateRoute';
 import { Provider } from 'react-redux';
 import store from './store';
 import PublicRoute from './components/routes/PublicRoute';
 import Inward from './pages/Inward/Inward';
 import Outward from './pages/Outward/Outward';
-import Report from './pages/report/report';
 import Dashboard from './pages/dashboard/Dashboard';
-import ForgotPassword from './components/auth/ForgotPassword';
+import ForgotPassword from './pages/auth/ForgotPassword';
 import InwardForms from './components/Forms/InwardForms';
 import OutwardForm from './components/Forms/OutwardForm';
+import ReportInward from './pages/report/reportInward';
+import ReportOutward from './pages/report/reportOutward';
 import FormAction from './components/Forms/FormAction';
-import { getDisplayData } from './actions/posts/postsAction';
 import Settings from './pages/Settings/Settings';
+import ViewInward from './components/ViewRow/ViewInward';
+import ViewOutward from './components/ViewRow/ViewOutward';
 
 function App() {
 
@@ -31,18 +33,23 @@ function App() {
         <Provider store={store}>
           <Router>
             <Routes>
-              <Route path='/test' element={<FormAction/>}></Route>
+              {/* <Route path='/test' element={<FormAction/>}></Route> */}
               <Route path='/' element={<PrivateRoute component={Dashboard} />}></Route>
               <Route path='/login' element={<PublicRoute component={Login} />}></Route>
               <Route path='/register' element={<PublicRoute component={Register} />}></Route>
               <Route path='/login/forgotpassword' element={<PublicRoute component={ForgotPassword} />}></Route>  
               <Route path='/dashboard' element={<PrivateRoute component={Dashboard} />}></Route>
               <Route path='/inward' element={<PrivateRoute component={Inward} />}></Route>
+              <Route path='/inward/view/:id' element={<PrivateRoute component={ViewInward} />}></Route>
+              <Route path='/inward/update/:id' element={<PrivateRoute component={InwardForms} />}></Route>
               <Route path='/outward' element={<PrivateRoute component={Outward} />}></Route>
-              <Route path='/Report' element={<PrivateRoute component={Report} />}></Route>  
-              <Route path='/inwardform' element={<PrivateRoute component={InwardForms}/>} />
-              <Route path='/outwardform' element={<PrivateRoute component={OutwardForm}/>} />
-              <Route path='/settings' element={<PrivateRoute component={Settings}/> } />
+              <Route path='/outward/view/:id' element={<PrivateRoute component={ViewOutward} />}></Route>
+              <Route path='/outward/update/:id' element={<PrivateRoute component={OutwardForm} />}></Route>
+              <Route path='/reportInward' element={<PrivateRoute component={ReportInward} />}></Route> 
+              <Route path='/reportOutward' element={<PrivateRoute component={ReportOutward} />}></Route>   
+              <Route path='/inwardform' element={<PrivateRoute component={InwardForms}/>}></Route>
+              <Route path='/outwardform' element={<PrivateRoute component={OutwardForm}/>}></Route>
+              <Route path='/settings' element={<PrivateRoute component={Settings}/>}></Route>
             </Routes>
           </Router>
         </Provider>

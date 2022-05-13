@@ -7,8 +7,8 @@ export const postsSlice = createSlice({
         outwardTable:[],
         dashboardInward:[],
         dashboardOutward:[],
-        inwardCount: '',
-        outwardCount: '',
+        inwardCount: 0,
+        outwardCount: 0,
         connectionError: false
     },
     reducers: {
@@ -19,15 +19,6 @@ export const postsSlice = createSlice({
         connected : (state) => {
             state.connectionError = false;
         },
-
-        // initStore : (state) => {
-        //     state.inwardTable = JSON.parse(sessionStorage.getItem('inwardTable'));
-        //     state.outwardTable = JSON.parse(sessionStorage.getItem('outwardTable'));
-        //     state.dashboardInward = JSON.parse(sessionStorage.getItem('dashboardInward'));
-        //     state.dashboardOutward = JSON.parse(sessionStorage.getItem('dashboardOutward'));
-        //     state.inwardCount = JSON.parse(sessionStorage.getItem('inwardCount'));
-        //     state.outwardCount = JSON.parse(sessionStorage.getItem('outwardCount'));
-        // },
 
         setInwardTable: (state) => {
             state.inwardTable = JSON.parse(sessionStorage.getItem('inwardTable'));
@@ -51,10 +42,14 @@ export const postsSlice = createSlice({
 
         setOutwardCount : (state) => {
             state.outwardCount = JSON.parse(sessionStorage.getItem('outwardCount'));
+        },
+
+        setViewRow : (state) =>{
+            state.viewRow = JSON.parse(sessionStorage.getItem('viewRow'));
         }
     }
 });
 
 
-export const { connected, connectionError, setInwardTable, setOutwardTable, setDashboardInward, setDashboardOutward, setInwardCount, setOutwardCount } = postsSlice.actions;
+export const { setViewRow, setInwardViewRow, connected, connectionError, setInwardTable, setOutwardTable, setDashboardInward, setDashboardOutward, setInwardCount, setOutwardCount } = postsSlice.actions;
 export default postsSlice.reducer;

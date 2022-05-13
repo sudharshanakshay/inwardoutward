@@ -1,7 +1,8 @@
 import { Navigate } from "react-router-dom";
 import React from "react";
 import { useSelector } from "react-redux";
-import { getDisplayData } from "../../actions/posts/postsAction";
+import { getDisplayData, selectRow } from "../../actions/posts/postsAction";
+import { getAllDepartment, getEmployeeData } from "../../actions/settings/settingsAction";
 
 const PrivateRoute = ({ component: RouteComponent }) => {
     
@@ -9,6 +10,9 @@ const PrivateRoute = ({ component: RouteComponent }) => {
     const connErr = useSelector((state) => state.posts.connectionError);
 
     getDisplayData({});
+    getAllDepartment();
+    getEmployeeData();
+    // selectRow({inward:true, id:5});
 
     if(isLoggedIn) {
         if(connErr) return <p>connection err</p>

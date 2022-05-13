@@ -1,37 +1,68 @@
-import React, { useState } from 'react';
-import {insertFrom} from '../../actions/posts/postsAction';
-import { Button, Col, Container, Form, FormControl, InputGroup, Row } from "react-bootstrap";
+import React, { useEffect, useState } from 'react';
+import { getRow, insertFrom, updateTo } from '../../actions/posts/postsAction';
+import { Button, Col, Container, Dropdown, Form, FormControl, InputGroup, Row } from "react-bootstrap";
 import TopNavBar from '../navBar/TopNavBar';
+import { useParams } from 'react-router-dom';
+import { useSelector } from 'react-redux';
 
-const InwardForms = () => {
+const OutwardForm = () => {
+
+    const { id } = useParams();
+    console.log(id)
 
     const [formData, setFormData] = useState({
-        nature : '',
-        recievedFrom : '',
-        subject : '',
-        deliverTo : '',
-        remark : '',
+        serialNo: '',
+        date: '',
+        department: 'Select Department',
+        addressee: '',
+        nature: '',
+        description: '',
+        receiptNo: '',
+        remark: '',
     });
 
-    const inward = true;
+    // ---- 'getRow' func defined in PostsAction, fetches specific row from database ----
+    // ---- useEffect to render only once , empty '[]' makes it happn. ----
+    useEffect(() => {
+        if (id) {
+            var res = getRow({ outward: true, id: id });
+            res.then((value) => {
+                console.log(value);
+                setFormData(value[0]);
+            })
+        }
+    }, []);
 
-    const {nature, recievedFrom, subject, deliverTo, remark } = formData;
+    // ---- get department ----
 
-    const handleChange = (change) => {
-        setFormData({...formData, [change.target.name]:change.target.value });
+    const departmentList = useSelector((state) => {
+        console.log(state.settings.departmentList);
+        try {
+            return state.settings.departmentList;
+        }
+        catch (err) {
+            console.log(err);
+        }
+    })
+
+    const handleChange = (event) => {
+        setFormData({ ...formData, [event.target.name]: event.target.value });
         console.log(formData);
     }
 
     const onSubmit = (e) => {
         e.preventDefault();
-        insertFrom({inward, nature, recievedFrom, subject, deliverTo, remark});
+        const outward = true;
+        const { serialNo, date, nature, department, addressee, description, receiptNo, deliverTo, remark } = formData;
+        if (!id) insertFrom({ outward, serialNo, date, nature, department, addressee, description, receiptNo, deliverTo, remark });
+        if (id) updateTo({ id, outward, serialNo, date, nature, department, addressee, description, receiptNo, deliverTo, remark });
     }
 
 
     return (
         <>
-        <TopNavBar/>
-            <Form onSubmit={(s)=>onSubmit(s)}>
+            <TopNavBar />
+            <Form onSubmit={(s) => onSubmit(s)}>
                 <Container >
                     <Row className='pt-5'>
                         <Col >
@@ -41,21 +72,35 @@ const InwardForms = () => {
                                     placeholder="Serial No : "
                                     aria-label="SerialNo"
                                     aria-describedby="basic-addon1"
-                                    // onChange={(value)=> handleChange(value)}
+                                    name='serialNo'
+                                    value={formData.serialNo}
+                                    onChange={(value) => handleChange(value)}
                                 />
                             </InputGroup>
                         </Col>
                         <Col >
                             <InputGroup className="mb-3 mt-4" >
                                 <InputGroup.Text>Date : </InputGroup.Text>
-                                <FormControl
+
+                                {/* ---- set date field type to 'text' when updating ---- */}
+                                {id && <FormControl
+                                    type="text"
+                                    placeholder="Date"
+                                    aria-label="Date"
+                                    aria-describedby="basic-addon1"
+                                    name='date'
+                                    value={formData.date}
+                                    onChange={(value) => handleChange(value)}
+                                />}
+                                {!id && <FormControl
                                     type="Date"
                                     placeholder="Date"
                                     aria-label="Date"
                                     aria-describedby="basic-addon1"
-                                    name=''
-                                    // onChange={(value)=> handleChange(value)}
-                                />
+                                    name='date'
+                                    value={formData.date}
+                                    onChange={(value) => handleChange(value)}
+                                />}
                             </InputGroup>
                         </Col>
                     </Row>
@@ -65,13 +110,17 @@ const InwardForms = () => {
                         <Col xs={12} sm={12} md={12} lg={4}>
                             <InputGroup className="mb-3 mt-4" >
                                 <InputGroup.Text >Department : </InputGroup.Text>
-                                <FormControl
-                                    placeholder="Department"
-                                    aria-label="Department"
-                                    aria-describedby="basic-addon1"
-                                    name='department'
-                                    onChange={(value)=> handleChange(value)}
-                                />
+                                { 
+                                    <select name='department' id='dropdown' onChange={(val) => { handleChange(val) }}>
+                                        <option value='' selected="selected" >{formData.department}</option>
+                                        {departmentList.map((obj, index) => {
+                                            return (
+                                                <option >{obj.name}</option>
+                                            )
+                                        })
+                                        }
+                                    </select>
+                                }
                             </InputGroup>
                         </Col>
                         <Col xs={12} sm={12} md={6} lg={4}>
@@ -79,14 +128,13 @@ const InwardForms = () => {
                                 <InputGroup.Text>Addressee : </InputGroup.Text>
                                 <FormControl
                                     placeholder="Addressee"
-                                    aria-label="Addressee"
-                                    aria-describedby="basic-addon1"
                                     name='addressee'
-                                    onChange={(value)=> handleChange(value)}
+                                    value={formData.addressee}
+                                    onChange={(value) => handleChange(value)}
                                 />
                             </InputGroup>
                         </Col>
-                        <Col xs={12} sm={12} md={6}  lg={4}>
+                        <Col xs={12} sm={12} md={6} lg={4}>
                             <InputGroup className="mb-3 mt-4" >
                                 <InputGroup.Text>Nature : </InputGroup.Text>
                                 <FormControl
@@ -94,37 +142,41 @@ const InwardForms = () => {
                                     aria-label="Nature"
                                     aria-describedby="basic-addon1"
                                     name='nature'
-                                    onChange={(value)=> handleChange(value)}
+                                    value={formData.nature}
+                                    onChange={(value) => handleChange(value)}
                                 />
                             </InputGroup>
                         </Col>
-                        <Col xs={12} sm={12} md={6}  lg={4}>
+                        <Col xs={12} sm={12} md={6} lg={4}>
                             <InputGroup className="mb-3 mt-4" >
                                 <InputGroup.Text>Description : </InputGroup.Text>
                                 <FormControl
+                                    type='textarea'
                                     placeholder="Description"
                                     aria-label="Description"
                                     aria-describedby="basic-addon1"
                                     name='description'
-                                    onChange={(value)=> handleChange(value)}
+                                    value={formData.description}
+                                    onChange={(value) => handleChange(value)}
                                 />
                             </InputGroup>
                         </Col>
 
-                        <Col xs={12} sm={12} md={6}  lg={4}>
+                        <Col xs={12} sm={12} md={6} lg={4}>
                             <InputGroup className="mb-3 mt-4" >
                                 <InputGroup.Text>Recipt No : </InputGroup.Text>
                                 <FormControl
                                     placeholder="Recipt No"
                                     aria-label="Recipt No"
                                     aria-describedby="basic-addon1"
-                                    name='recipt'
-                                    onChange={(value)=> handleChange(value)}
+                                    name='receiptNo'
+                                    value={formData.receiptNo}
+                                    onChange={(value) => handleChange(value)}
                                 />
                             </InputGroup>
                         </Col>
 
-                        <Col xs={12} sm={12} md={6}  lg={4}>
+                        <Col xs={12} sm={12} md={6} lg={4}>
                             <InputGroup className="mb-3 mt-4" >
                                 <InputGroup.Text>Remark : </InputGroup.Text>
                                 <FormControl
@@ -132,7 +184,8 @@ const InwardForms = () => {
                                     aria-label="Remark"
                                     aria-describedby="basic-addon1"
                                     name='remark'
-                                    onChange={(value)=> handleChange(value)}
+                                    value={formData.remark}
+                                    onChange={(value) => handleChange(value)}
                                 />
                             </InputGroup>
                         </Col>
@@ -140,8 +193,9 @@ const InwardForms = () => {
 
 
                     <Row >
-                        <Col  lg={{ span: 2, offset: 5 }}  md={{ span:2, offset:2 }} sm={{ span:2, offset:2 }} >
-                        <Button type='submit' variant="success" >Save Inward Post</Button>
+                        <Col lg={{ span: 2, offset: 5 }} md={{ span: 2, offset: 2 }} sm={{ span: 2, offset: 2 }} >
+                            {!id && <Button type='submit' variant="success" >Save Outward Post</Button>}
+                            {id && <Button type='submit' variant="success" >Update Outward Post</Button>}
                         </Col>
                     </Row>
                 </Container>
@@ -150,5 +204,5 @@ const InwardForms = () => {
     )
 }
 
-export default InwardForms;
+export default OutwardForm;
 

@@ -5,14 +5,11 @@ import { Link, Navigate } from "react-router-dom";
 import { logOut } from "../../actions/auth/authSlice";
 import store from "../../store";
 import { BsFillGridFill } from 'react-icons/bs';
+import PopModal from "../Modals/PopModal";
 
 
 
 const TopNavBar = () => {
-
-    const user = useSelector((state) => state.loggedIn.email);
-    const user1 = "hello";
-    const [key, setKey] = useState('Dashboard');
 
     const [show, setShow] = useState(false);
 
@@ -55,10 +52,10 @@ const TopNavBar = () => {
                                 </Dropdown.Toggle>
                                 <Dropdown.Menu>
                                     <Nav.Link >
-                                        <Link to="/#" >Inward Report</Link>
+                                        <Link to="/ReportInward" >Inward Report</Link>
                                     </Nav.Link>
                                     <Nav.Link >
-                                        <Link to="/#" >Outward Report</Link>
+                                        <Link to="/ReportOutward" >Outward Report</Link>
                                     </Nav.Link>
                                 </Dropdown.Menu>
                             </Dropdown>
@@ -74,15 +71,25 @@ const TopNavBar = () => {
                             <Offcanvas.Header closeButton>
                                 <Offcanvas.Title  >Settings</Offcanvas.Title>
                             </Offcanvas.Header>
-                            <hr />
-                            <Offcanvas.Body>
-
+                            
+                            {/* ---- offcanvas body ---- */}
+                            <Offcanvas.Body className='center' >
+                                <hr />
                                 <Link to="/settings" className="nav-item" > Settings </Link>
+                                <hr />
 
-                                <Nav defaultActiveKey="/home" as="ul"
+                                {/* ---- logout Button ---- */}
+                                <Nav as="ul"
                                     className=" my-3 my-lg-0"
                                     style={{ maxHeight: '100px' }}>
-                                    <Button type="submit" onClick={() => store.dispatch(logOut())} variant="outline-success" >logOut</Button>
+                                    {/* <Button type="submit" onClick={() => store.dispatch(logOut())} variant="outline-success" >logOut</Button> */}
+                                    <PopModal 
+                                        mode={'logout'}
+                                        modelTitle={'Logout'}
+                                        ctlBtnVariant={'primary'}
+                                        variant={'danger'}
+                                        message={'logout from current session ?'}
+                                    />
                                 </Nav>
                             </Offcanvas.Body>
                         </Container>
