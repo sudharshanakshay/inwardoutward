@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from 'react';
-import { getRow, insertFrom } from '../../actions/posts/postsAction';
+import { getRow, insertFrom, updateTo } from '../../actions/posts/postsAction';
 import { Button, Col, Container, Dropdown, Form, FormControl, InputGroup, Row } from "react-bootstrap";
 import TopNavBar from '../navBar/TopNavBar';
 import { useParams } from 'react-router-dom';
-import { getAllDepartment } from '../../actions/settings/settingsAction';
+import { useSelector } from 'react-redux';
 
 const OutwardForm = () => {
 
@@ -13,7 +13,7 @@ const OutwardForm = () => {
     const [formData, setFormData] = useState({
         serialNo: '',
         date: '',
-        department: '',
+        department: 'Select Department',
         addressee: '',
         nature: '',
         description: '',
@@ -21,25 +21,29 @@ const OutwardForm = () => {
         remark: '',
     });
 
-    const [departmentList, setDepartmentList] = useState([]);
-
     // ---- 'getRow' func defined in PostsAction, fetches specific row from database ----
     // ---- useEffect to render only once , empty '[]' makes it happn. ----
     useEffect(() => {
-        var dept = getAllDepartment();
-        dept.then((val) => {
-            setDepartmentList(val);
-            console.log(val)
-        })
-
         if (id) {
             var res = getRow({ outward: true, id: id });
             res.then((value) => {
                 console.log(value);
-                setFormData(value);
+                setFormData(value[0]);
             })
         }
     }, []);
+
+    // ---- get department ----
+
+    const departmentList = useSelector((state) => {
+        console.log(state.settings.departmentList);
+        try {
+            return state.settings.departmentList;
+        }
+        catch (err) {
+            console.log(err);
+        }
+    })
 
     const handleChange = (event) => {
         setFormData({ ...formData, [event.target.name]: event.target.value });
@@ -50,13 +54,13 @@ const OutwardForm = () => {
         e.preventDefault();
         const outward = true;
         const { serialNo, date, nature, department, addressee, description, receiptNo, deliverTo, remark } = formData;
-        insertFrom({ outward, serialNo, date, nature, department, addressee, description, receiptNo, deliverTo, remark });
+        if (!id) insertFrom({ outward, serialNo, date, nature, department, addressee, description, receiptNo, deliverTo, remark });
+        if (id) updateTo({ id, outward, serialNo, date, nature, department, addressee, description, receiptNo, deliverTo, remark });
     }
 
 
     return (
         <>
-
             <TopNavBar />
             <Form onSubmit={(s) => onSubmit(s)}>
                 <Container >
@@ -106,10 +110,9 @@ const OutwardForm = () => {
                         <Col xs={12} sm={12} md={12} lg={4}>
                             <InputGroup className="mb-3 mt-4" >
                                 <InputGroup.Text >Department : </InputGroup.Text>
-
-                                {
+                                { 
                                     <select name='department' id='dropdown' onChange={(val) => { handleChange(val) }}>
-                                        <option value="" selected="selected">Select Department</option>
+                                        <option value='' selected="selected" >{formData.department}</option>
                                         {departmentList.map((obj, index) => {
                                             return (
                                                 <option >{obj.name}</option>
@@ -125,8 +128,6 @@ const OutwardForm = () => {
                                 <InputGroup.Text>Addressee : </InputGroup.Text>
                                 <FormControl
                                     placeholder="Addressee"
-                                    aria-label="Addressee"
-                                    aria-describedby="basic-addon1"
                                     name='addressee'
                                     value={formData.addressee}
                                     onChange={(value) => handleChange(value)}

@@ -1,8 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import { getRow, insertFrom, updateTo } from '../../actions/posts/postsAction';
-import { Button, Col, Container, Form, FormControl, InputGroup, Row } from "react-bootstrap";
+import { Button, Col, Container, Dropdown, Form, FormControl, InputGroup, Row } from "react-bootstrap";
 import TopNavBar from '../navBar/TopNavBar';
 import { useParams } from 'react-router-dom';
+import { useSelector } from 'react-redux';
 
 const OutwardForm = () => {
 
@@ -12,7 +13,7 @@ const OutwardForm = () => {
     const [formData, setFormData] = useState({
         serialNo: '',
         date: '',
-        department: '',
+        department: 'Select Department',
         addressee: '',
         nature: '',
         description: '',
@@ -26,15 +27,26 @@ const OutwardForm = () => {
         if (id) {
             var res = getRow({ outward: true, id: id });
             res.then((value) => {
-                console.log(value[0]);
+                console.log(value);
                 setFormData(value[0]);
             })
         }
     }, []);
 
+    // ---- get department ----
 
-    const handleChange = (change) => {
-        setFormData({ ...formData, [change.target.name]: change.target.value });
+    const departmentList = useSelector((state) => {
+        console.log(state.settings.departmentList);
+        try {
+            return state.settings.departmentList;
+        }
+        catch (err) {
+            console.log(err);
+        }
+    })
+
+    const handleChange = (event) => {
+        setFormData({ ...formData, [event.target.name]: event.target.value });
         console.log(formData);
     }
 
@@ -46,6 +58,7 @@ const OutwardForm = () => {
         if (id) updateTo({ id, outward, serialNo, date, nature, department, addressee, description, receiptNo, deliverTo, remark });
     }
 
+
     return (
         <>
             <TopNavBar />
@@ -56,7 +69,6 @@ const OutwardForm = () => {
                             <InputGroup className="mb-3 mt-4" >
                                 <InputGroup.Text >Serial No : </InputGroup.Text>
                                 <FormControl
-                                    type='number'
                                     placeholder="Serial No : "
                                     aria-label="SerialNo"
                                     aria-describedby="basic-addon1"
@@ -98,14 +110,17 @@ const OutwardForm = () => {
                         <Col xs={12} sm={12} md={12} lg={4}>
                             <InputGroup className="mb-3 mt-4" >
                                 <InputGroup.Text >Department : </InputGroup.Text>
-                                <FormControl
-                                    placeholder="Department"
-                                    aria-label="Department"
-                                    aria-describedby="basic-addon1"
-                                    name='department'
-                                    value={formData.department}
-                                    onChange={(value) => handleChange(value)}
-                                />
+                                { 
+                                    <select name='department' id='dropdown' onChange={(val) => { handleChange(val) }}>
+                                        <option value='' selected="selected" >{formData.department}</option>
+                                        {departmentList.map((obj, index) => {
+                                            return (
+                                                <option >{obj.name}</option>
+                                            )
+                                        })
+                                        }
+                                    </select>
+                                }
                             </InputGroup>
                         </Col>
                         <Col xs={12} sm={12} md={6} lg={4}>
@@ -113,8 +128,6 @@ const OutwardForm = () => {
                                 <InputGroup.Text>Addressee : </InputGroup.Text>
                                 <FormControl
                                     placeholder="Addressee"
-                                    aria-label="Addressee"
-                                    aria-describedby="basic-addon1"
                                     name='addressee'
                                     value={formData.addressee}
                                     onChange={(value) => handleChange(value)}
@@ -153,7 +166,6 @@ const OutwardForm = () => {
                             <InputGroup className="mb-3 mt-4" >
                                 <InputGroup.Text>Recipt No : </InputGroup.Text>
                                 <FormControl
-                                    type='number'
                                     placeholder="Recipt No"
                                     aria-label="Recipt No"
                                     aria-describedby="basic-addon1"
