@@ -207,9 +207,10 @@ const Settings = () => {
                                                 <th>Department</th>
                                                 <th>Email</th>
                                                 <th>Phone</th>
+                                                <th>Action</th>
                                             </thead>
                                             <tbody>
-                                                {employeeData.map((obj) => {
+                                                {employeeData?.map((obj) => {
                                                     return (
                                                         <>
                                                             <tr>
@@ -217,6 +218,14 @@ const Settings = () => {
                                                                 <td>{obj.departmentName}</td>
                                                                 <td>{obj.email}</td>
                                                                 <td>{obj.phone}</td>
+                                                                <td>
+                                                                <PopModal
+                                                                        mode={'delete_employee'}
+                                                                        id={obj.employeeID}
+                                                                        modelTitle={'Delete'}
+                                                                        message={`delete employee ${obj.name} ?`}
+                                                                    />
+                                                                </td>
                                                             </tr>
                                                         </>
                                                     )

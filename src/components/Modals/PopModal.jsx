@@ -3,6 +3,7 @@ import { useState } from "react";
 import { delete_from } from "../../actions/posts/postsAction";
 import store from "../../store";
 import { logOut } from "../../actions/auth/authSlice";
+import { delDepartment, delEmployee } from "../../actions/settings/settingsAction";
 
 
 const PopModal = ({id, mode, btnText, modelTitle, message, variant, ctlBtnVariant='link' }) => {
@@ -11,9 +12,11 @@ const PopModal = ({id, mode, btnText, modelTitle, message, variant, ctlBtnVarian
     const handleClose = () => setShow(false);
 
     const handleClick = () => {
+        setShow(false)
         if (mode === 'inward_delete') delete_from({ inward: true, rowID: id });
         if (mode === 'outward_delete') delete_from({ outward: true, rowID: id });
-        if (mode === 'department_delete') delete_from({ department: true, rowID:id });
+        if (mode === 'department_delete') delDepartment({ rowID:id });
+        if (mode === 'delete_employee') delEmployee({ rowID:id })
         if (mode === 'logout') store.dispatch(logOut());
     };
     return (

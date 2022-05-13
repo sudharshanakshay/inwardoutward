@@ -32,26 +32,27 @@ const Outward = () => {
 
     return (
         <div>
-            <TopNavBar />
+            <div className="h-100vh">
+                <TopNavBar />
 
-            <Container fluid className="desktop-view">
-                <Row>
-                    <Col sm={12} md={12} lg={10} >
-                        <TableFair
-                            outward={true}
-                            applyDataTableApi={true}
-                            title={OUTWARD_TABLE_TITLE}
-                            tableHeaders={OUTWARD_TABLE_HEADER}
-                            tableRows={outwardTableData}
-                        />
-                    </Col>
-                    <Col>
-                        <Link to="/outwardform" className="btn btn-success">Add outward</Link>
-                    </Col>
-                </Row>
-            </Container>
+                <Container fluid className="desktop-view">
+                    <Row>
+                        <Col sm={12} md={12} lg={10} >
+                            <TableFair
+                                outward={true}
+                                applyDataTableApi={true}
+                                title={OUTWARD_TABLE_TITLE}
+                                tableHeaders={OUTWARD_TABLE_HEADER}
+                                tableRows={outwardTableData}
+                            />
+                        </Col>
+                        <Col>
+                            <Link to="/outwardform" className="btn btn-success">Add outward</Link>
+                        </Col>
+                    </Row>
+                </Container>
 
-            <Container fluid className="mobile-view">
+                <Container fluid className="mobile-view">
                     <Row >
                         <Col md={{ span: 4, offset: 10 }}>
                             <Link to="/outwardform" className="btn btn-success">Add outward</Link>
@@ -66,7 +67,8 @@ const Outward = () => {
                             tableRows={outwardTableData}
                         />
                     </Row>
-            </Container>
+                </Container>
+            </div>
             <Footer />
         </div>
     )

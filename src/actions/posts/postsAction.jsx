@@ -287,7 +287,7 @@ export const updateTo = ({
 
 
 
-export const delete_from = ({ rowID, inward = false, outward = false, department=false }) => {
+export const delete_from = ({ rowID, inward = false, outward = false }) => {
 
     // only one of two options must be specified.
 
@@ -340,23 +340,5 @@ export const delete_from = ({ rowID, inward = false, outward = false, department
             console.log(err);
         }
     }
-
-    if (department) {
-        const body = JSON.stringify({
-            from: 'department',
-            id: rowID
-        })
-
-        try {
-            axios.post('http://localhost:5000/delete', body, CONFIG )
-            .then((res)=>{
-                console.log(res.data)
-            })
-        }
-        catch (err) {
-            console.log(err);
-        }
-    }
-
 
 }
