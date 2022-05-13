@@ -2,7 +2,7 @@ import { Navigate } from "react-router-dom";
 import React from "react";
 import { useSelector } from "react-redux";
 import { getDisplayData, selectRow } from "../../actions/posts/postsAction";
-import { getAllDepartment } from "../../actions/settings/settingsAction";
+import { getAllDepartment, getEmployeeData } from "../../actions/settings/settingsAction";
 
 const PrivateRoute = ({ component: RouteComponent }) => {
     
@@ -11,6 +11,7 @@ const PrivateRoute = ({ component: RouteComponent }) => {
 
     getDisplayData({});
     getAllDepartment();
+    getEmployeeData();
     // selectRow({inward:true, id:5});
 
     if(isLoggedIn) {

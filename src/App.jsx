@@ -44,11 +44,11 @@ function App() {
               <Route path='/inward/update/:id' element={<PrivateRoute component={InwardForms} />}></Route>
               <Route path='/outward' element={<PrivateRoute component={Outward} />}></Route>
               <Route path='/outward/view/:id' element={<PrivateRoute component={ViewOutward} />}></Route>
-              <Route path='/outward/update/:id' element={<PrivateRoute component={FormAction} />}></Route>
+              <Route path='/outward/update/:id' element={<PrivateRoute component={OutwardForm} />}></Route>
               <Route path='/reportInward' element={<PrivateRoute component={ReportInward} />}></Route> 
               <Route path='/reportOutward' element={<PrivateRoute component={ReportOutward} />}></Route>   
               <Route path='/inwardform' element={<PrivateRoute component={InwardForms}/>}></Route>
-              <Route path='/outwardform' element={<PrivateRoute component={FormAction}/>}></Route>
+              <Route path='/outwardform' element={<PrivateRoute component={OutwardForm}/>}></Route>
               <Route path='/settings' element={<PrivateRoute component={Settings}/>}></Route>
             </Routes>
           </Router>
