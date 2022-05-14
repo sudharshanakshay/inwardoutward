@@ -1,16 +1,17 @@
 import React, { useEffect, useState } from 'react';
-import { Button, Col, Container, Form, FormControl, InputGroup, Row, Table } from "react-bootstrap";
-import { useSelector } from 'react-redux';
+import { Col, Container, Row, ListGroup, Button } from "react-bootstrap";
 import { useParams } from 'react-router-dom';
 import { getRow } from '../../actions/posts/postsAction';
-import store from '../../store';
-import ActionMessage from '../Modals/PopModal';
- 
+import TopNavBar from '../navBar/TopNavBar';
+import { AiOutlinePrinter } from 'react-icons/ai';
+import PopModal from "../Modals/PopModal";
+import { Link, useNavigate } from 'react-router-dom';
+import Footer from "../../components/Footer/Footer";
+
 const ViewOutward = () => {
 
     const { id } = useParams();
-    console.log(id)
-
+    const outward = true;
     const [formData, setFormData] = useState({
         serialNo: '',
         date: '',
@@ -32,19 +33,86 @@ const ViewOutward = () => {
         })
     }, []);
 
-    return(
-       <Container>
-           <li>{formData.serialNo}</li>       
-           <li>{formData.date}</li>    
-           <li>{formData.department}</li>    
-           <li>{formData.addressee}</li>    
-           <li>{formData.nature}</li>    
-           <li>{formData.description}</li>    
-           <li>{formData.receiptNo}</li>    
-           <li>{formData.remark}</li>    
-       </Container>
+    let navigate = useNavigate();
+    const handleEdit = (id) => {
+
+        if (outward) navigate(`/outward/update/${id}`);
+    }
+
+    return (
+        <div>
+            <div className='no-print' >
+                <TopNavBar />
+                <h1 style={{ textAlign: "center" }}>Outward Post </h1>
+            </div>
+            <Row>
+                <Col sm={4} >
+                    <div className='actions'>
+                        <Container>
+                            <ListGroup variant='flush' >
+                                <ListGroup.Item variant='success' style={{ textAlign: "center" }}>Actions</ListGroup.Item>
+                                <ListGroup.Item action >
+                                    <Button variant="link"
+                                        className="me-1 p-0"
+                                        onClick={() => handleEdit(id)}>
+                                        Edit Outward Post
+                                    </Button>
+                                </ListGroup.Item>
+                                <ListGroup.Item action>
+                                    <PopModal
+                                        outward={outward}
+                                        mode={'delete'}
+                                        btnText={'Yes, Delete'}
+                                        modelTitle={"Delete"}
+                                        message={`Outward Row with ID "${id}" will be permanently deleted, wish to proceed ? `}
+                                        variant={'outline-danger'}
+                                        id={id}
+                                    />
+                                </ListGroup.Item>
+                                <ListGroup.Item action>
+                                    <Link to="/outward">List Outward Posts</Link>
+                                </ListGroup.Item>
+                                <ListGroup.Item action>
+                                    <Link to="/outwardform">New Outward Post</Link>
+                                </ListGroup.Item>
+                            </ListGroup>
+                        </Container>
+                    </div>
+                </Col>
+                <Col sm={8} >
+                    <div>
+                        <Container>
+                            <div className="divToPrint" >
+                                <ListGroup variant='flush' >
+                                    <ListGroup.Item><h3>Record Details</h3></ListGroup.Item>
+                                    <ListGroup.Item>
+
+                                        <li><th>Date :</th>{ }<td>{formData.date}</td></li>
+                                        <li><th>Serial No. :</th> <td> {formData.serialNo}</td></li>
+                                        <li><th>Receipt No. : </th> <td> {formData.receiptNo}</td></li>
+                                        <li><th>Addressee  : </th> <td> {formData.addressee}</td></li>
+                                        <li><th>Department : </th> <td> {formData.department}</td></li>
+                                        <li><th>Nature : </th> <td> {formData.nature}</td></li>
+                                        <li><th>Description : </th> <td> {formData.description}</td></li>
+                                        <li><th>Remark : </th> <td> {formData.remark}</td></li>
+                                    </ListGroup.Item>
+                                </ListGroup>
+                            </div>
+                            <div className="buttons">
+                                <button className='btn btn-outline-primary glyphicon glyphicon-print'
+                                    onClick={() => window.print()}>
+                                    <AiOutlinePrinter />
+                                    Print
+                                </button>{" "}
+                            </div>
+                        </Container>
+                    </div>
+                </Col>
+            </Row>
+           
+        </div>
     );
-    
+
 }
 
 export default ViewOutward;

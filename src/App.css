@@ -307,3 +307,14 @@ body {
     background-color: #4b51528f;
 }
 
+li{
+    list-style: none;
+}
+
+@media print {
+
+    .no-print, .actions, .buttons {
+        display: none;
+    }
+    
+}
