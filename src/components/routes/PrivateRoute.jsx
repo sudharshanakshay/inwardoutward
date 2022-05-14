@@ -12,7 +12,6 @@ const PrivateRoute = ({ component: RouteComponent }) => {
     getDisplayData({});
     getDepartment();
     getEmployeeData();
-    // selectRow({inward:true, id:5});
 
     if(isLoggedIn) {
         if(connErr) return <p>connection err</p>

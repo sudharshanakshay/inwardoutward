@@ -2,8 +2,11 @@ import axios from "axios"
 import store from "../../store";
 import { CONFIG } from "../../utility/Constants"
 import { setDepartmentList, setEmployeeData } from "./settingsSlice";
-const SUCCESS = 'success';
+import { SUCCESS } from "../../utility/Constants";
 
+// ----------------- settings Actions handles data manuplation for settings page -----------------
+
+// ----------------- insert department -----------------
 export const addDepartment = async (dept) => {
     const INSERT_DEPARTMENT_URL = 'http://localhost:5000/dept';
 
@@ -14,7 +17,7 @@ export const addDepartment = async (dept) => {
     try {
         await axios.post(INSERT_DEPARTMENT_URL, body, CONFIG)
             .then((res) => {
-                if (res.data.status === 'success') {
+                if (res.data.status === SUCCESS) {
                     // ---- insert successful ----
                     console.log('dept insert successful ');
                     getDepartment();
@@ -29,6 +32,8 @@ export const addDepartment = async (dept) => {
         console.log(err)
     }
 }
+
+// ----------------- Retrive department -----------------
 
 export const getDepartment = async () => {
     const GET_DEPT_URL = 'http://localhost:5000/select/dept';
@@ -47,6 +52,8 @@ export const getDepartment = async () => {
     }
     // ---- ToDo : handle error return here ----
 }
+
+// ----------------- delete department -----------------
 
 export const delDepartment = async ({rowID}) => {
 
@@ -67,6 +74,8 @@ export const delDepartment = async ({rowID}) => {
     }
 }
 
+// ----------------- insert employee data -----------------
+
 export const addEmployee = async (employeeData) => {
     const ADD_EMP_URL = 'http://localhost:5000/insert/emp';
     try {
@@ -82,11 +91,13 @@ export const addEmployee = async (employeeData) => {
     }
 }
 
-export const getEmployeeData = () => {
+// ----------------- Retrive Employee data -----------------
+
+export const getEmployeeData = async() => {
 
     const GET_EMP_URL = 'http://localhost:5000/select/emp';
     try {
-        axios.post(GET_EMP_URL, CONFIG)
+        await axios.post(GET_EMP_URL, CONFIG)
             .then((res) => {
                 console.log(res.data.employeeData);
                 if (res.data.employeeData !== 'error') sessionStorage.setItem('employeeData', JSON.stringify(res.data.employeeData));
@@ -98,7 +109,9 @@ export const getEmployeeData = () => {
     }
 }
 
-export const delEmployee = ({ rowID }) => {
+// ----------------- delete Employee data -----------------
+
+export const delEmployee = async ({ rowID }) => {
     const DELETE_URL = 'http://localhost:5000/delete';
 
     const body = JSON.stringify({
@@ -107,7 +120,7 @@ export const delEmployee = ({ rowID }) => {
     })
 
     try {
-        axios.post(DELETE_URL, body, CONFIG)
+        await axios.post(DELETE_URL, body, CONFIG)
             .then((res) => {
                 console.log(res.data.status);
                 if (res.data.status === SUCCESS) getEmployeeData();

@@ -7,6 +7,7 @@ import { useSelector } from 'react-redux';
 
 const OutwardForm = () => {
 
+    // ---- get outward ID ----
     const { id } = useParams();
     console.log(id)
 
@@ -66,9 +67,11 @@ const OutwardForm = () => {
                 <Container >
                     <Row className='pt-5'>
                         <Col >
+                        {/* -------- serial no -------- */}
                             <InputGroup className="mb-3 mt-4" >
                                 <InputGroup.Text >Serial No : </InputGroup.Text>
                                 <FormControl
+                                    
                                     placeholder="Serial No : "
                                     aria-label="SerialNo"
                                     aria-describedby="basic-addon1"
@@ -79,6 +82,7 @@ const OutwardForm = () => {
                             </InputGroup>
                         </Col>
                         <Col >
+                        {/* -------- Date -------- */}
                             <InputGroup className="mb-3 mt-4" >
                                 <InputGroup.Text>Date : </InputGroup.Text>
 
@@ -108,6 +112,7 @@ const OutwardForm = () => {
 
                     <Row>
                         <Col xs={12} sm={12} md={12} lg={4}>
+                            {/* -------- Department -------- */}
                             <InputGroup className="mb-3 mt-4" >
                                 <InputGroup.Text >Department : </InputGroup.Text>
                                 { 
@@ -124,6 +129,7 @@ const OutwardForm = () => {
                             </InputGroup>
                         </Col>
                         <Col xs={12} sm={12} md={6} lg={4}>
+                            {/* -------- Addressee -------- */}
                             <InputGroup className="mb-3 mt-4" >
                                 <InputGroup.Text>Addressee : </InputGroup.Text>
                                 <FormControl
@@ -135,6 +141,7 @@ const OutwardForm = () => {
                             </InputGroup>
                         </Col>
                         <Col xs={12} sm={12} md={6} lg={4}>
+                            {/* -------- Nature -------- */}
                             <InputGroup className="mb-3 mt-4" >
                                 <InputGroup.Text>Nature : </InputGroup.Text>
                                 <FormControl
@@ -148,6 +155,7 @@ const OutwardForm = () => {
                             </InputGroup>
                         </Col>
                         <Col xs={12} sm={12} md={6} lg={4}>
+                            {/* -------- Description -------- */}
                             <InputGroup className="mb-3 mt-4" >
                                 <InputGroup.Text>Description : </InputGroup.Text>
                                 <FormControl
@@ -163,6 +171,7 @@ const OutwardForm = () => {
                         </Col>
 
                         <Col xs={12} sm={12} md={6} lg={4}>
+                            {/* -------- Recipt no -------- */}
                             <InputGroup className="mb-3 mt-4" >
                                 <InputGroup.Text>Recipt No : </InputGroup.Text>
                                 <FormControl
@@ -178,6 +187,7 @@ const OutwardForm = () => {
 
                         <Col xs={12} sm={12} md={6} lg={4}>
                             <InputGroup className="mb-3 mt-4" >
+                                {/* -------- Remark -------- */}
                                 <InputGroup.Text>Remark : </InputGroup.Text>
                                 <FormControl
                                     placeholder="Remark"
@@ -190,10 +200,9 @@ const OutwardForm = () => {
                             </InputGroup>
                         </Col>
                     </Row>
-
-
                     <Row >
-                        <Col lg={{ span: 2, offset: 5 }} md={{ span: 2, offset: 2 }} sm={{ span: 2, offset: 2 }} >
+                        {/* -------- Form control buttons -------- */}
+                        <Col lg={{ span: 3, offset: 5 }} md={{ span: 4, offset: 4 }} sm={{ span: 5, offset: 4 }} >
                             {!id && <Button type='submit' variant="success" >Save Outward Post</Button>}
                             {id && <Button type='submit' variant="success" >Update Outward Post</Button>}
                         </Col>

@@ -3,21 +3,24 @@ import TopNavBar from "../../components/navBar/TopNavBar";
 import { Container } from "react-bootstrap";
 import TableFair from "../../components/TableFair/TableFair";
 import { OUTWARD_TABLE_HEADER } from "../../utility/Constants";
-import { getDisplayData } from '../../actions/posts/postsAction';
 import ButtonSpinner from "../../components/Loading/ButtonSpinner";
+import { useSelector } from "react-redux";
 
 const ReportOutward = () => {
 
+     // ---- load Outward Table Data ----
+     const outwardTableData = useSelector((state) => {
+        console.log(state.posts);
+        try {
+            return state.posts.outwardTable;
+        }
+        catch {
+            return 0;
+        }
+    });
 
-    const [ren, setRen] = useState(false);
-
-    getDisplayData({ setRen });
-
-    const tableDataString = sessionStorage.getItem('outwardTable');
-
-    const OUTWARD_TABLE_DATA = JSON.parse(tableDataString);
-
-    if (OUTWARD_TABLE_DATA== undefined) {
+    // ---- loading... ----
+    if (!outwardTableData) {
         return (
             <>
                 <TopNavBar />
@@ -30,14 +33,15 @@ const ReportOutward = () => {
           
     <div>
             <TopNavBar />
-            <Container fluid>
+            <Container fluid className="report-view">
+                {/* ---------- Outward Table Content ---------- */}
                 <TableFair
                     outward={true}
                     applyDataTableApi={true} 
                     applyReportOptions={true}
                     title={"Outward Posts"}
                     tableHeaders={OUTWARD_TABLE_HEADER}
-                    tableRows={OUTWARD_TABLE_DATA}
+                    tableRows={outwardTableData}
                 />
             </Container>
             </div>

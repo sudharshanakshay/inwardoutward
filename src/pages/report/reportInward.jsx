@@ -9,6 +9,7 @@ import { useSelector } from "react-redux";
 
 const ReportInward = () => {
 
+    // ---- load Inward Table Data ----
     const inwardTableData = useSelector((state) => {
         console.log(state.posts.inwardTable)
         try {
@@ -19,6 +20,7 @@ const ReportInward = () => {
         }
     });
 
+    // ---- loading... ----
     if (!inwardTableData) {
         return (
             <>
@@ -31,7 +33,8 @@ const ReportInward = () => {
     return (
         <><div>
             <TopNavBar />
-            <Container className="desktop-view" fluid>
+            <Container className="report-view" fluid>
+                {/* ---------- Inward Table Content ---------- */}
                 <TableFair
                     inward={true}
                     applyDataTableApi={true} 

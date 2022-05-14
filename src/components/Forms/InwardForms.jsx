@@ -7,6 +7,7 @@ import { getRow } from "../../actions/posts/postsAction";
 
 const InwardForm = () => {
 
+    // ---- get inwardID ----
     const { id } = useParams();
     console.log(id)
 
@@ -53,6 +54,7 @@ const InwardForm = () => {
                 <Container >
                     <Row className='pt-5'>
                         <Col >
+                        {/* -------- inward no -------- */}
                             <InputGroup className="mb-3 mt-4" >
                                 <InputGroup.Text >Inward No : </InputGroup.Text>
                                 <FormControl
@@ -67,6 +69,7 @@ const InwardForm = () => {
                             </InputGroup>
                         </Col>
                         <Col >
+                        {/* -------- Date -------- */}
                             <InputGroup className="mb-3 mt-4" >
                                 <InputGroup.Text>Date : </InputGroup.Text>
 
@@ -98,6 +101,7 @@ const InwardForm = () => {
 
                     <Row>
                         <Col xs={12} sm={12} md={12} lg={4}>
+                            {/* -------- nature  -------- */}
                             <InputGroup className="mb-3 mt-4" >
                                 <InputGroup.Text >Nature : </InputGroup.Text>
                                 <FormControl
@@ -111,6 +115,7 @@ const InwardForm = () => {
                             </InputGroup>
                         </Col>
                         <Col xs={12} sm={12} md={6} lg={4}>
+                            {/* -------- subject -------- */}
                             <InputGroup className="mb-3 mt-4" >
                                 <InputGroup.Text>Subject : </InputGroup.Text>
                                 <FormControl
@@ -125,6 +130,7 @@ const InwardForm = () => {
                         </Col>
 
                         <Col xs={12} sm={12} md={6} lg={4}>
+                            {/* -------- remark -------- */}
                             <InputGroup className="mb-3 mt-4" >
                                 <InputGroup.Text>Remark : </InputGroup.Text>
                                 <FormControl
@@ -142,6 +148,7 @@ const InwardForm = () => {
 
                     <Row>
                         <Col xs={12} sm={12} md={6} >
+                            {/* -------- Recieved From -------- */}
                             <InputGroup className="mb-3 mt-4" >
                                 <InputGroup.Text >Recieved From : </InputGroup.Text>
                                 <FormControl
@@ -155,6 +162,7 @@ const InwardForm = () => {
                             </InputGroup>
                         </Col>
                         <Col xs={12} sm={12} md={6} >
+                            {/* -------- Deliver to -------- */}
                             <InputGroup className="mb-3 mt-4" >
                                 <InputGroup.Text>Deliver To : </InputGroup.Text>
                                 <FormControl
@@ -170,7 +178,8 @@ const InwardForm = () => {
 
                     </Row>
                     <Row >
-                        <Col lg={{ span: 3, offset: 5 }} md={{ span: 4, offset: 4 }} sm={{ span: 5, offset: 3 }} xs={{ span: 3, offset: 2 }} >
+                        {/* -------- Form control Buttons -------- */}
+                        <Col lg={{ span: 3, offset: 5 }} md={{ span: 4, offset: 4 }} sm={{ span: 5, offset: 4 }} >
                             {!id && <Button className='m-4' type='submit' variant="success" >Save Inward Post</Button>}
                             {id && <Button className='m-4' type='submit' variant="success" >Update Inward Post</Button>}
                         </Col>

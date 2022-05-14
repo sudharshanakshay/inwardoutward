@@ -16,7 +16,6 @@ import InwardForms from './components/Forms/InwardForms';
 import OutwardForm from './components/Forms/OutwardForm';
 import ReportInward from './pages/report/reportInward';
 import ReportOutward from './pages/report/reportOutward';
-import FormAction from './components/Forms/FormAction';
 import Settings from './pages/Settings/Settings';
 import ViewInward from './components/ViewRow/ViewInward';
 import ViewOutward from './components/ViewRow/ViewOutward';

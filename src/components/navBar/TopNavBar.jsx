@@ -6,7 +6,7 @@ import { logOut } from "../../actions/auth/authSlice";
 import store from "../../store";
 import { BsFillGridFill } from 'react-icons/bs';
 import PopModal from "../Modals/PopModal";
-
+import { FcSettings } from 'react-icons/fc';
 
 
 const TopNavBar = () => {
@@ -39,6 +39,8 @@ const TopNavBar = () => {
                     <Navbar.Toggle aria-controls={`offcanvasNavbar-expand-${expand}}`} />
                     <Navbar.Collapse id="navbarScroll">
 
+                        {/* ------ Nav Items ------ */}
+
                         <Nav defaultActiveKey="/home" as="ul"
                             className="me-auto my-3 my-lg-0"
                             style={{ maxHeight: '100px' }}
@@ -69,13 +71,14 @@ const TopNavBar = () => {
                     <Offcanvas show={show} onHide={handleClose} placement={placement} name={placement} >
                         <Container>
                             <Offcanvas.Header closeButton>
-                                <Offcanvas.Title  >Settings</Offcanvas.Title>
+                                <Offcanvas.Title >Settings</Offcanvas.Title>
                             </Offcanvas.Header>
                             
                             {/* ---- offcanvas body ---- */}
                             <Offcanvas.Body className='center' >
                                 <hr />
-                                <Link to="/settings" className="nav-item" > Settings </Link>
+                                {/* ---- Settings  Link Button ---- */}
+                                <Link to="/settings" className="nav-item"><FcSettings size={'2em'}/> Settings </Link>
                                 <hr />
 
                                 {/* ---- logout Button ---- */}
@@ -86,7 +89,7 @@ const TopNavBar = () => {
                                     <PopModal 
                                         mode={'logout'}
                                         modelTitle={'Logout'}
-                                        ctlBtnVariant={'primary'}
+                                        ctlBtnVariant={'outline-danger'}
                                         variant={'danger'}
                                         message={'logout from current session ?'}
                                     />

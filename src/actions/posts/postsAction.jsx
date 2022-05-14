@@ -1,9 +1,9 @@
 import axios from "axios"
-import { INSERT_INWARD_URL, INSERT_OUTWARD_URL, CONFIG, SELECT_INWARD_URL, DELETE_URL, SELECT_OUTWARD_URL, SELECT_DASHBOARD_INWARD_URL, SELECT_DASHBOARD_OUTWARD_URL, UPDATE_INWARD_URL } from "../../utility/Constants";
+import { INSERT_INWARD_URL, INSERT_OUTWARD_URL, CONFIG, SELECT_INWARD_URL, SELECT_OUTWARD_URL, SELECT_DASHBOARD_INWARD_URL, SELECT_DASHBOARD_OUTWARD_URL } from "../../utility/Constants";
 import store from "../../store";
-import { connected, connectionError, initStore, setDashboardInward, setDashboardOutward, setInwardCount, setInwardTable, setOutwardCount, setOutwardTable, setViewRow } from "./postsSlice";
+import { connected, connectionError, setDashboardInward, setDashboardOutward, setInwardCount, setInwardTable, setOutwardCount, setOutwardTable } from "./postsSlice";
 
-var tempViewRow = '';
+// ----------------- Insert handler -----------------
 
 export const insertFrom = async ({
     inward = null,
@@ -94,6 +94,7 @@ export const insertFrom = async ({
     }
 }
 
+// ----------------- Retrive inward, outward table data  -----------------
 
 export const getDisplayData = async ({ updated = false }) => {
 
@@ -156,8 +157,11 @@ export const getDisplayData = async ({ updated = false }) => {
     }
 }
 
+// ----------------- Retrive specific row handler -----------------
+
 export const getRow = ({ id, inward = false, outward = false }) => {
 
+    // ----------------- get Inward row -----------------
     if (inward) {
         const body = JSON.stringify({
             from_post: 'inward',
@@ -177,6 +181,8 @@ export const getRow = ({ id, inward = false, outward = false }) => {
             return 'error';
         }
     }
+
+    // ----------------- get Outward row -----------------
 
     if (outward) {
         const body = JSON.stringify({
@@ -201,7 +207,9 @@ export const getRow = ({ id, inward = false, outward = false }) => {
 }
 
 
-export const updateTo = ({
+// ----------------- Update Row handler -----------------
+
+export const updateTo = async ({
 
     inward = null,
     outward = null,
@@ -223,6 +231,8 @@ export const updateTo = ({
     description = null,
     department = null }) => {
 
+    // ----------------- update Inward row -----------------
+
     if (inward) {
         const from_post = "inward_post";
         console.log(id)
@@ -240,25 +250,27 @@ export const updateTo = ({
         });
 
         try {
-            axios.post('http://localhost:5000/inward/update', body, CONFIG)
-            .then((res) => {
-                console.log(res.data.inwardUpdate);
-                if (res.data.inwardUpdate) getDisplayData({ updated: true });
-            })
+            await axios.post('http://localhost:5000/inward/update', body, CONFIG)
+                .then((res) => {
+                    console.log(res.data.inwardUpdate);
+                    if (res.data.inwardUpdate) getDisplayData({ updated: true });
+                })
         }
-        catch (err){
+        catch (err) {
             console.log(err);
         }
     }
 
+    // ----------------- update Outward row -----------------
+
     if (outward) {
         console.log('outward update')
         console.log(id)
-        
+
         const from_post = "outward_post";
 
         const body = JSON.stringify({
-            outwardID : id,
+            outwardID: id,
             from_post: from_post,
             date: date,
             serialNo: serialNo,
@@ -271,12 +283,12 @@ export const updateTo = ({
         });
 
         try {
-            axios.post('http://localhost:5000/outward/update', body, CONFIG)
-            .then((res) => {
-                console.log(res.data.outwardUpdate);
-                console.log('outward update success');
-                if (res.data.outwardUpdate) getDisplayData({ updated: true });
-            })
+            await axios.post('http://localhost:5000/outward/update', body, CONFIG)
+                .then((res) => {
+                    console.log(res.data.outwardUpdate);
+                    console.log('outward update success');
+                    if (res.data.outwardUpdate) getDisplayData({ updated: true });
+                })
         }
         catch (err) {
             console.log('outward update error')
@@ -285,9 +297,9 @@ export const updateTo = ({
     }
 }
 
+// ----------------- delete handler -----------------
 
-
-export const delete_from = ({ rowID, inward = false, outward = false }) => {
+export const delete_from = async ({ rowID, inward = false, outward = false }) => {
 
     // only one of two options must be specified.
 
@@ -295,6 +307,8 @@ export const delete_from = ({ rowID, inward = false, outward = false }) => {
         // alert function usage error
         return;
     }
+
+    // ----------------- delete inward -----------------
 
     if (inward) {
         console.log(rowID)
@@ -306,11 +320,12 @@ export const delete_from = ({ rowID, inward = false, outward = false }) => {
 
         try {
             console.log(body);
-            axios.post('http://localhost:5000/delete', body, CONFIG)
+            await axios.post('http://localhost:5000/delete', body, CONFIG)
                 .then((res) => {
                     console.log(res.data);
+                    if (res.data.status === 'success') getDisplayData({ updated: true });
                 })
-            getDisplayData({ updated: true });
+
 
             // delete successful alert msg.
         }
@@ -318,6 +333,8 @@ export const delete_from = ({ rowID, inward = false, outward = false }) => {
             console.log(err);
         }
     }
+
+    // ----------------- delete outward -----------------
 
     if (outward) {
 
@@ -328,12 +345,12 @@ export const delete_from = ({ rowID, inward = false, outward = false }) => {
 
         try {
             console.log(body);
-            axios.post('http://localhost:5000/delete', body, CONFIG)
+            await axios.post('http://localhost:5000/delete', body, CONFIG)
                 .then((res) => {
                     console.log(res.data);
+                    if (res.data.status === 'success') getDisplayData({ updated: true });
                 })
 
-            getDisplayData({ updated: true });
             // delete successful alert msg.
         }
         catch (err) {

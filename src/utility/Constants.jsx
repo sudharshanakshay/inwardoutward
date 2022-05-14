@@ -39,6 +39,14 @@ export const CONFIG = {
 
 // ------------------------------ constants & test data ------------------------------
 
+export const SUCCESS = 'success';
+
+export const TOTAL_OUTWARD_POST = 'Total Outward Post';
+
+export const TOTAL_INWARD_POST = 'Total Inward Post';
+
+export const TOTAL_POST = 'Total Post';
+
 export const INWARD_TABLE_TITLE = "Inward Table";
 
 export const OUTWARD_TABLE_TITLE = "Outward Table";

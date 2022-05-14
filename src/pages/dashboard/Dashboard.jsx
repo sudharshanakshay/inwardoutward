@@ -5,7 +5,7 @@ import TableFair from '../../components/TableFair/TableFair';
 
 import { BRIGHT_GREEN_SHADE, TEST_COLOR, ORANGE, MORE_TEAL, YELLOWISH, VIOLET, VIOLET_SHADE, GOLDEN } from '../../utility/color';
 import { Button, Col, Container, Row, Spinner, Table } from 'react-bootstrap';
-import { INWARD_TABLE_HEADER_SHORT, INWARD_TABLE_TITLE, OUTWARD_TABLE_TITLE, OUTWARD_TABLE_HEADER_SHORT } from '../../utility/Constants';
+import { INWARD_TABLE_HEADER_SHORT, INWARD_TABLE_TITLE, OUTWARD_TABLE_TITLE, OUTWARD_TABLE_HEADER_SHORT, TOTAL_OUTWARD_POST, TOTAL_INWARD_POST, TOTAL_POST } from '../../utility/Constants';
 import Footer from '../../components/Footer/Footer';
 import ButtonSpinner from '../../components/Loading/ButtonSpinner';
 import { useSelector } from 'react-redux';
@@ -13,7 +13,7 @@ import { useSelector } from 'react-redux';
 
 const Dashboard = () => {
 
-    // ---- get dashboard inward table data ----
+    // ---- load dashboard inward table data ----
     const inwardTableData = useSelector((state)=> {
         try {
             return state.posts.dashboardInward;
@@ -23,7 +23,7 @@ const Dashboard = () => {
         }
     });
 
-    // ---- get dashboard outward table data ----
+    // ---- load dashboard outward table data ----
     const outwardTableData = useSelector((state)=> {
         try {
             return state.posts.dashboardOutward;
@@ -33,7 +33,7 @@ const Dashboard = () => {
         }
     });
 
-    // ---- get inward count ----
+    // ---- load inward count ----
     const inwardCount = useSelector((state)=> {
         try {
             return state.posts.inwardCount;
@@ -44,7 +44,7 @@ const Dashboard = () => {
     });
 
 
-    // ---- get outward count ----
+    // ---- load outward count ----
     const outwardCount = useSelector((state)=> {
         try {
             return state.posts.outwardCount;
@@ -56,13 +56,13 @@ const Dashboard = () => {
 
 
     // ---- calculate pending count ----
-    let pending = inwardCount - outwardCount ;
-    pending = pending < 0 ? 0 : pending ; 
+    let pending = inwardCount + outwardCount ;
+    // pending = pending < 0 ? 0 : pending ; 
 
     // ---- load spinner while loading ----
-    if (!outwardTableData) {
-        return (
-            <>
+    if (!outwardTableData || !inwardTableData || !inwardCount || !outwardCount) {
+        return ( 
+            <>outwardCount
                 <TopNavBar />
                 <ButtonSpinner />
             </>
@@ -104,11 +104,11 @@ const Dashboard = () => {
                         <Col >
                             {/* <Row className='display-empty-box'></Row> */}
                             {/* ---------- total pending posts ---------- */}
-                            <Row><StatusBox mainSpace={pending} discription="Total Pending Post" color={VIOLET_SHADE}></StatusBox></Row>
+                            <Row><StatusBox mainSpace={pending} discription={TOTAL_POST} color={VIOLET_SHADE}></StatusBox></Row>
                             {/* ---------- total inward posts ---------- */}
-                            <Row><StatusBox mainSpace={inwardCount} discription="Total Inward Post" color={GOLDEN}></StatusBox></Row>
+                            <Row><StatusBox mainSpace={inwardCount} discription={TOTAL_INWARD_POST} color={GOLDEN}></StatusBox></Row>
                             {/* ---------- total outward posts ---------- */}
-                            <Row><StatusBox mainSpace={outwardCount} discription="Total Outward Post" color={BRIGHT_GREEN_SHADE}></StatusBox></Row>
+                            <Row><StatusBox mainSpace={outwardCount} discription={TOTAL_OUTWARD_POST} color={BRIGHT_GREEN_SHADE}></StatusBox></Row>
                         </Col>
                     </Row>
                 </Container>
@@ -124,11 +124,11 @@ const Dashboard = () => {
 
                     <Row>
                         {/* ---------- total pending posts ---------- */}
-                        <Col /*xs={4} sm={4}*/><StatusBox mainSpace={pending} discription="Total Pending Post" color={VIOLET_SHADE}></StatusBox></Col>
+                        <Col /*xs={4} sm={4}*/><StatusBox mainSpace={pending} discription={TOTAL_POST} color={VIOLET_SHADE}></StatusBox></Col>
                         {/* ---------- total inward posts ---------- */}
-                        <Col /*xs={4} sm={4} */ ><StatusBox mainSpace={inwardCount} discription="Total Inward Post" color={GOLDEN}></StatusBox></Col>
+                        <Col /*xs={4} sm={4} */ ><StatusBox mainSpace={inwardCount} discription={TOTAL_INWARD_POST} color={GOLDEN}></StatusBox></Col>
                         {/* ---------- total outward posts ---------- */}
-                        <Col /*xs={4} sm={4}*/ ><StatusBox mainSpace={outwardCount} discription="Total Outward Post" color={BRIGHT_GREEN_SHADE}></StatusBox></Col>
+                        <Col /*xs={4} sm={4}*/ ><StatusBox mainSpace={outwardCount} discription={TOTAL_OUTWARD_POST} color={BRIGHT_GREEN_SHADE}></StatusBox></Col>
                     </Row>
                     <Row >
                         {/* --------------------------- Inward Table --------------------------- */}
