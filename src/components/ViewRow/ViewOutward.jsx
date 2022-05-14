@@ -60,11 +60,10 @@ const ViewOutward = () => {
                                 </ListGroup.Item>
                                 <ListGroup.Item action>
                                     <PopModal
-                                        outward={outward}
-                                        mode={'delete'}
+                                        mode={'outward_delete'}
                                         btnText={'Yes, Delete'}
                                         modelTitle={"Delete"}
-                                        message={`Outward Row with ID "${id}" will be permanently deleted, wish to proceed ? `}
+                                        message={`Outward Row will be permanently deleted, wish to proceed ? `}
                                         variant={'outline-danger'}
                                         id={id}
                                     />
@@ -109,7 +108,7 @@ const ViewOutward = () => {
                     </div>
                 </Col>
             </Row>
-           
+
         </div>
     );
 
