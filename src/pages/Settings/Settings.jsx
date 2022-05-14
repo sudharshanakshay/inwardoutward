@@ -24,6 +24,7 @@ const Settings = () => {
             return state.settings.departmentList;
         }
         catch (err) {
+            // return [];
             console.log(err);
         }
     })
@@ -35,6 +36,7 @@ const Settings = () => {
             return state.settings.employeeData;
         }
         catch (err) {
+            // return [];
             console.log(err)
         }
     })
@@ -142,7 +144,7 @@ const Settings = () => {
                                                         {
                                                             <select name='department' id='dropdown' onChange={(val) => { handleChange(val) }}>
                                                                 <option value='' selected="selected" >{formData.department}</option>
-                                                                {departmentList.map((obj, index) => {
+                                                                {departmentList?.map((obj, index) => {
                                                                     return (<option >{obj.name}</option>)
                                                                 })}
                                                             </select>

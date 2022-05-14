@@ -62,7 +62,7 @@ const Dashboard = () => {
     // ---- load spinner while loading ----
     if (!outwardTableData || !inwardTableData || !inwardCount || !outwardCount) {
         return ( 
-            <>outwardCount
+            <>
                 <TopNavBar />
                 <ButtonSpinner />
             </>
