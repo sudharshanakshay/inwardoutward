@@ -12,8 +12,6 @@ import Footer from "../../components/Footer/Footer";
 
 const ViewInward = () => {
 
-
-
     const { id } = useParams();
     const inward = true;
     console.log(id)
