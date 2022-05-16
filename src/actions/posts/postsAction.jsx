@@ -1,7 +1,8 @@
 import axios from "axios"
-import { INSERT_INWARD_URL, INSERT_OUTWARD_URL, CONFIG, SELECT_INWARD_URL, SELECT_OUTWARD_URL, SELECT_DASHBOARD_INWARD_URL, SELECT_DASHBOARD_OUTWARD_URL } from "../../utility/Constants";
+import { INSERT_INWARD_URL, INSERT_OUTWARD_URL, CONFIG, SELECT_INWARD_URL, SELECT_OUTWARD_URL, SELECT_DASHBOARD_INWARD_URL, SELECT_DASHBOARD_OUTWARD_URL, SUCCESS } from "../../utility/Constants";
 import store from "../../store";
-import { connected, connectionError, setDashboardInward, setDashboardOutward, setInwardCount, setInwardTable, setOutwardCount, setOutwardTable } from "./postsSlice";
+import { connected, connectionError, setDashboardInward, setDashboardOutward, setInwardCount, setInwardTable, setOutwardCount, setOutwardTable, setRowData } from "./postsSlice";
+import { Next } from "react-bootstrap/esm/PageItem";
 
 // ----------------- Insert handler -----------------
 
@@ -170,10 +171,17 @@ export const getRow = ({ id, inward = false, outward = false }) => {
         try {
             const row = axios.post('http://localhost:5000/select/row', body, CONFIG)
                 .then((res) => {
-                    console.log(res.data.selectRow);
-                    console.log('retrive successful')
+                    // console.log(res.data.selectRow);
+                    console.log('single row retrived successful')
+                    // sessionStorage.setItem('selectRow', JSON.stringify({rowData : res.data.selectRow }));
+                    // Next()
                     return res.data.selectRow;
                 })
+                // .then((res) => {
+                    // console.log(res.data);
+                    // store.dispatch(setRowData());
+                    // return res.data.selectRow;
+                // } );
             return row;
         }
         catch (err) {
@@ -252,8 +260,8 @@ export const updateTo = async ({
         try {
             await axios.post('http://localhost:5000/inward/update', body, CONFIG)
                 .then((res) => {
-                    console.log(res.data.inwardUpdate);
-                    if (res.data.inwardUpdate) getDisplayData({ updated: true });
+                    console.log(res.data);
+                    if (res.data.status === SUCCESS) getDisplayData({ updated: true });
                 })
         }
         catch (err) {
@@ -323,7 +331,10 @@ export const delete_from = async ({ rowID, inward = false, outward = false }) =>
             await axios.post('http://localhost:5000/delete', body, CONFIG)
                 .then((res) => {
                     console.log(res.data);
-                    if (res.data.status === 'success') getDisplayData({ updated: true });
+                    if (res.data.status === 'success') {
+                        console.log('hy im delete in inward !');
+                        getDisplayData({ updated: true });
+                    }
                 })
 
 

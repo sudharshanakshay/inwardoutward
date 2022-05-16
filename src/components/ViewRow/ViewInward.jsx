@@ -1,13 +1,14 @@
 import "C:/Users/hp/Desktop/Aptra/inwardoutward/src/App.css"
 import React, { useEffect, useState } from 'react';
 import { Col, Container, Row, ListGroup, Button } from "react-bootstrap";
-import { useParams } from 'react-router-dom';
+import { Navigate, useParams } from 'react-router-dom';
 import { getRow } from '../../actions/posts/postsAction';
 import TopNavBar from '../navBar/TopNavBar';
 import { AiOutlinePrinter } from 'react-icons/ai';
 import PopModal from "../Modals/PopModal";
 import { Link, useNavigate } from 'react-router-dom';
 import Footer from "../../components/Footer/Footer";
+import { useSelector } from "react-redux";
 
 
 const ViewInward = () => {
@@ -29,19 +30,71 @@ const ViewInward = () => {
     // ---- 'getRow' func defined in PostsAction, fetches specific row from database ----
     // ---- useEffect to render only once , empty '[]' makes it happn. ----
     useEffect(() => {
-        var res = getRow({ inward: true, id: id });
-        console.log(res);
-        res.then((value) => {
+        var promise = getRow({ inward: true, id: id });
+        console.log(promise);
+        promise.then((value) => {
             console.log(value[0]);
             setFormData(value[0]);
         })
     }, []);
 
+    // ---- load Inward Table data ---- 
+    // const rowData = useSelector((state) => {
+    //     console.log(state.posts.rowData)
+    //     try { return state.posts.rowData; }
+    //     catch { return 0; }
+    // });
+
     let navigate = useNavigate();
+    // if(!rowData) {
+    //     return (
+    //         <>helle </>
+    //     )
+    // }
+
+    
     const handleEdit = (id) => {
 
         if (inward) navigate(`/inward/update/${id}`);
 
+    }
+
+    
+    const handleOnClick = (e) => {
+        console.log('hy clicked !!');
+        try {
+            console.log(formData.date);
+            navigate('/inward');
+        }
+        catch (err) {
+            
+        }
+    }
+    try {
+        console.log(formData.date)
+    }
+    catch {
+        return( 
+            <>
+            
+            <div className='no-print' >
+                <TopNavBar />
+                <h1 style={{ textAlign: "center" }}>Inward Post </h1>
+            </div>
+            data has been deleted !
+            
+            {
+                navigate(-1)
+            }
+            </>
+            
+        )
+    }
+    if(formData.date === undefined){
+        
+        return(
+            <>data has been deleted !</>
+        )
     }
 
     return (
@@ -75,7 +128,8 @@ const ViewInward = () => {
                                     />
                                 </ListGroup.Item>
                                 <ListGroup.Item action>
-                                    <Link to="/inward">List Inward Posts</Link>
+                                    <Button onClick={(e) => handleOnClick(e)}>List Inward Posts</Button>
+                                    {/* Link to="/inward" */}
                                 </ListGroup.Item>
                                 <ListGroup.Item action>
                                     <Link to="/inwardform">New Inward Post</Link>
@@ -91,8 +145,7 @@ const ViewInward = () => {
                                 <ListGroup variant='flush' >
                                     <ListGroup.Item><h3>Record Details</h3></ListGroup.Item>
                                     <ListGroup.Item>
-
-                                        <li><th>Date :</th>{ }<td>{formData.date}</td></li>
+                                        <li><th>Date :</th><td>{formData.date}</td></li>
                                         <li><th>Inward No. :</th> <td> {formData.inwardNo}</td></li>
                                         <li><th>Received From. : </th> <td> {formData.recievedFrom}</td></li>
                                         <li><th>Subject  : </th> <td> {formData.subject}</td></li>
