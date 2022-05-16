@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { getRow, insertFrom, updateTo } from '../../actions/posts/postsAction';
 import { Button, Col, Container, Dropdown, Form, FormControl, InputGroup, Row } from "react-bootstrap";
 import TopNavBar from '../navBar/TopNavBar';
-import { useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 
 const OutwardForm = () => {
@@ -51,12 +51,14 @@ const OutwardForm = () => {
         console.log(formData);
     }
 
+    const navigate = useNavigate();
     const onSubmit = (e) => {
         e.preventDefault();
         const outward = true;
         const { serialNo, date, nature, department, addressee, description, receiptNo, deliverTo, remark } = formData;
         if (!id) insertFrom({ outward, serialNo, date, nature, department, addressee, description, receiptNo, deliverTo, remark });
         if (id) updateTo({ id, outward, serialNo, date, nature, department, addressee, description, receiptNo, deliverTo, remark });
+        navigate(-1);
     }
 
 

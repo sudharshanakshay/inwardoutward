@@ -2,10 +2,12 @@ import React, { useEffect, useState } from 'react';
 import { insertFrom, updateTo } from '../../actions/posts/postsAction';
 import { Button, Col, Container, Form, FormControl, InputGroup, Row } from "react-bootstrap";
 import TopNavBar from '../navBar/TopNavBar';
-import { useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import { getRow } from "../../actions/posts/postsAction";
 
 const InwardForm = () => {
+
+    const navigate = useNavigate();
 
     // ---- get inwardID ----
     const { id } = useParams();
@@ -45,6 +47,7 @@ const InwardForm = () => {
         const { inwardNo, date, nature, recievedFrom, subject, deliverTo, remark } = formData;
         if (!id) insertFrom({ inward, inwardNo, date, nature, recievedFrom, subject, deliverTo, remark });
         if (id) updateTo({ id, inward, inwardNo, date, nature, recievedFrom, subject, deliverTo, remark });
+        navigate(-1);
     }
 
     return (
