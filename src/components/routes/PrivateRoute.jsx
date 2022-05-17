@@ -10,8 +10,8 @@ const PrivateRoute = ({ component: RouteComponent }) => {
     const connErr = useSelector((state) => state.posts.connectionError);
 
     getDisplayData({});
-    getDepartment();
-    getEmployeeData();
+    getDepartment({});
+    getEmployeeData({});
 
     if(isLoggedIn) {
         if(connErr) return <p>connection err</p>

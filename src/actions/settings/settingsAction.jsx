@@ -6,6 +6,28 @@ import { SUCCESS } from "../../utility/Constants";
 
 // ----------------- settings Actions handles data manuplation for settings page -----------------
 
+// ----------------- Retrive department -----------------
+
+export const getDepartment = async ({ updated = false }) => {
+    const GET_DEPT_URL = 'http://localhost:5000/select/dept';
+    if(sessionStorage.getItem('departmentList') == undefined || updated){
+        try {
+            await axios.post(GET_DEPT_URL, CONFIG)
+                .then((res) => {
+                    console.log(res.data.departmentList);
+                    sessionStorage.setItem('departmentList', JSON.stringify(res.data.departmentList));
+                    // return res.data.departmentList;
+                })
+                .then(() => store.dispatch(setDepartmentList()))
+            // return dept;
+        }
+        catch (err) {
+            console.log(err);
+        }
+        // ---- ToDo : handle error return here ----
+    }
+}
+
 // ----------------- insert department -----------------
 export const addDepartment = async (dept) => {
     const INSERT_DEPARTMENT_URL = 'http://localhost:5000/dept';
@@ -20,7 +42,7 @@ export const addDepartment = async (dept) => {
                 if (res.data.status === SUCCESS) {
                     // ---- insert successful ----
                     console.log('dept insert successful ');
-                    getDepartment();
+                    getDepartment({ updated:true });
                 }
                 else {
                     console.log(res.data);
@@ -31,26 +53,6 @@ export const addDepartment = async (dept) => {
     catch (err) {
         console.log(err)
     }
-}
-
-// ----------------- Retrive department -----------------
-
-export const getDepartment = async () => {
-    const GET_DEPT_URL = 'http://localhost:5000/select/dept';
-    try {
-        await axios.post(GET_DEPT_URL, CONFIG)
-            .then((res) => {
-                console.log(res.data.departmentList);
-                sessionStorage.setItem('departmentList', JSON.stringify(res.data.departmentList));
-                // return res.data.departmentList;
-            })
-            .then(() => store.dispatch(setDepartmentList()))
-        // return dept;
-    }
-    catch (err) {
-        console.log(err);
-    }
-    // ---- ToDo : handle error return here ----
 }
 
 // ----------------- delete department -----------------
@@ -66,11 +68,31 @@ export const delDepartment = async ({rowID}) => {
         await axios.post('http://localhost:5000/delete', body, CONFIG)
             .then((res) => {
                 console.log(res.data.status)
-                if (res.data.status === SUCCESS) getDepartment();
+                if (res.data.status === SUCCESS) getDepartment({ updated:true });
             })
     }
     catch (err) {
         console.log(err);
+    }
+}
+
+// ----------------- Retrive Employee data -----------------
+
+export const getEmployeeData = async({ updated = false }) => {
+
+    const GET_EMP_URL = 'http://localhost:5000/select/emp';
+    if(sessionStorage.getItem('employeeData') == undefined || updated){
+        try {
+            await axios.post(GET_EMP_URL, CONFIG)
+                .then((res) => {
+                    console.log(res.data.employeeData);
+                    if (res.data.employeeData !== 'error') sessionStorage.setItem('employeeData', JSON.stringify(res.data.employeeData));
+                })
+                .then(() => store.dispatch(setEmployeeData()));
+        }
+        catch (err) {
+            console.log(err)
+        }
     }
 }
 
@@ -84,30 +106,13 @@ export const addEmployee = async (employeeData) => {
         await axios.post(ADD_EMP_URL, body, CONFIG)
             .then((res) => {
                 console.log(res.data.status);
-                if (res.data.status === SUCCESS) getEmployeeData();
+                if (res.data.status === SUCCESS) getEmployeeData({ updated:true });
             })
     } catch (error) {
         console.log(error)
     }
 }
 
-// ----------------- Retrive Employee data -----------------
-
-export const getEmployeeData = async() => {
-
-    const GET_EMP_URL = 'http://localhost:5000/select/emp';
-    try {
-        await axios.post(GET_EMP_URL, CONFIG)
-            .then((res) => {
-                console.log(res.data.employeeData);
-                if (res.data.employeeData !== 'error') sessionStorage.setItem('employeeData', JSON.stringify(res.data.employeeData));
-            })
-            .then(() => store.dispatch(setEmployeeData()));
-    }
-    catch (err) {
-        console.log(err)
-    }
-}
 
 // ----------------- delete Employee data -----------------
 
@@ -123,7 +128,7 @@ export const delEmployee = async ({ rowID }) => {
         await axios.post(DELETE_URL, body, CONFIG)
             .then((res) => {
                 console.log(res.data.status);
-                if (res.data.status === SUCCESS) getEmployeeData();
+                if (res.data.status === SUCCESS) getEmployeeData({ updated:true });
             })
     }
     catch (err) {
