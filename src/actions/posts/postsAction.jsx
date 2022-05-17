@@ -1,5 +1,5 @@
 import axios from "axios"
-import { INSERT_INWARD_URL, INSERT_OUTWARD_URL, CONFIG, SELECT_INWARD_URL, SELECT_OUTWARD_URL, SELECT_DASHBOARD_INWARD_URL, SELECT_DASHBOARD_OUTWARD_URL, SUCCESS } from "../../utility/Constants";
+import { INSERT_INWARD_URL, INSERT_OUTWARD_URL, CONFIG, SELECT_INWARD_URL, SELECT_OUTWARD_URL, SELECT_DASHBOARD_INWARD_URL, SELECT_DASHBOARD_OUTWARD_URL, SUCCESS } from "../../utils/Constants";
 import store from "../../store";
 import { connected, connectionError, setDashboardInward, setDashboardOutward, setInwardCount, setInwardTable, setOutwardCount, setOutwardTable, setRowData } from "./postsSlice";
 import { Next } from "react-bootstrap/esm/PageItem";

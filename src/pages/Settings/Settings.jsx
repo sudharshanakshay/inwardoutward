@@ -4,7 +4,7 @@ import { addDepartment, addEmployee, delDepartment, delEmployee, getAllDepartmen
 import GoBackNavBar from "../../components/navBar/GoBackNavBar";
 import PopModal from "../../components/Modals/PopModal";
 import { useSelector } from "react-redux";
-import { DELETE } from "../../utility/Constants";
+import { DELETE } from "../../utils/Constants";
 import { delete_from } from "../../actions/posts/postsAction";
 import { LocalConvenienceStoreOutlined } from "@mui/icons-material";
 

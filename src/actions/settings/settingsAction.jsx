@@ -1,8 +1,8 @@
 import axios from "axios"
 import store from "../../store";
-import { CONFIG } from "../../utility/Constants"
+import { CONFIG } from "../../utils/Constants"
 import { setDepartmentList, setEmployeeData } from "./settingsSlice";
-import { SUCCESS } from "../../utility/Constants";
+import { SUCCESS } from "../../utils/Constants";
 
 // ----------------- settings Actions handles data manuplation for settings page -----------------
 

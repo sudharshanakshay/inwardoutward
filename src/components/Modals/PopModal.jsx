@@ -3,7 +3,7 @@ import { useState } from "react";
 import store from "../../store";
 import { logOut } from "../../actions/auth/authSlice";
 import { useNavigate } from "react-router-dom";
-import { DELETE, LOGOUT } from "../../utility/Constants";
+import { DELETE, LOGOUT } from "../../utils/Constants";
 
 
 const PopModal = ({ren=()=>{}, execFunc, id=false, mode, modalBtnText, ctlBtnText, modelTitle, message, modalBtnVariant, ctlBtnVariant='link' }) => {

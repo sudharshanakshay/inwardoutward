@@ -3,9 +3,9 @@ import TopNavBar from '../../components/navBar/TopNavBar';
 import StatusBox from '../../components/StatusBox/StatusBox';
 import TableFair from '../../components/TableFair/TableFair';
 
-import { BRIGHT_GREEN_SHADE, TEST_COLOR, ORANGE, MORE_TEAL, YELLOWISH, VIOLET, VIOLET_SHADE, GOLDEN } from '../../utility/color';
+import { BRIGHT_GREEN_SHADE, TEST_COLOR, ORANGE, MORE_TEAL, YELLOWISH, VIOLET, VIOLET_SHADE, GOLDEN } from '../../utils/color';
 import { Button, Col, Container, Row, Spinner, Table } from 'react-bootstrap';
-import { INWARD_TABLE_HEADER_SHORT, INWARD_TABLE_TITLE, OUTWARD_TABLE_TITLE, OUTWARD_TABLE_HEADER_SHORT, TOTAL_OUTWARD_POST, TOTAL_INWARD_POST, TOTAL_POST } from '../../utility/Constants';
+import { INWARD_TABLE_HEADER_SHORT, INWARD_TABLE_TITLE, OUTWARD_TABLE_TITLE, OUTWARD_TABLE_HEADER_SHORT, TOTAL_OUTWARD_POST, TOTAL_INWARD_POST, TOTAL_POST } from '../../utils/Constants';
 import Footer from '../../components/Footer/Footer';
 import ButtonSpinner from '../../components/Loading/ButtonSpinner';
 import { useSelector } from 'react-redux';

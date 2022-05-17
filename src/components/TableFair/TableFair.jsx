@@ -16,7 +16,7 @@ import jsZip from 'jszip';
 import pdfMake from 'pdfmake/build/pdfmake'
 import pdfFonts from 'pdfmake/build/vfs_fonts'
 import PopModal from "../Modals/PopModal";
-import { DELETE } from "../../utility/Constants";
+import { DELETE } from "../../utils/Constants";
 import { delete_from } from "../../actions/posts/postsAction";
 pdfMake.vfs = pdfFonts.pdfMake.vfs;
 window.pdfMake = pdfMake;

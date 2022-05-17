@@ -1,14 +1,11 @@
 import { useState } from "react";
 import { Navbar, Nav, NavDropdown, Container, Button, Offcanvas, FormControl, Form, Dropdown, NavLink, NavItem, OffcanvasHeader, Col } from "react-bootstrap";
-import { useSelector } from "react-redux";
 import { Link, Navigate } from "react-router-dom";
-import { logOut } from "../../actions/auth/authSlice";
-import store from "../../store";
 import { BsFillGridFill } from 'react-icons/bs';
 import PopModal from "../Modals/PopModal";
 import { FcSettings } from 'react-icons/fc';
-import { LOGOUT } from "../../utility/Constants";
-
+import { LOGOUT } from "../../utils/Constants";
+import logo from '../../utils/Sayhadrilogo.jpg'
 
 const TopNavBar = () => {
 
@@ -30,6 +27,7 @@ const TopNavBar = () => {
                     <Navbar.Brand className="nav-item">
                         <img
                             src="https://sahyadri.edu.in/img/sahyadri-logo.png"
+                            // src={logo}
                             width="300"
                             height="60"
                             // className="d-inline-block align-top"

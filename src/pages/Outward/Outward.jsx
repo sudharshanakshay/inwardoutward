@@ -3,12 +3,12 @@ import TopNavBar from "../../components/navBar/TopNavBar";
 import { Link } from 'react-router-dom';
 import { Container, Row, Col } from "react-bootstrap";
 import TableFair from "../../components/TableFair/TableFair";
-import {  OUTWARD_TABLE_HEADER, TOTAL_OUTWARD_POST } from "../../utility/Constants";
+import {  OUTWARD_TABLE_HEADER, TOTAL_OUTWARD_POST } from "../../utils/Constants";
 import ButtonSpinner from "../../components/Loading/ButtonSpinner";
 import Footer from "../../components/Footer/Footer";
 import { useSelector } from "react-redux";
 import StatusBox from "../../components/StatusBox/StatusBox";
-import { BRIGHT_GREEN_SHADE } from "../../utility/color";
+import { BRIGHT_GREEN_SHADE } from "../../utils/color";
 
 const Outward = () => {
 

@@ -33,7 +33,7 @@ const ReportInward = () => {
     return (
         <><div>
             <TopNavBar />
-            <Container className="report-view" fluid>
+            <Container fluid>
                 {/* ---------- Inward Table Content ---------- */}
                 <TableFair
                     inward={true}

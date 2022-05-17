@@ -33,7 +33,7 @@ const ReportOutward = () => {
           
     <div>
             <TopNavBar />
-            <Container fluid className="report-view">
+            <Container fluid>
                 {/* ---------- Outward Table Content ---------- */}
                 <TableFair
                     outward={true}
