@@ -11,10 +11,10 @@ import { FaEdit } from 'react-icons/fa';
 import { MdDelete } from 'react-icons/md';
 import { AiOutlineFileAdd } from 'react-icons/ai';
 import { FaList } from 'react-icons/fa';
-import { DELETE } from '../../utility/Constants';
+import { DELETE } from '../../utils/Constants';
 import GoBackNavBar from '../navBar/GoBackNavBar';
 import StatusBox from '../StatusBox/StatusBox';
-import { GREEN } from '../../utility/color';
+import { GREEN } from '../../utils/color';
 import ViewStatus from '../StatusBox/ViewStatus';
 
 const ViewOutward = () => {

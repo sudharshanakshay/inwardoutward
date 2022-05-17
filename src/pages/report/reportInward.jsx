@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import TopNavBar from "../../components/navBar/TopNavBar";
 import { Container } from "react-bootstrap";
 import TableFair from "../../components/TableFair/TableFair";
-import { INWARD_TABLE_HEADER } from "../../utility/Constants";
+import { INWARD_TABLE_HEADER } from "../../utils/Constants";
 import ButtonSpinner from "../../components/Loading/ButtonSpinner";
 import { useSelector } from "react-redux";
 

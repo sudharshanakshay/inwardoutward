@@ -12,8 +12,8 @@ import { FaEdit } from 'react-icons/fa';
 import { MdDelete } from 'react-icons/md';
 import { AiOutlineFileAdd } from 'react-icons/ai';
 import { FaList } from 'react-icons/fa';
-import { DELETE } from '../../utility/Constants';
-import { GREEN } from '../../utility/color';
+import { DELETE } from '../../utils/Constants';
+import { GREEN } from '../../utils/color';
 import ViewStatus from '../StatusBox/ViewStatus';
 import GoBackNavBar from '../navBar/GoBackNavBar';
 
