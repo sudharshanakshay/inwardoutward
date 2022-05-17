@@ -102,7 +102,9 @@ const ViewInward = () => {
                         <div>
                             <Container>
                                 {deleted &&
-                                    <ViewStatus title='Deleted' />
+                                   <Col>
+                                     <ViewStatus title='Deleted' />
+                                   </Col>
                                 }
                                 {!deleted &&
                                     <>

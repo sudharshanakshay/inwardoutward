@@ -6,6 +6,8 @@ import PopModal from "../Modals/PopModal";
 import { FcSettings } from 'react-icons/fc';
 import { LOGOUT } from "../../utils/Constants";
 import logo from '../../utils/Sayhadrilogo.jpg'
+import store from "../../store";
+import { logOut } from "../../actions/auth/authSlice";
 
 const TopNavBar = () => {
 
@@ -89,6 +91,7 @@ const TopNavBar = () => {
                                     <PopModal 
                                         mode={LOGOUT}
                                         modelTitle={'Logout'}
+                                        execFunc={()=>{store.dispatch(logOut())}}
                                         ctlBtnVariant={'outline-danger'}
                                         message={'logout from current session ?'}
                                     />

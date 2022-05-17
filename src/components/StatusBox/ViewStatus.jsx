@@ -8,4 +8,4 @@ const ViewStatus = ({ title='Title' }) => {
     )
 }
 
-export default ViewStatus
+export default ViewStatus;
