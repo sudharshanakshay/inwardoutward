@@ -1,9 +1,7 @@
 import { Modal, Button } from "react-bootstrap";
 import { useState } from "react";
-import { delete_from } from "../../actions/posts/postsAction";
 import store from "../../store";
 import { logOut } from "../../actions/auth/authSlice";
-import { delDepartment, delEmployee } from "../../actions/settings/settingsAction";
 import { useNavigate } from "react-router-dom";
 import { DELETE, LOGOUT } from "../../utility/Constants";
 
@@ -35,7 +33,8 @@ const PopModal = ({ren=()=>{}, execFunc, id=false, mode, modalBtnText, ctlBtnTex
     };
     return (
         <>
-                <Button variant={ctlBtnVariant} className="me-1 p-0" onClick={() => setShow(true)}>{ ctlBtnText || mode?.trim().replace(/^\w/, (c) => c.toUpperCase())}</Button>
+                <Button variant={ctlBtnVariant} className="me-1 p-1"  onClick={() => setShow(true)}>{ ctlBtnText || mode?.trim().replace(/^\w/, (c) => c.toUpperCase())}</Button>
+
                 <Modal
                     show={show}
                     onHide={handleClose}

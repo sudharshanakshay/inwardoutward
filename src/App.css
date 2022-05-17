@@ -327,7 +327,7 @@ li {
 /* ---------------------- ViewPages ---------------------- */
 
 .link {
-    text-decoration: none;
+    text-decoration: none;  
 }
 
 .th {
@@ -343,4 +343,10 @@ li {
     margin-right: auto;
     width: 100%;
     justify-content: center;
+}
+
+.dropdown-border {
+    /* border: none; */
+    border-color: #c8d3cf;
+    background-color: #FFFFFF;
 }

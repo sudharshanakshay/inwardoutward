@@ -4,6 +4,7 @@ import { Button, Col, Container, Dropdown, Form, FormControl, InputGroup, Row } 
 import TopNavBar from '../navBar/TopNavBar';
 import { useNavigate, useParams } from 'react-router-dom';
 import { useSelector } from 'react-redux';
+import GoBackNavBar from '../navBar/GoBackNavBar';
 
 const OutwardForm = () => {
 
@@ -64,7 +65,7 @@ const OutwardForm = () => {
 
     return (
         <>
-            <TopNavBar />
+            <GoBackNavBar title={"New Outward Record"} />
             <Form onSubmit={(s) => onSubmit(s)}>
                 <Container >
                     <Row className='pt-5'>
@@ -118,7 +119,7 @@ const OutwardForm = () => {
                             <InputGroup className="mb-3 mt-4" >
                                 <InputGroup.Text >Department : </InputGroup.Text>
                                 { 
-                                    <select name='department' id='dropdown' onChange={(val) => { handleChange(val) }}>
+                                    <select name='department' className='dropdown-border' id='dropdown' onChange={(val) => { handleChange(val) }}>
                                         <option value='' selected="selected" >{formData.department}</option>
                                         {departmentList.map((obj, index) => {
                                             return (

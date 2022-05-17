@@ -4,6 +4,7 @@ import { Button, Col, Container, Form, FormControl, InputGroup, Row } from "reac
 import TopNavBar from '../navBar/TopNavBar';
 import { useNavigate, useParams } from 'react-router-dom';
 import { getRow } from "../../actions/posts/postsAction";
+import GoBackNavBar from '../navBar/GoBackNavBar';
 
 const InwardForm = () => {
 
@@ -53,7 +54,7 @@ const InwardForm = () => {
 
     return (
         <>
-            <TopNavBar />
+            <GoBackNavBar title={'New Inward Record'} />
             <Form onSubmit={(s) => onSubmit(s)}>
                 <Container >
                     <Row className='pt-5'>

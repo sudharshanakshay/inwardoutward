@@ -64,6 +64,8 @@ export const delDepartment = async ({rowID}) => {
         id: rowID
     })
 
+    console.log(rowID);
+
     try {
         await axios.post('http://localhost:5000/delete', body, CONFIG)
             .then((res) => {

@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Navbar, Nav, NavDropdown, Container, Button, Offcanvas, FormControl, Form, Dropdown, NavLink, NavItem, OffcanvasHeader } from "react-bootstrap";
+import { Navbar, Nav, NavDropdown, Container, Button, Offcanvas, FormControl, Form, Dropdown, NavLink, NavItem, OffcanvasHeader, Col } from "react-bootstrap";
 import { useSelector } from "react-redux";
 import { Link, Navigate } from "react-router-dom";
 import { logOut } from "../../actions/auth/authSlice";
@@ -7,6 +7,7 @@ import store from "../../store";
 import { BsFillGridFill } from 'react-icons/bs';
 import PopModal from "../Modals/PopModal";
 import { FcSettings } from 'react-icons/fc';
+import { LOGOUT } from "../../utility/Constants";
 
 
 const TopNavBar = () => {
@@ -54,10 +55,10 @@ const TopNavBar = () => {
                                 </Dropdown.Toggle>
                                 <Dropdown.Menu>
                                     <Nav.Link >
-                                        <Link to="/ReportInward" >Inward Report</Link>
+                                        <Link className="link" to="/ReportInward" >Inward Report</Link>
                                     </Nav.Link>
                                     <Nav.Link >
-                                        <Link to="/ReportOutward" >Outward Report</Link>
+                                        <Link className="link" to="/ReportOutward" >Outward Report</Link>
                                     </Nav.Link>
                                 </Dropdown.Menu>
                             </Dropdown>
@@ -86,13 +87,14 @@ const TopNavBar = () => {
                                     className=" my-3 my-lg-0"
                                     style={{ maxHeight: '100px' }}>
                                     {/* <Button type="submit" onClick={() => store.dispatch(logOut())} variant="outline-success" >logOut</Button> */}
+                                    <Col>
                                     <PopModal 
-                                        mode={'logout'}
+                                        mode={LOGOUT}
                                         modelTitle={'Logout'}
                                         ctlBtnVariant={'outline-danger'}
-                                        variant={'danger'}
                                         message={'logout from current session ?'}
                                     />
+                                    </Col>
                                 </Nav>
                             </Offcanvas.Body>
                         </Container>

@@ -1,9 +1,12 @@
 import React, { useEffect, useState } from "react";
 import { Tab, Nav, Button, Col, Container, Form, FormControl, InputGroup, Row, Table } from "react-bootstrap";
-import { addDepartment, addEmployee, getAllDepartment } from "../../actions/settings/settingsAction";
+import { addDepartment, addEmployee, delDepartment, delEmployee, getAllDepartment } from "../../actions/settings/settingsAction";
 import GoBackNavBar from "../../components/navBar/GoBackNavBar";
 import PopModal from "../../components/Modals/PopModal";
 import { useSelector } from "react-redux";
+import { DELETE } from "../../utility/Constants";
+import { delete_from } from "../../actions/posts/postsAction";
+import { LocalConvenienceStoreOutlined } from "@mui/icons-material";
 
 const Settings = () => {
 
@@ -30,6 +33,7 @@ const Settings = () => {
     })
 
     // ---- load employee data ----
+
     const employeeData = useSelector((state) => {
         console.log(state.settings.employeeData);
         try {
@@ -40,6 +44,8 @@ const Settings = () => {
             console.log(err)
         }
     })
+
+    console.log(employeeData);
 
     const handleChange = (event) => {
         setFormData({ ...formData, [event.target.name]: event.target.value });
@@ -110,11 +116,11 @@ const Settings = () => {
                                                     return (
                                                         <>
                                                             <tr>
-                                                                <td>{obj.name}</td>
+                                                                <td>{obj.name}obj.departmentID</td>
                                                                 <td>
                                                                     <PopModal
-                                                                        mode={'department_delete'}
-                                                                        id={obj.departmentID}
+                                                                        mode={DELETE}
+                                                                        execFunc={() => delDepartment({ rowID:obj.departmentID })}
                                                                         modelTitle={'Delete'}
                                                                         message={`delete branch ${obj.name} ?`}
                                                                     />
@@ -142,7 +148,7 @@ const Settings = () => {
                                                     <InputGroup className="mb-3 mt-4" >
                                                         <InputGroup.Text >Department : </InputGroup.Text>
                                                         {
-                                                            <select name='department' id='dropdown' onChange={(val) => { handleChange(val) }}>
+                                                            <select name='department' className='dropdown-border' id='dropdown' onChange={(val) => { handleChange(val) }}>
                                                                 <option value='' selected="selected" >{formData.department}</option>
                                                                 {departmentList?.map((obj, index) => {
                                                                     return (<option >{obj.name}</option>)
@@ -230,10 +236,10 @@ const Settings = () => {
                                                                         <td>{obj.phone}</td>
                                                                         <td>
                                                                             <PopModal
-                                                                                mode={'delete_employee'}
-                                                                                id={obj.employeeID}
+                                                                                mode={DELETE}
                                                                                 modelTitle={'Delete'}
-                                                                                message={`delete employee ${obj.name} ?`}
+                                                                                execFunc={ () => {delEmployee({ rowID:obj.employeeID })} }
+                                                                                message={`delete employee ${obj.employeeName} ?`}
                                                                             />
                                                                         </td>
                                                                     </tr>
