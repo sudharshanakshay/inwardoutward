@@ -8,13 +8,15 @@ import { useNavigate } from "react-router-dom";
 import { DELETE, LOGOUT } from "../../utility/Constants";
 
 
-const PopModal = ({execFunc, id, mode, modalBtnText, ctlBtnText, modelTitle, message, modalBtnVariant, ctlBtnVariant='link' }) => {
+const PopModal = ({ren=()=>{}, execFunc, id=false, mode, modalBtnText, ctlBtnText, modelTitle, message, modalBtnVariant, ctlBtnVariant='link' }) => {
 
     // mode can be 'DELETE' or 'LOGOUT' import from utils/constants.js
 
     const [show, setShow] = useState(false);
     const handleClose = () => setShow(false);
     let navigate = useNavigate();
+
+    // ren(true);
 
     if( mode  === DELETE){
         modalBtnVariant = 'outline-danger';
@@ -27,10 +29,8 @@ const PopModal = ({execFunc, id, mode, modalBtnText, ctlBtnText, modelTitle, mes
     const handleClick = () => {
         setShow(false);
         execFunc();
+        ren(true);
 
-        if (mode === 'outward_delete') { navigate("/outward");}
-        if (mode === 'department_delete') delDepartment({ rowID:id });
-        if (mode === 'delete_employee') delEmployee({ rowID:id })
         if (mode === 'logout') store.dispatch(logOut());
     };
     return (

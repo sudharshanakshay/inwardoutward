@@ -13,6 +13,9 @@ import { AiOutlineFileAdd } from 'react-icons/ai';
 import { FaList } from 'react-icons/fa';
 import { DELETE } from '../../utility/Constants';
 import GoBackNavBar from '../navBar/GoBackNavBar';
+import StatusBox from '../StatusBox/StatusBox';
+import { GREEN } from '../../utility/color';
+import ViewStatus from '../StatusBox/ViewStatus';
 
 const ViewOutward = () => {
 
@@ -29,13 +32,17 @@ const ViewOutward = () => {
         remark: '',
     });
 
+    const [deleted, setDeleted] = useState(false);
+
     // ---- 'getRow' func defined in PostsAction, fetches specific row from database ----
     // ---- useEffect to render only once , empty '[]' makes it happn. ----
     useEffect(() => {
         var res = getRow({ outward: true, id: id });
         res.then((value) => {
             console.log(value);
-            if(value.length)
+            if(!value.length) {
+                setDeleted(true);
+            } 
             setFormData(value[0]);
         })
     }, []);
@@ -70,7 +77,8 @@ const ViewOutward = () => {
                                 <ListGroup.Item action>
                                     <MdDelete />&nbsp; &nbsp;<PopModal
                                         mode={DELETE}
-                                        execFunc={() => delete_from({ outward: true, rowID: id })}
+                                        execFunc={() => {delete_from({ outward: true, rowID: id })}}
+                                        ren={setDeleted}
                                         modalBtnText={'Yes, Delete'}
                                         message={`Outward Row will be permanently deleted, wish to proceed ? `}
                                     />
@@ -81,8 +89,14 @@ const ViewOutward = () => {
                     </div>
                 </Col>
                 <Col sm={8} >
-                    <Container>
-                    { 
+                    <Container fluid>
+                       <Row>
+                       {
+                            deleted && 
+                            <ViewStatus title='Deleted'/>
+                        }
+                       </Row>
+                    { !deleted &&
                         <>
                             <div className="divToPrint" >
                             <ListGroup variant='flush' >
