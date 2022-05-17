@@ -13,6 +13,7 @@ import { MdDelete } from 'react-icons/md';
 import { AiOutlineFileAdd } from 'react-icons/ai';
 import { FaList } from 'react-icons/fa';
 import { DELETE } from '../../utility/Constants';
+import { GREEN } from '../../utility/color';
 
 
 
@@ -45,7 +46,7 @@ const ViewInward = () => {
         var promise = getRow({ inward: true, id: id });
         console.log(promise);
         promise.then((value) => {
-            console.log(value[0]);
+            console.log(value);
             setFormData(value[0]);
         })
     }, []);
@@ -105,22 +106,13 @@ const ViewInward = () => {
                                     <FaList/>&nbsp; &nbsp;<Link className='link' to="/inward" >Show All</Link>
                                 </ListGroup.Item>
 
-                                <PopModal
-                                    mode={DELETE}
-                                    btnText={'Yes, Delete'}
-                                    // modelTitle={"Delete"}
-                                    message={`Row will be permanently deleted, wish to proceed ? `}
-                                    execFunc={()=> delete_from({ inward: true, rowID: id })}
-                                />
-
                                 <ListGroup.Item action>
-                                    <MdDelete/>&nbsp;<PopModal
-                                        mode={'inward_delete'}
-                                        btnText={'Yes, Delete'}
-                                        modelTitle={"Delete"}
-                                        message={`Row will be permanently deleted, wish to proceed ? `}
-                                        variant={'outline-danger'}
-                                        id={id}
+                                    <MdDelete/>&nbsp; &nbsp;<PopModal
+                                         mode={DELETE}
+                                         ctlBtnText={'Delete Post'}
+                                         execFunc={()=> delete_from({ inward: true, rowID: id })}
+                                         modalBtnText={'Yes, Delete'}
+                                         message={`Row will be permanently deleted, wish to proceed ? `}
                                     />
                                 </ListGroup.Item>
 
@@ -136,8 +128,8 @@ const ViewInward = () => {
                                     <ListGroup.Item><h3>Record Details</h3></ListGroup.Item>
                                     <ListGroup.Item>
                                         <li><th>Date :&nbsp;</th><td>{formData.date}</td></li><br/>
-                                        <li><th>Inward No. :&nbsp;</th> <td> {formData.inwardNo}</td></li><br/>
-                                        <li><th>Received From. :&nbsp;</th> <td> {formData.recievedFrom}</td></li><br/>
+                                        <li><th>Inward No :&nbsp;</th> <td> {formData.inwardNo}</td></li><br/>
+                                        <li><th>Received From :&nbsp;</th> <td> {formData.recievedFrom}</td></li><br/>
                                         <li><th>Subject  :&nbsp;</th> <td> {formData.subject}</td></li><br/>
                                         <li><th>Delivered To :&nbsp;</th> <td> {formData.deliverTo}</td></li><br/>
                                         <li><th>Nature :&nbsp;</th> <td> {formData.nature}</td></li><br/>

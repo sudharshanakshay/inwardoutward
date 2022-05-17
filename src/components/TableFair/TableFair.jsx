@@ -16,6 +16,8 @@ import jsZip from 'jszip';
 import pdfMake from 'pdfmake/build/pdfmake'
 import pdfFonts from 'pdfmake/build/vfs_fonts'
 import PopModal from "../Modals/PopModal";
+import { DELETE } from "../../utility/Constants";
+import { delete_from } from "../../actions/posts/postsAction";
 pdfMake.vfs = pdfFonts.pdfMake.vfs;
 window.pdfMake = pdfMake;
 window.JSZip = jsZip;
@@ -101,12 +103,11 @@ const TableFair = ({ title, tableHeaders, tableRows, inward = false, outward = f
                       <Button variant="link" className="me-1 p-0" onClick={() => handleEdit(rowValue.inwardID)}>Edit</Button>
                       <Button variant="link" className="me-1 p-0" onClick={() => handleView(rowValue.inwardID)} > view </Button>
                       <PopModal
-                        mode={'inward_delete'}
-                        btnText={'Yes, Delete'}
+                        mode={DELETE}
+                        execFunc={() => delete_from({ inward: true, rowID: rowValue.inwardID }) }
+                        modalBtnText={'Yes, Delete'}
                         modelTitle={"Delete"}
                         message={`Row will be permanently deleted, wish to proceed ? `}
-                        variant={'outline-danger'}
-                        id={rowValue.inwardID}
                       />
                     </td>
                     }
@@ -143,12 +144,11 @@ const TableFair = ({ title, tableHeaders, tableRows, inward = false, outward = f
                       <Button variant="link" className="me-1 p-0" onClick={() => handleEdit(rowValue.outwardID)}>Edit</Button>
                         <Button variant="link" className="me-1 p-0" onClick={() => handleView(rowValue.outwardID)} > view </Button>
                         <PopModal
-                          mode={'outward_delete'}
-                          btnText={'Yes, Delete'}
+                          mode={DELETE}
+                          execFunc={() => delete_from({ outward: true, rowID: rowValue.outwardID })}
+                          modalBtnText={'Yes, Delete'}
                           modelTitle={"Delete"}
                           message={`Outward Row will be permanently deleted, wish to proceed ? `}
-                          variant={'outline-danger'}
-                          id={rowValue.outwardID}
                         />
                       </td>
                     }

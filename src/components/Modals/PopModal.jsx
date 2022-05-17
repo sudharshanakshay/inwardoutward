@@ -28,15 +28,14 @@ const PopModal = ({execFunc, id, mode, modalBtnText, ctlBtnText, modelTitle, mes
         setShow(false);
         execFunc();
 
-        if (mode === 'outward_delete') {delete_from({ outward: true, rowID: id }); navigate("/outward");}
+        if (mode === 'outward_delete') { navigate("/outward");}
         if (mode === 'department_delete') delDepartment({ rowID:id });
         if (mode === 'delete_employee') delEmployee({ rowID:id })
         if (mode === 'logout') store.dispatch(logOut());
     };
     return (
         <>
-            <div>
-                <Button variant={ctlBtnVariant}  className="me-1 p-1" onClick={() => setShow(true)}>{ ctlBtnText || mode?.trim().replace(/^\w/, (c) => c.toUpperCase())}</Button>
+                <Button variant={ctlBtnVariant} className="me-1 p-0" onClick={() => setShow(true)}>{ ctlBtnText || mode?.trim().replace(/^\w/, (c) => c.toUpperCase())}</Button>
                 <Modal
                     show={show}
                     onHide={handleClose}
@@ -55,7 +54,6 @@ const PopModal = ({execFunc, id, mode, modalBtnText, ctlBtnText, modelTitle, mes
                         </Button>
                     </Modal.Footer>
                 </Modal>
-            </div>{' '}
         </>
     );
 }
