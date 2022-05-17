@@ -39,6 +39,10 @@ export const CONFIG = {
 
 // ------------------------------ constants & test data ------------------------------
 
+export const LOGOUT = 'logout';
+
+export const DELETE = 'delete';
+
 export const SUCCESS = 'success';
 
 export const TOTAL_OUTWARD_POST = 'Total Outward Post';

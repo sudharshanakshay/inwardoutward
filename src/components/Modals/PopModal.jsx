@@ -5,16 +5,29 @@ import store from "../../store";
 import { logOut } from "../../actions/auth/authSlice";
 import { delDepartment, delEmployee } from "../../actions/settings/settingsAction";
 import { useNavigate } from "react-router-dom";
+import { DELETE, LOGOUT } from "../../utility/Constants";
 
 
-const PopModal = ({id, mode, btnText, modelTitle, message, variant, ctlBtnVariant='link' }) => {
+const PopModal = ({execFunc, id, mode, modalBtnText, ctlBtnText, modelTitle, message, modalBtnVariant, ctlBtnVariant='link' }) => {
+
+    // mode can be 'DELETE' or 'LOGOUT' import from utils/constants.js
 
     const [show, setShow] = useState(false);
     const handleClose = () => setShow(false);
     let navigate = useNavigate();
+
+    if( mode  === DELETE){
+        modalBtnVariant = 'outline-danger';
+    }
+
+    if( mode === LOGOUT ){
+        modalBtnVariant = 'danger';
+    }
+
     const handleClick = () => {
-        setShow(false)
-        if (mode === 'inward_delete') {delete_from({ inward: true, rowID: id }); navigate("/inward")}
+        setShow(false);
+        execFunc();
+
         if (mode === 'outward_delete') {delete_from({ outward: true, rowID: id }); navigate("/outward");}
         if (mode === 'department_delete') delDepartment({ rowID:id });
         if (mode === 'delete_employee') delEmployee({ rowID:id })
@@ -23,22 +36,22 @@ const PopModal = ({id, mode, btnText, modelTitle, message, variant, ctlBtnVarian
     return (
         <>
             <div>
-                <Button variant={ctlBtnVariant}  className="me-1 p-1" onClick={() => setShow(true)}>{modelTitle.trim().replace(/^\w/, (c) => c.toUpperCase())}</Button>
+                <Button variant={ctlBtnVariant}  className="me-1 p-1" onClick={() => setShow(true)}>{ ctlBtnText || mode?.trim().replace(/^\w/, (c) => c.toUpperCase())}</Button>
                 <Modal
                     show={show}
                     onHide={handleClose}
                 >
 
                     <Modal.Header closeButton>
-                        <Modal.Title>{modelTitle}</Modal.Title>
+                        <Modal.Title>{modelTitle || mode}</Modal.Title>
                     </Modal.Header>
 
                     { id && <Modal.Body className="center">{message}</Modal.Body>}
 
                     <Modal.Footer>
                         { !id && <Modal.Body className="center">{message}</Modal.Body>}
-                        <Button variant={variant} onClick={handleClick}>
-                            {btnText || modelTitle.trim().replace(/^\w/, (c) => c.toUpperCase())}
+                        <Button variant={modalBtnVariant} onClick={handleClick}>
+                            {modalBtnText || mode.trim().replace(/^\w/, (c) => c.toUpperCase())}
                         </Button>
                     </Modal.Footer>
                 </Modal>
