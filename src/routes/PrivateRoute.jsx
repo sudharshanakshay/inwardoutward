@@ -1,8 +1,8 @@
 import { Navigate } from "react-router-dom";
 import React from "react";
 import { useSelector } from "react-redux";
-import { getDisplayData, selectRow } from "../../actions/posts/postsAction";
-import { getDepartment, getEmployeeData } from "../../actions/settings/settingsAction";
+import { getDisplayData, selectRow } from "../actions/posts/postsAction";
+import { getDepartment, getEmployeeData } from "../actions/settings/settingsAction";
 
 const PrivateRoute = ({ component: RouteComponent }) => {
     

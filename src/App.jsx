@@ -4,10 +4,8 @@ import './App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import Login from './pages/auth/login'
 import Register from './pages/auth/register';
-import PrivateRoute from './components/routes/PrivateRoute';
 import { Provider } from 'react-redux';
 import store from './store';
-import PublicRoute from './components/routes/PublicRoute';
 import Inward from './pages/Inward/Inward';
 import Outward from './pages/Outward/Outward';
 import Dashboard from './pages/dashboard/Dashboard';
@@ -19,6 +17,9 @@ import ReportOutward from './pages/report/reportOutward';
 import Settings from './pages/Settings/Settings';
 import ViewInward from './components/ViewRow/ViewInward';
 import ViewOutward from './components/ViewRow/ViewOutward';
+import PrivateRoute from './routes/PrivateRoute';
+import PublicRoute from './routes/PublicRoute';
+
 
 function App() {
 
@@ -32,7 +33,6 @@ function App() {
         <Provider store={store}>
           <Router>
             <Routes>
-              {/* <Route path='/test' element={<FormAction/>}></Route> */}
               <Route path='/' element={<PrivateRoute component={Dashboard} />}></Route>
               <Route path='/login' element={<PublicRoute component={Login} />}></Route>
               <Route path='/register' element={<PublicRoute component={Register} />}></Route>

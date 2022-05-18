@@ -116,7 +116,7 @@ const Settings = () => {
                                                     return (
                                                         <>
                                                             <tr>
-                                                                <td>{obj.name}obj.departmentID</td>
+                                                                <td>{obj.name}</td>
                                                                 <td>
                                                                     <PopModal
                                                                         mode={DELETE}
