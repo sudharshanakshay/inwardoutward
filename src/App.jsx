@@ -19,7 +19,6 @@ import ViewInward from './components/ViewRow/ViewInward';
 import ViewOutward from './components/ViewRow/ViewOutward';
 import PrivateRoute from './routes/PrivateRoute';
 import PublicRoute from './routes/PublicRoute';
-import Mailer from './components/Mailer/Mailer';
 
 function App() {
 
@@ -33,7 +32,6 @@ function App() {
         <Provider store={store}>
           <Router>
             <Routes>
-              <Route path='/email' element={<PrivateRoute component={Mailer} />}></Route>
               <Route path='/' element={<PrivateRoute component={Dashboard} />}></Route>
               <Route path='/login' element={<PublicRoute component={Login} />}></Route>
               <Route path='/register' element={<PublicRoute component={Register} />}></Route>
