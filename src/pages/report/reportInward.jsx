@@ -1,10 +1,11 @@
 import React, { useState } from "react";
 import TopNavBar from "../../components/navBar/TopNavBar";
-import { Container } from "react-bootstrap";
+import { Container, Col} from "react-bootstrap";
 import TableFair from "../../components/TableFair/TableFair";
 import { INWARD_TABLE_HEADER } from "../../utils/Constants";
 import ButtonSpinner from "../../components/Loading/ButtonSpinner";
 import { useSelector } from "react-redux";
+import Footer from "../../components/Footer/Footer";
 
 
 const ReportInward = () => {
@@ -33,9 +34,10 @@ const ReportInward = () => {
     return (
         <><div>
             <TopNavBar />
-            <Container fluid>
+            <div desktop-view>
+            <Container fluid={'lg'} className={'mt-4'} >
                 {/* ---------- Inward Table Content ---------- */}
-                <TableFair
+                <TableFair 
                     inward={true}
                     applyDataTableApi={true} 
                     applyReportOptions={true}
@@ -44,6 +46,9 @@ const ReportInward = () => {
                     tableRows={inwardTableData}
                 />
             </Container>
+            </div>
+            
+            <Footer />
         </div></>
     )
 }

@@ -98,6 +98,8 @@ const TableFair = ({ title, tableHeaders, tableRows, inward = false, outward = f
                     <td>{rowValue.subject}</td>
                     <td>{rowValue.deliverTo}</td>
                     <td>{rowValue.remark}</td>
+
+                    {/* --------- Action Buttons --------- */}
                     { applyDataTableApi && !applyReportOptions && 
                       <td>
                       <Button variant="link" className="me-1 p-0" onClick={() => handleEdit(rowValue.inwardID)}>Edit</Button>
@@ -139,6 +141,8 @@ const TableFair = ({ title, tableHeaders, tableRows, inward = false, outward = f
                     <td>{rowValue.description}</td>
                     <td>{rowValue.receiptNo}</td>
                     <td>{rowValue.remark}</td>
+
+                    {/* --------- Action Buttons --------- */}
                     { applyDataTableApi && !applyReportOptions && 
                       <td>
                       <Button variant="link" className="me-1 p-0" onClick={() => handleEdit(rowValue.outwardID)}>Edit</Button>
