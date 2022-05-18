@@ -50,7 +50,7 @@ export const insertFrom = async ({
             await axios.post(INSERT_INWARD_URL, body, CONFIG)
                 .then((res) => {
                     console.log(res.data)
-                    if (res.data.insert == "successful") {
+                    if (res.data.status === SUCCESS) {
                         console.log("insert successful")
                         getDisplayData({ updated: true })
                         // Todo : alert model . 
@@ -82,7 +82,7 @@ export const insertFrom = async ({
             await axios.post(INSERT_OUTWARD_URL, body, CONFIG)
                 .then((res) => {
                     console.log(res);
-                    if (res.data.insert == "successful") {
+                    if (res.data.status === SUCCESS) {
                         console.log("insert successful")
                         getDisplayData({ updated: true })
                         // Todo : alert model . 
@@ -295,7 +295,7 @@ export const updateTo = async ({
                 .then((res) => {
                     console.log(res.data.outwardUpdate);
                     console.log('outward update success');
-                    if (res.data.outwardUpdate) getDisplayData({ updated: true });
+                    if (res.data.status === SUCCESS) getDisplayData({ updated: true });
                 })
         }
         catch (err) {
