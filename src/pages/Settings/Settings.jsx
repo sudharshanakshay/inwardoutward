@@ -16,7 +16,9 @@ const Settings = () => {
         department: 'Select Department',
         name: '',
         email: '',
-        phone: ''
+        phone: '',
+        body:BODY,
+        subject: SUBJECT
     });
 
     // ---- load department list ----
@@ -261,24 +263,30 @@ const Settings = () => {
                             </Tab.Pane>
                             <Tab.Pane eventKey="third" >
                                 <Container>
-                                <InputGroup className="mb-3 mt-4" >
-                                        <InputGroup.Text >Subject : </InputGroup.Text>
-                                        <FormControl
-                                            placeholder="subject"
-                                            name='subject'
-                                            value={SUBJECT}
-                                            // onChange={(value) => handleChange(value)}
-                                        />
-                                    </InputGroup>
+                                    <Row>
+                                        <Col sm={10} md={8} lg={6}>
+                                            <InputGroup className="mb-3 mt-4" >
+                                                <InputGroup.Text >Subject : </InputGroup.Text>
+                                                <FormControl
+                                                    placeholder="subject"
+                                                    name='subject'
+                                                    value={formData.subject}
+                                                    onChange={(e) => handleChange(e)}
+                                                />
+                                            </InputGroup>
+                                        </Col>
+                                    </Row>
                                     <InputGroup className="mb-3 mt-4" >
                                         <InputGroup.Text >Email content : </InputGroup.Text>
-                                        <FormControl
-                                            type='paragraph'
+                                        {/* <FormControl
                                             placeholder="body"
                                             name='body'
                                             value={BODY}
                                             // onChange={(value) => handleChange(value)}
-                                        />
+                                        /> */}
+                                        <textarea value={formData.body} name='body' onChange={(e) => handleChange(e)} >
+
+                                        </textarea>
                                     </InputGroup>
                                 </Container>
                             </Tab.Pane>

@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Modal, Button, InputGroup } from "react-bootstrap";
+import { Modal, Button, InputGroup, FormControl } from "react-bootstrap";
 import { FiSend } from 'react-icons/fi';
 import { useSelector } from "react-redux";
 
@@ -8,11 +8,11 @@ const EmailModal = (props) => {
     console.log('3');
 
     const [formData, setFormData] = useState({
-        departmentID : '',
-        department: 'Select Department',
-        name: '',
-        email: '',
-        phone: ''
+        department: 'Select',
+        employeeNames: [],
+        selectedEmployee: '',
+        emailIds: [],
+        selectedEmail: ''
     });
 
     // ---- email modal control ----
@@ -31,8 +31,49 @@ const EmailModal = (props) => {
         }
     })
 
+    // ---- load employee data ----
+
+    const employeeData = useSelector((state) => {
+        console.log(state.settings.employeeData);
+        try {
+            return state.settings.employeeData;
+        }
+        catch (err) {
+            console.log(err)
+        }
+    })
+
+    let emplist = formData.employeeNames;
+    let emailIds = formData.emailIds;
+
     const handleChange = (event) => {
-        setFormData({ ...formData, [event.target.name]: event.target.value });
+
+        // ---- event is from department dropdown ----
+        if (event.target.name == 'department') {
+            // ---- prepare to display employee list ----
+            emplist = [];
+            emailIds = [];
+            employeeData.forEach(obj => {
+                if (event.target.value == obj.departmentName) {
+                    emplist.push(obj.employeeName);
+                }
+            });
+        }
+
+        // ---- event is from name dropdown ----
+        if (event.target.name == 'selectedEmployee') {
+            // ---- prepare to display email list ----
+            emailIds = [];
+            employeeData.forEach(obj => {
+                if (event.target.value == obj.employeeName) {
+                    emailIds.push(obj.email);
+                }
+            })
+                ;
+        }
+
+        setFormData({ ...formData, 'employeeNames': emplist, 'emailIds': emailIds, [event.target.name]: event.target.value });
+        console.log(formData);
     }
 
     return (
@@ -49,10 +90,10 @@ const EmailModal = (props) => {
                     <InputGroup className="mb-3 mt-4" >
                         <InputGroup.Text >Dept : </InputGroup.Text>
                         {
-                            <select name='departmentID' className='dropdown-border' id='dropdown' onChange={(val) => { handleChange(val) }}>
-                                <option value='' selected="selected" >Select</option>
-                                {departmentList?.map((obj) => {
-                                    return (<option >{obj.name}</option>)
+                            <select name='department' className='dropdown-border' id='dropdown' onChange={(e) => { handleChange(e) }}>
+                                <option value=''  >Select</option>
+                                {departmentList?.map((obj, key) => {
+                                    return (<option key={key} value={obj.name} >{obj.name}</option>)
                                 })}
                             </select>
                         }
@@ -60,10 +101,10 @@ const EmailModal = (props) => {
                     <InputGroup className="mb-3 mt-4" >
                         <InputGroup.Text >Name : </InputGroup.Text>
                         {
-                            <select name='department' className='dropdown-border' id='dropdown' onChange={(val) => { handleChange(val) }}>
-                                <option value='' selected="selected" >Select</option>
-                                {departmentList?.map((obj) => {
-                                    return (<option >{obj.name}</option>)
+                            <select name='selectedEmployee' className='dropdown-border' id='dropdown' onChange={(e) => { handleChange(e) }}>
+                                <option value=''  >Select</option>
+                                {formData.employeeNames?.map((val, key) => {
+                                    return (<option key={key}>{val}</option>)
                                 })}
                             </select>
                         }
@@ -71,10 +112,10 @@ const EmailModal = (props) => {
                     <InputGroup className="mb-3 mt-4" >
                         <InputGroup.Text >Email : </InputGroup.Text>
                         {
-                            <select name='department' className='dropdown-border' id='dropdown' onChange={(val) => { handleChange(val) }}>
+                            <select name='selectedEmail' className='dropdown-border' id='dropdown' onChange={(e) => { handleChange(e) }}>
                                 <option value='' selected="selected" >Select</option>
-                                {departmentList?.map((obj, index) => {
-                                    return (<option >{obj.name}</option>)
+                                {formData.emailIds?.map((val, index) => {
+                                    return (<option key={index}>{val}</option>)
                                 })}
                             </select>
                         }
@@ -82,12 +123,18 @@ const EmailModal = (props) => {
                 </Modal.Header>
 
                 <Modal.Body>
-                    <h4>Centered Modal</h4>
-                    <p>
-                        Cras mattis consectetur purus sit amet fermentum. Cras justo odio,
-                        dapibus ac facilisis in, egestas eget quam. Morbi leo risus, porta ac
-                        consectetur ac, vestibulum at eros.
-                    </p>
+                    <InputGroup className="mb-3 mt-4" >
+                        <InputGroup.Text >Subject : </InputGroup.Text>
+                        <FormControl
+                            placeholder="subject"
+                            name='subject'
+                            // value={formData.remark}
+                            // onChange={(value) => handleChange(value)}
+                        />
+                    </InputGroup>
+                    <textarea >
+                        
+                    </textarea>
                 </Modal.Body>
 
                 <Modal.Footer>
