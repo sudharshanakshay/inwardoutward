@@ -5,7 +5,7 @@ import { BsFillGridFill } from 'react-icons/bs';
 import PopModal from "../Modals/PopModal";
 import { FcSettings } from 'react-icons/fc';
 import { LOGOUT } from "../../utils/Constants";
-import logo from '../../utils/Sayhadrilogo.jpg'
+import logo from '../../utils/sahyadri-logo.png'
 import store from "../../store";
 import { logOut } from "../../actions/auth/authSlice";
 
@@ -28,8 +28,8 @@ const TopNavBar = () => {
                 <Container fluid className="top-nav-bar">
                     <Navbar.Brand className="nav-item">
                         <img
-                            src="https://sahyadri.edu.in/img/sahyadri-logo.png"
-                            // src={logo}
+                            // src="https://sahyadri.edu.in/img/sahyadri-logo.png"
+                            src={logo}
                             width="300"
                             height="60"
                             // className="d-inline-block align-top"
