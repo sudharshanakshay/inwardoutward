@@ -36,8 +36,8 @@ const TableFair = ({ title, tableHeaders, tableRows, inward = false, outward = f
     $(document).ready(function () {
       $('#table').DataTable({
         destroy: true,
-        paging: false,
-        searching: false,
+        paging: true,
+        searching: true,
         dom: 'Blfrtip',
         buttons: [
           { extend: 'copy', className: 'btn btn-outline-primary glyphicon glyphicon-duplicate' },
@@ -103,6 +103,8 @@ const TableFair = ({ title, tableHeaders, tableRows, inward = false, outward = f
                     <td>{rowValue.subject}</td>
                     <td>{rowValue.deliverTo}</td>
                     <td>{rowValue.remark}</td>
+
+                    {/* --------- Action Buttons --------- */}
                     { applyDataTableApi && !applyReportOptions && 
                       <td>
                       <Button variant="link" className="me-1 p-0" onClick={() => handleEdit(rowValue.inwardID)}>Edit</Button>
@@ -144,6 +146,8 @@ const TableFair = ({ title, tableHeaders, tableRows, inward = false, outward = f
                     <td>{rowValue.description}</td>
                     <td>{rowValue.receiptNo}</td>
                     <td>{rowValue.remark}</td>
+
+                    {/* --------- Action Buttons --------- */}
                     { applyDataTableApi && !applyReportOptions && 
                       <td>
                       <Button variant="link" className="me-1 p-0" onClick={() => handleEdit(rowValue.outwardID)}>Edit</Button>

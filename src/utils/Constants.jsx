@@ -66,7 +66,7 @@ export const INWARD_TABLE_HEADER = [["sl. no", "4%"], ["Date", "10%"], ["Inward 
 
 export const INWARD_TABLE_HEADER_SHORT = [ ["Date", "33.33%"], ["From", "33.33%"], ["Deliver To", "33.33%"] /*,"Subject"*/];
 
-export const OUTWARD_TABLE_HEADER = [["sl.no", "1%"], ["Date","10%"],  ["Serial No.", "10%"],["Department", "8%"], ["Addressee", "10%"], ["Nature", "10%"], ["Description", "10%"], ["Receipt No.", "12%"], ["Remark", "6%"]];
+export const OUTWARD_TABLE_HEADER = [["sl.no", "1%"], ["Date","10%"],  ["Serial No.", "10%"],["From Department", "8%"], ["Addressee", "10%"], ["Nature", "10%"], ["Description", "10%"], ["Receipt No.", "12%"], ["Remark", "6%"]];
 
 export const OUTWARD_TABLE_HEADER_SHORT = [ ["Date", "33.33%"],  ["Department", "33.33%"], ["Addressee", "33.33%"]];
 

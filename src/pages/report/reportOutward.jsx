@@ -5,6 +5,7 @@ import TableFair from "../../components/TableFair/TableFair";
 import { OUTWARD_TABLE_HEADER } from "../../utils/Constants";
 import ButtonSpinner from "../../components/Loading/ButtonSpinner";
 import { useSelector } from "react-redux";
+import Footer from "../../components/Footer/Footer";
 
 const ReportOutward = () => {
 
@@ -33,7 +34,7 @@ const ReportOutward = () => {
           
     <div>
             <TopNavBar />
-            <Container fluid>
+            <Container fluid={'lg'} className={'mt-4'}>
                 {/* ---------- Outward Table Content ---------- */}
                 <TableFair
                     outward={true}
@@ -44,6 +45,7 @@ const ReportOutward = () => {
                     tableRows={outwardTableData}
                 />
             </Container>
+            <Footer />
             </div>
         </>
     )
