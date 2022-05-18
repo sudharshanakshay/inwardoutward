@@ -31,8 +31,8 @@ const TableFair = ({ title, tableHeaders, tableRows, inward = false, outward = f
     $(document).ready(function () {
       $('#table').DataTable({
         destroy: true,
-        paging: false,
-        searching: false,
+        paging: true,
+        searching: true,
         dom: 'Blfrtip',
         buttons: [
           { extend: 'copy', className: 'btn btn-outline-primary glyphicon glyphicon-duplicate' },
