@@ -17,8 +17,8 @@ const Settings = () => {
         name: '',
         email: '',
         phone: '',
-        body:BODY,
-        subject: SUBJECT
+        body:localStorage.getItem('body'),
+        subject: localStorage.getItem('subject')
     });
 
     // ---- load department list ----
@@ -50,6 +50,12 @@ const Settings = () => {
     console.log(employeeData);
 
     const handleChange = (event) => {
+
+        // ---- save subject & body of email to localStorage ----
+        if(event.target.name == 'subject' || event.target.name == 'body' ){
+            localStorage.setItem('subject', event.target.value);
+            localStorage.setItem('body', event.target.value);
+        }
         setFormData({ ...formData, [event.target.name]: event.target.value });
         console.log(formData);
     }
