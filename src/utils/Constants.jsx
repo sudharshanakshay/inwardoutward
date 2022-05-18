@@ -22,6 +22,13 @@ export const SELECT_DASHBOARD_INWARD_URL = BASE_URL+"/dashboard/inward";
 
 export const SELECT_DASHBOARD_OUTWARD_URL = BASE_URL+"/dashboard/outward";
 
+// ------------------------------ Default message ------------------------------
+
+export const BODY = 'body';
+
+export const SUBJECT = 'subject'; 
+
+
 // ------------------------------ Configuration data ------------------------------
 
 export const CONFIG = {

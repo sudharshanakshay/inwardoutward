@@ -131,8 +131,6 @@ body {
 }
 
 
-
-
 @media (max-width: 1200px) {
     .statusBox {
         height: 80px;
@@ -344,6 +342,8 @@ li {
     width: 100%;
     justify-content: center;
 }
+
+/* ---------------------- Dropdown ---------------------- */
 
 .dropdown-border {
     /* border: none; */

@@ -2,14 +2,14 @@ import React from 'react'
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import './App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import Login from './pages/auth/login'
-import Register from './pages/auth/register';
+import Login from './pages/authentication/login'
+import Register from './pages/authentication/register';
 import { Provider } from 'react-redux';
 import store from './store';
 import Inward from './pages/Inward/Inward';
 import Outward from './pages/Outward/Outward';
 import Dashboard from './pages/dashboard/Dashboard';
-import ForgotPassword from './pages/auth/ForgotPassword';
+import ForgotPassword from './pages/authentication/ForgotPassword';
 import InwardForms from './components/Forms/InwardForms';
 import OutwardForm from './components/Forms/OutwardForm';
 import ReportInward from './pages/report/reportInward';

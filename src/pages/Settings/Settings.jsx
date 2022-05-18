@@ -4,7 +4,7 @@ import { addDepartment, addEmployee, delDepartment, delEmployee, getAllDepartmen
 import GoBackNavBar from "../../components/navBar/GoBackNavBar";
 import PopModal from "../../components/Modals/PopModal";
 import { useSelector } from "react-redux";
-import { DELETE } from "../../utils/Constants";
+import { DELETE, SUBJECT, BODY } from "../../utils/Constants";
 import { delete_from } from "../../actions/posts/postsAction";
 import { LocalConvenienceStoreOutlined } from "@mui/icons-material";
 
@@ -79,6 +79,9 @@ const Settings = () => {
                             <Nav.Item>
                                 <Nav.Link eventKey="second">Employee</Nav.Link>
                             </Nav.Item>
+                            <Nav.Item>
+                                <Nav.Link eventKey="third">Email</Nav.Link>
+                            </Nav.Item>
                         </Nav>
                     </Col>
                     {/* ------------------- side pannel ends here ------------------- */}
@@ -120,7 +123,7 @@ const Settings = () => {
                                                                 <td>
                                                                     <PopModal
                                                                         mode={DELETE}
-                                                                        execFunc={() => delDepartment({ rowID:obj.departmentID })}
+                                                                        execFunc={() => delDepartment({ rowID: obj.departmentID })}
                                                                         modelTitle={'Delete'}
                                                                         message={`delete branch ${obj.name} ?`}
                                                                     />
@@ -238,7 +241,7 @@ const Settings = () => {
                                                                             <PopModal
                                                                                 mode={DELETE}
                                                                                 modelTitle={'Delete'}
-                                                                                execFunc={ () => {delEmployee({ rowID:obj.employeeID })} }
+                                                                                execFunc={() => { delEmployee({ rowID: obj.employeeID }) }}
                                                                                 message={`delete employee ${obj.employeeName} ?`}
                                                                             />
                                                                         </td>
@@ -254,6 +257,29 @@ const Settings = () => {
                                         </Col>
                                         {/* ------------------- display employee list ends here ------------------- */}
                                     </Row>
+                                </Container>
+                            </Tab.Pane>
+                            <Tab.Pane eventKey="third" >
+                                <Container>
+                                <InputGroup className="mb-3 mt-4" >
+                                        <InputGroup.Text >Subject : </InputGroup.Text>
+                                        <FormControl
+                                            placeholder="subject"
+                                            name='subject'
+                                            value={SUBJECT}
+                                            // onChange={(value) => handleChange(value)}
+                                        />
+                                    </InputGroup>
+                                    <InputGroup className="mb-3 mt-4" >
+                                        <InputGroup.Text >Email content : </InputGroup.Text>
+                                        <FormControl
+                                            type='paragraph'
+                                            placeholder="body"
+                                            name='body'
+                                            value={BODY}
+                                            // onChange={(value) => handleChange(value)}
+                                        />
+                                    </InputGroup>
                                 </Container>
                             </Tab.Pane>
                         </Tab.Content>
