@@ -85,21 +85,27 @@ const EmailModal = (props) => {
         console.log(formData);
     }
 
-    const handleSend = (e) => {
-        e.preventDefault();
+
+    // const form = useRef();
+    const handleSend = () => {
+        // e.preventDefault();
 
 
         const params = {
-            user_name: formData.selectedEmployee,
-            user_email: formData.selectedEmail,
-            message: formData.body
+            to_name: formData.selectedEmployee,
+            to_email: formData.selectedEmail,
+            message: formData.body,
+            subject: formData.subject,
+            recieved_from : props.recievedFrom
         }
+
+        console.log(params);
         // const SERVICE_KEY = process.env.service_key;
         // const PUBLIC_KEY = process.env.public_key;
         // const TEMPLATE_KEY = process.env.template_key;
 
         // emailjs.sendForm(SERVICE_KEY, TEMPLATE_KEY, form.current, 'F25xGp4o4nMxlO0zd')
-        emailjs.sendForm('service_xfdmrwb', 'template_t115k7w', params, 'F25xGp4o4nMxlO0zd')
+        emailjs.send('service_xfdmrwb', 'template_t115k7w', params, 'F25xGp4o4nMxlO0zd')
             .then((result) => {
                 console.log(result.text);
             }, (error) => {
@@ -112,7 +118,7 @@ const EmailModal = (props) => {
     return (
         <>
             <FiSend onClick={() => setShowEmailModal(true)} />
-            <Form onSubmit={(e) => handleSend(e)}>
+            {/* <Form onSubmit={(e) => handleSend(e)}> */}
                 <Modal
                     show={showEmailModal}
                     onHide={() => setShowEmailModal(false)}
@@ -121,7 +127,7 @@ const EmailModal = (props) => {
                     centered >
                     <Modal.Header closeButton>
 
-                        <InputGroup className="mb-3 mt-4" >
+                        <InputGroup className="m-0" >
                             <InputGroup.Text >Dept : </InputGroup.Text>
                             {
                                 <select name='department' className='dropdown-border' id='dropdown' onChange={(e) => { handleChange(e) }}>
@@ -132,7 +138,7 @@ const EmailModal = (props) => {
                                 </select>
                             }
                         </InputGroup>
-                        <InputGroup className="mb-3 mt-4" >
+                        <InputGroup className="m-0" >
                             <InputGroup.Text >Name : </InputGroup.Text>
                             {
                                 <select name='selectedEmployee' className='dropdown-border' id='dropdown' onChange={(e) => { handleChange(e) }}>
@@ -143,11 +149,11 @@ const EmailModal = (props) => {
                                 </select>
                             }
                         </InputGroup>
-                        <InputGroup className="mb-3 mt-4" >
+                        <InputGroup className="m-0" >
                             <InputGroup.Text >Email : </InputGroup.Text>
                             {
                                 <select name='selectedEmail' className='dropdown-border' id='dropdown' onChange={(e) => { handleChange(e) }}>
-                                    <option value='' selected="selected" >Select</option>
+                                    <option value=''  >Select</option>
                                     {formData.emailIds?.map((val, index) => {
                                         return (<option key={index}>{val}</option>)
                                     })}
@@ -172,10 +178,10 @@ const EmailModal = (props) => {
                     </Modal.Body>
 
                     <Modal.Footer>
-                        <MdSend size={'2em'} type='submit' />
+                        <MdSend size={'2em'} type='submit' onClick={()=>handleSend()} />
                     </Modal.Footer>
                 </Modal>
-            </Form>
+            {/* </Form> */}
         </>
     );
 }
