@@ -115,9 +115,14 @@ const EmailModal = (props) => {
         setShowEmailModal(false);
     }
 
+    const handleIconColor = () => {
+        // if()
+        return 'red';
+    }
+
     return (
         <>
-            <FiSend onClick={() => setShowEmailModal(true)} />
+            <FiSend onClick={() => setShowEmailModal(true)} color={handleIconColor()}/>
             {/* <Form onSubmit={(e) => handleSend(e)}> */}
                 <Modal
                     show={showEmailModal}
