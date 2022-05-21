@@ -5,6 +5,9 @@ import TopNavBar from '../navBar/TopNavBar';
 import { useNavigate, useParams } from 'react-router-dom';
 import { getRow } from "../../actions/posts/postsAction";
 import GoBackNavBar from '../navBar/GoBackNavBar';
+import { useSelector } from 'react-redux';
+import { BsQuestionCircle } from 'react-icons/bs';
+
 
 const InwardForm = () => {
 
@@ -38,6 +41,18 @@ const InwardForm = () => {
         }
     }, []);
 
+    // ---- load department list ----
+    const departmentList = useSelector((state) => {
+        console.log(state.settings.departmentList);
+        try {
+            return state.settings.departmentList;
+        }
+        catch (err) {
+            // return [];
+            console.log(err);
+        }
+    })
+
     const handleChange = (change) => {
         setFormData({ ...formData, [change.target.name]: change.target.value });
         console.log(formData);
@@ -59,7 +74,7 @@ const InwardForm = () => {
                 <Container >
                     <Row className='pt-5'>
                         <Col >
-                        {/* -------- inward no -------- */}
+                            {/* -------- inward no -------- */}
                             <InputGroup className="mb-3 mt-4" >
                                 <InputGroup.Text >Inward No : </InputGroup.Text>
                                 <FormControl
@@ -74,7 +89,7 @@ const InwardForm = () => {
                             </InputGroup>
                         </Col>
                         <Col >
-                        {/* -------- Date -------- */}
+                            {/* -------- Date -------- */}
                             <InputGroup className="mb-3 mt-4" >
                                 <InputGroup.Text>Date : </InputGroup.Text>
 
@@ -166,9 +181,23 @@ const InwardForm = () => {
                                 />
                             </InputGroup>
                         </Col>
-                        <Col xs={12} sm={12} md={6} >
-                            {/* -------- Deliver to -------- */}
+
+                        <Col xs={12} sm={12} md={2}>
                             <InputGroup className="mb-3 mt-4" >
+                                <InputGroup.Text >Name : </InputGroup.Text>
+                                {
+                                    <select name='selectedEmployee' className='dropdown-border' id='dropdown' onChange={(e) => { handleChange(e) }}>
+                                        <option value=''  >Select</option>
+                                        {formData.employeeNames?.map((val, key) => {
+                                            return (<option key={key}>{val}</option>)
+                                        })}
+                                    </select>
+                                }
+                            </InputGroup>
+                        </Col>
+                        <Col xs={12} sm={12} md={2} >
+                            {/* -------- Deliver to -------- */}
+                            {/* <InputGroup className="mb-3 mt-4" >
                                 <InputGroup.Text>Deliver To : </InputGroup.Text>
                                 <FormControl
                                     placeholder="Deliver"
@@ -178,8 +207,23 @@ const InwardForm = () => {
                                     value={formData.deliverTo}
                                     onChange={(value) => handleChange(value)}
                                 />
+                            </InputGroup> */}
+                            <InputGroup className="mb-3 mt-4" >
+                                <InputGroup.Text >Dept : </InputGroup.Text>
+                                {
+                                    <select name='department' className='dropdown-border' id='dropdown' onChange={(e) => { handleChange(e) }}>
+                                        <option value=''  >Select</option>
+                                        {departmentList?.map((obj, key) => {
+                                            return (<option key={key} value={obj.name} >{obj.name}</option>)
+                                        })}
+                                    </select>
+                                }
                             </InputGroup>
                         </Col>
+                        <Col><BsQuestionCircle  className="mb-3 mt-4" onClick={() => navigate('')}/></Col>
+
+                        
+                        
 
                     </Row>
                     <Row >

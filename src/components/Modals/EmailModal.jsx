@@ -4,9 +4,10 @@ import { FiSend } from 'react-icons/fi';
 import { useSelector } from "react-redux";
 import { MdSend } from 'react-icons/md';
 import emailjs from '@emailjs/browser';
+import {getRow, updateTo} from '../../actions/posts/postsAction'
 
 const EmailModal = (props) => {
-    console.log('3');
+    // console.log('3');
 
     const [formData, setFormData] = useState({
         department: 'Select',
@@ -27,7 +28,7 @@ const EmailModal = (props) => {
     // ---- load department list ----
 
     const departmentList = useSelector((state) => {
-        console.log(state.settings.departmentList);
+        // console.log(state.settings.departmentList);
         try {
             return state.settings.departmentList;
         }
@@ -40,7 +41,7 @@ const EmailModal = (props) => {
     // ---- load employee data ----
 
     const employeeData = useSelector((state) => {
-        console.log(state.settings.employeeData);
+        // console.log(state.settings.employeeData);
         try {
             return state.settings.employeeData;
         }
@@ -87,10 +88,8 @@ const EmailModal = (props) => {
 
 
     // const form = useRef();
-    const handleSend = () => {
+    const handleSendEmail = () => {
         // e.preventDefault();
-
-
         const params = {
             to_name: formData.selectedEmployee,
             to_email: formData.selectedEmail,
@@ -107,7 +106,16 @@ const EmailModal = (props) => {
         // emailjs.sendForm(SERVICE_KEY, TEMPLATE_KEY, form.current, 'F25xGp4o4nMxlO0zd')
         emailjs.send('service_xfdmrwb', 'template_t115k7w', params, 'F25xGp4o4nMxlO0zd')
             .then((result) => {
-                console.log(result.text);
+                console.log(result.text, result.status);
+                if(result.text === 'OK'){
+                    getRow({ inward:true, id:props.id })
+                    .then((row)=>{
+                        row[0].isEmailSent = 1;
+                        row.push({...row.pop(),inward:true});
+                        console.log(row[0]);
+                        updateTo(row[0]);
+                    })
+                }
             }, (error) => {
                 console.log(error.text);
             });
@@ -123,7 +131,7 @@ const EmailModal = (props) => {
     return (
         <>
             <FiSend onClick={() => setShowEmailModal(true)} color={handleIconColor()}/>
-            {/* <Form onSubmit={(e) => handleSend(e)}> */}
+            {/* <Form onSubmit={(e) => handleSendEmail(e)}> */}
                 <Modal
                     show={showEmailModal}
                     onHide={() => setShowEmailModal(false)}
@@ -183,7 +191,7 @@ const EmailModal = (props) => {
                     </Modal.Body>
 
                     <Modal.Footer>
-                        <MdSend size={'2em'} type='submit' onClick={()=>handleSend()} />
+                        <MdSend size={'2em'} type='submit' onClick={()=>handleSendEmail()} />
                     </Modal.Footer>
                 </Modal>
             {/* </Form> */}

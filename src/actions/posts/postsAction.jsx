@@ -217,44 +217,49 @@ export const getRow = ({ id, inward = false, outward = false }) => {
 
 // ----------------- Update Row handler -----------------
 
-export const updateTo = async ({
+export const updateTo = async ( props
+    // {
 
-    inward = null,
-    outward = null,
+    // inward = null,
+    // outward = null,
 
-    id = null,
+    // id = null,
 
-    date = null,
+    // date = null,
 
-    inwardNo = null,
-    nature = null,
-    recievedFrom = null,
-    subject = null,
-    deliverTo = null,
-    remark = null,
+    // inwardNo = null,
+    // nature = null,
+    // recievedFrom = null,
+    // subject = null,
+    // deliverTo = null,
+    // remark = null,
+    // isEmailSent = 0,
 
-    serialNo = null,
-    receiptNo = null,
-    addressee = null,
-    description = null,
-    department = null }) => {
+    // serialNo = null,
+    // receiptNo = null,
+    // addressee = null,
+    // description = null,
+    // department = null }
+    
+    ) => {
 
     // ----------------- update Inward row -----------------
 
-    if (inward) {
+    if (props.inward) {
         const from_post = "inward_post";
-        console.log(id)
+        console.log(props.inwardID)
 
         const body = JSON.stringify({
-            inwardID: id,
-            inwardNo: inwardNo,
-            date: date,
-            from_post: from_post,
-            nature: nature,
-            recievedFrom: recievedFrom,
-            subject: subject,
-            deliverTo: deliverTo,
-            remark: remark
+            inwardID: props.inwardID,
+            inwardNo: props.inwardNo,
+            date: props.date,
+            from_post: props.from_post,
+            nature: props.nature,
+            recievedFrom: props.recievedFrom,
+            subject: props.subject,
+            deliverTo: props.deliverTo,
+            remark: props.remark,
+            isEmailSent : props.isEmailSent
         });
 
         try {
@@ -271,23 +276,23 @@ export const updateTo = async ({
 
     // ----------------- update Outward row -----------------
 
-    if (outward) {
+    if (props.outward) {
         console.log('outward update')
-        console.log(id)
+        console.log(props.id)
 
         const from_post = "outward_post";
 
         const body = JSON.stringify({
-            outwardID: id,
-            from_post: from_post,
-            date: date,
-            serialNo: serialNo,
-            department: department,
-            receiptNo: receiptNo,
-            addressee: addressee,
-            nature: nature,
-            description: description,
-            remark: remark
+            outwardID: props.id,
+            from_post: props.from_post,
+            date: props.date,
+            serialNo: props.serialNo,
+            department: props.department,
+            receiptNo: props.receiptNo,
+            addressee: props.addressee,
+            nature: props.nature,
+            description: props.description,
+            remark: props.remark
         });
 
         try {
