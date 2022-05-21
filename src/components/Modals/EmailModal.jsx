@@ -1,10 +1,13 @@
 import React, { useState } from "react";
-import { Modal, Button, InputGroup, FormControl, Form } from "react-bootstrap";
+import { Modal, Button, InputGroup, FormControl, Form, Spinner } from "react-bootstrap";
 import { FiSend } from 'react-icons/fi';
 import { useSelector } from "react-redux";
 import { MdSend } from 'react-icons/md';
 import emailjs from '@emailjs/browser';
 import {getRow, updateTo} from '../../actions/posts/postsAction'
+import ButtonSpinner from "../Loading/ButtonSpinner";
+import { GOLDEN } from "../../utils/color";
+import GoldenSpinner from "../Loading/GoldenSpinner";
 
 const EmailModal = (props) => {
     // console.log('3');
@@ -16,7 +19,8 @@ const EmailModal = (props) => {
         emailIds: [],
         selectedEmail: '',
         subject: localStorage.getItem('subject'),
-        body: localStorage.getItem('body')
+        body: localStorage.getItem('body'),
+        iconLoading: false
     });
 
     let emplist = formData.employeeNames;
@@ -89,6 +93,8 @@ const EmailModal = (props) => {
 
     // const form = useRef();
     const handleSendEmail = () => {
+        setFormData({...formData, ['iconLoading']:true});
+        console.log(formData.iconLoading);
         // e.preventDefault();
         const params = {
             to_name: formData.selectedEmployee,
@@ -97,7 +103,7 @@ const EmailModal = (props) => {
             subject: formData.subject,
             recieved_from : props.recievedFrom
         }
-
+        setFormData({...formData, ['iconLoading']:true});
         console.log(params);
         // const SERVICE_KEY = process.env.service_key;
         // const PUBLIC_KEY = process.env.public_key;
@@ -114,6 +120,8 @@ const EmailModal = (props) => {
                         row.push({...row.pop(),inward:true});
                         console.log(row[0]);
                         updateTo(row[0]);
+                        // ---- also sets all formData to default value '' if reasign is not done ----
+                        setFormData({...formData, ['iconLoading']:false});
                     })
                 }
             }, (error) => {
@@ -124,13 +132,14 @@ const EmailModal = (props) => {
     }
 
     const handleIconColor = () => {
-        // if()
-        return 'red';
+        if(props.color) return 'green';
     }
 
     return (
         <>
-            <FiSend onClick={() => setShowEmailModal(true)} color={handleIconColor()}/>
+        {formData.iconLoading && <GoldenSpinner/>}
+        {!formData.iconLoading && <FiSend onClick={() => setShowEmailModal(true)} color={handleIconColor()}/>}
+            
             {/* <Form onSubmit={(e) => handleSendEmail(e)}> */}
                 <Modal
                     show={showEmailModal}
