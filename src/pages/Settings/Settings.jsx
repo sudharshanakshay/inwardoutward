@@ -17,7 +17,7 @@ const Settings = () => {
         name: '',
         email: '',
         phone: '',
-        body:localStorage.getItem('body'),
+        body: localStorage.getItem('body'),
         subject: localStorage.getItem('subject')
     });
 
@@ -52,7 +52,7 @@ const Settings = () => {
     const handleChange = (event) => {
 
         // ---- save subject & body of email to localStorage ----
-        if(event.target.name == 'subject' || event.target.name == 'body' ){
+        if (event.target.name == 'subject' || event.target.name == 'body') {
             localStorage.setItem('subject', event.target.value);
             localStorage.setItem('body', event.target.value);
         }
@@ -159,7 +159,7 @@ const Settings = () => {
                                                     <InputGroup className="mb-3 mt-4" >
                                                         <InputGroup.Text >Department : </InputGroup.Text>
                                                         {
-                                                            <select name='department' className='dropdown-border' id='dropdown' onChange={(val) => { handleChange(val) }}>
+                                                            <select name='department' className='color-border' id='dropdown' onChange={(val) => { handleChange(val) }}>
                                                                 <option value='' selected="selected" >{formData.department}</option>
                                                                 {departmentList?.map((obj, index) => {
                                                                     return (<option >{obj.name}</option>)
@@ -284,15 +284,17 @@ const Settings = () => {
                                     </Row>
                                     <InputGroup className="mb-3 mt-4" >
                                         <InputGroup.Text >Email content : </InputGroup.Text>
-                                        {/* <FormControl
+                                        
+                                        <FormControl
+                                            as='textarea'
                                             placeholder="body"
                                             name='body'
-                                            value={BODY}
-                                            // onChange={(value) => handleChange(value)}
-                                        /> */}
-                                        <textarea value={formData.body} name='body' onChange={(e) => handleChange(e)} >
+                                            value={formData.body}
+                                            onChange={(e) => handleChange(e)}
+                                        />
+                                        {/* <textarea value={formData.body} name='body' onChange={(e) => handleChange(e)} >
 
-                                        </textarea>
+                                        </textarea> */}
                                     </InputGroup>
                                 </Container>
                             </Tab.Pane>

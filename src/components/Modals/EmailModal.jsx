@@ -1,12 +1,10 @@
 import React, { useState } from "react";
-import { Modal, Button, InputGroup, FormControl, Form, Spinner } from "react-bootstrap";
-import { FiSend } from 'react-icons/fi';
+import { Modal, InputGroup, FormControl, Form, Spinner } from "react-bootstrap";
+import { RiMailSendFill } from 'react-icons/ri';
 import { useSelector } from "react-redux";
 import { MdSend } from 'react-icons/md';
 import emailjs from '@emailjs/browser';
 import {getRow, updateTo} from '../../actions/posts/postsAction'
-import ButtonSpinner from "../Loading/ButtonSpinner";
-import { GOLDEN } from "../../utils/color";
 import GoldenSpinner from "../Loading/GoldenSpinner";
 
 const EmailModal = (props) => {
@@ -20,7 +18,8 @@ const EmailModal = (props) => {
         selectedEmail: '',
         subject: localStorage.getItem('subject'),
         body: localStorage.getItem('body'),
-        iconLoading: false
+        iconLoading: false,
+        emailSendError: false
     });
 
     let emplist = formData.employeeNames;
@@ -124,23 +123,26 @@ const EmailModal = (props) => {
                         setFormData({...formData, ['iconLoading']:false});
                     })
                 }
+                else  setFormData({...formData, ['iconLoading']:false}); 
             }, (error) => {
                 console.log(error.text);
+                setFormData({...formData, ['iconLoading']:false, ['emailSendError']:true});
             });
 
         setShowEmailModal(false);
     }
 
     const handleIconColor = () => {
+        if(formData.emailSendError) return 'red';
         if(props.color) return 'green';
     }
 
     return (
         <>
         {formData.iconLoading && <GoldenSpinner/>}
-        {!formData.iconLoading && <FiSend onClick={() => setShowEmailModal(true)} color={handleIconColor()}/>}
+        {!formData.iconLoading && <RiMailSendFill onClick={() => setShowEmailModal(true)} color={ formData.emailSendError?'red': props.color?'green':'' }/>}
             
-            {/* <Form onSubmit={(e) => handleSendEmail(e)}> */}
+            <Form >
                 <Modal
                     show={showEmailModal}
                     onHide={() => setShowEmailModal(false)}
@@ -152,7 +154,7 @@ const EmailModal = (props) => {
                         <InputGroup className="m-0" >
                             <InputGroup.Text >Dept : </InputGroup.Text>
                             {
-                                <select name='department' className='dropdown-border' id='dropdown' onChange={(e) => { handleChange(e) }}>
+                                <select name='department' className='color-border' id='dropdown' onChange={(e) => { handleChange(e) }}>
                                     <option value=''  >Select</option>
                                     {departmentList?.map((obj, key) => {
                                         return (<option key={key} value={obj.name} >{obj.name}</option>)
@@ -163,7 +165,7 @@ const EmailModal = (props) => {
                         <InputGroup className="m-0" >
                             <InputGroup.Text >Name : </InputGroup.Text>
                             {
-                                <select name='selectedEmployee' className='dropdown-border' id='dropdown' onChange={(e) => { handleChange(e) }}>
+                                <select name='selectedEmployee' className='color-border' id='dropdown' onChange={(e) => { handleChange(e) }}>
                                     <option value=''  >Select</option>
                                     {formData.employeeNames?.map((val, key) => {
                                         return (<option key={key}>{val}</option>)
@@ -172,9 +174,9 @@ const EmailModal = (props) => {
                             }
                         </InputGroup>
                         <InputGroup className="m-0" >
-                            <InputGroup.Text >Email : </InputGroup.Text>
+                            <InputGroup.Text >@</InputGroup.Text>
                             {
-                                <select name='selectedEmail' className='dropdown-border' id='dropdown' onChange={(e) => { handleChange(e) }}>
+                                <select name='selectedEmail' className='color-border' id='dropdown' onChange={(e) => { handleChange(e) }}>
                                     <option value=''  >Select</option>
                                     {formData.emailIds?.map((val, index) => {
                                         return (<option key={index}>{val}</option>)
@@ -194,16 +196,23 @@ const EmailModal = (props) => {
                                 onChange={(e) => handleChange(e)}
                             />
                         </InputGroup>
-                        <textarea name="body" value={formData.body} onChange={(e) => handleChange(e)} >
+                        <FormControl
+                                as='textarea'
+                                placeholder="body"
+                                name='body'
+                                value={formData.body}
+                                onChange={(e) => handleChange(e)}
+                            />
+                        {/* <textarea name="body" value={formData.body} onChange={(e) => handleChange(e)} style={{width:'100%'}} className='color-border' >
 
-                        </textarea>
+                        </textarea> */}
                     </Modal.Body>
 
                     <Modal.Footer>
                         <MdSend size={'2em'} type='submit' onClick={()=>handleSendEmail()} />
                     </Modal.Footer>
                 </Modal>
-            {/* </Form> */}
+            </Form>
         </>
     );
 }

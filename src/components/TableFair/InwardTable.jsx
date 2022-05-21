@@ -29,6 +29,30 @@ window.JSZip = jsZip;
 
 const InwardTable = (props) => {
 
+    // ---- Option to Apply convert & download table data by Data-Table Api, set 'applyReportOptions' to 'true'----
+    if (props.applyReportOptions) {
+        $(document).ready(function () {
+            $('#table').DataTable({
+                destroy: true,
+                paging: true,
+                searching: true,
+                dom: 'Blfrtip',
+                buttons: [
+                    { extend: 'copy', className: 'btn btn-outline-primary glyphicon glyphicon-duplicate' },
+                    { extend: 'csv', className: 'btn btn-outline-primary glyphicon glyphicon-save-file' },
+                    { extend: 'excel', className: 'btn btn-outline-primary glyphicon glyphicon-list-alt' },
+                    { extend: 'pdf', className: 'btn btn-outline-primary glyphicon glyphicon-file' },
+                    { extend: 'print', className: 'btn btn-outline-primary glyphicon glyphicon-print' }
+                ],
+            });
+        });
+    }
+
+    // ---- Option to Apply Data-Table API for table, by setting 'applyDataTableApi' params to 'true' ----
+    if (props.applyDataTableApi) {
+        $(() => $('#table').DataTable());
+    }
+
     let navigate = useNavigate();
 
     const handleView = (id) => {
@@ -64,9 +88,9 @@ const InwardTable = (props) => {
 
                                 {/* ------------ Inward Table ------------ */}
 
-                                {props.applyDataTableApi  &&
+                                {props.applyDataTableApi &&
                                     <>
-                                        <td>{rowValue.inwardID}</td>
+                                        <td>{index+1}</td>
                                         <td>{rowValue.date}</td>
                                         <td>{rowValue.inwardNo}</td>
                                         <td>{rowValue.nature}</td>
@@ -85,8 +109,8 @@ const InwardTable = (props) => {
                                                     modelTitle={"Delete"}
                                                     message={`Row will be permanently deleted, wish to proceed ? `}
                                                 />
-                                                
-                                                <EmailModal color={rowValue.isEmailSent} id={rowValue.inwardID} show={ props.show } onHide={ props.onHide } recievedFrom={rowValue.recievedFrom} />
+
+                                                <EmailModal color={rowValue.isEmailSent} id={rowValue.inwardID} show={props.show} onHide={props.onHide} recievedFrom={rowValue.recievedFrom} />
                                             </td>
                                         }
                                     </>

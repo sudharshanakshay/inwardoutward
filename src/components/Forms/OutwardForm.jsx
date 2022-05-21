@@ -119,7 +119,7 @@ const OutwardForm = () => {
                             <InputGroup className="mb-3 mt-4" >
                                 <InputGroup.Text >Department : </InputGroup.Text>
                                 { 
-                                    <select name='department' className='dropdown-border' id='dropdown' onChange={(val) => { handleChange(val) }}>
+                                    <select name='department' className='color-border' id='dropdown' onChange={(val) => { handleChange(val) }}>
                                         <option value='' selected="selected" >{formData.department}</option>
                                         {departmentList.map((obj, index) => {
                                             return (
