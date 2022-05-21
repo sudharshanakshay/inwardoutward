@@ -281,21 +281,27 @@ const Settings = () => {
                                                 />
                                             </InputGroup>
                                         </Col>
+
                                     </Row>
-                                    <InputGroup className="mb-3 mt-4" >
-                                        <InputGroup.Text >Email content : </InputGroup.Text>
-                                        
-                                        <FormControl
-                                            as='textarea'
-                                            placeholder="body"
-                                            name='body'
-                                            value={formData.body}
-                                            onChange={(e) => handleChange(e)}
-                                        />
-                                        {/* <textarea value={formData.body} name='body' onChange={(e) => handleChange(e)} >
+                                    <Row>
+                                        <Col sm={10} md={8} lg={6}>
+                                            <InputGroup className="mb-3 mt-4" >
+                                                <InputGroup.Text >Email content : </InputGroup.Text>
+
+                                                <FormControl
+                                                    as='textarea'
+                                                    placeholder="body"
+                                                    name='body'
+                                                    value={formData.body}
+                                                    onChange={(e) => handleChange(e)}
+                                                />
+                                                {/* <textarea value={formData.body} name='body' onChange={(e) => handleChange(e)} >
 
                                         </textarea> */}
-                                    </InputGroup>
+                                            </InputGroup>
+                                        </Col>
+                                    </Row>
+
                                 </Container>
                             </Tab.Pane>
                         </Tab.Content>
