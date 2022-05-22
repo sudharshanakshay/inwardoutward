@@ -76,3 +76,10 @@ export const TEST_TABLEDATA_LONG = [[1, "21/04/2022", "in005", "Invitation", "NI
 
 export const TEST_TABLEDATA_SMALL = [["21/04/2022", "in005",  "NITK", "Meeting", "Principal"],["20/04/2022","in006",  "Higher Authority", "Examination", "Students"], ["21/04/2022", "in005",  "NITK", "Meeting", "Principal"], ["21/04/2022", "in005",  "NITK", "Meeting", "Principal"], ["21/04/2022", "in005",  "NITK", "Meeting", "Principal"], ["21/04/2022", "in005",  "NITK", "Meeting", "Principal"]];
 
+
+
+// ------------------------------ login & register page ------------------------------
+
+export const CREATE_ACC_TEXT = 'Create an account' ;
+
+export const NOT_REGISTERED_TEXT = 'Not registered ? ';

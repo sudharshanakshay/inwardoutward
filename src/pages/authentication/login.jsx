@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { loginAction } from '../../actions/auth/authAction';
+import { CREATE_ACC_TEXT, NOT_REGISTERED_TEXT } from '../../utils/Constants';
 
 const Login = () => {
 
@@ -25,15 +26,15 @@ const Login = () => {
             <div className="login-page">
                 <div className="form">
                     <form className="login-form" onSubmit={s => onSubmit(s)}>
-                        <input type="text" placeholder="email / username"
+                        <input type="text" placeholder="email/username"
                             name='email' value={email} onChange={change => onChange(change)} />
                         <input type="password" placeholder='password'
                             name='password' value={password} onChange={change => onChange(change)} />
                         <button type="submit">login</button>
 
-                        <p className="message">Not registered ? <Link to='/register'>Create an account</Link></p>
+                        <p className="message">{NOT_REGISTERED_TEXT}&nbsp;<Link to='/register'>{CREATE_ACC_TEXT}</Link></p>
 
-                        <p className="message"><Link to='/login/forgotpassword'>Forgot password ?</Link></p>
+                        {/* <p className="message"><Link to='/login/forgotpassword'>Forgot password ?</Link></p> */}
                     </form>
                 </div>
             </div>
@@ -42,7 +43,3 @@ const Login = () => {
 }
 
 export default Login;
-
-// Login.prototype = {
-//     setAuth: PropTypes.func.isRequired
-// }
