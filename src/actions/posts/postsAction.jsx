@@ -100,7 +100,7 @@ export const getDisplayData = async ({ updated = false }) => {
 
     if (sessionStorage.getItem('inwardTable') == undefined || updated) {
 
-        console.debug("sessionStorage undefined");
+        // console.debug("sessionStorage undefined");
 
         try {
             // ------------ Dashboard Inward ------------
