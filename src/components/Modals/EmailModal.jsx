@@ -3,8 +3,8 @@ import { Modal, InputGroup, FormControl, Form, Spinner } from "react-bootstrap";
 import { RiMailSendFill } from 'react-icons/ri';
 import { useSelector } from "react-redux";
 import { MdSend } from 'react-icons/md';
-import emailjs from '@emailjs/browser';
-import {getRow, updateTo} from '../../actions/posts/postsAction'
+// import emailjs from '@emailjs/browser';
+// import {getRow, updateTo} from '../../actions/posts/postsAction'
 import GoldenSpinner from "../Loading/GoldenSpinner";
 
 const EmailModal = (props) => {
@@ -104,30 +104,7 @@ const EmailModal = (props) => {
         }
         setFormData({...formData, ['iconLoading']:true});
         console.log(params);
-        // const SERVICE_KEY = process.env.service_key;
-        // const PUBLIC_KEY = process.env.public_key;
-        // const TEMPLATE_KEY = process.env.template_key;
-
-        // emailjs.sendForm(SERVICE_KEY, TEMPLATE_KEY, form.current, 'F25xGp4o4nMxlO0zd')
-        emailjs.send('service_xfdmrwb', 'template_t115k7w', params, 'F25xGp4o4nMxlO0zd')
-            .then((result) => {
-                console.log(result.text, result.status);
-                if(result.text === 'OK'){
-                    getRow({ inward:true, id:props.id })
-                    .then((row)=>{
-                        row[0].isEmailSent = 1;
-                        row.push({...row.pop(),inward:true});
-                        console.log(row[0]);
-                        updateTo(row[0]);
-                        // ---- also sets all formData to default value '' if reasign is not done ----
-                        setFormData({...formData, ['iconLoading']:false});
-                    })
-                }
-                else  setFormData({...formData, ['iconLoading']:false}); 
-            }, (error) => {
-                console.log(error.text);
-                setFormData({...formData, ['iconLoading']:false, ['emailSendError']:true});
-            });
+        
 
         setShowEmailModal(false);
     }
