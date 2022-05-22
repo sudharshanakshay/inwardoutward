@@ -132,6 +132,7 @@ const Settings = () => {
                                                                 <td>
                                                                     <PopModal
                                                                         mode={DELETE}
+                                                                        
                                                                         execFunc={() => delDepartment({ rowID: obj.departmentID })}
                                                                         modelTitle={'Delete'}
                                                                         message={`delete branch ${obj.name} ?`}

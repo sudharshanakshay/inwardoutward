@@ -83,3 +83,9 @@ export const TEST_TABLEDATA_SMALL = [["21/04/2022", "in005",  "NITK", "Meeting",
 export const CREATE_ACC_TEXT = 'Create an account' ;
 
 export const NOT_REGISTERED_TEXT = 'Not registered ? ';
+
+// ------------------------------ login & register page ------------------------------
+
+export const MODAL_LOGOUT_BTN = 'Logout' ;
+
+// export const MODAL_LOGOUT_BTN = 'Logout' ;

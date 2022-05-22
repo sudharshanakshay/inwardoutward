@@ -32,7 +32,7 @@ const PopModal = ({ ren = () => { }, execFunc, id = false, mode, modalBtnText, c
     };
     return (
         <>
-            <Button variant={ctlBtnVariant} className="me-1 p-1" onClick={() => setShow(true)}>{ctlBtnText}</Button>
+            <Button variant={ctlBtnVariant} className="me-1 p-1" onClick={() => setShow(true)}>{ctlBtnText || mode}</Button>
 
             <Modal
                 show={show}
@@ -47,7 +47,7 @@ const PopModal = ({ ren = () => { }, execFunc, id = false, mode, modalBtnText, c
                 <Modal.Footer>
                     {!id && <Modal.Body className="center">{message}</Modal.Body>}
                     <Button variant={modalBtnVariant} onClick={handleClick}>
-                        {modalBtnText}
+                        {modalBtnText || mode}
                     </Button>
                 </Modal.Footer>
             </Modal>
