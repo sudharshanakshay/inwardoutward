@@ -1,3 +1,4 @@
+import React from "react";
 import { Modal, Button } from "react-bootstrap";
 import { useState } from "react";
 import store from "../../store";
