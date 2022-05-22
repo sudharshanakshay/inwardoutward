@@ -1,7 +1,7 @@
+import React from "react";
 import { Navbar, Nav, Container} from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
 import { IoIosArrowBack } from 'react-icons/io';
-
 
 const GoBackNavBar = ({ title }) => {
     const expand = 'md';
