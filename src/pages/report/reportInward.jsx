@@ -12,7 +12,7 @@ const ReportInward = () => {
 
     // ---- load Inward Table Data ----
     const inwardTableData = useSelector((state) => {
-        console.log(state.posts.inwardTable)
+        console.debug(state.posts.inwardTable)
         try {
             return state.posts.inwardTable;
         }

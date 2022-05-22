@@ -25,13 +25,13 @@ export const insertFrom = async ({
     description = null,
     department = null }) => {
 
-    console.log("post Action")
+    console.debug("post Action")
 
     let from_post = null;
     let body = null;
 
     if (inward) {
-        console.log("insert inward");
+        console.debug("insert inward");
 
         from_post = "inward_post";
 
@@ -49,20 +49,20 @@ export const insertFrom = async ({
         try {
             await axios.post(INSERT_INWARD_URL, body, CONFIG)
                 .then((res) => {
-                    console.log(res.data)
+                    console.debug(res.data)
                     if (res.data.status === SUCCESS) {
-                        console.log("insert successful")
+                        console.debug("insert successful")
                         getDisplayData({ updated: true })
                         // Todo : alert model . 
                     }
                 })
         } catch (err) {
-            console.log(err);
+            console.debug(err);
         }
     }
 
     if (outward) {
-        console.log("insert outward");
+        console.debug("insert outward");
 
         from_post = "outward_post";
 
@@ -81,16 +81,16 @@ export const insertFrom = async ({
         try {
             await axios.post(INSERT_OUTWARD_URL, body, CONFIG)
                 .then((res) => {
-                    console.log(res);
+                    console.debug(res);
                     if (res.data.status === SUCCESS) {
-                        console.log("insert successful")
+                        console.debug("insert successful")
                         getDisplayData({ updated: true })
                         // Todo : alert model . 
                     }
                 })
         } catch (err) {
-            console.log("err outward insert ");
-            console.log(err);
+            console.debug("err outward insert ");
+            console.debug(err);
         }
     }
 }
@@ -101,13 +101,13 @@ export const getDisplayData = async ({ updated = false }) => {
 
     if (sessionStorage.getItem('inwardTable') == undefined || updated) {
 
-        console.log("sessionStorage undefined");
+        console.debug("sessionStorage undefined");
 
         try {
             // ------------ Dashboard Inward ------------
             await axios.post(SELECT_DASHBOARD_INWARD_URL, CONFIG)
                 .then((res) => {
-                    console.log(res.data);
+                    console.debug(res.data);
                     sessionStorage.setItem('dashboardInward', JSON.stringify(res.data.dashboardInward));
                 })
                 .then(() => store.dispatch(setDashboardInward()))
@@ -116,7 +116,7 @@ export const getDisplayData = async ({ updated = false }) => {
             await axios.post(SELECT_DASHBOARD_OUTWARD_URL, CONFIG)
                 .then((res) => {
                     sessionStorage.setItem('dashboardOutward', JSON.stringify(res.data.dashboardOutward));
-                    console.log(res.data);
+                    console.debug(res.data);
                 })
                 .then(() => store.dispatch(setDashboardOutward()))
 
@@ -137,7 +137,7 @@ export const getDisplayData = async ({ updated = false }) => {
             // request inward & outward count  
             await axios.post('http://localhost:5000/status', CONFIG)
                 .then((res) => {
-                    // console.log(typeof(res.data.inward[0].inward_count));
+                    // console.debug(typeof(res.data.inward[0].inward_count));
                     sessionStorage.setItem('inwardCount', res.data.inward[0].inward_count);
                     sessionStorage.setItem('outwardCount', res.data.outward[0].outward_count);
                 })
@@ -148,11 +148,11 @@ export const getDisplayData = async ({ updated = false }) => {
 
         }
         catch (err) {
-            console.log(err);
+            console.debug(err);
             store.dispatch(connectionError());
             setTimeout(() => {
                 getDisplayData({});
-                console.log("hello");
+                console.debug("hello");
             }, 6000);
         }
     }
@@ -171,21 +171,21 @@ export const getRow = ({ id, inward = false, outward = false }) => {
         try {
             const row = axios.post('http://localhost:5000/select/row', body, CONFIG)
                 .then((res) => {
-                    // console.log(res.data.selectRow);
-                    console.log('single row retrived successful')
+                    // console.debug(res.data.selectRow);
+                    console.debug('single row retrived successful')
                     // sessionStorage.setItem('selectRow', JSON.stringify({rowData : res.data.selectRow }));
                     // Next()
                     return res.data.selectRow;
                 })
                 // .then((res) => {
-                    // console.log(res.data);
+                    // console.debug(res.data);
                     // store.dispatch(setRowData());
                     // return res.data.selectRow;
                 // } );
             return row;
         }
         catch (err) {
-            console.log(err);
+            console.debug(err);
             return 'error';
         }
     }
@@ -201,14 +201,14 @@ export const getRow = ({ id, inward = false, outward = false }) => {
         try {
             const row = axios.post('http://localhost:5000/select/row', body, CONFIG)
                 .then((res) => {
-                    console.log(res.data.selectRow);
-                    console.log('retrive successful')
+                    console.debug(res.data.selectRow);
+                    console.debug('retrive successful')
                     return res.data.selectRow;
                 })
             return row;
         }
         catch (err) {
-            console.log(err);
+            console.debug(err);
             return 'error'
         }
     }
@@ -243,7 +243,7 @@ export const updateTo = async ({
 
     if (inward) {
         const from_post = "inward_post";
-        console.log(id)
+        console.debug(id)
 
         const body = JSON.stringify({
             inwardID: id,
@@ -260,20 +260,20 @@ export const updateTo = async ({
         try {
             await axios.post('http://localhost:5000/inward/update', body, CONFIG)
                 .then((res) => {
-                    console.log(res.data);
+                    console.debug(res.data);
                     if (res.data.status === SUCCESS) getDisplayData({ updated: true });
                 })
         }
         catch (err) {
-            console.log(err);
+            console.debug(err);
         }
     }
 
     // ----------------- update Outward row -----------------
 
     if (outward) {
-        console.log('outward update')
-        console.log(id)
+        console.debug('outward update')
+        console.debug(id)
 
         const from_post = "outward_post";
 
@@ -293,14 +293,14 @@ export const updateTo = async ({
         try {
             await axios.post('http://localhost:5000/outward/update', body, CONFIG)
                 .then((res) => {
-                    console.log(res.data.outwardUpdate);
-                    console.log('outward update success');
+                    console.debug(res.data.outwardUpdate);
+                    console.debug('outward update success');
                     if (res.data.status === SUCCESS) getDisplayData({ updated: true });
                 })
         }
         catch (err) {
-            console.log('outward update error')
-            console.log(err);
+            console.debug('outward update error')
+            console.debug(err);
         }
     }
 }
@@ -319,7 +319,7 @@ export const delete_from = async ({ rowID, inward = false, outward = false }) =>
     // ----------------- delete inward -----------------
 
     if (inward) {
-        console.log(rowID)
+        console.debug(rowID)
 
         const body = JSON.stringify({
             from: 'inward',
@@ -327,12 +327,12 @@ export const delete_from = async ({ rowID, inward = false, outward = false }) =>
         });
 
         try {
-            console.log(body);
+            console.debug(body);
             await axios.post('http://localhost:5000/delete', body, CONFIG)
                 .then((res) => {
-                    console.log(res.data);
+                    console.debug(res.data);
                     if (res.data.status === 'success') {
-                        console.log('hy im delete in inward !');
+                        console.debug('hy im delete in inward !');
                         getDisplayData({ updated: true });
                     }
                 })
@@ -341,7 +341,7 @@ export const delete_from = async ({ rowID, inward = false, outward = false }) =>
             // delete successful alert msg.
         }
         catch (err) {
-            console.log(err);
+            console.debug(err);
         }
     }
 
@@ -355,17 +355,17 @@ export const delete_from = async ({ rowID, inward = false, outward = false }) =>
         });
 
         try {
-            console.log(body);
+            console.debug(body);
             await axios.post('http://localhost:5000/delete', body, CONFIG)
                 .then((res) => {
-                    console.log(res.data);
+                    console.debug(res.data);
                     if (res.data.status === 'success') getDisplayData({ updated: true });
                 })
 
             // delete successful alert msg.
         }
         catch (err) {
-            console.log(err);
+            console.debug(err);
         }
     }
 

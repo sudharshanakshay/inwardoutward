@@ -39,7 +39,7 @@ const ViewOutward = () => {
     useEffect(() => {
         var res = getRow({ outward: true, id: id });
         res.then((value) => {
-            console.log(value);
+            console.debug(value);
             if(!value.length) {
                 setDeleted(true);
             } 

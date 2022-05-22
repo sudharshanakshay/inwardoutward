@@ -22,45 +22,45 @@ const Settings = () => {
     // ---- load department list ----
 
     const departmentList = useSelector((state) => {
-        console.log(state.settings.departmentList);
+        console.debug(state.settings.departmentList);
         try {
             return state.settings.departmentList;
         }
         catch (err) {
             // return [];
-            console.log(err);
+            console.debug(err);
         }
     })
 
     // ---- load employee data ----
 
     const employeeData = useSelector((state) => {
-        console.log(state.settings.employeeData);
+        console.debug(state.settings.employeeData);
         try {
             return state.settings.employeeData;
         }
         catch (err) {
             // return [];
-            console.log(err)
+            console.debug(err)
         }
     })
 
-    console.log(employeeData);
+    console.debug(employeeData);
 
     const handleChange = (event) => {
         setFormData({ ...formData, [event.target.name]: event.target.value });
-        console.log(formData);
+        console.debug(formData);
     }
 
     const handleAddDepartment = (event) => {
         event.preventDefault();
-        console.log(formData.department);
+        console.debug(formData.department);
         addDepartment(formData);
     }
 
     const handleAddEmployee = (event) => {
         event.preventDefault();
-        console.log(formData);
+        console.debug(formData);
         addEmployee(formData);
     }
 

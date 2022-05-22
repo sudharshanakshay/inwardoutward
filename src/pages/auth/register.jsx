@@ -5,7 +5,7 @@ import { useSelector } from 'react-redux';
 
 const Register = () => {
     // const isLoggedIn = useSelector((state) => state.loggedInStatus.isLoggedIn);
-    // console.log(isLoggedIn);
+    // console.debug(isLoggedIn);
 
     const [formData, setFormData] = useState({
         name:'',
@@ -17,11 +17,11 @@ const Register = () => {
 
     const onChange = (change) => {
         setFormData({ ...formData, [change.target.name]: change.target.value });
-        console.log(formData);
+        console.debug(formData);
     }
     const onSubmit = (v) => {
         v.preventDefault();
-        // console.log("sent " +name+ " "+ email + " " + password);
+        // console.debug("sent " +name+ " "+ email + " " + password);
         registerAction({name,  email, password });
     }
 

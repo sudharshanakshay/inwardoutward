@@ -12,7 +12,7 @@ const InwardForm = () => {
 
     // ---- get inwardID ----
     const { id } = useParams();
-    console.log(id)
+    console.debug(id)
 
     const [formData, setFormData] = useState({
         inwardNo: '',
@@ -30,9 +30,9 @@ const InwardForm = () => {
         // window.location.reload();
         if (id) {
             var res = getRow({ inward: true, id: id });
-            console.log(res);
+            console.debug(res);
             res.then((value) => {
-                console.log(value[0]);
+                console.debug(value[0]);
                 setFormData(value[0]);
             })
         }
@@ -40,7 +40,7 @@ const InwardForm = () => {
 
     const handleChange = (change) => {
         setFormData({ ...formData, [change.target.name]: change.target.value });
-        console.log(formData);
+        console.debug(formData);
     }
 
     const onSubmit = (e) => {

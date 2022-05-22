@@ -55,13 +55,13 @@ const TableFair = ({ title, tableHeaders, tableRows, inward = false, outward = f
   let navigate = useNavigate();
 
   const handleView = (id) => {
-    console.log(id);
+    console.debug(id);
     if(inward) navigate(`view/${id}`);
     if(outward) navigate(`view/${id}`);
   }
 
   const handleEdit = (id) => {
-    console.log(id);
+    console.debug(id);
     if(inward) navigate(`update/${id}`);
     if(outward) navigate(`update/${id}`);
   }

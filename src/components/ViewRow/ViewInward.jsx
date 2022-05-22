@@ -30,7 +30,7 @@ const ViewInward = () => {
 
     const { id } = useParams();
 
-    console.log(id)
+    console.debug(id)
 
     const [deleted, setDeleted] = useState(false);
 
@@ -49,9 +49,9 @@ const ViewInward = () => {
     // ---- useEffect to render only once , empty '[]' makes it happn. ----
     useEffect(() => {
         var promise = getRow({ inward: true, id: id });
-        console.log(promise);
+        console.debug(promise);
         promise.then((value) => {
-            console.log(value);
+            console.debug(value);
             setFormData(value[0]);
         })
     }, []);
