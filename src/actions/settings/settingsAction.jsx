@@ -83,7 +83,7 @@ export const delDepartment = async ({rowID}) => {
 export const getEmployeeData = async({ updated = false }) => {
 
     const GET_EMP_URL = 'http://localhost:5000/select/emp';
-    if(sessionStorage.getItem('employeeData') == undefined || updated){
+    if(sessionStorage.getItem('employeeData') ==     undefined || updated){
         try {
             await axios.post(GET_EMP_URL, CONFIG)
                 .then((res) => {

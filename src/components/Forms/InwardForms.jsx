@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { insertFrom, updateTo } from '../../actions/posts/postsAction';
 import { Button, Col, Container, Form, FormControl, InputGroup, Row } from "react-bootstrap";
-import TopNavBar from '../navBar/TopNavBar';
 import { useNavigate, useParams } from 'react-router-dom';
 import { getRow } from "../../actions/posts/postsAction";
 import GoBackNavBar from '../navBar/GoBackNavBar';

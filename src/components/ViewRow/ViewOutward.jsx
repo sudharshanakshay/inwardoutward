@@ -1,20 +1,16 @@
 import React, { useEffect, useState } from 'react';
-import { Col, Container, Row, ListGroup, Button } from "react-bootstrap";
+import { Col, Container, Row, ListGroup } from "react-bootstrap";
 import { useParams } from 'react-router-dom';
 import { delete_from, getRow } from '../../actions/posts/postsAction';
-import TopNavBar from '../navBar/TopNavBar';
 import { AiOutlinePrinter } from 'react-icons/ai';
 import PopModal from "../Modals/PopModal";
-import { Link, useNavigate } from 'react-router-dom';
-import Footer from "../../components/Footer/Footer";
+import { Link } from 'react-router-dom';
 import { FaEdit } from 'react-icons/fa';
 import { MdDelete } from 'react-icons/md';
 import { AiOutlineFileAdd } from 'react-icons/ai';
 import { FaList } from 'react-icons/fa';
 import { DELETE } from '../../utils/Constants';
 import GoBackNavBar from '../navBar/GoBackNavBar';
-import StatusBox from '../StatusBox/StatusBox';
-import { GREEN } from '../../utils/color';
 import ViewStatus from '../StatusBox/ViewStatus';
 
 const ViewOutward = () => {

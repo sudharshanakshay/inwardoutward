@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import TopNavBar from "../../components/navBar/TopNavBar";
 import { Container } from "react-bootstrap";
 import TableFair from "../../components/TableFair/TableFair";

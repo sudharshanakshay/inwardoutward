@@ -1,6 +1,6 @@
-import React, { useState } from "react";
+import React from "react";
 import { Button, Table } from "react-bootstrap";
-import { Link, useNavigate } from 'react-router-dom';
+import {  useNavigate } from 'react-router-dom';
 
 // ---- imports for converting into PDF, Excel, CSV, & to print ----   
 import $ from 'jquery';

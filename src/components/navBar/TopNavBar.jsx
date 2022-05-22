@@ -1,6 +1,6 @@
 import { useState } from "react";
-import { Navbar, Nav, NavDropdown, Container, Button, Offcanvas, FormControl, Form, Dropdown, NavLink, NavItem, OffcanvasHeader, Col } from "react-bootstrap";
-import { Link, Navigate } from "react-router-dom";
+import { Navbar, Nav, Container,  Offcanvas, Dropdown, Col } from "react-bootstrap";
+import { Link } from "react-router-dom";
 import { BsFillGridFill } from 'react-icons/bs';
 import PopModal from "../Modals/PopModal";
 import { FcSettings } from 'react-icons/fc';
