@@ -1,6 +1,6 @@
-import React, { useState } from "react";
+import React from "react";
 import { Button, Table } from "react-bootstrap";
-import { Link, useNavigate } from 'react-router-dom';
+import {  useNavigate } from 'react-router-dom';
 
 // ---- imports for converting into PDF, Excel, CSV, & to print ----   
 import $ from 'jquery';
@@ -60,13 +60,13 @@ const TableFair = ({ title, tableHeaders, tableRows, inward = false, outward = f
   let navigate = useNavigate();
 
   const handleView = (id) => {
-    console.log(id);
+    console.debug(id);
     if(inward) navigate(`view/${id}`);
     if(outward) navigate(`view/${id}`);
   }
 
   const handleEdit = (id) => {
-    console.log(id);
+    console.debug(id);
     if(inward) navigate(`update/${id}`);
     if(outward) navigate(`update/${id}`);
   }

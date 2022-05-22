@@ -1,16 +1,9 @@
-import { useState } from "react";
-import { Navbar, Nav, NavDropdown, Container, Button, Offcanvas, FormControl, Form, Dropdown, NavLink, NavItem, OffcanvasHeader } from "react-bootstrap";
-import { useSelector } from "react-redux";
-import { Link, Navigate, UNSAFE_NavigationContext, useNavigate } from "react-router-dom";
-import { logOut } from "../../actions/auth/authSlice";
-import store from "../../store";
-import { BsFillGridFill } from 'react-icons/bs';
-import PopModal from "../Modals/PopModal";
+import { Navbar, Nav, Container} from "react-bootstrap";
+import { useNavigate } from "react-router-dom";
 import { IoIosArrowBack } from 'react-icons/io';
 
 
 const GoBackNavBar = ({ title }) => {
-    const placement = 'end';
     const expand = 'md';
     const navigate = useNavigate();
     return (

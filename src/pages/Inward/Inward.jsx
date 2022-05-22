@@ -16,7 +16,7 @@ const Inward = () => {
 
     // ---- load Inward Table data ---- 
     const inwardTableData = useSelector((state) => {
-        console.log(state.posts.inwardTable)
+        console.debug(state.posts.inwardTable)
         try { return state.posts.inwardTable; }
         catch { return 0; }
     });

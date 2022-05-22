@@ -14,7 +14,7 @@ export const getDepartment = async ({ updated = false }) => {
         try {
             await axios.post(GET_DEPT_URL, CONFIG)
                 .then((res) => {
-                    console.log(res.data.departmentList);
+                    console.debug(res.data.departmentList);
                     sessionStorage.setItem('departmentList', JSON.stringify(res.data.departmentList));
                     // return res.data.departmentList;
                 })
@@ -22,7 +22,7 @@ export const getDepartment = async ({ updated = false }) => {
             // return dept;
         }
         catch (err) {
-            console.log(err);
+            console.debug(err);
         }
         // ---- ToDo : handle error return here ----
     }
@@ -34,24 +34,24 @@ export const addDepartment = async (dept) => {
 
     const body = JSON.stringify(dept);
 
-    console.log(body);
+    console.debug(body);
 
     try {
         await axios.post(INSERT_DEPARTMENT_URL, body, CONFIG)
             .then((res) => {
                 if (res.data.status === SUCCESS) {
                     // ---- insert successful ----
-                    console.log('dept insert successful ');
+                    console.debug('dept insert successful ');
                     getDepartment({ updated:true });
                 }
                 else {
-                    console.log(res.data);
+                    console.debug(res.data);
                 }
             })
 
     }
     catch (err) {
-        console.log(err)
+        console.debug(err)
     }
 }
 
@@ -64,17 +64,17 @@ export const delDepartment = async ({rowID}) => {
         id: rowID
     })
 
-    console.log(rowID);
+    console.debug(rowID);
 
     try {
         await axios.post('http://localhost:5000/delete', body, CONFIG)
             .then((res) => {
-                console.log(res.data.status)
+                console.debug(res.data.status)
                 if (res.data.status === SUCCESS) getDepartment({ updated:true });
             })
     }
     catch (err) {
-        console.log(err);
+        console.debug(err);
     }
 }
 
@@ -83,17 +83,17 @@ export const delDepartment = async ({rowID}) => {
 export const getEmployeeData = async({ updated = false }) => {
 
     const GET_EMP_URL = 'http://localhost:5000/select/emp';
-    if(sessionStorage.getItem('employeeData') == undefined || updated){
+    if(sessionStorage.getItem('employeeData') ==     undefined || updated){
         try {
             await axios.post(GET_EMP_URL, CONFIG)
                 .then((res) => {
-                    console.log(res.data.employeeData);
+                    console.debug(res.data.employeeData);
                     if (res.data.employeeData !== 'error') sessionStorage.setItem('employeeData', JSON.stringify(res.data.employeeData));
                 })
                 .then(() => store.dispatch(setEmployeeData()));
         }
         catch (err) {
-            console.log(err)
+            console.debug(err)
         }
     }
 }
@@ -107,11 +107,11 @@ export const addEmployee = async (employeeData) => {
 
         await axios.post(ADD_EMP_URL, body, CONFIG)
             .then((res) => {
-                console.log(res.data.status);
+                console.debug(res.data.status);
                 if (res.data.status === SUCCESS) getEmployeeData({ updated:true });
             })
     } catch (error) {
-        console.log(error)
+        console.debug(error)
     }
 }
 
@@ -129,11 +129,11 @@ export const delEmployee = async ({ rowID }) => {
     try {
         await axios.post(DELETE_URL, body, CONFIG)
             .then((res) => {
-                console.log(res.data.status);
+                console.debug(res.data.status);
                 if (res.data.status === SUCCESS) getEmployeeData({ updated:true });
             })
     }
     catch (err) {
-        console.log(err)
+        console.debug(err)
     }
 }

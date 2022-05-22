@@ -20,7 +20,7 @@ export const loginAction = async ({ email, password, setAuth }) => {
 
     try {
         const res = await axios.post(LOGIN_URL, body, CONFIG);
-        console.log("res : " + res.data.password);
+        console.debug("res : " + res.data.password);
         if (await bcryptjs.compareSync(password, res.data.password)) {
             store.dispatch(logIn());
             store.dispatch(userConfig({ 'email': email }));
@@ -30,7 +30,7 @@ export const loginAction = async ({ email, password, setAuth }) => {
             
         }
     } catch (err) {
-        console.log("error client side " + err);
+        console.debug("error client side " + err);
     }
 }
 
@@ -42,7 +42,7 @@ export const registerAction = async ({ name, email, password }) => {
         'password': passHash
     });
 
-    console.log(body);
+    console.debug(body);
 
     try {
         const res = await axios.post(REGISTER_URL, body, CONFIG);
@@ -52,6 +52,6 @@ export const registerAction = async ({ name, email, password }) => {
         }
 
     } catch (err) {
-        console.log(err);
+        console.debug(err);
     }
 }

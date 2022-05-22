@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { insertFrom, updateTo } from '../../actions/posts/postsAction';
 import { Button, Col, Container, Form, FormControl, InputGroup, Row } from "react-bootstrap";
-import TopNavBar from '../navBar/TopNavBar';
 import { useNavigate, useParams } from 'react-router-dom';
 import { getRow } from "../../actions/posts/postsAction";
 import GoBackNavBar from '../navBar/GoBackNavBar';
@@ -12,7 +11,7 @@ const InwardForm = () => {
 
     // ---- get inwardID ----
     const { id } = useParams();
-    console.log(id)
+    console.debug(id)
 
     const [formData, setFormData] = useState({
         inwardNo: '',
@@ -30,9 +29,9 @@ const InwardForm = () => {
         // window.location.reload();
         if (id) {
             var res = getRow({ inward: true, id: id });
-            console.log(res);
+            console.debug(res);
             res.then((value) => {
-                console.log(value[0]);
+                console.debug(value[0]);
                 setFormData(value[0]);
             })
         }
@@ -40,7 +39,7 @@ const InwardForm = () => {
 
     const handleChange = (change) => {
         setFormData({ ...formData, [change.target.name]: change.target.value });
-        console.log(formData);
+        console.debug(formData);
     }
 
     const onSubmit = (e) => {

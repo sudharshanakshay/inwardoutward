@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Link, Navigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { loginAction } from '../../actions/auth/authAction';
 
 const Login = () => {
@@ -12,11 +12,11 @@ const Login = () => {
     const { email, password } = formData;
     const onChange = (change) => {
         setFormData({ ...formData, [change.target.name]: change.target.value });
-        console.log(formData);
+        console.debug(formData);
     }
     const onSubmit = (v) => {
         v.preventDefault();
-        // console.log("sent " + email + " " + password);
+        // console.debug("sent " + email + " " + password);
         loginAction({ email, password});
     }
 

@@ -20,7 +20,7 @@ export const authSlice = createSlice({
 
         userConfig: (state, email) => {
             // state.user = user;
-            console.log(email.email);
+            console.debug(email.email);
             // state.email = email;
         }
     }

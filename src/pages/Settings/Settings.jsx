@@ -1,12 +1,11 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { Tab, Nav, Button, Col, Container, Form, FormControl, InputGroup, Row, Table } from "react-bootstrap";
-import { addDepartment, addEmployee, delDepartment, delEmployee, getAllDepartment } from "../../actions/settings/settingsAction";
+import { addDepartment, addEmployee, delDepartment, delEmployee } from "../../actions/settings/settingsAction";
 import GoBackNavBar from "../../components/navBar/GoBackNavBar";
 import PopModal from "../../components/Modals/PopModal";
 import { useSelector } from "react-redux";
 import { DELETE, SUBJECT, BODY } from "../../utils/Constants";
 import { delete_from } from "../../actions/posts/postsAction";
-import { LocalConvenienceStoreOutlined } from "@mui/icons-material";
 
 const Settings = () => {
 
@@ -24,30 +23,30 @@ const Settings = () => {
     // ---- load department list ----
 
     const departmentList = useSelector((state) => {
-        console.log(state.settings.departmentList);
+        console.debug(state.settings.departmentList);
         try {
             return state.settings.departmentList;
         }
         catch (err) {
             // return [];
-            console.log(err);
+            console.debug(err);
         }
     })
 
     // ---- load employee data ----
 
     const employeeData = useSelector((state) => {
-        console.log(state.settings.employeeData);
+        console.debug(state.settings.employeeData);
         try {
             return state.settings.employeeData;
         }
         catch (err) {
             // return [];
-            console.log(err)
+            console.debug(err)
         }
     })
 
-    console.log(employeeData);
+    console.debug(employeeData);
 
     const handleChange = (event) => {
 
@@ -57,18 +56,18 @@ const Settings = () => {
             localStorage.setItem('body', event.target.value);
         }
         setFormData({ ...formData, [event.target.name]: event.target.value });
-        console.log(formData);
+        console.debug(formData);
     }
 
     const handleAddDepartment = (event) => {
         event.preventDefault();
-        console.log(formData.department);
+        console.debug(formData.department);
         addDepartment(formData);
     }
 
     const handleAddEmployee = (event) => {
         event.preventDefault();
-        console.log(formData);
+        console.debug(formData);
         addEmployee(formData);
     }
 

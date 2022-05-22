@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { getRow, insertFrom, updateTo } from '../../actions/posts/postsAction';
-import { Button, Col, Container, Dropdown, Form, FormControl, InputGroup, Row } from "react-bootstrap";
-import TopNavBar from '../navBar/TopNavBar';
+import { Button, Col, Container, Form, FormControl, InputGroup, Row } from "react-bootstrap";
 import { useNavigate, useParams } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import GoBackNavBar from '../navBar/GoBackNavBar';
@@ -10,7 +9,7 @@ const OutwardForm = () => {
 
     // ---- get outward ID ----
     const { id } = useParams();
-    console.log(id)
+    console.debug(id)
 
     const [formData, setFormData] = useState({
         serialNo: '',
@@ -29,7 +28,7 @@ const OutwardForm = () => {
         if (id) {
             var res = getRow({ outward: true, id: id });
             res.then((value) => {
-                console.log(value);
+                console.debug(value);
                 setFormData(value[0]);
             })
         }
@@ -38,18 +37,18 @@ const OutwardForm = () => {
     // ---- get department ----
 
     const departmentList = useSelector((state) => {
-        console.log(state.settings.departmentList);
+        console.debug(state.settings.departmentList);
         try {
             return state.settings.departmentList;
         }
         catch (err) {
-            console.log(err);
+            console.debug(err);
         }
     })
 
     const handleChange = (event) => {
         setFormData({ ...formData, [event.target.name]: event.target.value });
-        console.log(formData);
+        console.debug(formData);
     }
 
     const navigate = useNavigate();

@@ -5,8 +5,6 @@ const PublicRoute = ({component: RouteComponent }) =>{
 
     const isLoggedIn = useSelector((state) => state.loggedIn.isLoggedIn);
 
-    console.log("public Route : " +isLoggedIn);
-
     if(!isLoggedIn){ 
         return <RouteComponent />
     }

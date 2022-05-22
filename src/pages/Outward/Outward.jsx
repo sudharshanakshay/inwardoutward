@@ -16,7 +16,7 @@ const Outward = () => {
 
     // ---- load Outward Table Data ----
     const outwardTableData = useSelector((state) => {
-        console.log(state.posts);
+        console.debug(state.posts);
         try {
             return state.posts.outwardTable;
         }

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import TopNavBar from "../../components/navBar/TopNavBar";
 import { Container } from "react-bootstrap";
 import TableFair from "../../components/TableFair/TableFair";
@@ -11,7 +11,7 @@ const ReportOutward = () => {
 
      // ---- load Outward Table Data ----
      const outwardTableData = useSelector((state) => {
-        console.log(state.posts);
+        console.debug(state.posts);
         try {
             return state.posts.outwardTable;
         }
