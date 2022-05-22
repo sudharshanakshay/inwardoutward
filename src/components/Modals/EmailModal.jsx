@@ -3,12 +3,15 @@ import { Modal, InputGroup, FormControl, Form, Spinner } from "react-bootstrap";
 import { RiMailSendFill } from 'react-icons/ri';
 import { useSelector } from "react-redux";
 import { MdSend } from 'react-icons/md';
-// import emailjs from '@emailjs/browser';
-// import {getRow, updateTo} from '../../actions/posts/postsAction'
+import emailjs from '@emailjs/browser';
+import { getRow, updateTo } from '../../actions/posts/postsAction'
 import GoldenSpinner from "../Loading/GoldenSpinner";
 
 const EmailModal = (props) => {
-    // console.log('3');
+    
+    const SERVICE_KEY = process.env.SERVICE_KEY;
+    const TEMPLATE_KEY = process.env.TEMPLATE_KEY;
+    const PUBLIC_KEY = process.env.PUBLIC_URL;
 
     const [formData, setFormData] = useState({
         department: 'Select',
@@ -92,7 +95,7 @@ const EmailModal = (props) => {
 
     // const form = useRef();
     const handleSendEmail = () => {
-        setFormData({...formData, ['iconLoading']:true});
+        setFormData({ ...formData, ['iconLoading']: true });
         console.log(formData.iconLoading);
         // e.preventDefault();
         const params = {
@@ -100,25 +103,44 @@ const EmailModal = (props) => {
             to_email: formData.selectedEmail,
             message: formData.body,
             subject: formData.subject,
-            recieved_from : props.recievedFrom
+            recieved_from: props.recievedFrom
         }
-        setFormData({...formData, ['iconLoading']:true});
+        setFormData({ ...formData, ['iconLoading']: true });
         console.log(params);
-        
+
+        emailjs.send(SERVICE_KEY, TEMPLATE_KEY, params, PUBLIC_KEY)
+            .then((result) => {
+                console.log(result.text, result.status);
+                if (result.text === 'OK') {
+                    getRow({ inward: true, id: props.id })
+                        .then((row) => {
+                            row[0].isEmailSent = 1;
+                            row.push({ ...row.pop(), inward: true });
+                            console.log(row[0]);
+                            updateTo(row[0]);
+                            // ---- also sets all formData to default value '' if reasign is not done ----
+                            setFormData({ ...formData, ['iconLoading']: false });
+                        })
+                }
+                else setFormData({ ...formData, ['iconLoading']: false });
+            }, (error) => {
+                console.log(error.text);
+                setFormData({ ...formData, ['iconLoading']: false, ['emailSendError']: true });
+            });
+
 
         setShowEmailModal(false);
     }
 
-    const handleIconColor = () => {
-        if(formData.emailSendError) return 'red';
-        if(props.color) return 'green';
-    }
+
+
+
 
     return (
         <>
-        {formData.iconLoading && <GoldenSpinner/>}
-        {!formData.iconLoading && <RiMailSendFill onClick={() => setShowEmailModal(true)} color={ formData.emailSendError?'red': props.color?'green':'' }/>}
-            
+            {formData.iconLoading && <GoldenSpinner />}
+            {!formData.iconLoading && <RiMailSendFill onClick={() => setShowEmailModal(true)} color={formData.emailSendError ? 'red' : props.color ? 'green' : ''} />}
+
             <Form >
                 <Modal
                     show={showEmailModal}
@@ -174,19 +196,19 @@ const EmailModal = (props) => {
                             />
                         </InputGroup>
                         <FormControl
-                                as='textarea'
-                                placeholder="body"
-                                name='body'
-                                value={formData.body}
-                                onChange={(e) => handleChange(e)}
-                            />
+                            as='textarea'
+                            placeholder="body"
+                            name='body'
+                            value={formData.body}
+                            onChange={(e) => handleChange(e)}
+                        />
                         {/* <textarea name="body" value={formData.body} onChange={(e) => handleChange(e)} style={{width:'100%'}} className='color-border' >
 
                         </textarea> */}
                     </Modal.Body>
 
                     <Modal.Footer>
-                        <MdSend size={'2em'} type='submit' onClick={()=>handleSendEmail()} />
+                        <MdSend size={'2em'} type='submit' onClick={() => handleSendEmail()} />
                     </Modal.Footer>
                 </Modal>
             </Form>
