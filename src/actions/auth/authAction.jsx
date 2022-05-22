@@ -1,45 +1,34 @@
 import axios from 'axios';
 import { logIn, userConfig } from './authSlice';
 import store from '../../store';
-import { LOGIN_URL, REGISTER_URL, CONFIG } from '../../utils/Constants';
-import bcryptjs from 'bcryptjs';
-
-
-const hashPass = (password) => {
-    const salt = bcryptjs.genSaltSync(5);
-    const passHash = bcryptjs.hashSync(password, 0);
-    return passHash;
-}
+import { LOGIN_URL, REGISTER_URL, CONFIG, SUCCESS } from '../../utils/Constants';
 
 export const loginAction = async ({ email, password, setAuth }) => {
-    const passHash = hashPass(password);
+
     const body = JSON.stringify({
         'email': email,
         'password': password
     });
 
     try {
-        const res = await axios.post(LOGIN_URL, body, CONFIG);
-        console.debug("res : " + res.data.password);
-        if (await bcryptjs.compareSync(password, res.data.password)) {
-            store.dispatch(logIn());
-            store.dispatch(userConfig({ 'email': email }));
-        }
-        else {
-            // alert should trigger here
-            
-        }
+        await axios.post(LOGIN_URL, body, CONFIG)
+        .then((res) => {
+            if(res.data.status === SUCCESS){
+                store.dispatch(logIn());
+            }
+        })
+
     } catch (err) {
         console.debug("error client side " + err);
     }
 }
 
 export const registerAction = async ({ name, email, password }) => {
-    const passHash = hashPass(password);
+
     const body = JSON.stringify({
         'name': name,
         'email': email,
-        'password': passHash
+        'password': password 
     });
 
     console.debug(body);
