@@ -2,7 +2,6 @@ import React from "react";
 import { Link } from 'react-router-dom';
 import TopNavBar from "../../components/navBar/TopNavBar";
 import { Container, Row, Col } from "react-bootstrap";
-import TableFair from "../../components/TableFair/TableFair";
 import { INWARD_TABLE_HEADER, TOTAL_INWARD_POST } from "../../utils/Constants";
 import ButtonSpinner from "../../components/Loading/ButtonSpinner";
 import Footer from "../../components/Footer/Footer";
