@@ -18,10 +18,15 @@ import pdfFonts from 'pdfmake/build/vfs_fonts'
 import PopModal from "../Modals/PopModal";
 import { DELETE } from "../../utils/Constants";
 import { delete_from } from "../../actions/posts/postsAction";
+
+
+
 pdfMake.vfs = pdfFonts.pdfMake.vfs;
 window.pdfMake = pdfMake;
 window.JSZip = jsZip;
 // ---- import ends here ----
+
+
 
 
 const TableFair = ({ title, tableHeaders, tableRows, inward = false, outward = false, applyDataTableApi = false, applyReportOptions = false }) => {

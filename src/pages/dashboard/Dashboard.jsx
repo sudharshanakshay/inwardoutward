@@ -54,9 +54,9 @@ const Dashboard = () => {
     });
 
 
-    // ---- calculate pending count ----
-    let pending = inwardCount + outwardCount ;
-    // pending = pending < 0 ? 0 : pending ; 
+    // ---- calculate total count ----
+    let total = inwardCount + outwardCount ;
+    // total = total < 0 ? 0 : total ; 
 
     // ---- load spinner while loading ----
     if (!outwardTableData || !inwardTableData || !inwardCount || !outwardCount) {
@@ -102,8 +102,8 @@ const Dashboard = () => {
 
                         <Col >
                             {/* <Row className='display-empty-box'></Row> */}
-                            {/* ---------- total pending posts ---------- */}
-                            <Row><StatusBox mainSpace={pending} discription={TOTAL_POST} color={VIOLET_SHADE}></StatusBox></Row>
+                            {/* ---------- total posts ---------- */}
+                            <Row><StatusBox mainSpace={total} discription={TOTAL_POST} color={VIOLET_SHADE}></StatusBox></Row>
                             {/* ---------- total inward posts ---------- */}
                             <Row><StatusBox mainSpace={inwardCount} discription={TOTAL_INWARD_POST} color={GOLDEN}></StatusBox></Row>
                             {/* ---------- total outward posts ---------- */}
@@ -122,8 +122,8 @@ const Dashboard = () => {
                     {/* --------------------------- Status Box --------------------------- */}
 
                     <Row>
-                        {/* ---------- total pending posts ---------- */}
-                        <Col /*xs={4} sm={4}*/><StatusBox mainSpace={pending} discription={TOTAL_POST} color={VIOLET_SHADE}></StatusBox></Col>
+                        {/* ---------- total posts ---------- */}
+                        <Col /*xs={4} sm={4}*/><StatusBox mainSpace={total} discription={TOTAL_POST} color={VIOLET_SHADE}></StatusBox></Col>
                         {/* ---------- total inward posts ---------- */}
                         <Col /*xs={4} sm={4} */ ><StatusBox mainSpace={inwardCount} discription={TOTAL_INWARD_POST} color={GOLDEN}></StatusBox></Col>
                         {/* ---------- total outward posts ---------- */}

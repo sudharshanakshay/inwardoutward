@@ -4,7 +4,8 @@ import { addDepartment, addEmployee, delDepartment, delEmployee } from "../../ac
 import GoBackNavBar from "../../components/navBar/GoBackNavBar";
 import PopModal from "../../components/Modals/PopModal";
 import { useSelector } from "react-redux";
-import { DELETE } from "../../utils/Constants";
+import { DELETE, SUBJECT, BODY } from "../../utils/Constants";
+import { delete_from } from "../../actions/posts/postsAction";
 
 const Settings = () => {
 
@@ -14,7 +15,9 @@ const Settings = () => {
         department: 'Select Department',
         name: '',
         email: '',
-        phone: ''
+        phone: '',
+        body: localStorage.getItem('body'),
+        subject: localStorage.getItem('subject')
     });
 
     // ---- load department list ----
@@ -46,6 +49,12 @@ const Settings = () => {
     console.debug(employeeData);
 
     const handleChange = (event) => {
+
+        // ---- save subject & body of email to localStorage ----
+        if (event.target.name == 'subject' || event.target.name == 'body') {
+            localStorage.setItem('subject', event.target.value);
+            localStorage.setItem('body', event.target.value);
+        }
         setFormData({ ...formData, [event.target.name]: event.target.value });
         console.debug(formData);
     }
@@ -76,6 +85,9 @@ const Settings = () => {
                             </Nav.Item>
                             <Nav.Item>
                                 <Nav.Link eventKey="second">Employee</Nav.Link>
+                            </Nav.Item>
+                            <Nav.Item>
+                                <Nav.Link eventKey="third">Email</Nav.Link>
                             </Nav.Item>
                         </Nav>
                     </Col>
@@ -118,7 +130,7 @@ const Settings = () => {
                                                                 <td>
                                                                     <PopModal
                                                                         mode={DELETE}
-                                                                        execFunc={() => delDepartment({ rowID:obj.departmentID })}
+                                                                        execFunc={() => delDepartment({ rowID: obj.departmentID })}
                                                                         modelTitle={'Delete'}
                                                                         message={`delete branch ${obj.name} ?`}
                                                                     />
@@ -146,7 +158,7 @@ const Settings = () => {
                                                     <InputGroup className="mb-3 mt-4" >
                                                         <InputGroup.Text >Department : </InputGroup.Text>
                                                         {
-                                                            <select name='department' className='dropdown-border' id='dropdown' onChange={(val) => { handleChange(val) }}>
+                                                            <select name='department' className='color-border' id='dropdown' onChange={(val) => { handleChange(val) }}>
                                                                 <option value='' selected="selected" >{formData.department}</option>
                                                                 {departmentList?.map((obj, index) => {
                                                                     return (<option >{obj.name}</option>)
@@ -236,7 +248,7 @@ const Settings = () => {
                                                                             <PopModal
                                                                                 mode={DELETE}
                                                                                 modelTitle={'Delete'}
-                                                                                execFunc={ () => {delEmployee({ rowID:obj.employeeID })} }
+                                                                                execFunc={() => { delEmployee({ rowID: obj.employeeID }) }}
                                                                                 message={`delete employee ${obj.employeeName} ?`}
                                                                             />
                                                                         </td>
@@ -252,6 +264,43 @@ const Settings = () => {
                                         </Col>
                                         {/* ------------------- display employee list ends here ------------------- */}
                                     </Row>
+                                </Container>
+                            </Tab.Pane>
+                            <Tab.Pane eventKey="third" >
+                                <Container>
+                                    <Row>
+                                        <Col sm={10} md={8} lg={6}>
+                                            <InputGroup className="mb-3 mt-4" >
+                                                <InputGroup.Text >Subject : </InputGroup.Text>
+                                                <FormControl
+                                                    placeholder="subject"
+                                                    name='subject'
+                                                    value={formData.subject}
+                                                    onChange={(e) => handleChange(e)}
+                                                />
+                                            </InputGroup>
+                                        </Col>
+
+                                    </Row>
+                                    <Row>
+                                        <Col sm={10} md={8} lg={6}>
+                                            <InputGroup className="mb-3 mt-4" >
+                                                <InputGroup.Text >Email content : </InputGroup.Text>
+
+                                                <FormControl
+                                                    as='textarea'
+                                                    placeholder="body"
+                                                    name='body'
+                                                    value={formData.body}
+                                                    onChange={(e) => handleChange(e)}
+                                                />
+                                                {/* <textarea value={formData.body} name='body' onChange={(e) => handleChange(e)} >
+
+                                        </textarea> */}
+                                            </InputGroup>
+                                        </Col>
+                                    </Row>
+
                                 </Container>
                             </Tab.Pane>
                         </Tab.Content>

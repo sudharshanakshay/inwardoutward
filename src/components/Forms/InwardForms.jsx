@@ -177,7 +177,7 @@ const InwardForm = () => {
                                     value={formData.deliverTo}
                                     onChange={(value) => handleChange(value)}
                                 />
-                            </InputGroup>
+                            </InputGroup>   
                         </Col>
 
                     </Row>

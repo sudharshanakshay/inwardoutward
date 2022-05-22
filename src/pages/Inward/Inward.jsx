@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { Link } from 'react-router-dom';
 import TopNavBar from "../../components/navBar/TopNavBar";
 import { Container, Row, Col } from "react-bootstrap";
@@ -9,6 +9,7 @@ import Footer from "../../components/Footer/Footer";
 import { useSelector } from "react-redux";
 import StatusBox from "../../components/StatusBox/StatusBox";
 import { GOLDEN } from "../../utils/color";
+import InwardTable from "../../components/TableFair/InwardTable";
 
 
 const Inward = () => {
@@ -38,6 +39,8 @@ const Inward = () => {
             </div>
         )
     }
+    console.log('1')
+
 
     return (
         <div>
@@ -51,8 +54,7 @@ const Inward = () => {
 
                                 {/* ---------- Inward Table Content ---------- */}
                                 <Container fluid>
-                                    <TableFair
-                                        inward={true}
+                                    <InwardTable
                                         applyDataTableApi={true}
                                         title={"Inward Posts"}
                                         tableHeaders={INWARD_TABLE_HEADER}
@@ -87,8 +89,7 @@ const Inward = () => {
                             <div >
                                 {/* ---------- Inward Table Content ---------- */}
                                 <Container fluid>
-                                    <TableFair
-                                        inward={true}
+                                    <InwardTable
                                         applyDataTableApi={true}
                                         title={"Inward Posts"}
                                         tableHeaders={INWARD_TABLE_HEADER}
