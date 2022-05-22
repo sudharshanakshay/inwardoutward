@@ -1,6 +1,6 @@
 import axios from "axios"
 import store from "../../store";
-import { CONFIG } from "../../utils/Constants"
+import { CONFIG, ERROR } from "../../utils/Constants"
 import { setDepartmentList, setEmployeeData } from "./settingsSlice";
 import { SUCCESS } from "../../utils/Constants";
 
@@ -10,12 +10,14 @@ import { SUCCESS } from "../../utils/Constants";
 
 export const getDepartment = async ({ updated = false }) => {
     const GET_DEPT_URL = 'http://localhost:5000/select/dept';
+
     if(sessionStorage.getItem('departmentList') == undefined || updated){
         try {
             await axios.post(GET_DEPT_URL, CONFIG)
                 .then((res) => {
                     console.debug(res.data.departmentList);
-                    sessionStorage.setItem('departmentList', JSON.stringify(res.data.departmentList));
+
+                    if(!(res.data.departmentList == ERROR)) sessionStorage.setItem('departmentList', JSON.stringify(res.data.departmentList));
                     // return res.data.departmentList;
                 })
                 .then(() => store.dispatch(setDepartmentList()))
@@ -30,6 +32,7 @@ export const getDepartment = async ({ updated = false }) => {
 
 // ----------------- insert department -----------------
 export const addDepartment = async (dept) => {
+
     const INSERT_DEPARTMENT_URL = 'http://localhost:5000/dept';
 
     const body = JSON.stringify(dept);

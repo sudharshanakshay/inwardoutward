@@ -45,6 +45,8 @@ export const DELETE = 'delete';
 
 export const SUCCESS = 'success';
 
+export const ERROR = 'error';
+
 export const TOTAL_OUTWARD_POST = 'Total Outward Post';
 
 export const TOTAL_INWARD_POST = 'Total Inward Post';
