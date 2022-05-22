@@ -335,7 +335,7 @@ export const delete_from = async ({ rowID, inward = false, outward = false }) =>
             await axios.post('http://localhost:5000/delete', body, CONFIG)
                 .then((res) => {
                     console.debug(res.data);
-                    if (res.data.status === 'success') {
+                    if (res.data.status === SUCCESS) {
                         console.debug('hy im delete in inward !');
                         getDisplayData({ updated: true });
                     }
@@ -363,7 +363,7 @@ export const delete_from = async ({ rowID, inward = false, outward = false }) =>
             await axios.post('http://localhost:5000/delete', body, CONFIG)
                 .then((res) => {
                     console.debug(res.data);
-                    if (res.data.status === 'success') getDisplayData({ updated: true });
+                    if (res.data.status === SUCCESS) getDisplayData({ updated: true });
                 })
 
             // delete successful alert msg.

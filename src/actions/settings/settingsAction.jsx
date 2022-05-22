@@ -86,12 +86,12 @@ export const delDepartment = async ({rowID}) => {
 export const getEmployeeData = async({ updated = false }) => {
 
     const GET_EMP_URL = 'http://localhost:5000/select/emp';
-    if(sessionStorage.getItem('employeeData') ==     undefined || updated){
+    if(sessionStorage.getItem('employeeData') ==  undefined || updated){
         try {
             await axios.post(GET_EMP_URL, CONFIG)
                 .then((res) => {
                     console.debug(res.data.employeeData);
-                    if (res.data.employeeData !== 'error') sessionStorage.setItem('employeeData', JSON.stringify(res.data.employeeData));
+                    if (res.data.employeeData !== ERROR ) sessionStorage.setItem('employeeData', JSON.stringify(res.data.employeeData));
                 })
                 .then(() => store.dispatch(setEmployeeData()));
         }

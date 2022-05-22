@@ -35,7 +35,7 @@ export const registerAction = async ({ name, email, password }) => {
 
     try {
         const res = await axios.post(REGISTER_URL, body, CONFIG);
-        if (res.data.register == "successful") {
+        if (res.data.status === SUCCESS) {
             store.dispatch(logIn());
             store.dispatch(userConfig({ 'email': email }));
         }

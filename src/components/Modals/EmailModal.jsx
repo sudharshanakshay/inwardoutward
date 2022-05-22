@@ -8,7 +8,7 @@ import { getRow, updateTo } from '../../actions/posts/postsAction'
 import GoldenSpinner from "../Loading/GoldenSpinner";
 
 const EmailModal = (props) => {
-    
+
     const SERVICE_KEY = process.env.SERVICE_KEY;
     const TEMPLATE_KEY = process.env.TEMPLATE_KEY;
     const PUBLIC_KEY = process.env.PUBLIC_URL;
@@ -95,9 +95,10 @@ const EmailModal = (props) => {
 
     // const form = useRef();
     const handleSendEmail = () => {
+
+        // ---- email loading status ----  
         setFormData({ ...formData, ['iconLoading']: true });
-        console.log(formData.iconLoading);
-        // e.preventDefault();
+
         const params = {
             to_name: formData.selectedEmployee,
             to_email: formData.selectedEmail,
@@ -105,8 +106,6 @@ const EmailModal = (props) => {
             subject: formData.subject,
             recieved_from: props.recievedFrom
         }
-        setFormData({ ...formData, ['iconLoading']: true });
-        console.log(params);
 
         emailjs.send(SERVICE_KEY, TEMPLATE_KEY, params, PUBLIC_KEY)
             .then((result) => {
@@ -116,13 +115,12 @@ const EmailModal = (props) => {
                         .then((row) => {
                             row[0].isEmailSent = 1;
                             row.push({ ...row.pop(), inward: true });
-                            console.log(row[0]);
                             updateTo(row[0]);
-                            // ---- also sets all formData to default value '' if reasign is not done ----
-                            setFormData({ ...formData, ['iconLoading']: false });
+
                         })
                 }
-                else setFormData({ ...formData, ['iconLoading']: false });
+                setFormData({ ...formData, ['iconLoading']: false });
+                
             }, (error) => {
                 console.log(error.text);
                 setFormData({ ...formData, ['iconLoading']: false, ['emailSendError']: true });
@@ -131,10 +129,6 @@ const EmailModal = (props) => {
 
         setShowEmailModal(false);
     }
-
-
-
-
 
     return (
         <>

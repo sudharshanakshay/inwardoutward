@@ -4,8 +4,8 @@ import { addDepartment, addEmployee, delDepartment, delEmployee } from "../../ac
 import GoBackNavBar from "../../components/navBar/GoBackNavBar";
 import PopModal from "../../components/Modals/PopModal";
 import { useSelector } from "react-redux";
-import { DELETE, SUBJECT, BODY } from "../../utils/Constants";
-import { delete_from } from "../../actions/posts/postsAction";
+import { DELETE } from "../../utils/Constants";
+
 
 const Settings = () => {
 
@@ -51,7 +51,7 @@ const Settings = () => {
     const handleChange = (event) => {
 
         // ---- save subject & body of email to localStorage ----
-        if (event.target.name == 'subject' || event.target.name == 'body') {
+        if (event.target.name === 'subject' || event.target.name === 'body') {
             localStorage.setItem('subject', event.target.value);
             localStorage.setItem('body', event.target.value);
         }
