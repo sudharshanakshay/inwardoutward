@@ -276,9 +276,9 @@ export const updateTo = async ( props
 
     // ----------------- update Outward row -----------------
 
-    if (outward) {
+    if (props.outward) {
         console.debug('outward update')
-        console.debug(id)
+        console.debug(props.id)
 
         const from_post = "outward_post";
 
