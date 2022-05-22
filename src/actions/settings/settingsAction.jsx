@@ -15,9 +15,9 @@ export const getDepartment = async ({ updated = false }) => {
         try {
             await axios.post(GET_DEPT_URL, CONFIG)
                 .then((res) => {
-                    console.debug(res.data.departmentList);
+                    console.log(res.data.departmentList);
 
-                    if(!(res.data.departmentList == ERROR)) sessionStorage.setItem('departmentList', JSON.stringify(res.data.departmentList));
+                    if(!(res.data.departmentList === ERROR)) sessionStorage.setItem('departmentList', JSON.stringify(res.data.departmentList));
                     // return res.data.departmentList;
                 })
                 .then(() => store.dispatch(setDepartmentList()))

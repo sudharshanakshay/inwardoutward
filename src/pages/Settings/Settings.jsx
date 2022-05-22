@@ -107,7 +107,7 @@ const Settings = () => {
                                                 <FormControl
                                                     placeholder="Add Department"
                                                     name='department'
-                                                    autocomplete="off"
+                                                    autoComplete="off"
                                                     onChange={(value) => handleChange(value)}
                                                 />
                                                 <Button variant='success' type='submit' >Add</Button>
@@ -118,14 +118,16 @@ const Settings = () => {
                                         {/* ---------- display department list ---------- */}
                                         <Table striped hover bordered size="sm">
                                             <thead>
-                                                <td>Department</td>
-                                                <td>Actions</td>
+                                                <tr>
+                                                    <th>Department</th>
+                                                    <th>Actions</th>
+                                                </tr>
                                             </thead>
                                             <tbody>
-                                                {departmentList?.map((obj) => {
+                                                {departmentList?.map((obj, index) => {
                                                     return (
                                                         <>
-                                                            <tr>
+                                                            <tr key={index}>
                                                                 <td>{obj.name}</td>
                                                                 <td>
                                                                     <PopModal
@@ -154,14 +156,14 @@ const Settings = () => {
 
                                                 {/* ------------------- add employee data ------------------- */}
                                                 <Row>
-                                                    {/* ---------- from input select department ----------  */}
+                                                    {/* ---------- form input select department ----------  */}
                                                     <InputGroup className="mb-3 mt-4" >
                                                         <InputGroup.Text >Department : </InputGroup.Text>
                                                         {
                                                             <select name='department' className='color-border' id='dropdown' onChange={(val) => { handleChange(val) }}>
-                                                                <option value='' selected="selected" >{formData.department}</option>
+                                                                <option value='' >{formData.department}</option>
                                                                 {departmentList?.map((obj, index) => {
-                                                                    return (<option >{obj.name}</option>)
+                                                                    return (<option key={index}>{obj.name}</option>)
                                                                 })}
                                                             </select>
                                                         }
@@ -229,17 +231,19 @@ const Settings = () => {
                                                 <Table striped bordered hover size="sm">
 
                                                     <thead>
-                                                        <th>Name</th>
-                                                        <th>Department</th>
-                                                        <th>Email</th>
-                                                        <th>Phone</th>
-                                                        <th>Action</th>
+                                                        <tr>
+                                                            <th>Name</th>
+                                                            <th>Department</th>
+                                                            <th>Email</th>
+                                                            <th>Phone</th>
+                                                            <th>Action</th>
+                                                        </tr>
                                                     </thead>
                                                     <tbody>
-                                                        {employeeData?.map((obj) => {
+                                                        {employeeData?.map((obj, index) => {
                                                             return (
                                                                 <>
-                                                                    <tr>
+                                                                    <tr key={index}>
                                                                         <td>{obj.employeeName}</td>
                                                                         <td>{obj.departmentName}</td>
                                                                         <td>{obj.email}</td>
