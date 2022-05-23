@@ -110,7 +110,7 @@ const InwardTable = (props) => {
                                                     message={`Row will be permanently deleted, wish to proceed ? `}
                                                 />
 
-                                                <EmailModal color={rowValue.isEmailSent} id={rowValue.inwardID} show={props.show} onHide={props.onHide} recievedFrom={rowValue.recievedFrom} />
+                                                <EmailModal color={rowValue.isEmailSent} id={rowValue.inwardID} show={props.show} onHide={props.onHide} rowValue={rowValue} />
                                             </td>
                                         }
                                     </>

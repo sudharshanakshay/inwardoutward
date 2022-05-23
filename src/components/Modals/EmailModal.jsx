@@ -7,11 +7,14 @@ import emailjs from '@emailjs/browser';
 import { getRow, updateTo } from '../../actions/posts/postsAction'
 import GoldenSpinner from "../Loading/GoldenSpinner";
 
+
 const EmailModal = (props) => {
 
-    const SERVICE_KEY = process.env.SERVICE_KEY;
-    const TEMPLATE_KEY = process.env.TEMPLATE_KEY;
-    const PUBLIC_KEY = process.env.PUBLIC_URL;
+    const SERVICE_KEY = process.env.REACT_APP_SERVICE_KEY;
+    const TEMPLATE_KEY = process.env.REACT_APP_TEMPLATE_KEY;
+    const PUBLIC_KEY = process.env.REACT_APP_PUBLIC_KEY;
+
+    console.log(SERVICE_KEY, TEMPLATE_KEY, PUBLIC_KEY, process.env.NODE_ENV);
 
     const [formData, setFormData] = useState({
         department: 'Select',
@@ -82,14 +85,9 @@ const EmailModal = (props) => {
             })
         }
 
-        // ---- save subject & body of email to localStorage ----
-        if (event.target.name == 'subject' || event.target.name == 'body') {
-            localStorage.setItem('subject', event.target.value);
-            localStorage.setItem('body', event.target.value);
-        }
-
         setFormData({ ...formData, 'employeeNames': emplist, 'emailIds': emailIds, [event.target.name]: event.target.value });
-        console.log(formData);
+        if(event.target.name === 'subject') localStorage.setItem('subject', event.target.value);
+        if(event.target.name === 'body') localStorage.setItem('body', event.target.value);
     }
 
 
@@ -99,32 +97,42 @@ const EmailModal = (props) => {
         // ---- email loading status ----  
         setFormData({ ...formData, ['iconLoading']: true });
 
-        const params = {
-            to_name: formData.selectedEmployee,
-            to_email: formData.selectedEmail,
-            message: formData.body,
-            subject: formData.subject,
-            recieved_from: props.recievedFrom
+        try {
+            const params = {
+                to_name: formData.selectedEmployee,
+                to_email: formData.selectedEmail,
+                message: formData.body,
+                subject: formData.subject,
+                from_name: props.rowValue.recievedFrom
+            }
+
+            console.log(props.rowValue.recievedFrom);
+
+            emailjs.send(SERVICE_KEY, TEMPLATE_KEY, params, PUBLIC_KEY)
+                .then((result) => {
+                    console.log(result.text, result.status);
+                    if (result.text === 'OK') {
+                        getRow({ inward: true, id: props.id })
+                            .then((row) => {
+                                row[0].isEmailSent = 1;
+                                row.push({ ...row.pop(), inward: true });
+                                updateTo(row[0]);
+
+                            })
+                    }
+                    setFormData({ ...formData, ['iconLoading']: false });
+
+                }, (error) => {
+                    console.log(error.text);
+                    setFormData({ ...formData, ['iconLoading']: false });
+                    setFormData({ ...formData, ['emailSendError']: true });
+                });
         }
-
-        emailjs.send(SERVICE_KEY, TEMPLATE_KEY, params, PUBLIC_KEY)
-            .then((result) => {
-                console.log(result.text, result.status);
-                if (result.text === 'OK') {
-                    getRow({ inward: true, id: props.id })
-                        .then((row) => {
-                            row[0].isEmailSent = 1;
-                            row.push({ ...row.pop(), inward: true });
-                            updateTo(row[0]);
-
-                        })
-                }
-                setFormData({ ...formData, ['iconLoading']: false });
-                
-            }, (error) => {
-                console.log(error.text);
-                setFormData({ ...formData, ['iconLoading']: false, ['emailSendError']: true });
-            });
+        catch (err) {
+            console.log(err)
+            setFormData({ ...formData, ['iconLoading']: false });
+            setFormData({ ...formData, ['emailSendError']: true });
+        }
 
 
         setShowEmailModal(false);
@@ -132,8 +140,8 @@ const EmailModal = (props) => {
 
     return (
         <>
-            {formData.iconLoading && <GoldenSpinner />}
-            {!formData.iconLoading && <RiMailSendFill onClick={() => setShowEmailModal(true)} color={formData.emailSendError ? 'red' : props.color ? 'green' : ''} />}
+            {formData.iconLoading ? <GoldenSpinner /> :
+                <RiMailSendFill onClick={() => setShowEmailModal(true)} color={formData.emailSendError ? 'red' : props.color ? 'green' : ''} />}
 
             <Form >
                 <Modal

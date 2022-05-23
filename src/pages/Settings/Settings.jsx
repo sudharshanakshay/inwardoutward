@@ -46,28 +46,24 @@ const Settings = () => {
         }
     })
 
-    console.debug(employeeData);
 
     const handleChange = (event) => {
 
-        // ---- save subject & body of email to localStorage ----
-        if (event.target.name === 'subject' || event.target.name === 'body') {
-            localStorage.setItem('subject', event.target.value);
-            localStorage.setItem('body', event.target.value);
-        }
         setFormData({ ...formData, [event.target.name]: event.target.value });
-        console.debug(formData);
+
+        // ---- save subject & body of email to localStorage ----
+
+        if(event.target.name === 'subject') localStorage.setItem('subject', event.target.value);
+        if(event.target.name === 'body') localStorage.setItem('body', event.target.value);
     }
 
     const handleAddDepartment = (event) => {
         event.preventDefault();
-        console.debug(formData.department);
         addDepartment(formData);
     }
 
     const handleAddEmployee = (event) => {
         event.preventDefault();
-        console.debug(formData);
         addEmployee(formData);
     }
 
@@ -299,9 +295,7 @@ const Settings = () => {
                                                     value={formData.body}
                                                     onChange={(e) => handleChange(e)}
                                                 />
-                                                {/* <textarea value={formData.body} name='body' onChange={(e) => handleChange(e)} >
 
-                                        </textarea> */}
                                             </InputGroup>
                                         </Col>
                                     </Row>
