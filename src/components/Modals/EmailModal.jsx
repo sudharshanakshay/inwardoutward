@@ -14,8 +14,6 @@ const EmailModal = (props) => {
     const TEMPLATE_KEY = process.env.REACT_APP_TEMPLATE_KEY;
     const PUBLIC_KEY = process.env.REACT_APP_PUBLIC_KEY;
 
-    console.log(SERVICE_KEY, TEMPLATE_KEY, PUBLIC_KEY, process.env.NODE_ENV);
-
     const [formData, setFormData] = useState({
         department: 'Select',
         employeeNames: [],

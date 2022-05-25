@@ -76,6 +76,9 @@ export const TEST_TABLEDATA_LONG = [[1, "21/04/2022", "in005", "Invitation", "NI
 
 export const TEST_TABLEDATA_SMALL = [["21/04/2022", "in005",  "NITK", "Meeting", "Principal"],["20/04/2022","in006",  "Higher Authority", "Examination", "Students"], ["21/04/2022", "in005",  "NITK", "Meeting", "Principal"], ["21/04/2022", "in005",  "NITK", "Meeting", "Principal"], ["21/04/2022", "in005",  "NITK", "Meeting", "Principal"], ["21/04/2022", "in005",  "NITK", "Meeting", "Principal"]];
 
+export const DEPARTMENT_TABLE_HEADER = ['Department', 'Actions'];
+
+export const EMPLOYEE_TABLE_HEADER = ['Name', 'Department', 'Email', 'Phone', 'Action'];
 
 
 // ------------------------------ login & register page ------------------------------

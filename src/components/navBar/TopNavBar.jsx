@@ -55,12 +55,12 @@ const TopNavBar = () => {
                                     Report
                                 </Dropdown.Toggle>
                                 <Dropdown.Menu>
-                                    <Nav.Link >
+                                    <Nav className="p-2">
                                         <Link className="link" to="/ReportInward" >Inward Report</Link>
-                                    </Nav.Link>
-                                    <Nav.Link >
+                                    </Nav>
+                                    <Nav className="p-2">
                                         <Link className="link" to="/ReportOutward" >Outward Report</Link>
-                                    </Nav.Link>
+                                    </Nav>
                                 </Dropdown.Menu>
                             </Dropdown>
                         </Nav>

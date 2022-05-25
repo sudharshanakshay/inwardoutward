@@ -249,7 +249,7 @@ export const updateTo = async ( props
         console.debug(props.inwardID)
 
         const body = JSON.stringify({
-            inwardID: props.inwardID,
+            inwardID: props.id,
             inwardNo: props.inwardNo,
             date: props.date,
             from_post: props.from_post,
@@ -336,7 +336,7 @@ export const delete_from = async ({ rowID, inward = false, outward = false }) =>
                 .then((res) => {
                     console.debug(res.data);
                     if (res.data.status === SUCCESS) {
-                        console.debug('hy im delete in inward !');
+                        console.log('hy im delete in inward !');
                         getDisplayData({ updated: true });
                     }
                 })

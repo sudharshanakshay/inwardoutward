@@ -104,13 +104,13 @@ const ViewInward = () => {
                                             <ListGroup variant='flush' >
                                                 <ListGroup.Item><h3>Record Details</h3></ListGroup.Item>
                                                 <ListGroup.Item>
-                                                    <li><th>Date :&nbsp;</th><td>{formData.date}</td></li><br />
-                                                    <li><th>Inward No :&nbsp;</th> <td> {formData.inwardNo}</td></li><br />
-                                                    <li><th>Received From :&nbsp;</th> <td> {formData.recievedFrom}</td></li><br />
-                                                    <li><th>Subject  :&nbsp;</th> <td> {formData.subject}</td></li><br />
-                                                    <li><th>Delivered To :&nbsp;</th> <td> {formData.deliverTo}</td></li><br />
-                                                    <li><th>Nature :&nbsp;</th> <td> {formData.nature}</td></li><br />
-                                                    <li><th>Remark :&nbsp;</th> <td> {formData.remark}</td></li><br />
+                                                    <li><b>Date :&nbsp;</b><label>{formData.date}</label></li><br />
+                                                    <li><b>Inward No :&nbsp;</b> <label> {formData.inwardNo}</label></li><br />
+                                                    <li><b>Received From :&nbsp;</b> <label> {formData.recievedFrom}</label></li><br />
+                                                    <li><b>Subject  :&nbsp;</b> <label> {formData.subject}</label></li><br />
+                                                    <li><b>Delivered To :&nbsp;</b> <label> {formData.deliverTo}</label></li><br />
+                                                    <li><b>Nature :&nbsp;</b> <label> {formData.nature}</label></li><br />
+                                                    <li><b>Remark :&nbsp;</b> <label> {formData.remark}</label></li><br />
                                                 </ListGroup.Item>
                                             </ListGroup>
                                         </div>

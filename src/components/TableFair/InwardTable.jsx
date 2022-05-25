@@ -84,7 +84,7 @@ const InwardTable = (props) => {
                 <tbody>
                     {
                         props.tableRows?.map((rowValue, index) => (
-                            <tr key={index} className="center" >
+                            <tr key={rowValue.inwardID} className="center" >
 
                                 {/* ------------ Inward Table ------------ */}
 

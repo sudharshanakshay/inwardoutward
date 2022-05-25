@@ -9,6 +9,7 @@ import Footer from "../../components/Footer/Footer";
 import { useSelector } from "react-redux";
 import StatusBox from "../../components/StatusBox/StatusBox";
 import { BRIGHT_GREEN_SHADE } from "../../utils/color";
+import OutwardTable from "../../components/TableFair/OutwardTable";
 
 const Outward = () => {
 
@@ -47,8 +48,8 @@ const Outward = () => {
 
     return (
         <div>
+            <TopNavBar />
             <div className="h-100vh">
-                <TopNavBar />
 
                 {/* ------------------ Desktop view ------------------ */}
                 <Container fluid className="desktop-view">
@@ -56,7 +57,7 @@ const Outward = () => {
                         <Col sm={12} md={12} lg={10} >
 
                             {/* ---------- Outward Table Content ---------- */}
-                            <TableFair
+                            <OutwardTable
                                 outward={true}
                                 applyDataTableApi={true}
                                 title={OUTWARD_TABLE_TITLE}

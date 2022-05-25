@@ -4,7 +4,7 @@ import { addDepartment, addEmployee, delDepartment, delEmployee } from "../../ac
 import GoBackNavBar from "../../components/navBar/GoBackNavBar";
 import PopModal from "../../components/Modals/PopModal";
 import { useSelector } from "react-redux";
-import { DELETE } from "../../utils/Constants";
+import { DELETE, DEPARTMENT_TABLE_HEADER, EMPLOYEE_TABLE_HEADER } from "../../utils/Constants";
 
 
 const Settings = () => {
@@ -115,15 +115,22 @@ const Settings = () => {
                                         <Table striped hover bordered size="sm">
                                             <thead>
                                                 <tr>
-                                                    <th>Department</th>
-                                                    <th>Actions</th>
+                                                {DEPARTMENT_TABLE_HEADER.map((val, index) => {
+                                                    return(
+                                                        <>
+                                                            <th key={index}>{val}</th>
+                                                        </>
+                                                    )
+                                                })}
+                                                    {/* <th>Department</th>
+                                                    <th>Actions</th> */}
                                                 </tr>
                                             </thead>
                                             <tbody>
                                                 {departmentList?.map((obj, index) => {
                                                     return (
                                                         <>
-                                                            <tr key={index}>
+                                                            <tr key={obj.departmentID}>
                                                                 <td>{obj.name}</td>
                                                                 <td>
                                                                     <PopModal
@@ -158,7 +165,7 @@ const Settings = () => {
                                                         <InputGroup.Text >Department : </InputGroup.Text>
                                                         {
                                                             <select name='department' className='color-border' id='dropdown' onChange={(val) => { handleChange(val) }}>
-                                                                <option value='' >{formData.department}</option>
+                                                                <option value='' key='' >{formData.department}</option>
                                                                 {departmentList?.map((obj, index) => {
                                                                     return (<option key={index}>{obj.name}</option>)
                                                                 })}
@@ -229,18 +236,25 @@ const Settings = () => {
 
                                                     <thead>
                                                         <tr>
-                                                            <th>Name</th>
+                                                            {EMPLOYEE_TABLE_HEADER.map((val, index) => {
+                                                                return(
+                                                                    <>
+                                                                    <th key={index}>{val}</th>
+                                                                    </>
+                                                                )
+                                                            })}
+                                                            {/* <th>Name</th>
                                                             <th>Department</th>
                                                             <th>Email</th>
                                                             <th>Phone</th>
-                                                            <th>Action</th>
+                                                            <th>Action</th> */}
                                                         </tr>
                                                     </thead>
                                                     <tbody>
                                                         {employeeData?.map((obj, index) => {
                                                             return (
                                                                 <>
-                                                                    <tr key={index}>
+                                                                    <tr key={obj.employeeID}>
                                                                         <td>{obj.employeeName}</td>
                                                                         <td>{obj.departmentName}</td>
                                                                         <td>{obj.email}</td>

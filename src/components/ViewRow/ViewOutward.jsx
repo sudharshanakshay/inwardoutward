@@ -71,7 +71,8 @@ const ViewOutward = () => {
                                 </ListGroup.Item>
 
                                 <ListGroup.Item action>
-                                    <MdDelete />&nbsp; &nbsp;<PopModal
+                                    <MdDelete />&nbsp; &nbsp;
+                                    <PopModal
                                         mode={DELETE}
                                         execFunc={() => {delete_from({ outward: true, rowID: id })}}
                                         ren={setDeleted}
@@ -98,14 +99,14 @@ const ViewOutward = () => {
                             <ListGroup variant='flush' >
                                 <ListGroup.Item><h3>Record Details</h3></ListGroup.Item>
                                 <ListGroup.Item>
-                                    <li><th>Date :&nbsp;</th>{ }<td>{formData.date}</td></li><br/>
-                                    <li><th>Serial No :&nbsp;</th> <td> {formData.serialNo}</td></li><br/>
-                                    <li><th>Receipt No :&nbsp;</th> <td> {formData.receiptNo}</td></li><br/>
-                                    <li><th>Addressee  :&nbsp;</th> <td> {formData.addressee}</td></li><br/>
-                                    <li><th>Department :&nbsp;</th> <td> {formData.department}</td></li><br/>
-                                    <li><th>Nature :&nbsp;</th> <td> {formData.nature}</td></li><br/>
-                                    <li><th>Description :&nbsp;</th> <td> {formData.description}</td></li><br/>
-                                    <li><th>Remark :&nbsp;</th> <td> {formData.remark}</td></li><br/>
+                                    <li><b>Date :&nbsp;</b>{ }<label>{formData.date}</label></li><br/>
+                                    <li><b>Serial No :&nbsp;</b> <label> {formData.serialNo}</label></li><br/>
+                                    <li><b>Receipt No :&nbsp;</b> <label> {formData.receiptNo}</label></li><br/>
+                                    <li><b>Addressee  :&nbsp;</b> <label> {formData.addressee}</label></li><br/>
+                                    <li><b>Department :&nbsp;</b> <label> {formData.department}</label></li><br/>
+                                    <li><b>Nature :&nbsp;</b> <label> {formData.nature}</label></li><br/>
+                                    <li><b>Description :&nbsp;</b> <label> {formData.description}</label></li><br/>
+                                    <li><b>Remark :&nbsp;</b> <label> {formData.remark}</label></li><br/>
                                 </ListGroup.Item>
                             </ListGroup>
                         </div>
