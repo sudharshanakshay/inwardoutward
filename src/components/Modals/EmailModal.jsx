@@ -91,6 +91,7 @@ const EmailModal = (props) => {
 
     // const form = useRef();
     const handleSendEmail = () => {
+        console.log('id : ',props.id);
 
         // ---- email loading status ----  
         setFormData({ ...formData, ['iconLoading']: true });
@@ -109,16 +110,18 @@ const EmailModal = (props) => {
             emailjs.send(SERVICE_KEY, TEMPLATE_KEY, params, PUBLIC_KEY)
                 .then((result) => {
                     console.log(result.text, result.status);
+                    
                     if (result.text === 'OK') {
                         getRow({ inward: true, id: props.id })
                             .then((row) => {
+                                console.log(row);
                                 row[0].isEmailSent = 1;
                                 row.push({ ...row.pop(), inward: true });
                                 updateTo(row[0]);
-
                             })
                     }
                     setFormData({ ...formData, ['iconLoading']: false });
+                    setFormData({ ...formData, ['emailSendError']: false });
 
                 }, (error) => {
                     console.log(error.text);

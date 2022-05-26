@@ -47,7 +47,7 @@ const InwardForm = () => {
         const inward = true;
         const { inwardNo, date, nature, recievedFrom, subject, deliverTo, remark } = formData;
         if (!id) insertFrom({ inward, inwardNo, date, nature, recievedFrom, subject, deliverTo, remark });
-        if (id) updateTo({ id, inward, inwardNo, date, nature, recievedFrom, subject, deliverTo, remark });
+        if (id) updateTo({ inwardID : id, inward, inwardNo, date, nature, recievedFrom, subject, deliverTo, remark });
         navigate(-1);
     }
 

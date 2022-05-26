@@ -161,11 +161,13 @@ export const getDisplayData = async ({ updated = false }) => {
 
 export const getRow = ({ id, inward = false, outward = false }) => {
 
+    console.log(id);
+
     // ----------------- get Inward row -----------------
     if (inward) {
         const body = JSON.stringify({
             from_post: 'inward',
-            id: id
+            id : id
         })
         try {
             const row = axios.post('http://localhost:5000/select/row', body, CONFIG)
@@ -246,10 +248,10 @@ export const updateTo = async ( props
 
     if (props.inward) {
         const from_post = "inward_post";
-        console.debug(props.inwardID)
+        console.log(props.inwardID);
 
         const body = JSON.stringify({
-            inwardID: props.id,
+            inwardID: props.inwardID,
             inwardNo: props.inwardNo,
             date: props.date,
             from_post: props.from_post,
