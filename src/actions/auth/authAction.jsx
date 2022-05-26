@@ -16,6 +16,7 @@ export const loginAction = async ({ email, password, setAuth }) => {
             if(res.data.status === SUCCESS){
                 store.dispatch(logIn());
             }
+            else alert('wrong password!');
         })
 
     } catch (err) {
