@@ -25,7 +25,7 @@ const Register = () => {
     }
 
     return (
-        <div>
+        <div style={{width: '100%', height:'100%' ,backgroundColor:'#a9ffab'}}>
             <div className="login-page">
                 <div className="form">
                     <form className="register-form" onSubmit={s => onSubmit(s)}>

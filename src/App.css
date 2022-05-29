@@ -3,12 +3,15 @@
 @import url(https://fonts.googleapis.com/css?family=Roboto:300);
 
 .login-page {
-    width: 360px;
+    /* width: 360px; */
+    /* align-self: center; */
+    /* justify-content: center; */
+    /* align-content: center; */
     padding: 8% 0 0;
     margin: auto;
 }
 
-.form {
+ .form {
     position: relative;
     z-index: 1;
     background: #FFFFFF;
@@ -19,6 +22,7 @@
     box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.2), 0 5px 5px 0 rgba(0, 0, 0, 0.24);
     border-radius: 2%;
 }
+
 
 .form input {
     font-family: "Roboto", sans-serif;
@@ -47,11 +51,13 @@
     cursor: pointer;
 }
 
+
 .form button:hover,
 .form button:active,
 .form button:focus {
     background: #43A047;
 }
+
 
 .form .message {
     margin: 15px 0 0;
@@ -59,11 +65,13 @@
     font-size: 12px;
 }
 
+
 .form .message a {
     color: rgb(0, 0, 0);
     text-decoration: none;
 }
 
+/*
 .form .register-form {
     display: block;
 }
@@ -107,16 +115,16 @@
 
 .container .info span .fa {
     color: #EF3B3A;
-}
+} */
 
-body {
+/* body {
     background: #9bc3da;
-    /* fallback for old browsers */
+    /* fallback for old browsers 
     background: rgb(155, 195, 218);
     font-family: "Roboto", sans-serif;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
-}
+} */
 
 
 /* ---------------------- Status Box  ---------------------- */

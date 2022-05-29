@@ -70,7 +70,7 @@ const Settings = () => {
 
     return (
         <>
-            <GoBackNavBar title={' Settings '} />
+            <GoBackNavBar title={' Settings '} settings={true}/>
             <Tab.Container id="left-tabs-example" defaultActiveKey="first">
                 <Row>
                     {/* ------------------- side pannel ------------------- */}
