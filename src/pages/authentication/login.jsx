@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import { Container } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 import { loginAction } from '../../actions/auth/authAction';
 import { CREATE_ACC_TEXT, NOT_REGISTERED_TEXT } from '../../utils/Constants';
