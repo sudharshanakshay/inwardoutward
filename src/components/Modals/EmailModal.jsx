@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Modal, InputGroup, FormControl, Form, Spinner } from "react-bootstrap";
+import { Modal, InputGroup, FormControl, Form, Spinner, Col, Container, Row } from "react-bootstrap";
 import { RiMailSendFill } from 'react-icons/ri';
 import { useSelector } from "react-redux";
 import { MdSend } from 'react-icons/md';
@@ -84,14 +84,14 @@ const EmailModal = (props) => {
         }
 
         setFormData({ ...formData, 'employeeNames': emplist, 'emailIds': emailIds, [event.target.name]: event.target.value });
-        if(event.target.name === 'subject') localStorage.setItem('subject', event.target.value);
-        if(event.target.name === 'body') localStorage.setItem('body', event.target.value);
+        if (event.target.name === 'subject') localStorage.setItem('subject', event.target.value);
+        if (event.target.name === 'body') localStorage.setItem('body', event.target.value);
     }
 
 
     // const form = useRef();
     const handleSendEmail = () => {
-        console.log('id : ',props.id);
+        console.log('id : ', props.id);
 
         // ---- email loading status ----  
         setFormData({ ...formData, ['iconLoading']: true });
@@ -110,7 +110,7 @@ const EmailModal = (props) => {
             emailjs.send(SERVICE_KEY, TEMPLATE_KEY, params, PUBLIC_KEY)
                 .then((result) => {
                     console.log(result.text, result.status);
-                    
+
                     if (result.text === 'OK') {
                         getRow({ inward: true, id: props.id })
                             .then((row) => {
@@ -152,7 +152,13 @@ const EmailModal = (props) => {
                     aria-labelledby="contained-modal-title-vcenter"
                     centered >
                     <Modal.Header closeButton>
+                        <Modal.Title>{'Send Email'}</Modal.Title>
+                    </Modal.Header>
 
+                    <Modal.Body>
+                        <Container>
+                            <Row>
+                            <Col>
                         <InputGroup className="m-0" >
                             <InputGroup.Text >Dept : </InputGroup.Text>
                             {
@@ -164,6 +170,8 @@ const EmailModal = (props) => {
                                 </select>
                             }
                         </InputGroup>
+                        </Col>
+                        <Col>
                         <InputGroup className="m-0" >
                             <InputGroup.Text >Name : </InputGroup.Text>
                             {
@@ -175,6 +183,8 @@ const EmailModal = (props) => {
                                 </select>
                             }
                         </InputGroup>
+                        </Col>
+                        <Col>
                         <InputGroup className="m-0" >
                             <InputGroup.Text >@</InputGroup.Text>
                             {
@@ -186,9 +196,12 @@ const EmailModal = (props) => {
                                 </select>
                             }
                         </InputGroup>
-                    </Modal.Header>
+                        </Col>
 
-                    <Modal.Body>
+                            </Row>
+
+                        
+                        
                         <InputGroup className="mb-3 mt-4" >
                             <InputGroup.Text >Subject : </InputGroup.Text>
                             <FormControl
@@ -208,6 +221,7 @@ const EmailModal = (props) => {
                         {/* <textarea name="body" value={formData.body} onChange={(e) => handleChange(e)} style={{width:'100%'}} className='color-border' >
 
                         </textarea> */}
+                        </Container>
                     </Modal.Body>
 
                     <Modal.Footer>
