@@ -77,7 +77,7 @@ const ViewOutward = () => {
                                         execFunc={() => {delete_from({ outward: true, rowID: id })}}
                                         ren={setDeleted}
                                         modalBtnText={'Yes, Delete'}
-                                        message={`Outward Row will be permanently deleted, wish to proceed ? `}
+                                        message={`Row will be permanently deleted, wish to proceed ? `}
                                     />
                                 </ListGroup.Item>
 
