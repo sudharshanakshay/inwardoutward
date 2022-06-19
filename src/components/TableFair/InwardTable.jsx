@@ -29,6 +29,8 @@ window.JSZip = jsZip;
 
 const InwardTable = (props) => {
 
+    console.log(props);
+
     // ---- Option to Apply convert & download table data by Data-Table Api, set 'applyReportOptions' to 'true'----
     if (props.applyReportOptions) {
         $(document).ready(function () {

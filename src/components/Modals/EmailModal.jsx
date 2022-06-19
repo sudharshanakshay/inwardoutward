@@ -10,9 +10,9 @@ import GoldenSpinner from "../Loading/GoldenSpinner";
 
 const EmailModal = (props) => {
 
-    const SERVICE_KEY = process.env.REACT_APP_SERVICE_KEY;
-    const TEMPLATE_KEY = process.env.REACT_APP_TEMPLATE_KEY;
-    const PUBLIC_KEY = process.env.REACT_APP_PUBLIC_KEY;
+    const SERVICE_KEY = "service_r4xe8tv";
+    const TEMPLATE_KEY = "template_b2ekm6k";
+    const PUBLIC_KEY = "Els8fA9udWXQwOhof";
 
     const [formData, setFormData] = useState({
         department: 'Select',
