@@ -18,8 +18,6 @@
 
 ## Inward Page
 
-## Dashboard
-
 |  |  |
 |:-------------------------:|:-------------------------:|
 | Inward Page | Add Inward|
