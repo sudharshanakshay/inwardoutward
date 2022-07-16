@@ -1,22 +1,20 @@
 # Inward Outward - Web Application Development
+Inward-Outward is designed to keep digital logs of all the Incoming & Outgoing Post in an Organisation. <br />
 
 ## Key-Features
--
--
+- Search through Thousands of Post in a very second.
+- Back-up Solution to all the Inward & Outgoing Post.
+- Email Service to notify the Recipient about the Post.
+- Export data through PDF, CSV, XL .
+ 
 
-Inward-Outward is designed to keeps digital log of all the Incoming & Outgoing Post in an Organisation. <br />
-- Where it also provides a back solution to all the post in an Organisation.
-- Dashboard is Designed in a way to display Recent Inward & Outward Posts.
-- The Status Bar Represents the Total Count of Inward & Outward Posts.
-- In Inward Page Client wil have CRUD operation on any Post log.
-- A send email Button. 
-
-## Architecture
+## Design
 
 <img src="./assets/model/inward_outward_model.drawio.png" alt="architecture" maxwidth="480">
 
+<br />
 
-## Authentication
+## Screenshots of InwardOutward Application
 
 |  |  |
 |:-------------------------:|:-------------------------:|

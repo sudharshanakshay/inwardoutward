@@ -1,15 +1,25 @@
-# Inward Outward Application
+# Inward Outward - Web Application Development
+Inward-Outward is designed to keep digital logs of all the Incoming & Outgoing Post in an Organisation. <br />
 
-## Architecture
+## Key-Features
+- Search through Thousands of Post in a very second.
+- Back-up Solution to all the Inward & Outgoing Post.
+- Email Service to notify the Recipient about the Post.
+- Export data through PDF, CSV, XL .
+ 
+
+## Design
 
 <img src="./docs/assets/model/inward_outward_model.drawio.png" alt="architecture" maxwidth="480">
 
-## Authentication
+<br />
+
+## Screenshots of InwardOutward Application
 
 |  |  |
 |:-------------------------:|:-------------------------:|
 | Login Page | Register Page|
-|<img src="./docs/assets//authentication/login_page.png" alt="" maxwidth="480">|<img src="./docs/assets/authentication/register_page.png" alt="" min-width="240" min-heigth="140" max-width="480" max-height="280">|
+|<img src="./docs/assets/authentication/login_page.png" alt="" maxwidth="480">|<img src="./docs/assets/authentication/register_page.png" alt="" min-width="240" min-heigth="140" max-width="480" max-height="280">|
 
 
 ## Dashboard
