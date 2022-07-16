@@ -1,70 +1,86 @@
-# Getting Started with Create React App
+# Inward Outward - React Web Application
+ Inward-Outward is designed to keep digital logs of all the Incoming & Outgoing Post in an Organisation.
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## Key-Features
+- Search through Thousands of Post in a very second.
+- Back-up Solution to all the Inward & Outgoing Post.
+- Email Service to notify the Recipient about the Post.
+- Export data through PDF, CSV, XL .
+ 
 
-## Available Scripts
+## System Design
 
-In the project directory, you can run:
+<img src="./docs/assets/model/inward_outward_model.drawio.png" alt="architecture" maxwidth="480">
 
-### `npm start`
+<br />
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+## Screenshots of InwardOutward Application
 
-### `npm test`
+|  |  |
+|:-------------------------:|:-------------------------:|
+| Login Page | Register Page|
+|<img src="./docs/assets/authentication/login_page.png" alt="" maxwidth="480">|<img src="./docs/assets/authentication/register_page.png" alt="" min-width="240" min-heigth="140" max-width="480" max-height="280">|
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
 
-### `npm run build`
+## Dashboard
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+|  |
+|:-------------------------:|
+| Dashboard |
+|<img src="./docs/assets/dashboard/dashboard.png" alt="" maxwidth="480">|
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+## Inward Page
 
-### `npm run eject`
+|  |  |
+|:-------------------------:|:-------------------------:|
+| Inward Page | Add Inward|
+|<img src="./docs/assets/inward/inward_page.png" alt="Inward Page" maxwidth="480">|<img src="./docs/assets/inward/inward_add.png" alt="Add Inward" maxwidth="480">|
+| Update Inward | View Inward |
+|<img src="./docs/assets/inward/inward_update.png" alt="" maxwidth="480">|<img src="./docs/assets/inward/inward_view.png" alt="" maxwidth="480">|
+| Delete Inward | Send Email |
+|<img src="./docs/assets/inward/inward_delete.png" alt="Delete Inward" maxwidth="480">|<img src="./docs/assets/inward/inward_send_email.png" alt="Send Email" maxwidth="480">|
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+## Outward Page
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+|  |  |
+|:-------------------------:|:-------------------------:|
+| Outward Page | Add Outward |
+|<img src="./docs/assets/outward/outward_page.png" alt="Outward Page" maxwidth="480">|<img src="./docs/assets/outward/outward_add.png" alt="Add Outward" maxwidth="480">|
+| Update Outward | Delete Outward |
+|<img src="./docs/assets/outward/outward_update.png" alt="Update Outward" maxwidth="480">|<img src="./docs/assets/outward/outward_delete.png" alt="View Outward" maxwidth="480">|
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+| |
+|:-------------------------:|
+| View Outward |
+|<img src="./docs/assets/outward/outward_view.png" alt="Delete Outward" maxwidth="480">|
 
-## Learn More
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+## Report 
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+| | |
+|:-------------------------:|:-------------------------:|
+| Inward Report | Outward Report  |
+|<img src="./docs/assets/report/report_inward.png" alt="Inward Report" maxwidth="480">|<img src="./docs/assets/report/report_outward.png" alt="Outward Report" maxwidth="480">|
+| Pdf download option | Pdf Result| 
+|<img src="./docs/assets/report/pdf.png" alt="PDF download option" maxwidth="480">|<img src="./docs/assets/report/pdf_result.png" alt="pdf result" maxwidth="480">|
+| CSV donwload option| Csv Result |
+|<img src="./docs/assets/report/csv.png" alt="" maxwidth="480">|<img src="./docs/assets/report/csv_result.png" alt="" maxwidth="480">|
+| Xl download option | Xl Result |
+|<img src="./docs/assets/report/xlsx.png" alt="" maxwidth="480">|<img src="./docs/assets/report/xlsx_result.png" alt="" maxwidth="480">|
+| Print option | Search Result |
+|<img src="./docs/assets/report/print.png" alt="" maxwidth="480">|<img src="./docs/assets/report/search_results.png" alt="" maxwidth="480">|
 
-### Code Splitting
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+## Settigs Page
 
-### Analyzing the Bundle Size
+|  |  |
+|:-------------------------:|:-------------------------:|
+| Employee | Department |
+|<img src="./docs/assets/settings/employee_add_n_display.png" alt="Employee settings" maxwidth="480">|<img src="./docs/assets/settings/department_add_n_display.png" alt="Department settings" maxwidth="480">|
+| Email | Side bar |
+|<img src="./docs/assets/settings/email_settings.png" alt="Email settings" maxwidth="480">|<img src="./docs/assets/settings/offCanva_sideBar.png" alt="Side bar" maxwidth="480">|
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
 
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
