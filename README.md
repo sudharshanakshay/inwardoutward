@@ -1,5 +1,5 @@
 # Inward Outward - React Web Application
-## `Inward-Outward is designed to keep digital logs of all the Incoming & Outgoing Post in an Organisation.` 
+
 
 <br />
 
