@@ -1,5 +1,9 @@
 # Inward Outward Application
 
+## Architecture
+
+<img src="./docs/assets/model/inward_outward_model.drawio.png" alt="architecture" maxwidth="480">
+
 ## Authentication
 
 |  |  |
