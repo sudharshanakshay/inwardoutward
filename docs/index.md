@@ -1,4 +1,4 @@
-# Inward Outward - Web Application Development
+# Inward Outward - React Web Application
 Inward-Outward is designed to keep digital logs of all the Incoming & Outgoing Post in an Organisation. <br />
 
 ## Key-Features
@@ -13,6 +13,7 @@ Inward-Outward is designed to keep digital logs of all the Incoming & Outgoing P
 <img src="./assets/model/inward_outward_model.drawio.png" alt="architecture" maxwidth="480">
 
 <br />
+
 
 ## Screenshots of InwardOutward Application
 
