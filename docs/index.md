@@ -1,5 +1,9 @@
 # Inward Outward - Web Application Development
 
+## Key-Features
+-
+-
+
 Inward-Outward is designed to keeps digital log of all the Incoming & Outgoing Post in an Organisation. <br />
 - Where it also provides a back solution to all the post in an Organisation.
 - Dashboard is Designed in a way to display Recent Inward & Outward Posts.
@@ -7,12 +11,17 @@ Inward-Outward is designed to keeps digital log of all the Incoming & Outgoing P
 - In Inward Page Client wil have CRUD operation on any Post log.
 - A send email Button. 
 
+## Architecture
+
+<img src="./assets/model/inward_outward_model.drawio.png" alt="architecture" maxwidth="480">
+
+
 ## Authentication
 
 |  |  |
 |:-------------------------:|:-------------------------:|
 | Login Page | Register Page|
-|<img src="./assets//authentication/login_page.png" alt="" maxwidth="480">|<img src="./assets/authentication/register_page.png" alt="" min-width="240" min-heigth="140" max-width="480" max-height="280">|
+|<img src="./assets/authentication/login_page.png" alt="" maxwidth="480">|<img src="./assets/authentication/register_page.png" alt="" min-width="240" min-heigth="140" max-width="480" max-height="280">|
 
 
 ## Dashboard
